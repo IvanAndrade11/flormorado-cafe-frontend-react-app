@@ -1,0 +1,93 @@
+@use '../../../styles/globals.scss' as *;
+
+.footer-fm {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-top: auto; // ✅ Esto empuja el footer al final
+  background-color: $principal-beige;
+  border-top: 1px solid #e5e5e5; // Opcional: línea separadora
+  flex-shrink: 0; // ✅ Evita que el footer se encoja
+
+  img {
+    max-height: 120px;
+    height: auto;
+  }
+
+  .logo-letra {
+    max-height: 150px;
+    padding: 0px !important;
+  }
+
+  .logo-letra-title {
+    font-weight: 700;
+  }
+
+  ul {
+    list-style-type: none;
+    /* Elimina el punto de la li */
+    padding: 0;
+    /* Elimina el sangrado izquierdo */
+    margin: 0;
+  }
+
+  ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  ul li a {
+    text-decoration: none;
+    /* Elimina el subrayado del enlace */
+    color: inherit;
+    /* Mantiene el color del texto original */
+  }
+
+  ul li a img {
+    max-height: 23px;
+    height: auto;
+    margin-right: 0.5rem;
+  }
+
+  .footer-block-info {
+    padding: 0.5rem 3rem;
+  }
+
+  .footer-block-info-center {
+    width: 300px;
+    margin-top: 8rem;
+    position: absolute;
+    left: 50%;
+    top: auto; // centra verticalmente sobre el footer
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2; // sobre los demás si se cruzan
+    pointer-events: auto;
+
+    p {
+      margin-top: 2rem;
+      font-size: 12px;
+    }
+
+    ul li a img {
+      max-height: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    img {
+      max-height: 60px;
+    }
+
+    .footer-block-info {
+      padding: 0.5rem 1rem;
+    }
+
+    .footer-block-info-center {
+      display: none;
+    }
+  }
+}

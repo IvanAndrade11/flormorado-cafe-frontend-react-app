@@ -1,0 +1,154 @@
+@use '../../../styles/globals.scss' as *;
+
+.tab-section {
+  // background-color: $principal-beige;
+  padding: 56px 0 30px;
+  // background-image: url('../../assets/img/bg-gradient.svg');
+  background-position-y: bottom;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  @media screen and (max-width: 768px) {
+    padding: 60px 0 20px;
+  }
+
+  .title {
+    font-weight: 500;
+    // color: $principal-purple;
+    color: $principal-beige;
+    font-size: 28px;
+    text-align: center;
+  }
+}
+
+.col {
+  padding: 24px 32px;
+  background-color: $principal-purple;
+  border-radius: 16px;
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0px 4px 4px 0px #adbae666;
+  color: #4e556c;
+
+  h5 {
+    font-size: 18px;
+  }
+}
+
+.tab-container {
+  width: 100%;
+  margin: 0 0 24px 0;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  // border-bottom: 1.5px solid #e6e9f4;
+  margin-bottom: 32px;
+  gap: 96px;
+
+  @media (max-width: 991px) {
+    gap: 40px;
+  }
+
+  @media (max-width: 768px) {
+    border-color: transparent;
+    gap: 32px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Safari, and Opera */
+    }
+  }
+
+  @media (max-width: 576px) {
+    gap: 24px;
+  }
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  // color: #1b1c1e;
+  color: $principal-beige;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  /* Evita que el texto del botón se divida en varias líneas */
+  flex-shrink: 0;
+  /* Evita que los botones se encochen */
+
+  &.active {
+    // color: $principal-cafe; // Color primario del banco
+    border-bottom-color: $principal-cafe;
+  }
+
+  &:hover:not(.active) {
+    color: $principal-cafe;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding: 8px;
+  }
+}
+
+.tab-content {
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+  border-radius: 16px;
+  padding: 32px 36px 0;
+  height: 390px;
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+    min-height: auto;
+    height: auto;
+    padding: 32px 24px;
+  }
+}
+
+.image-container {
+  flex: 1;
+  text-align: center;
+  align-self: flex-end;
+
+  @media (max-width: 991px) {
+    align-self: center;
+  }
+
+  .image {
+    width: 390px;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+}
+
+.text-container {
+  flex: 1;
+  color: $principal-purple;
+}

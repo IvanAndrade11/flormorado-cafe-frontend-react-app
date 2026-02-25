@@ -1,0 +1,59 @@
+@use './globals.scss' as *;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+  // background-color: $principal-beige; // ✅ Fondo blanco global
+
+  font-family: $font-flormorado !important;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh; // Para móviles modernos
+  // background-image: url('../assets/images/background.jpg');
+  background-image: url('../assets/images/background1.jpg');
+  // background-image: url('../assets/images/background3.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+
+  // background-color: $principal-beige; // ✅ Fondo blanco garantizado
+}
+
+.fm-container {
+  width: 100%;
+  max-width: 100vw; // ✅ Evita desbordamiento horizontal
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  // background-color: $principal-beige; // ✅ Fondo blanco de fm
+  overflow-x: hidden; // ✅ Previene scroll horizontal
+  overflow-y: auto; // ✅ Permite scroll vertical si es necesario
+
+  &__mf {
+    width: 100%;
+    flex: 1 1 auto; // ✅ Se adapta al contenido
+    background-color: #ffffff; // ✅ Fondo blanco
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.loading {
+  font-family: sans-serif;
+  width: 100vw;
+  height: 100vh;
+  background-color: azure;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  opacity: 0.5;
+  z-index: 9999;
+}

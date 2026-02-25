@@ -1,0 +1,63 @@
+@use '../../styles/globals.scss' as *;
+
+.banner-first {
+  img {
+    width: 100%;
+  }
+}
+
+.content_title {
+  width: 80%;
+  margin: 0 auto;
+
+  .title-landing {
+    font-size: 28px;
+    line-height: 1.54;
+    align-items: center;
+    text-align: center;
+    color: #022047;
+    width: 100%;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal !important;
+    letter-spacing: normal;
+  }
+
+  .subtext-landing {
+    font-style: normal;
+    font-size: 18px;
+    align-items: center;
+    letter-spacing: 0.03em;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 1.38;
+    text-align: center;
+    color: #55616f;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.initial-space {
+  padding-top: 70px;
+  // @media (max-width: 768px) {
+  //   padding-top: 70px;
+  // }
+}
+
+.banner-carousel-title {
+  background: $principal-purple-gradient;
+
+  a {
+    display: block;
+    cursor: pointer;
+    padding: 64px;
+    text-align: center;
+    color: #fff !important;
+    font-size: 28px;
+    font-weight: 700;
+  }
+}
