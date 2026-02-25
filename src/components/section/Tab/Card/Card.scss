@@ -1,0 +1,46 @@
+.ul {
+  padding: 10px 0px;
+  display: flex;
+  flex-flow: column;
+  gap: 24px;
+  margin-bottom: 24px;
+  max-width: 464px;
+}
+
+.lists {
+  margin: 0;
+  color: #4e556c;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.title {
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+.smallText {
+  font-size: 12px;
+  font-weight: 400;
+  color: #022047;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.btnSubmit {
+  padding: 16px 12px;
+  font-weight: 500;
+  font-size: 12px;
+  height: auto;
+  width: 280px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+
+  &:focus,
+  &:hover {
+    border: none;
+  }
+}

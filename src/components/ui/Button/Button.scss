@@ -1,0 +1,218 @@
+@use '../../../styles/globals.scss' as *;
+
+.container__button {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-width: 0px;
+  background: $principal-purple-gradient;
+  border-radius: 4px;
+  color: white;
+  font-size: 15px;
+  font-stretch: normal;
+  line-height: normal;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: $font-flormorado;
+  font-style: normal;
+  font-weight: 500;
+
+  &:focus {
+    outline: none;
+    background: linear-gradient(180deg, $principal-cafe 0%, $principal-purple 100%);
+    border: 1px solid $principal-cafe;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    outline: none;
+    background: linear-gradient(180deg, #6d2649e6 -1.39%, $principal-purple 100%);
+    border: 1px solid $principal-cafe;
+    box-shadow: 0px 8px 8px rgba(0, 129, 255, 0.24);
+    border-radius: 4px;
+  }
+
+  &:disabled {
+    cursor: no-drop;
+    background: linear-gradient(180deg, #6d2649e6 -1.39%, $principal-purple 100%);
+    opacity: 0.5;
+
+    &:hover {
+      border-color: var(--grayscale-background);
+    }
+  }
+
+  & .loadingButton {
+    margin: 5px;
+    text-indent: -9999em;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: linear-gradient(to right, white 10%, rgba(255, 255, 255, 0) 70%);
+    position: relative;
+    animation-iteration-count: infinite;
+    animation-duration: 1.4s;
+    animation-timing-function: linear;
+    animation-name: loadAnimation;
+    transform: translateZ(0);
+
+    @keyframes loadAnimation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    &::before {
+      width: 50%;
+      height: 50%;
+      display: block;
+      background: white;
+      border-radius: 100% 0 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: ' ';
+    }
+
+    &::after {
+      background: var(--brand-dark-blue);
+      display: block;
+      width: 75%;
+      height: 75%;
+      border-radius: 50%;
+      content: ' ';
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  &.link {
+    background-color: transparent;
+    color: var(--grayscale-body);
+    text-decoration: underline;
+
+    &:focus {
+      outline: none;
+      color: var(--brand-dark-blue);
+      background-color: var(--grayscale-line);
+      box-shadow: none;
+      border-width: 0px;
+    }
+
+    &:hover {
+      outline: none;
+      color: black;
+      border-width: 0px;
+    }
+
+    &:disabled {
+      cursor: no-drop;
+      color: var(--grayscale-placeholder);
+    }
+
+    & .loadingButton {
+      text-indent: initial;
+      background: transparent;
+      animation-name: none;
+      width: 100%;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &.default {
+    background-color: transparent;
+    color: var(brand-sky-blue);
+
+    &:focus {
+      outline: none;
+      background-color: var(brand-sky-blue-focus);
+      color: var(brand-sky-blue);
+      box-shadow: none;
+      border-width: 0px;
+    }
+
+    &:hover {
+      outline: none;
+      color: var(brand-sky-blue-hover);
+      border-width: 0px;
+    }
+
+    &:disabled {
+      cursor: no-drop;
+      color: var(--grayscale-line);
+    }
+
+    & .loadingButton {
+      text-indent: initial;
+      background: transparent;
+      animation-name: none;
+      width: 100%;
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &.outlined {
+    color: var(--brand-dark-blue);
+    background-color: white;
+    border: solid 1px var(--brand-dark-blue);
+    border-radius: 28px;
+    border-style: solid;
+    border-width: 3px;
+    line-height: normal;
+    text-decoration: none;
+  }
+
+  &.filled {
+    color: white;
+    border: solid 1px var(--brand-dark-blue);
+    background-color: var(--brand-dark-blue);
+    border-radius: 28px;
+    border-style: solid;
+    border-width: 3px;
+    line-height: normal;
+    text-decoration: none;
+  }
+
+  &.clean {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: 30px 7px;
+    margin: 0 24px;
+    color: #6d2649;
+    font-size: 15px;
+    box-sizing: border-box;
+
+    &:hover,
+    &:focus {
+      border-bottom: 2px solid #6d2649;
+      box-shadow: none;
+    }
+
+    @media screen and (max-width: 1200px) {
+      margin: 0 10px;
+    }
+  }
+}
