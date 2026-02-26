@@ -1,7 +1,7 @@
-import React from 'react';
-import './Banner.scss';
+import React from "react";
+import "./Banner.scss";
 // import { Image } from '@/components/ui/Image/Image';
-import { IBanner } from '@/types/ui';
+import { IBanner } from "@/types/ui";
 
 export const Banner: React.FC<IBanner> = ({ img }) => {
   return (

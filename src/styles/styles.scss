@@ -1,4 +1,4 @@
-@use './globals.scss' as *;
+@use "./globals.scss" as *;
 
 body,
 html {
@@ -6,8 +6,6 @@ html {
   padding: 0;
   border: 0;
   height: 100%;
-  // background-color: $principal-beige; // ✅ Fondo blanco global
-
   font-family: $font-flormorado !important;
 }
 
@@ -15,14 +13,17 @@ html {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-height: 100dvh; // Para móviles modernos
-  // background-image: url('../assets/images/background.jpg');
-  background-image: url('../assets/images/background1.jpg');
-  // background-image: url('../assets/images/background3.jpg');
-  background-size: cover;
-  background-attachment: fixed;
+  min-height: 100dvh;
 
-  // background-color: $principal-beige; // ✅ Fondo blanco garantizado
+  background-color: $principal-beige-oscuro; // ✅ Fondo garantizado
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 991px) {
+  #root {
+    background-image: url("../assets/images/background1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+  }
 }
 
 .fm-container {

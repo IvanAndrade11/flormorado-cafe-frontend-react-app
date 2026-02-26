@@ -3,7 +3,7 @@ export interface IToast {
   title?: string;
   message?: string;
   duration: number;
-  type: 'success' | 'error' | 'info' | 'warning';
+  type: "success" | "error" | "info" | "warning";
 }
 
 export interface ILoader {

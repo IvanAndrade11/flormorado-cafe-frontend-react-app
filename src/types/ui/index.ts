@@ -8,7 +8,7 @@ export interface IImage {
 }
 
 export interface IButton {
-  type: 'button' | 'submit' | 'reset';
+  type: "button" | "submit" | "reset";
   label: any;
   dataTestid?: string;
   className?: string;

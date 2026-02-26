@@ -1,3 +1,3 @@
-export * from './Landing/Landing';
+export * from "./Landing/Landing";
 
-export * from './Store/Store';
+export * from "./Store/Store";

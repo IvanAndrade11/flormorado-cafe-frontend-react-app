@@ -1,4 +1,4 @@
-@use '../../../styles/globals.scss' as *;
+@use "../../../styles/globals.scss" as *;
 
 .container__button {
   height: 40px;
@@ -21,14 +21,22 @@
 
   &:focus {
     outline: none;
-    background: linear-gradient(180deg, $principal-cafe 0%, $principal-purple 100%);
+    background: linear-gradient(
+      180deg,
+      $principal-cafe 0%,
+      $principal-purple 100%
+    );
     border: 1px solid $principal-cafe;
     border-radius: 4px;
   }
 
   &:hover {
     outline: none;
-    background: linear-gradient(180deg, #6d2649e6 -1.39%, $principal-purple 100%);
+    background: linear-gradient(
+      180deg,
+      #6d2649e6 -1.39%,
+      $principal-purple 100%
+    );
     border: 1px solid $principal-cafe;
     box-shadow: 0px 8px 8px rgba(0, 129, 255, 0.24);
     border-radius: 4px;
@@ -36,7 +44,11 @@
 
   &:disabled {
     cursor: no-drop;
-    background: linear-gradient(180deg, #6d2649e6 -1.39%, $principal-purple 100%);
+    background: linear-gradient(
+      180deg,
+      #6d2649e6 -1.39%,
+      $principal-purple 100%
+    );
     opacity: 0.5;
 
     &:hover {
@@ -50,7 +62,11 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: linear-gradient(to right, white 10%, rgba(255, 255, 255, 0) 70%);
+    background: linear-gradient(
+      to right,
+      white 10%,
+      rgba(255, 255, 255, 0) 70%
+    );
     position: relative;
     animation-iteration-count: infinite;
     animation-duration: 1.4s;
@@ -77,7 +93,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      content: ' ';
+      content: " ";
     }
 
     &::after {
@@ -86,7 +102,7 @@
       width: 75%;
       height: 75%;
       border-radius: 50%;
-      content: ' ';
+      content: " ";
       margin: auto;
       position: absolute;
       top: 0;

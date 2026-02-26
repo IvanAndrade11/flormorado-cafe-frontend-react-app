@@ -1,67 +1,88 @@
-import { icons, images } from '@/utils/constants';
+import { icons, images } from "@/utils/constants";
 
 export const TAB_ITEMS = [
   {
     id: 0,
-    title: 'Pestaña 1',
+    title: "Pestaña 1",
     image: images.LogoFondoBeige,
-    color: '#EFFAFE',
+    color: "#EFFAFE",
     content: {
-      title: 'Titulo de la card 1',
-      textBtn: 'Boton',
-      action: () => console.log('Clic'),
+      title: "Titulo de la card 1",
+      textBtn: "Boton",
+      action: () => console.log("Clic"),
       list: [
         {
           icon: icons.Phone,
-          text: 'Texto'
+          text: "Texto",
         },
         {
           icon: icons.Phone,
-          text: 'Texto'
-        }
-      ]
-    }
+          text: "Texto",
+        },
+      ],
+    },
   },
   {
     id: 1,
-    title: 'Pestaña 2',
+    title: "Pestaña 2",
     image: images.LogoNombreFondoBeige,
-    color: '#F2FDF6',
+    color: "#F2FDF6",
     content: {
-      title: 'Titulo de la card 2',
-      textBtn: 'Boton',
-      action: () => console.log('Clic'),
+      title: "Titulo de la card 2",
+      textBtn: "Boton",
+      action: () => console.log("Clic"),
       list: [
         {
           icon: icons.Facebook,
-          text: 'Texto'
+          text: "Texto",
         },
         {
           icon: icons.Facebook,
-          text: 'Texto'
-        }
-      ]
-    }
+          text: "Texto",
+        },
+      ],
+    },
   },
   {
     id: 2,
-    title: 'Pestaña 3',
+    title: "Pestaña 3",
     image: images.LogoFondoBeige,
-    color: '#EFFAFE',
+    color: "#EFFAFE",
     content: {
-      title: 'Titulo de la card 3',
-      textBtn: 'Boton',
-      action: () => console.log('Clic'),
+      title: "Titulo de la card 3",
+      textBtn: "Boton",
+      action: () => console.log("Clic"),
       list: [
         {
           icon: icons.Phone,
-          text: 'Texto'
+          text: "Texto",
         },
         {
           icon: icons.Phone,
-          text: 'Texto'
-        }
-      ]
-    }
-  }
+          text: "Texto",
+        },
+      ],
+    },
+  },
+  {
+    id: 3,
+    title: "Pestaña 4",
+    image: images.LogoNombreFondoBeige,
+    color: "#F2FDF6",
+    content: {
+      title: "Titulo de la card 4",
+      textBtn: "Boton",
+      action: () => console.log("Clic"),
+      list: [
+        {
+          icon: icons.Instagram,
+          text: "Texto",
+        },
+        {
+          icon: icons.Instagram,
+          text: "Texto",
+        },
+      ],
+    },
+  },
 ];

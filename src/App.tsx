@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react';
-import Router from './app/router';
-import { Navbar, Footer } from './components/layout';
+import React, { Suspense } from "react";
+import Router from "./app/router";
+import { Navbar, Footer } from "./components/layout";
 
 export const App: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ export const App: React.FC = () => {
       {/* <OverlayLoader show={loader} /> */}
       {/* <Suspense fallback={<OverlayLoader show={true} />}> */}
 
-      <Suspense fallback={'Cargandoooooo...'}>
+      <Suspense fallback={"Cargandoooooo..."}>
         <Navbar />
 
         <Router />

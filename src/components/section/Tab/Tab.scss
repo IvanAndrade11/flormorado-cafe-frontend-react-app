@@ -1,4 +1,4 @@
-@use '../../../styles/globals.scss' as *;
+@use "../../../styles/globals.scss" as *;
 
 .tab-section {
   // background-color: $principal-beige;
@@ -11,6 +11,12 @@
 
   @media screen and (max-width: 768px) {
     padding: 60px 0 20px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .title {
+      color: $principal-purple !important;
+    }
   }
 
   .title {
@@ -91,7 +97,6 @@
   /* Evita que los botones se encochen */
 
   &.active {
-    // color: $principal-cafe; // Color primario del banco
     border-bottom-color: $principal-cafe;
   }
 
@@ -104,6 +109,7 @@
   }
 
   @media (max-width: 991px) {
+    color: $principal-purple !important;
     font-size: 18px;
   }
 

@@ -1,4 +1,4 @@
-@use '../../../styles/globals.scss' as *;
+@use "../../../styles/globals.scss" as *;
 
 @keyframes scroll {
   0% {
@@ -19,7 +19,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;

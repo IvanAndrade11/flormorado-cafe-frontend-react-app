@@ -1,8 +1,8 @@
-import React from 'react';
-import './Footer.scss';
+import React from "react";
+import "./Footer.scss";
 
-import { Image } from '@/components/ui';
-import { images, icons } from '@/utils/constants';
+import { Image } from "@/components/ui";
+import { images, icons } from "@/utils/constants";
 
 export const Footer: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
         {/* <Image src={images.LogoFondoBeige} className="p-2 ms-auto" alt="Logo beige Flormorado Café" /> */}
 
         <div className="footer-block-info">
-          <p style={{ fontWeight: 'bold' }}>Contáctanos</p>
+          <p style={{ fontWeight: "bold" }}>Contáctanos</p>
           <ul>
             <li>
               <a href="mailto:info@flormoradocafe.com">

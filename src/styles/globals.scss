@@ -48,8 +48,12 @@ $info-100: #e3f2ff;
 
 /* Gradients */
 
-$principal-purple-gradient: linear-gradient(180deg, #6d2649e6 -1.39%, $principal-purple 100%);
+$principal-purple-gradient: linear-gradient(
+  180deg,
+  #6d2649e6 -1.39%,
+  $principal-purple 100%
+);
 
 /* Fonts */
 
-$font-flormorado: 'Source Sans 3', sans-serif;
+$font-flormorado: "Source Sans 3", sans-serif;

@@ -1,10 +1,10 @@
-import './NavBar.scss';
+import "./NavBar.scss";
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { images, scrollToSection, NAVBAR_MENU_ITEMS } from '@/utils/constants';
-import { Button, WhatsAppButton } from '@/components/ui';
+import { images, scrollToSection, NAVBAR_MENU_ITEMS } from "@/utils/constants";
+import { Button, WhatsAppButton } from "@/components/ui";
 
 export const Navbar: React.FC = () => {
   const Navigate = useNavigate();
@@ -13,16 +13,19 @@ export const Navbar: React.FC = () => {
 
   const handleNavClick = () => setExpanded(false);
 
-  const goToStore = () => Navigate('/tienda');
+  const goToStore = () => {
+    Navigate("/tienda");
+    handleNavClick();
+  };
 
   return (
     <>
-      <nav className={`navbar fixed-top ${expanded ? 'expanded' : ''}`}>
+      <nav className={`navbar fixed-top ${expanded ? "expanded" : ""}`}>
         <div id="navbar" className="container">
           <a
             className="navbar-brand"
             onClick={() => {
-              Navigate('/');
+              Navigate("/");
             }}
           >
             <img src={images.LogoFondoBeige} alt="Logo Flormorado Café" />
@@ -38,9 +41,12 @@ export const Navbar: React.FC = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className={`navbar-collapse ${expanded ? 'show' : ''}`} id="navbar">
+          <div
+            className={`navbar-collapse ${expanded ? "show" : ""}`}
+            id="navbar"
+          >
             <div className="navbar-nav-container">
-              {NAVBAR_MENU_ITEMS.map(item => (
+              {NAVBAR_MENU_ITEMS.map((item) => (
                 <Button
                   key={item.url}
                   type="button"
@@ -48,7 +54,7 @@ export const Navbar: React.FC = () => {
                   data-testid="button"
                   className="nav-link clean"
                   onClick={() => {
-                    if (item.url.startsWith('/')) {
+                    if (item.url.startsWith("/")) {
                       Navigate(item.url);
                     } else {
                       scrollToSection(item.url);

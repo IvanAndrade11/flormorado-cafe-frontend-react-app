@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialState } from '@/utils/constants';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { initialState } from "@/utils/constants";
 
 export const mainSlice = createSlice({
-  name: 'main',
+  name: "main",
   initialState,
   reducers: {
     setToast: (state, action) => {
       state.toast = { ...action.payload };
     },
-    hideToast: state => {
+    hideToast: (state) => {
       state.toast.show = false;
     },
     setLoader: (state, action) => {
@@ -23,15 +23,15 @@ export const mainSlice = createSlice({
     setLoaderSubText: (state, action) => {
       state.loader.transparentText = action.payload;
     },
-    showLoader: state => {
+    showLoader: (state) => {
       state.loader.show = true;
     },
-    hideLoader: state => {
+    hideLoader: (state) => {
       state.loader.show = false;
       state.loader.progress = 10;
     },
-    restartFlow: () => ({ ...initialState })
-  }
+    restartFlow: () => ({ ...initialState }),
+  },
 });
 
 export default mainSlice.reducer;
