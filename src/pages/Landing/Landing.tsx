@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Landing.scss";
 
 import { Banner, Carousel, Tab } from "@/components/section";
-import { images, scrollToSection } from "@/utils/constants";
+import { images } from "@/utils/constants";
 
 export const Landing: React.FC = () => {
   useEffect(() => {

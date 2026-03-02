@@ -1,15 +1,24 @@
 import React from "react";
 import "./Banner.scss";
-// import { Image } from '@/components/ui/Image/Image';
+
+import { isMobile } from "react-device-detect";
+
 import { IBanner } from "@/types/ui";
+import { videos } from "@/utils/constants/videos";
 
 export const Banner: React.FC<IBanner> = ({ img }) => {
   return (
-    <div className="banner-container">
-      <img src={img} alt="Banner Flormorado Café" />
-    </div>
-    // <section className="banner-first">
-    //     <Image src={img} alt="Banner Flormorado Café" />
-    // </section>
+    <>
+      <div className="banner-container">
+        {isMobile ? (
+          <video className="banner-video" controls autoPlay muted loop>
+            <source src={videos.Bird} type="video/mp4" />
+            Tu navegador no soporta el elemento video.
+          </video>
+        ) : (
+          <img src={img} alt="Banner Flormorado Café" />
+        )}
+      </div>
+    </>
   );
 };

@@ -44,10 +44,7 @@ export const Tab: React.FC = () => {
                   </button>
                 ))}
               </div>
-              <div
-                className={"tab-content"}
-                style={{ backgroundColor: tabActive.color }}
-              >
+              <div className={"tab-content"}>
                 <div className={"image-container"}>
                   <img
                     src={tabActive.image}

@@ -10,3 +10,4 @@ declare module "*.json";
 declare module "*.gif";
 declare module "*.ico";
 declare module "*.webp";
+declare module "*.mp4";

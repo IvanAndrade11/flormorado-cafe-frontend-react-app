@@ -1,19 +1,46 @@
-import IconNext from "../../assets/icons/icon-next.svg";
-import ArrowRight from "../../assets/icons/arrow-right.svg";
-import Mail from "../../assets/icons/mail.svg";
-import Phone from "../../assets/icons/phone.svg";
-import Instagram from "../../assets/icons/instagram.svg";
-import Facebook from "../../assets/icons/facebook.svg";
-import WhatsApp from "../../assets/icons/whatsapp.svg";
-import YouTube from "../../assets/icons/youtube.svg";
+import IconNext from "../../assets/icons/common/icon-next.svg";
+import ArrowRight from "../../assets/icons/common/arrow-right.svg";
 
-export const icons = {
+import Mail from "../../assets/icons/contact/mail.svg";
+import Phone from "../../assets/icons/contact/phone.svg";
+
+import Instagram from "../../assets/icons/network/instagram.svg";
+import Facebook from "../../assets/icons/network/facebook.svg";
+import WhatsApp from "../../assets/icons/network/whatsapp.svg";
+import YouTube from "../../assets/icons/network/youtube.svg";
+
+import Store1 from "../../assets/icons/store/store_1.png";
+import Store2 from "../../assets/icons/store/store_2.png";
+import Basket1 from "../../assets/icons/store/basket_1.png";
+import Basket2 from "../../assets/icons/store/basket_2.png";
+
+const common = {
   IconNext,
   ArrowRight,
+};
+
+const contact = {
   Mail,
   Phone,
+};
+
+const network = {
   Instagram,
   Facebook,
   WhatsApp,
   YouTube,
+};
+
+const store = {
+  Store1,
+  Store2,
+  Basket1,
+  Basket2,
+};
+
+export const icons = {
+  ...common,
+  ...contact,
+  ...network,
+  ...store,
 };

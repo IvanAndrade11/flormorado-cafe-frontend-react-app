@@ -51,6 +51,10 @@ module.exports = (env, argv) => {
                     test: /\.s[ac]ss$/i,
                     use: ['style-loader', 'css-loader', 'sass-loader']
                 },
+                {
+                    test: /\.(mp4|webm|ogg|ogv|mov)$/i,
+                    type: "asset/resource", // siempre emite el archivo (no inline)
+                },
 
             ],
         },
