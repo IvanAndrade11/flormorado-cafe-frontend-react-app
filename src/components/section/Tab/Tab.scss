@@ -1,9 +1,8 @@
 @use "../../../styles/globals.scss" as *;
 
 .tab-section {
-  // background-color: $principal-beige;
+  background: $secondary-beige-gradient;
   padding: 56px 0 30px;
-  // background-image: url('../../assets/img/bg-gradient.svg');
   background-position-y: bottom;
   background-position-x: center;
   background-repeat: no-repeat;
@@ -13,16 +12,9 @@
     padding: 60px 0 20px;
   }
 
-  @media screen and (max-width: 991px) {
-    .title {
-      color: $principal-purple !important;
-    }
-  }
-
   .title {
     font-weight: 500;
-    // color: $principal-purple;
-    color: $principal-beige;
+    color: $principal-purple;
     font-size: 28px;
     text-align: center;
   }
@@ -87,8 +79,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
-  // color: #1b1c1e;
-  color: $principal-beige;
+  color: $principal-purple;
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -97,11 +88,12 @@
   /* Evita que los botones se encochen */
 
   &.active {
-    border-bottom-color: $principal-cafe;
+    color: $principal-verde;
+    border-bottom-color: $principal-verde;
   }
 
   &:hover:not(.active) {
-    color: $principal-cafe;
+    color: $principal-verde;
   }
 
   @media (max-width: 1200px) {
@@ -109,7 +101,6 @@
   }
 
   @media (max-width: 991px) {
-    color: $principal-purple !important;
     font-size: 18px;
   }
 
@@ -145,7 +136,7 @@
   }
 
   .image {
-    width: 390px;
+    // width: 390px;
     max-width: 100%;
     height: auto;
     max-height: 100%;

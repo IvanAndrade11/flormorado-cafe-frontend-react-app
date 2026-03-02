@@ -29,11 +29,20 @@ export const Button = ({
         <>
           {label}
           <span>
-            <img
-              src={icons.IconNext}
+            {/* <img
+              src={icons.Basket1}
               alt="Icono de botón - Flormorado Café"
-              className=""
+            /> */}
+            <img src={icons.Basket2} alt="Icono de botón - Flormorado Café" />
+            {/* <img
+              src={icons.Store1}
+              alt="Icono de botón - Flormorado Café"
             />
+            <img
+              src={icons.Store2}
+              alt="Icono de botón - Flormorado Café"
+              style={{ width: "30px" }}
+            /> */}
           </span>
         </>
       ) : (

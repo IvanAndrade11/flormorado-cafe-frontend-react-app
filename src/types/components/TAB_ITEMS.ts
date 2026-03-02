@@ -4,7 +4,7 @@ export const TAB_ITEMS = [
   {
     id: 0,
     title: "Pestaña 1",
-    image: images.LogoFondoBeige,
+    image: images.GirlCollecting,
     color: "#EFFAFE",
     content: {
       title: "Titulo de la card 1",
@@ -25,7 +25,7 @@ export const TAB_ITEMS = [
   {
     id: 1,
     title: "Pestaña 2",
-    image: images.LogoNombreFondoBeige,
+    image: images.GirlStanding,
     color: "#F2FDF6",
     content: {
       title: "Titulo de la card 2",

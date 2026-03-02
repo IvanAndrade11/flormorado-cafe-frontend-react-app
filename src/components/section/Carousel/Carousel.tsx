@@ -11,11 +11,7 @@ export const Carousel: React.FC = () => {
   return (
     <>
       <div className="banner-carousel-title">
-        <a
-          onClick={() => {
-            () => scrollToSection("tab");
-          }}
-        >
+        <a onClick={() => scrollToSection("tab")}>
           Conoce nuestros recolectores aliados
         </a>
       </div>

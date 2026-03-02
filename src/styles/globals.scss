@@ -54,6 +54,25 @@ $principal-purple-gradient: linear-gradient(
   $principal-purple 100%
 );
 
+$principal-beige-gradient: linear-gradient(
+  180deg,
+  $principal-beige 0%,
+  $principal-beige-oscuro 100%
+);
+
+$secondary-beige-gradient: linear-gradient(
+  180deg,
+  #fff6e6e1 -1.39%,
+  $principal-beige 100%
+);
+
+$principal-beige-transparent-gradient: linear-gradient(
+  180deg,
+  $principal-beige 25%,
+  #fcf6ea 0%,
+  transparent 100%
+);
+
 /* Fonts */
 
 $font-flormorado: "Source Sans 3", sans-serif;

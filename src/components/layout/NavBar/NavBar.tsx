@@ -6,6 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { images, scrollToSection, NAVBAR_MENU_ITEMS } from "@/utils/constants";
 import { Button, WhatsAppButton } from "@/components/ui";
 
+const CAROUSEL_MESSAGE = () => {
+  return (
+    <>
+      <div className="navbar-carousel-group">
+        <p>
+          Reconociendo la labor del campo - ¡Envío gratis a partir de $150,000!
+        </p>
+      </div>
+    </>
+  );
+};
+
 export const Navbar: React.FC = () => {
   const Navigate = useNavigate();
 
@@ -21,6 +33,14 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <nav className={`navbar fixed-top ${expanded ? "expanded" : ""}`}>
+        <div className="navbar-carousel-container">
+          <div id="navbar-carousel" className="navbar-carousel-track">
+            {Array.from({ length: 10 }).map((_, index) => (
+              <CAROUSEL_MESSAGE key={index} />
+            ))}
+          </div>
+        </div>
+
         <div id="navbar" className="container">
           <a
             className="navbar-brand"
@@ -28,7 +48,7 @@ export const Navbar: React.FC = () => {
               Navigate("/");
             }}
           >
-            <img src={images.LogoFondoBeige} alt="Logo Flormorado Café" />
+            <img src={images.Logo} alt="Logo Flormorado Café" />
             {/* <img src={images.LogoSoloNombreFondoBeige} alt="Logo Flormorado Café" /> */}
           </a>
 
@@ -63,7 +83,6 @@ export const Navbar: React.FC = () => {
                   }}
                 />
               ))}
-
               <Button
                 type="button"
                 label="Ir a la tienda"

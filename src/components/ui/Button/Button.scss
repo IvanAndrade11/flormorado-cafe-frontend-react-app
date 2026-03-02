@@ -19,6 +19,15 @@
   font-style: normal;
   font-weight: 500;
 
+  // Icono de carrito de compras
+  span {
+    img {
+      width: 20px;
+      margin-left: 7px;
+      filter: brightness(0) invert(1);
+    }
+  }
+
   &:focus {
     outline: none;
     background: linear-gradient(
@@ -34,7 +43,7 @@
     outline: none;
     background: linear-gradient(
       180deg,
-      #6d2649e6 -1.39%,
+      #431c2fe6 -1.39%,
       $principal-purple 100%
     );
     border: 1px solid $principal-cafe;
