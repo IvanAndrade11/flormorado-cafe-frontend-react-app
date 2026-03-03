@@ -3,7 +3,12 @@ import "./NavBar.scss";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { images, scrollToSection, NAVBAR_MENU_ITEMS } from "@/utils/constants";
+import {
+  images,
+  scrollToSection,
+  NAVBAR_MENU_ITEMS,
+  URLS,
+} from "@/utils/constants";
 import { Button, WhatsAppButton, CarouselMessage } from "@/components/ui";
 
 export const Navbar: React.FC = () => {
@@ -14,7 +19,7 @@ export const Navbar: React.FC = () => {
   const handleNavClick = () => setExpanded(false);
 
   const goToStore = () => {
-    Navigate("/tienda");
+    Navigate(URLS.categories);
     handleNavClick();
   };
 
@@ -27,7 +32,7 @@ export const Navbar: React.FC = () => {
           <a
             className="navbar-brand"
             onClick={() => {
-              Navigate("/");
+              Navigate(URLS.home);
             }}
           >
             <img src={images.Logo} alt="Logo Flormorado Café" />
