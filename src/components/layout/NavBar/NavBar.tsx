@@ -4,19 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { images, scrollToSection, NAVBAR_MENU_ITEMS } from "@/utils/constants";
-import { Button, WhatsAppButton } from "@/components/ui";
-
-const CAROUSEL_MESSAGE = () => {
-  return (
-    <>
-      <div className="navbar-carousel-group">
-        <p>
-          Reconociendo la labor del campo - ¡Envío gratis a partir de $150,000!
-        </p>
-      </div>
-    </>
-  );
-};
+import { Button, WhatsAppButton, CarouselMessage } from "@/components/ui";
 
 export const Navbar: React.FC = () => {
   const Navigate = useNavigate();
@@ -33,13 +21,7 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <nav className={`navbar fixed-top ${expanded ? "expanded" : ""}`}>
-        <div className="navbar-carousel-container">
-          <div id="navbar-carousel" className="navbar-carousel-track">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <CAROUSEL_MESSAGE key={index} />
-            ))}
-          </div>
-        </div>
+        <CarouselMessage />
 
         <div id="navbar" className="container">
           <a

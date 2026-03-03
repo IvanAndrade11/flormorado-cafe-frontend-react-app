@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import Router from "./app/router";
+
 import { Navbar, Footer } from "./components/layout";
 
 export const App: React.FC = () => {
