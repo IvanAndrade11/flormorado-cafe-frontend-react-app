@@ -1,8 +1,10 @@
 import React from "react";
 import "./Card.scss";
 
-import { Button, ListItemWithIcon } from "@/components/ui";
+import { ListItemWithIcon } from "@/components/ui";
 import { ICard } from "@/types/components";
+
+import Button from "react-bootstrap/Button";
 
 export const Card: React.FC<ICard> = ({ title, textBtn, action, list }) => {
   return (
@@ -24,11 +26,11 @@ export const Card: React.FC<ICard> = ({ title, textBtn, action, list }) => {
       {textBtn && (
         <Button
           type="button"
-          label={"Botón"}
-          data-testid={"button"}
-          className={`mt-auto btnSubmit`}
+          className={`mt-auto fmc-button`}
           onClick={() => action()}
-        ></Button>
+        >
+          Botón
+        </Button>
       )}
     </>
   );

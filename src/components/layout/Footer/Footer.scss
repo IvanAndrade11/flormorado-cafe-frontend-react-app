@@ -21,15 +21,9 @@
     padding: 0px !important;
   }
 
-  .logo-letra-title {
-    font-weight: 700;
-  }
-
   ul {
     list-style-type: none;
-    /* Elimina el punto de la li */
     padding: 0;
-    /* Elimina el sangrado izquierdo */
     margin: 0;
   }
 
@@ -39,9 +33,7 @@
 
   ul li a {
     text-decoration: none;
-    /* Elimina el subrayado del enlace */
     color: inherit;
-    /* Mantiene el color del texto original */
   }
 
   ul li a img {

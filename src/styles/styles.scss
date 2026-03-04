@@ -47,22 +47,21 @@ html {
   }
 }
 
-.initial-space {
-  padding-top: 70px;
-  @media (max-width: 1000px) {
-    padding-top: 100px;
-  }
-}
+.fmc-button {
+  background-color: $principal-purple;
+  border: 1px solid $principal-purple;
+  padding: 8px 16px;
+  min-width: 160px;
 
-.loading {
-  font-family: sans-serif;
-  width: 100vw;
-  height: 100vh;
-  background-color: azure;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  opacity: 0.5;
-  z-index: 9999;
+  &:hover {
+    background-color: #83365c;
+    border: 1px solid $principal-cafe;
+    box-shadow: 0px 4px 4px #b06389;
+  }
+
+  span {
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
 }

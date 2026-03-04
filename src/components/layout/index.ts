@@ -1,3 +1,3 @@
-export * from "./NavBar/NavBar";
+export * from "./Navbar/Navbar";
 
 export * from "./Footer/Footer";
