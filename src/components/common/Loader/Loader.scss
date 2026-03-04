@@ -1,0 +1,46 @@
+@use "../../../styles/globals.scss" as *;
+
+.overlay-loader {
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background: $secondary-beige-gradient;
+  background-position: center;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.hide-loader {
+  display: none;
+}
+
+.loader-compound {
+  display: flex;
+  flex-direction: column;
+
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+      width: 10rem;
+      z-index: 1;
+    }
+
+    .text-loader {
+      font-family: "Economica";
+      font-size: 23px;
+      width: 12rem;
+      text-align: center;
+      color: $principal-verde;
+    }
+  }
+}
