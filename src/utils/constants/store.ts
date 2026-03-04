@@ -1,21 +1,8 @@
-import { ILoader, IMainState, IToast } from "@/types/store";
-
-const toast: IToast = {
-  duration: 61000,
-  show: false,
-  title: "",
-  message: "",
-  type: "warning",
-};
-
-const loader: ILoader = {
-  show: false,
-  progress: 0,
-  text: "",
-  transparentText: "",
-};
+import { IMainState } from "@/types/store";
 
 export const initialState: IMainState = {
-  toast,
-  loader,
+  session: {
+    loader: true,
+  },
+  flags: {},
 };

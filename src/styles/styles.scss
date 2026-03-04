@@ -19,8 +19,9 @@ html {
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 991px) {
+  // Solo se aplica la imagen de fondo en desktop
   #root {
-    background-image: url("../assets/images/background1.jpg");
+    background-image: url("../assets/images/backgrounds/background1.jpg");
     background-size: cover;
     background-attachment: fixed;
   }

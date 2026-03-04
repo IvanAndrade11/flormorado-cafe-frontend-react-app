@@ -7,3 +7,7 @@ export interface ICard {
     text: string;
   }[];
 }
+
+export interface ILoader {
+  show: boolean;
+}
