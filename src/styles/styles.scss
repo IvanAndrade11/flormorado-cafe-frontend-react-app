@@ -46,6 +46,13 @@ html {
   }
 }
 
+.initial-space {
+  padding-top: 70px;
+  @media (max-width: 1000px) {
+    padding-top: 100px;
+  }
+}
+
 .loading {
   font-family: sans-serif;
   width: 100vw;

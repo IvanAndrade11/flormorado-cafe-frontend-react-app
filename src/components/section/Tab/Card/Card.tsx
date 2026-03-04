@@ -1,23 +1,13 @@
 import React from "react";
 import "./Card.scss";
 
-import { Button, ListItemWithIcon, Title } from "@/components/ui";
-import { icons } from "@/utils/constants";
-
-interface ICard {
-  title: string;
-  textBtn: string | boolean;
-  action: () => any;
-  list: {
-    icon: any;
-    text: string;
-  }[];
-}
+import { Button, ListItemWithIcon } from "@/components/ui";
+import { ICard } from "@/types/components";
 
 export const Card: React.FC<ICard> = ({ title, textBtn, action, list }) => {
   return (
     <>
-      <Title message={title} className={"title"} />
+      <h3 className="text-center">{title}</h3>
 
       {list && (
         <ul className={"ul"}>

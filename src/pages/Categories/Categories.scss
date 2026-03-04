@@ -1,0 +1,13 @@
+@use "../../styles/globals.scss" as *;
+
+.categories-card {
+  cursor: pointer;
+  color: $principal-purple;
+  font-family: "Economica", sans-serif;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $principal-purple;
+    color: $principal-beige;
+  }
+}

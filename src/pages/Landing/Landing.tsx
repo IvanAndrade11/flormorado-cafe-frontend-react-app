@@ -14,7 +14,7 @@ export const Landing: React.FC = () => {
   }, []);
 
   return (
-    <div className="initial-space">
+    <>
       <Banner img={images.LogoNombre} />
 
       <Tab />
@@ -24,6 +24,6 @@ export const Landing: React.FC = () => {
       {isDesktop && (
         <div style={{ width: "100%", height: "200px", opacity: "0.5" }}></div>
       )}
-    </div>
+    </>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Tab.scss";
 
-import { TAB_ITEMS } from "@/types/components/TAB_ITEMS";
-
 import { Card } from "./Card/Card";
+
+import { TAB_ITEMS } from "@/utils/constants";
 
 export const Tab: React.FC = () => {
   const [tabActive, setTabActive] = useState(TAB_ITEMS[0]);

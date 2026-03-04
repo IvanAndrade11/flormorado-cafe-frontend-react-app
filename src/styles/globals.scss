@@ -76,3 +76,11 @@ $principal-beige-transparent-gradient: linear-gradient(
 /* Fonts */
 
 $font-flormorado: "Source Sans 3", sans-serif;
+
+@font-face {
+  font-family: "Economica";
+  src: url("@assets/fonts/Economica/Economica-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

@@ -12,14 +12,14 @@ import {
 import { Button, WhatsAppButton, CarouselMessage } from "@/components/ui";
 
 export const Navbar: React.FC = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [expanded, setExpanded] = useState(false);
 
   const handleNavClick = () => setExpanded(false);
 
   const goToStore = () => {
-    Navigate(URLS.categories);
+    navigate(URLS.categories);
     handleNavClick();
   };
 
@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
           <a
             className="navbar-brand"
             onClick={() => {
-              Navigate(URLS.home);
+              navigate(URLS.home);
             }}
           >
             <img src={images.Logo} alt="Logo Flormorado Café" />
@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
                   className="nav-link clean"
                   onClick={() => {
                     if (item.url.startsWith("/")) {
-                      Navigate(item.url);
+                      navigate(item.url);
                     } else {
                       scrollToSection(item.url);
                     }
