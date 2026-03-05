@@ -1,5 +1,6 @@
 export interface ISession {
   loader: boolean;
+  categoryTitle: string;
 }
 
 export interface IMainState {

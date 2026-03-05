@@ -11,6 +11,9 @@ export const mainSlice = createSlice({
     setLoader: (state, action) => {
       state.session.loader = action.payload;
     },
+    setCategoryTitle: (state, action) => {
+      state.session.categoryTitle = action.payload;
+    },
     restartFlow: () => ({ ...initialState }),
   },
 });

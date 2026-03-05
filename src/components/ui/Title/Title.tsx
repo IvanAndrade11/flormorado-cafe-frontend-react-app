@@ -5,10 +5,17 @@ import React from "react";
 
 import { Card } from "react-bootstrap";
 
-export const Title: React.FC<{ title: string }> = ({ title }) => {
+export const Title: React.FC<{ title: string; bold?: boolean }> = ({
+  title,
+  bold,
+}) => {
   return (
     <Card className="title-component">
-      <h1>{title}</h1>
+      {bold ? (
+        <h1 style={{ fontWeight: "bold" }}>{title}</h1>
+      ) : (
+        <h1>{title}</h1>
+      )}
     </Card>
   );
 };

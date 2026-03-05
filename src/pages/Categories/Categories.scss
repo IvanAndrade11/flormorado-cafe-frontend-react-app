@@ -11,4 +11,9 @@
     background-color: $principal-purple;
     color: $principal-beige;
   }
+
+  @media screen and (max-width: 990px) {
+    background-color: $principal-verde;
+    color: $principal-beige;
+  }
 }

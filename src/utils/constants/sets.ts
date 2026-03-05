@@ -7,8 +7,12 @@ const createSetter = <T>(action: (payload: T) => any) => {
 
 export const setFlags = createSetter<any>(mainSlice.actions.setFlags);
 export const setLoader = createSetter<boolean>(mainSlice.actions.setLoader);
+export const setCategoryTitle = createSetter<string>(
+  mainSlice.actions.setCategoryTitle,
+);
 
 export default {
   setFlags,
   setLoader,
+  setCategoryTitle,
 };
