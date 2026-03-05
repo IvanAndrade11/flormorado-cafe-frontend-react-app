@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/app/providers/redux";
 import { useFlags } from "./useFlags";
-import { setFlags, setLoader } from "@/utils/constants/sets";
+import { setFlags, setLoader } from "@/utils/constants/redux/sets";
 
 export const useInit = () => {
   const { loader } = useAppSelector((s) => s.main.session);
