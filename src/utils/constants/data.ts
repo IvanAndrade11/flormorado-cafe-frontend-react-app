@@ -2,6 +2,7 @@ import { icons } from "./icons";
 import { images } from "./images";
 
 export const URLS = {
+  all: "*",
   home: "/",
   about: "/sobre-nosotros",
   origins: "/origenes",

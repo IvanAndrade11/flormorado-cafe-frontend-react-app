@@ -17,6 +17,7 @@ export default (): React.JSX.Element => {
   return (
     <div className="initial-space">
       <Routes>
+        <Route path={URLS.all} element={<Landing />} />
         <Route path={URLS.home} element={<Landing />} />
         <Route path={URLS.categories} element={<Categories />} />
         <Route path={URLS.store} element={<Store />} />
