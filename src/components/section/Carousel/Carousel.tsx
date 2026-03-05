@@ -1,8 +1,7 @@
-import React from "react";
 import "./Carousel.scss";
+import React from "react";
 
-import { CAROUSEL_ITEMS } from "@/types/components/CAROUSEL_ITEMS";
-import { scrollToSection } from "@/utils/constants";
+import { CAROUSEL_ITEMS, scrollToSection } from "@/utils/constants";
 
 export const Carousel: React.FC = () => {
   // Duplicamos los datos para crear un bucle de animación fluido

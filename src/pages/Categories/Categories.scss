@@ -1,0 +1,19 @@
+@use "../../styles/globals.scss" as *;
+
+.categories-card {
+  cursor: pointer;
+  background-color: $principal-beige;
+  color: $principal-purple;
+  font-family: "Economica", sans-serif;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $principal-purple;
+    color: $principal-beige;
+  }
+
+  @media screen and (max-width: 990px) {
+    background-color: $principal-verde;
+    color: $principal-beige;
+  }
+}

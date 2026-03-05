@@ -6,46 +6,6 @@ $principal-beige-oscuro: #e4e2dd;
 $principal-cafe: #512a18;
 $principal-verde: #104928;
 
-$input-text-color: #555f83;
-
-/* Carbon colors */
-
-$carbon-dark: #1b1c1e;
-$carbon-light: #55616f;
-
-$carbon-dark-900: #1b1c1e;
-$carbon-dark-700: #333333;
-$carbon-dark-400: #898d95;
-$carbon-dark-100: #cdcdcd;
-
-$carbon-light-900: #55616f;
-$carbon-light-700: #555f83;
-$carbon-light-400: #adbae6;
-$carbon-light-100: #eff2fc;
-
-/* Semantic colors */
-
-$error-900: #981b1f;
-$error-700: #e24c4c;
-$error-400: #da6d6e;
-$error-100: #fdeaed;
-
-$warning-900: #b75f0e;
-$warning-700: #ffaa31;
-$warning-400: #ffcd84;
-$warning-100: #fff3e1;
-
-$success-900: #117847;
-$success-700: #00ca82;
-$success-400: #86e0b7;
-$success-100: #e2f8ed;
-
-$info-900: #2e4783;
-$info-700: #266dd0;
-$info-500: #3187ff;
-$info-400: #43a5ff;
-$info-100: #e3f2ff;
-
 /* Gradients */
 
 $principal-purple-gradient: linear-gradient(
@@ -69,10 +29,18 @@ $secondary-beige-gradient: linear-gradient(
 $principal-beige-transparent-gradient: linear-gradient(
   180deg,
   $principal-beige 25%,
-  #fcf6ea 0%,
+  #fcf6ea 25%,
   transparent 100%
 );
 
 /* Fonts */
 
 $font-flormorado: "Source Sans 3", sans-serif;
+
+@font-face {
+  font-family: "Economica";
+  src: url("@assets/fonts/Economica/Economica-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

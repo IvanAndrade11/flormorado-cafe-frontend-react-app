@@ -1,23 +1,15 @@
 import React from "react";
 import "./Card.scss";
 
-import { Button, ListItemWithIcon, Title } from "@/components/ui";
-import { icons } from "@/utils/constants";
+import { ListItemWithIcon } from "@/components/ui";
+import { ICard } from "@/types/components";
 
-interface ICard {
-  title: string;
-  textBtn: string | boolean;
-  action: () => any;
-  list: {
-    icon: any;
-    text: string;
-  }[];
-}
+import Button from "react-bootstrap/Button";
 
 export const Card: React.FC<ICard> = ({ title, textBtn, action, list }) => {
   return (
     <>
-      <Title message={title} className={"title"} />
+      <h3 className="text-center">{title}</h3>
 
       {list && (
         <ul className={"ul"}>
@@ -34,11 +26,11 @@ export const Card: React.FC<ICard> = ({ title, textBtn, action, list }) => {
       {textBtn && (
         <Button
           type="button"
-          label={"Botón"}
-          data-testid={"button"}
-          className={`mt-auto btnSubmit`}
+          className={`mt-auto fmc-button`}
           onClick={() => action()}
-        ></Button>
+        >
+          Botón
+        </Button>
       )}
     </>
   );

@@ -19,8 +19,9 @@ html {
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 991px) {
+  // Solo se aplica la imagen de fondo en desktop
   #root {
-    background-image: url("../assets/images/background1.jpg");
+    background-image: url("../assets/images/backgrounds/background1.jpg");
     background-size: cover;
     background-attachment: fixed;
   }
@@ -46,15 +47,21 @@ html {
   }
 }
 
-.loading {
-  font-family: sans-serif;
-  width: 100vw;
-  height: 100vh;
-  background-color: azure;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  opacity: 0.5;
-  z-index: 9999;
+.fmc-button {
+  background-color: $principal-purple;
+  border: 1px solid $principal-purple;
+  padding: 8px 16px;
+  min-width: 160px;
+
+  &:hover {
+    background-color: #83365c;
+    border: 1px solid $principal-cafe;
+    box-shadow: 0px 4px 4px #b06389;
+  }
+
+  span {
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
 }

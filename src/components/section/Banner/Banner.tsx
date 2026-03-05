@@ -4,7 +4,7 @@ import "./Banner.scss";
 import { isMobile } from "react-device-detect";
 
 import { IBanner } from "@/types/ui";
-import { videos } from "@/utils/constants/videos";
+import { videos } from "@/utils/constants";
 
 export const Banner: React.FC<IBanner> = ({ img }) => {
   return (
