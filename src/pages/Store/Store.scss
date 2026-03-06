@@ -1,1 +1,8 @@
 @use "../../styles/globals.scss" as *;
+
+.store-first-column {
+  max-width: 20rem;
+  @media screen and (max-width: 990px) {
+    display: none;
+  }
+}

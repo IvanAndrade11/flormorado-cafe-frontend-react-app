@@ -31,16 +31,19 @@ export const Footer: React.FC = () => {
         <div className="footer-block-info-center">
           <ul>
             <li>
-              <a href="https://www.facebook.com" target="_blank">
+              <a href="https://www.facebook.com/flormoradocafe" target="_blank">
                 <img src={icons.Facebook} alt="Facebook Flormorado Café" />
               </a>
-              <a href="https://www.instagram.com" target="_blank">
+              <a
+                href="https://www.instagram.com/flormoradocafe/"
+                target="_blank"
+              >
                 <img src={icons.Instagram} alt="Instagram Flormorado Café" />
               </a>
               <a href="https://wa.me/573132316080" target="_blank">
                 <img src={icons.WhatsApp} alt="WhatsApp Flormorado Café" />
               </a>
-              <a href="https://www.youtube.com" target="_blank">
+              <a href="https://www.youtube.com/@flormoradocafe" target="_blank">
                 <img src={icons.YouTube} alt="YouTube Flormorado Café" />
               </a>
             </li>
@@ -55,7 +58,7 @@ export const Footer: React.FC = () => {
         <Image
           src={images.LogoNombreFondoBeige}
           className="p-2 logo-letra ms-auto"
-          alt="Logo con nombre Flormorado Café"
+          alt="Flormorado Café"
         />
         <br />
       </footer>

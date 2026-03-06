@@ -11,3 +11,8 @@ export interface ICard {
 export interface ILoader {
   show: boolean;
 }
+
+export interface INavbarStore {
+  orderBy: (id: string) => void;
+  filter: (id: string) => void;
+}
