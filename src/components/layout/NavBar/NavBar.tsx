@@ -11,6 +11,7 @@ import {
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { Button, Container, Nav, Offcanvas } from "react-bootstrap";
 import NavbarBs from "react-bootstrap/Navbar";
@@ -38,7 +39,7 @@ export const Navbar: React.FC = () => {
         <NavbarBs expand="lg">
           <Container fluid>
             {/* Logo */}
-            <NavbarBs.Brand href="/">
+            <NavbarBs.Brand href="/" style={{ marginRight: "0" }}>
               <img
                 alt="Flormorado Café"
                 src={images.Logo}
@@ -47,6 +48,14 @@ export const Navbar: React.FC = () => {
               />{" "}
             </NavbarBs.Brand>
 
+            {isMobile && (
+              <img
+                alt="Flormorado Café"
+                src={images.LogoSoloNombreFondoBeige}
+                width="116"
+                className="d-inline-block align-top"
+              />
+            )}
             {/* OFF CANVAS */}
             <NavbarBs.Toggle
               aria-controls={`fmc-principal-navbar`}

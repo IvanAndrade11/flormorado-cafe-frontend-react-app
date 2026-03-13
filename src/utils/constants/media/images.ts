@@ -5,8 +5,14 @@ import LogoNombre from "@/assets/images/logos/logo-nombre.png";
 import Logo from "@/assets/images/logos/logo-principal.png";
 import Banner from "@/assets/images/banners/banner-hero.jpg";
 
-import GirlCollecting from "@/assets/images/illustrations/girl_collecting.png";
-import GirlStanding from "@/assets/images/illustrations/girl_standing.png";
+import Background1 from "@/assets/images/backgrounds/background1.jpg";
+
+import GirlCollecting from "@/assets/images/illustrations/girl_collecting.svg";
+import GirlStanding from "@/assets/images/illustrations/girl_standing.svg";
+import CoffeePlant from "@/assets/images/illustrations/coffee_plant.svg";
+import Bird from "@/assets/images/illustrations/bird.svg";
+import CoffeeGrains from "@/assets/images/illustrations/coffee_grains.svg";
+import FlowerOne from "@/assets/images/illustrations/flower_one.svg";
 
 import LogoLoading from "@/assets/images/animations/logo-loading.gif";
 
@@ -21,6 +27,10 @@ const logos = {
 const illustrations = {
   GirlCollecting,
   GirlStanding,
+  CoffeePlant,
+  Bird,
+  CoffeeGrains,
+  FlowerOne,
 };
 
 export const images = {
@@ -28,4 +38,5 @@ export const images = {
   ...logos,
   Banner,
   LogoLoading,
+  Background1,
 };

@@ -27,6 +27,20 @@ export const STORE_ORDER_BY = [
 
 export const CAFE_FILTERS = [
   {
+    id: "type",
+    value: "Tipo de café",
+    options: [
+      {
+        id: 0,
+        value: "Especialidad",
+      },
+      {
+        id: 1,
+        value: "Origen",
+      },
+    ],
+  },
+  {
     id: "brand",
     value: "Marca",
     options: [
