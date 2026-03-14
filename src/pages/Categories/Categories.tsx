@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { URLS } from "@/utils/constants";
-import { setCategoryTitle, setLoader } from "@/utils/constants/sets";
+import { setCategoryTitle, setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
 
 import { Row, Col, Card } from "react-bootstrap";

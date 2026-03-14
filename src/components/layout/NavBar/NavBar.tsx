@@ -8,15 +8,13 @@ import {
   scrollToSection,
   URLS,
 } from "@/utils/constants";
+
 import { useState } from "react";
-
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import NavbarBs from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
-
 import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+
+import { Button, Container, Nav, Offcanvas } from "react-bootstrap";
+import NavbarBs from "react-bootstrap/Navbar";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -41,7 +39,7 @@ export const Navbar: React.FC = () => {
         <NavbarBs expand="lg">
           <Container fluid>
             {/* Logo */}
-            <NavbarBs.Brand href="/">
+            <NavbarBs.Brand href="/" style={{ marginRight: "0" }}>
               <img
                 alt="Flormorado Café"
                 src={images.Logo}
@@ -50,20 +48,29 @@ export const Navbar: React.FC = () => {
               />{" "}
             </NavbarBs.Brand>
 
+            {isMobile && (
+              <img
+                alt="Flormorado Café"
+                src={images.LogoSoloNombreFondoBeige}
+                width="116"
+                className="d-inline-block align-top"
+              />
+            )}
             {/* OFF CANVAS */}
             <NavbarBs.Toggle
-              aria-controls={`offcanvasNavbar-expand-lg`}
+              aria-controls={`fmc-principal-navbar`}
               onClick={toggleShow}
             />
             <NavbarBs.Offcanvas
-              id={`offcanvasNavbar-expand-lg`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
+              id={`fmc-principal-navbar`}
+              aria-labelledby={`fmc-principal-navbar-label`}
               placement="end"
               show={show}
+              className="fmc-offcanvas"
               onHide={handleClose}
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+                <Offcanvas.Title id={`fmc-principal-navbar-label`}>
                   <h1 className="fmc-offcanvas-title">FLORMORADO</h1>
                 </Offcanvas.Title>
               </Offcanvas.Header>
@@ -74,7 +81,7 @@ export const Navbar: React.FC = () => {
                     <Nav.Link
                       key={item.url}
                       onClick={() => redirect(item.url)}
-                      className="nav-link mx-2"
+                      className="fmc-navbar-link nav-link mx-2"
                     >
                       {item.title}
                     </Nav.Link>

@@ -1,0 +1,25 @@
+@use "@/styles/globals.scss" as *;
+
+.fmc-store-filter-text {
+  font-size: 1rem;
+  color: $principal-purple;
+}
+
+.fmc-store-dropdown-item {
+  color: $principal-purple;
+
+  &:hover {
+    background-color: $principal-purple;
+    color: $principal-beige;
+  }
+}
+
+.fmc-navbar-store-show {
+  text-decoration: none;
+  padding-left: 0 !important;
+}
+
+.fmc-store-offcanvas-accordion {
+  display: flex;
+  color: $principal-purple;
+}

@@ -18,7 +18,7 @@
   }
 }
 
-.nav-link {
+.fmc-navbar-link {
   height: 65px;
   transition: color 0.15s ease-in-out;
   color: $principal-purple;
@@ -35,8 +35,12 @@
   }
 }
 
-.nav-link:hover {
+.fmc-navbar-link:hover {
   color: $principal-verde;
+}
+
+.fmc-offcanvas {
+  background-color: $principal-beige;
 }
 
 .fmc-offcanvas-title {
@@ -55,6 +59,11 @@
     background-color: #83365c;
     border: 1px solid $principal-cafe;
     box-shadow: 0px 8px 8px rgba(0, 129, 255, 0.24);
+  }
+
+  &:active {
+    background-color: #4c1e35 !important;
+    transform: translateY(2px);
   }
 
   span {

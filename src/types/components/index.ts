@@ -1,3 +1,5 @@
+import { OrderId } from "../store";
+
 export interface ICard {
   title: string;
   textBtn: string | boolean;
@@ -10,4 +12,11 @@ export interface ICard {
 
 export interface ILoader {
   show: boolean;
+}
+
+export interface INavbarStore {
+  orderBy: (id: OrderId) => void;
+  filter: (id: string) => void;
+  clearFilters: () => void;
+  selected: number;
 }

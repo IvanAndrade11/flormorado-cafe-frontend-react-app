@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 import {
   ConfigCatProvider,
   createConsoleLogger,
-  ILazyLoadingOptions,
+  IAutoPollOptions,
   LogLevel,
   PollingMode,
 } from "configcat-react";
@@ -25,15 +25,16 @@ import { App } from "./App";
 const mount = (container: Element) => {
   const root: Root = createRoot(container);
 
-  const options: ILazyLoadingOptions = {
+  const options: IAutoPollOptions = {
     logger: createConsoleLogger(LogLevel.Info),
-    cacheTimeToLiveSeconds: 1800,
+    pollIntervalSeconds: 10,
+    maxInitWaitTimeSeconds: 2,
   };
 
   root.render(
     <ConfigCatProvider
       sdkKey={process.env.SDK_CNFCT || ""}
-      pollingMode={PollingMode.LazyLoad}
+      pollingMode={PollingMode.AutoPoll}
       options={options}
     >
       <BrowserRouter>
