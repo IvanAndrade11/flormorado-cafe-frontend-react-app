@@ -16,7 +16,12 @@ import {
   Form,
 } from "react-bootstrap";
 
-export const NavbarStore: React.FC<INavbarStore> = ({ orderBy, filter }) => {
+export const NavbarStore: React.FC<INavbarStore> = ({
+  orderBy,
+  filter,
+  clearFilters,
+  selected,
+}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -28,7 +33,7 @@ export const NavbarStore: React.FC<INavbarStore> = ({ orderBy, filter }) => {
         <Navbar.Brand>
           <Button
             variant="link"
-            onClick={() => toggleShow()}
+            onClick={() => (toggleShow(), clearFilters())}
             className="fmc-navbar-store-show"
           >
             <>
@@ -38,7 +43,7 @@ export const NavbarStore: React.FC<INavbarStore> = ({ orderBy, filter }) => {
                 width="25"
                 className="d-inline-block align-top me-2"
               />
-              <span className="fmc-store-filter-text">Filtros</span>
+              <span className="fmc-store-filter-text">Filtros {selected}</span>
             </>
           </Button>
         </Navbar.Brand>
@@ -63,22 +68,19 @@ export const NavbarStore: React.FC<INavbarStore> = ({ orderBy, filter }) => {
                   <Accordion.Item eventKey={item.id} key={item.id}>
                     <Accordion.Header>{item.value}</Accordion.Header>
 
-                    {item.options.map((option) => (
+                    {item.options.map(({ id, value }) => (
                       <Accordion.Body
-                        key={option.id}
+                        key={id}
                         className="fmc-store-offcanvas-accordion"
                       >
                         <Form.Check
                           className="me-2"
-                          aria-label="option 1"
-                          onChange={(e) => {
-                            console.log(
-                              `Checkbox marcado: ${option.value}`,
-                              e.target.checked,
-                            );
+                          aria-label={value}
+                          onChange={() => {
+                            filter(`${item.id}:${id}`);
                           }}
                         />
-                        <span>{option.value}</span>
+                        <span>{value}</span>
                       </Accordion.Body>
                     ))}
                   </Accordion.Item>
@@ -102,13 +104,13 @@ export const NavbarStore: React.FC<INavbarStore> = ({ orderBy, filter }) => {
           drop="down"
           align="end"
         >
-          {STORE_ORDER_BY.map((item) => (
+          {STORE_ORDER_BY.map(({ id, value }) => (
             <NavDropdown.Item
-              key={item.id}
+              key={id}
               className="fmc-store-dropdown-item"
-              onClick={() => orderBy(item.id)}
+              onClick={() => orderBy(id)}
             >
-              {item.value}
+              {value}
             </NavDropdown.Item>
           ))}
         </NavDropdown>
