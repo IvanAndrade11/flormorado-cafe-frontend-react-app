@@ -49,12 +49,14 @@ export const Navbar: React.FC = () => {
             </NavbarBs.Brand>
 
             {isMobile && (
-              <img
-                alt="Flormorado Café"
-                src={images.LogoSoloNombreFondoBeige}
-                width="116"
-                className="d-inline-block align-top"
-              />
+              <a href="/">
+                <img
+                  alt="Flormorado Café"
+                  src={images.LogoSoloNombreFondoBeige}
+                  width="116"
+                  className="d-inline-block align-top"
+                />
+              </a>
             )}
             {/* OFF CANVAS */}
             <NavbarBs.Toggle

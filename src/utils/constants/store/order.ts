@@ -1,4 +1,5 @@
-import { ICoffeeProduct, OrderId } from "@/types/store";
+import { OrderId } from "@/types/store";
+import { ICoffeeProduct } from "@/types/configCat";
 
 /**
  * Convierte "35.000" o "240.000" a número 35000 / 240000.

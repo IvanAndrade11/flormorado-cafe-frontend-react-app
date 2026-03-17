@@ -1,5 +1,5 @@
 export * from "./Banner/Banner";
 
-export * from "./Carousel/Carousel";
+export * from "./InfiniteCarousel/InfiniteCarousel";
 
-export * from "./Tab/Tab";
+export * from "./CategoryCarousel/CategoryCarousel";

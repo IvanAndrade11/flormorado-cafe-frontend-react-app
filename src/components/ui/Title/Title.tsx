@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import "./Title.scss";
 import React from "react";
 
@@ -19,4 +17,3 @@ export const Title: React.FC<{ title: string; bold?: boolean }> = ({
     </Card>
   );
 };
-export default Title;

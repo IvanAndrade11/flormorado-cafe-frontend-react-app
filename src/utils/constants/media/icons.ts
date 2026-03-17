@@ -1,5 +1,6 @@
 import IconNext from "@/assets/icons/common/icon-next.svg";
 import ArrowRight from "@/assets/icons/common/arrow-right.svg";
+import DeletePurple from "@/assets/icons/common/delete-purple.svg";
 
 import Mail from "@/assets/icons/contact/mail.svg";
 import Phone from "@/assets/icons/contact/phone.svg";
@@ -19,6 +20,7 @@ import FilterPurple from "@/assets/icons/store/filter-purple.svg";
 const common = {
   IconNext,
   ArrowRight,
+  DeletePurple,
 };
 
 const contact = {
