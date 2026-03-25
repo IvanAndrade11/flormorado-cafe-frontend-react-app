@@ -1,4 +1,5 @@
-import { FilterGroupId, ICoffeeProduct, SelectedFilters } from "@/types/store";
+import { FilterGroupId, SelectedFilters } from "@/types/store";
+import { ICoffeeProduct } from "@/types/configCat";
 
 /**
  * Parse de ids compactos del UI: "group:option"

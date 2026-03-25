@@ -1,0 +1,19 @@
+@use "../../../styles/globals.scss" as *;
+
+.fmc-carousel-title {
+  background-color: transparent !important;
+  color: $principal-verde;
+
+  a {
+    display: block;
+    cursor: pointer;
+    padding: 64px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+  }
+}
+
+.fmc-carousel-category-section {
+  background: $principal-beige-transparent-gradient;
+}

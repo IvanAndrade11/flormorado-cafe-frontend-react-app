@@ -43,7 +43,7 @@ export const NavbarStore: React.FC<INavbarStore> = ({
                 width="25"
                 className="d-inline-block align-top me-2"
               />
-              <span className="fmc-store-filter-text">Filtros {selected}</span>
+              <span className="fmc-store-filter-text">Filtros</span>
             </>
           </Button>
         </Navbar.Brand>

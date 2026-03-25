@@ -7,3 +7,7 @@ export * from "./Title/Title";
 export * from "./WhatsAppButton/WhatsAppButton";
 
 export * from "./CarouselMessage/CarouselMessage";
+
+export * from "./CategoryCard/CategoryCard";
+
+export * from "./StoreCard/StoreCard";
