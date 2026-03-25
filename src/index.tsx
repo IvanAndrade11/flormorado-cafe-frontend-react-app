@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/styles.scss";
 
 import { createRoot, Root } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import {
   ConfigCatProvider,
@@ -37,11 +37,11 @@ const mount = (container: Element) => {
       pollingMode={PollingMode.AutoPoll}
       options={options}
     >
-      <BrowserRouter>
+      <HashRouter>
         <Provider store={store}>
           <App />
         </Provider>
-      </BrowserRouter>
+      </HashRouter>
     </ConfigCatProvider>,
   );
 };
