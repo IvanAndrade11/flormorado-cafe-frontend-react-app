@@ -38,7 +38,7 @@ export const Categories: React.FC = () => {
 
           <Row xs={1} md={2} lg={3} className="g-4 my-5">
             {categoriesList.map((item: ICategory) => (
-              <CategoryCard {...item} />
+              <CategoryCard key={item.id} {...item} />
             ))}
           </Row>
         </div>

@@ -26,7 +26,10 @@ const mount = (container: Element) => {
   const root: Root = createRoot(container);
 
   const options: IAutoPollOptions = {
-    logger: createConsoleLogger(LogLevel.Info),
+    logger:
+      process.env.NODE_ENV === "development"
+        ? createConsoleLogger(LogLevel.Info)
+        : undefined,
     pollIntervalSeconds: 10,
     maxInitWaitTimeSeconds: 2,
   };

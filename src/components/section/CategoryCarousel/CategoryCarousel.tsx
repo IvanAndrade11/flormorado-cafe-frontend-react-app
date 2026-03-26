@@ -42,7 +42,7 @@ export const CategoryCarousel: React.FC = () => {
           {isDesktop ? (
             <Row xs={2} md={3} lg={3} className="g-4">
               {categoriesList.map((item: ICategory) => (
-                <CategoryCard {...item} />
+                <CategoryCard key={item.id} {...item} />
               ))}
             </Row>
           ) : (
@@ -54,7 +54,7 @@ export const CategoryCarousel: React.FC = () => {
             >
               {categoriesList.map((item: ICategory, index: number) => (
                 <Carousel.Item key={index} interval={2000}>
-                  <CategoryCard {...item} />
+                  <CategoryCard key={item.id} {...item} />
                 </Carousel.Item>
               ))}
             </Carousel>
