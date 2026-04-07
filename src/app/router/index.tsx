@@ -15,7 +15,7 @@ import { URLS } from "@/utils/constants";
 
 export default (): React.JSX.Element => {
   return (
-    <div className="initial-space">
+    <>
       <Routes>
         <Route path={URLS.all} element={<Landing />} />
         <Route path={URLS.home} element={<Landing />} />
@@ -26,6 +26,6 @@ export default (): React.JSX.Element => {
         <Route path={URLS.contact} element={<Contact />} />
         <Route path={URLS.blog} element={<Blog />} />
       </Routes>
-    </div>
+    </>
   );
 };

@@ -1,6 +1,6 @@
 import "./Navbar.scss";
 
-import { CarouselMessage, WhatsAppButton } from "@/components/ui";
+import { CarouselMessage, PopDropdown, WhatsAppButton } from "@/components/ui";
 import {
   icons,
   images,
@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
-import { Button, Container, Nav, Offcanvas } from "react-bootstrap";
+import { Button, Container, Nav, Offcanvas, Accordion } from "react-bootstrap";
 import NavbarBs from "react-bootstrap/Navbar";
 
 export const Navbar: React.FC = () => {
@@ -79,15 +79,42 @@ export const Navbar: React.FC = () => {
 
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  {NAVBAR_MENU_ITEMS.map((item) => (
-                    <Nav.Link
-                      key={item.url}
-                      onClick={() => redirect(item.url)}
-                      className="fmc-navbar-link nav-link mx-2"
-                    >
-                      {item.title}
-                    </Nav.Link>
-                  ))}
+                  {NAVBAR_MENU_ITEMS.map((item) =>
+                    item.dropdown ? (
+                      isMobile ? (
+                        <Accordion key={item.id}>
+                          <Accordion.Item eventKey={item.title}>
+                            <Accordion.Header className="fmc-navbar-accordion-mobile">
+                              {item.title}
+                            </Accordion.Header>
+                            <Accordion.Body
+                              style={{ padding: "0rem 1.5rem !important" }}
+                            >
+                              {item.subItems?.map((subItem) => (
+                                <Nav.Link
+                                  key={subItem.id}
+                                  onClick={() => redirect(subItem.url)}
+                                  className="fmc-navbar-link nav-link mx-2 text-center"
+                                >
+                                  {subItem.title}
+                                </Nav.Link>
+                              ))}
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        </Accordion>
+                      ) : (
+                        <PopDropdown item={item} redirect={redirect} />
+                      )
+                    ) : (
+                      <Nav.Link
+                        key={item.id}
+                        onClick={() => redirect(item.url)}
+                        className="fmc-navbar-link nav-link mx-2"
+                      >
+                        {item.title}
+                      </Nav.Link>
+                    ),
+                  )}
                 </Nav>
 
                 <Button
