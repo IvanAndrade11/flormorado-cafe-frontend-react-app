@@ -113,6 +113,12 @@ export const Navbar: React.FC = () => {
                           <Accordion.Item eventKey={item.title}>
                             <Accordion.Header className="fmc-navbar-accordion-mobile">
                               <span onClick={() => redirect(item.url)}>
+                                <img
+                                  src={icons.GrainCoffee}
+                                  alt="Grano de Café Flormorado"
+                                  width="17"
+                                  className="d-inline-block align-top mx-2"
+                                />
                                 {item.title}
                               </span>
                             </Accordion.Header>
@@ -140,6 +146,14 @@ export const Navbar: React.FC = () => {
                         onClick={() => redirect(item.url)}
                         className="fmc-navbar-link nav-link mx-2"
                       >
+                        {isMobile && (
+                          <img
+                            src={icons.GrainCoffee}
+                            alt="Grano de Café Flormorado"
+                            width="17"
+                            className="d-inline-block mx-2"
+                          />
+                        )}
                         {item.title}
                       </Nav.Link>
                     ),

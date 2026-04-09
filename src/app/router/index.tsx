@@ -13,10 +13,12 @@ import {
 } from "@/pages";
 
 import { URLS } from "@/utils/constants";
+import { ScrollToTop } from "@/components/common";
 
 export default (): React.JSX.Element => {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path={URLS.all} element={<Landing />} />
         <Route path={URLS.home} element={<Landing />} />

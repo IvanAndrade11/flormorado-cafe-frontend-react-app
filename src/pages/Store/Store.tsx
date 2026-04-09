@@ -94,7 +94,7 @@ export const Store: React.FC = () => {
               <Col>
                 <Row xs={2} sm={2} md={2} lg={3} xl={4} className="g-4">
                   {visibleProducts.map((item) => (
-                    <StoreCard {...item} />
+                    <StoreCard {...item} key={item.id} />
                   ))}
                 </Row>
               </Col>

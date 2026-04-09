@@ -64,8 +64,8 @@ export const NavbarStore: React.FC<INavbarStore> = ({
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
               {CAFE_FILTERS.map((item) => (
-                <Accordion defaultActiveKey="0" className="my-2">
-                  <Accordion.Item eventKey={item.id} key={item.id}>
+                <Accordion key={item.id} defaultActiveKey="0" className="my-2">
+                  <Accordion.Item eventKey={item.id}>
                     <Accordion.Header>{item.value}</Accordion.Header>
 
                     {item.options.map(({ id, value }) => (
