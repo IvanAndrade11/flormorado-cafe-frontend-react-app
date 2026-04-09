@@ -29,6 +29,11 @@
     border-bottom: 1px solid $principal-purple;
   }
 
+  a {
+    color: $principal-purple !important;
+    padding: 0px !important;
+  }
+
   &:hover,
   &:focus {
     border-bottom: 2px solid $principal-verde;
@@ -76,4 +81,34 @@
     width: 100%;
     margin: 60px 0px;
   }
+}
+
+.fmc-navbar-accordion-mobile {
+  margin: 0 0.5rem;
+
+  button {
+    color: $principal-verde !important;
+    background-color: transparent !important;
+    height: 65px;
+    padding: 20px 0px !important;
+    border: none;
+    border-radius: 0 !important;
+    border-bottom: 1px solid $principal-purple !important;
+    box-shadow: none !important;
+
+    &:hover,
+    &:focus,
+    &:not(.collapsed) {
+      border: none;
+      color: $principal-verde !important;
+      background-color: transparent !important;
+      border-bottom: 2px solid $principal-verde !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.fmc-offcanvas .accordion-item {
+  border: none;
+  background-color: transparent;
 }

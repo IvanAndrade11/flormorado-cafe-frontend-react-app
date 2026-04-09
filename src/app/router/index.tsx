@@ -9,13 +9,14 @@ import {
   Origins,
   Contact,
   Blog,
+  BlogPost,
 } from "@/pages";
 
 import { URLS } from "@/utils/constants";
 
 export default (): React.JSX.Element => {
   return (
-    <div className="initial-space">
+    <>
       <Routes>
         <Route path={URLS.all} element={<Landing />} />
         <Route path={URLS.home} element={<Landing />} />
@@ -25,7 +26,8 @@ export default (): React.JSX.Element => {
         <Route path={URLS.origins} element={<Origins />} />
         <Route path={URLS.contact} element={<Contact />} />
         <Route path={URLS.blog} element={<Blog />} />
+        <Route path={`${URLS.blog}/:slug`} element={<BlogPost />} />
       </Routes>
-    </div>
+    </>
   );
 };

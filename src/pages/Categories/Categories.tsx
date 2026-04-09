@@ -1,12 +1,11 @@
 import "./Categories.scss";
 
 import React, { useEffect } from "react";
+import { Row } from "react-bootstrap";
 
+import store from "@/app/providers/redux/store";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
-
-import { Row } from "react-bootstrap";
-import store from "@/app/providers/redux/store";
 import { ICategory } from "@/types/configCat";
 import { CategoryCard } from "@/components/ui/CategoryCard/CategoryCard";
 
@@ -38,7 +37,7 @@ export const Categories: React.FC = () => {
 
           <Row xs={1} md={2} lg={3} className="g-4 my-5">
             {categoriesList.map((item: ICategory) => (
-              <CategoryCard {...item} />
+              <CategoryCard key={item.id} {...item} />
             ))}
           </Row>
         </div>

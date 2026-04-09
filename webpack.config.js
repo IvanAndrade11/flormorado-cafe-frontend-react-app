@@ -66,7 +66,7 @@ module.exports = (env, argv) => {
                 favicon: './public/icon.svg',
             }),
             new Dotenv({
-                path: './src/utils/env.env'
+                path: isProd ? './.env.production' : './.env.development'
             })
         ],
 

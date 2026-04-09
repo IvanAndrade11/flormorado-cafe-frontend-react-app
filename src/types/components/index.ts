@@ -20,3 +20,11 @@ export interface INavbarStore {
   clearFilters: () => void;
   selected: number;
 }
+
+export interface NavbarMenuItem {
+  id: string;
+  title: string;
+  url: string;
+  dropdown?: boolean;
+  subItems?: NavbarMenuItem[];
+}

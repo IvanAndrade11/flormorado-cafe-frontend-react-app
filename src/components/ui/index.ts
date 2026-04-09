@@ -11,3 +11,5 @@ export * from "./CarouselMessage/CarouselMessage";
 export * from "./CategoryCard/CategoryCard";
 
 export * from "./StoreCard/StoreCard";
+
+export * from "./PopDropdown/PopDropdown";
