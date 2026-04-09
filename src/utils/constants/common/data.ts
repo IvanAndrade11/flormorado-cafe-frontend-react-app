@@ -45,26 +45,6 @@ export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
     title: "Blog",
     url: URLS.blog,
     dropdown: true,
-    subItems: [
-      {
-        id: "cafe-especialidad",
-        title: "Café de especialidad",
-        url: URLS.home,
-      },
-      {
-        id: "metodos-preparacion",
-        title: "Métodos de preparación",
-        url: URLS.home,
-      },
-      {
-        id: "filtros-tela",
-        title: "Filtros de tela, tu mejor opción",
-        url: URLS.home,
-      },
-      { id: "usos-residuos", title: "Usos residuos del café", url: URLS.home },
-      { id: "ritual-cafe", title: "Ritual de café", url: URLS.home },
-      { id: "tips-esenciales", title: "Tips esenciales", url: URLS.home },
-      { id: "tostion-media", title: "Tostión media", url: URLS.home },
-    ],
+    subItems: [],
   },
 ];

@@ -1,12 +1,11 @@
 import "./Categories.scss";
 
 import React, { useEffect } from "react";
+import { Row } from "react-bootstrap";
 
+import store from "@/app/providers/redux/store";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
-
-import { Row } from "react-bootstrap";
-import store from "@/app/providers/redux/store";
 import { ICategory } from "@/types/configCat";
 import { CategoryCard } from "@/components/ui/CategoryCard/CategoryCard";
 

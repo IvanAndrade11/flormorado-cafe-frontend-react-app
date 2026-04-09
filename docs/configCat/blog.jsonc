@@ -1,0 +1,43 @@
+{
+  "blog": {
+    "title": "Blog de Café de Origen",
+    "description": "Historias, procesos y conocimiento sobre café de especialidad",
+    "language": "es",
+    "entries": [
+      {
+        "id": "origen-cafe-huila", //Usado para identificar el blog
+        "slug": "origen-del-cafe-en-el-huila", //Usado para la URL (/blog/:slug)
+        "status": "published", //Usado para saber si el blog esta publicado
+        "title": "El origen del café en el Huila", //Usado para el titulo del blog
+        "excerpt": "Descubre por qué el Huila produce uno de los cafés más reconocidos del mundo.", //Usado para la descripcion corta del blog
+        "content": {
+          "type": "html", //Usado para saber el tipo de contenido del blog
+          "body": "<p>El Huila es una región privilegiada...</p>" //Usado para el contenido del blog
+        },
+        "featuredImage": {
+          "url": "https://cdn.tusitio.com/blog/huila-cafe.jpg", //Usado para la imagen principal del blog
+          "alt": "Cultivos de café en el Huila", //Usado para el texto alternativo de la imagen principal del blog
+          "caption": "Café de altura cultivado en el Huila" //Usado para el caption de la imagen principal del blog
+        },
+        "author": {
+          "name": "Juan Pérez", //Usado para el nombre del autor del blog
+          "role": "Catador Q-Grader", //Usado para el rol del autor del blog
+          "avatarUrl": "https://cdn.tusitio.com/authors/juan.jpg" //Usado para la imagen del autor del blog
+        },
+        "categories": ["origen", "regiones"], //Usado para las categorias del blog
+        "tags": ["huila", "café de especialidad", "origen"], //Usado para las etiquetas del blog
+        "readingTimeMinutes": 5, //Usado para el tiempo de lectura del blog
+        "publishedAt": "2026-03-15T10:00:00Z", //Usado para la fecha de publicacion del blog
+        "updatedAt": "2026-03-20T14:30:00Z", //Usado para la fecha de actualizacion del blog
+        "seo": {
+          "metaTitle": "Café del Huila: origen y características", //Usado para el titulo del blog en el SEO
+          "metaDescription": "Conoce el origen, clima y perfil sensorial del café de Huila.", //Usado para la descripcion del blog en el SEO
+          "metaImage": "https://cdn.tusitio.com/seo/huila.jpg" //Usado para la imagen del blog en el SEO
+        }
+      },
+      {
+        "...": "entrada 2"
+      }
+    ]
+  }
+}

@@ -18,5 +18,7 @@ export const useFlags = () => {
     "Default",
   );
 
-  return { testFlag, storeProducts, storeCategories, coffeeGrowers };
+  const { value: blog } = configCat.useFeatureFlag("blog", "Default");
+
+  return { testFlag, storeProducts, storeCategories, coffeeGrowers, blog };
 };

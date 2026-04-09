@@ -1,5 +1,11 @@
 import "./Navbar.scss";
 
+import React, { useEffect, useState } from "react";
+import NavbarBs from "react-bootstrap/Navbar";
+import { isMobile } from "react-device-detect";
+import { Button, Container, Nav, Offcanvas, Accordion } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 import { CarouselMessage, PopDropdown, WhatsAppButton } from "@/components/ui";
 import {
   icons,
@@ -9,12 +15,10 @@ import {
   URLS,
 } from "@/utils/constants";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { isMobile } from "react-device-detect";
-
-import { Button, Container, Nav, Offcanvas, Accordion } from "react-bootstrap";
-import NavbarBs from "react-bootstrap/Navbar";
+import store from "@/app/providers/redux/store";
+import { IBlog, IBlogFlormorado } from "@/types/configCat";
+import { setLoader } from "@/utils/constants/redux/sets";
+import { NavbarMenuItem } from "@/types/components";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -22,6 +26,8 @@ export const Navbar: React.FC = () => {
 
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
+
+  const { blog } = store.getState().main.flags;
 
   const redirect = (url: string) => {
     handleClose();
@@ -31,6 +37,27 @@ export const Navbar: React.FC = () => {
       scrollToSection(url);
     }
   };
+
+  useEffect(() => {
+    setLoader(true);
+  }, []);
+
+  useEffect(() => {
+    if (blog) {
+      const { blogFlormorado }: IBlogFlormorado = JSON.parse(blog) as {
+        blogFlormorado: IBlog;
+      };
+      const blogSubItems: NavbarMenuItem[] = blogFlormorado.entries.map(
+        (entry) => ({
+          id: entry.id,
+          title: entry.title,
+          url: `${URLS.blog}/${entry.slug}`,
+        }),
+      );
+      NAVBAR_MENU_ITEMS[5].subItems = blogSubItems;
+      setLoader(false);
+    }
+  }, [blog]);
 
   return (
     <div className="flormorado-navbar">
@@ -85,7 +112,9 @@ export const Navbar: React.FC = () => {
                         <Accordion key={item.id}>
                           <Accordion.Item eventKey={item.title}>
                             <Accordion.Header className="fmc-navbar-accordion-mobile">
-                              {item.title}
+                              <span onClick={() => redirect(item.url)}>
+                                {item.title}
+                              </span>
                             </Accordion.Header>
                             <Accordion.Body
                               style={{ padding: "0rem 1.5rem !important" }}
