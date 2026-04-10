@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import NavbarBs from "react-bootstrap/Navbar";
 import { isMobile } from "react-device-detect";
 import { Button, Container, Nav, Offcanvas, Accordion } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { CarouselMessage, PopDropdown, WhatsAppButton } from "@/components/ui";
 import {
@@ -22,6 +22,8 @@ import { NavbarMenuItem } from "@/types/components";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -160,22 +162,24 @@ export const Navbar: React.FC = () => {
                   )}
                 </Nav>
 
-                <Button
-                  onClick={() => redirect(URLS.categories)}
-                  className="fmc-navbar-button"
-                >
-                  <>
-                    Ir a la tienda
-                    <span>
-                      <img
-                        src={icons.Basket2}
-                        alt="Tienda - Flormorado Café"
-                        width="20"
-                        className="d-inline-block align-top ms-1"
-                      />
-                    </span>
-                  </>
-                </Button>
+                {!pathname.includes(URLS.store) && (
+                  <Button
+                    onClick={() => redirect(URLS.categories)}
+                    className="fmc-navbar-button"
+                  >
+                    <>
+                      Ir a la tienda
+                      <span>
+                        <img
+                          src={icons.Basket2}
+                          alt="Tienda - Flormorado Café"
+                          width="20"
+                          className="d-inline-block align-top ms-1"
+                        />
+                      </span>
+                    </>
+                  </Button>
+                )}
               </Offcanvas.Body>
             </NavbarBs.Offcanvas>
           </Container>

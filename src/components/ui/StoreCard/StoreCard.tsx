@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Col, ListGroup, Button } from "react-bootstrap";
 
 import { ICoffeeProduct } from "@/types/configCat";
+import { useNavigate } from "react-router-dom";
+import { URLS } from "@/utils/constants";
 
 export const StoreCard: React.FC<ICoffeeProduct> = ({
   id,
@@ -13,9 +15,14 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
   variety,
   price,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Col key={id}>
-      <Card className="store-card">
+      <Card
+        className="store-card"
+        onClick={() => navigate(`${URLS.store}/${id}`)}
+      >
         <div className="store-card-image-container">
           <Card.Img
             variant="top"
@@ -48,8 +55,8 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
         <Card.Body className="store-card-body-button">
           <Card.Text className="store-card-body-title">$ {price}</Card.Text>
           <Button
-            // onClick={() => navigate(`/producto/${item.id}`)}
-            onClick={() => alert("¡Próximamente podrás comprar este producto!")}
+            onClick={() => navigate(`${URLS.store}/${id}`)}
+            // onClick={() => alert("¡Próximamente podrás comprar este producto!")}
             variant="secondary"
             className="fmc-button"
             style={{ minWidth: "100%" }}

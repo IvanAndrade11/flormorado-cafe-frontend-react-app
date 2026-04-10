@@ -13,3 +13,11 @@ export * from "./CategoryCard/CategoryCard";
 export * from "./StoreCard/StoreCard";
 
 export * from "./PopDropdown/PopDropdown";
+
+export * from "./Product/ProductGallery/ProductGallery";
+
+export * from "./Product/ProductInfo/ProductInfo";
+
+export * from "./Product/ProductConfigurator/ProductConfigurator";
+
+export * from "./Product/QuantitySelector/QuantitySelector";

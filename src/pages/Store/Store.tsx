@@ -74,10 +74,10 @@ export const Store: React.FC = () => {
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="container">
         <Title title={categoryTitle} bold={true} />
 
-        <Container className="my-5">
+        <Container className="mt-2 mb-5">
           <Row>
             <Col>
               <NavbarStore

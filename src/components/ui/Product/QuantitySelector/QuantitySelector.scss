@@ -1,0 +1,41 @@
+@use "@/styles/globals.scss" as *;
+
+.quantity-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.qty-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: white;
+  color: $principal-cafe;
+  border: 1px solid rgba($principal-cafe, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+
+  &:hover {
+    background: $principal-beige;
+    color: $principal-purple;
+    border-color: $principal-purple;
+    box-shadow: 0 4px 12px rgba($principal-purple, 0.15);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.qty-value {
+  width: 40px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $principal-cafe;
+}

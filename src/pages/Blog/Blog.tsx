@@ -40,7 +40,7 @@ export const Blog: React.FC = () => {
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="container">
         <Title title="FLORMORADO BLOG" />
       </div>
 
