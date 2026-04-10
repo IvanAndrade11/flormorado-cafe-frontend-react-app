@@ -6,7 +6,12 @@ import { isMobile } from "react-device-detect";
 import { Button, Container, Nav, Offcanvas, Accordion } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { CarouselMessage, PopDropdown, WhatsAppButton } from "@/components/ui";
+import {
+  CarouselMessage,
+  PopDropdown,
+  WhatsAppButton,
+  ShoppingCart,
+} from "@/components/ui";
 import {
   icons,
   images,
@@ -186,6 +191,7 @@ export const Navbar: React.FC = () => {
         </NavbarBs>
       </div>
       <WhatsAppButton />
+      <ShoppingCart />
     </div>
   );
 };

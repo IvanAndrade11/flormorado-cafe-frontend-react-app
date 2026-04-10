@@ -21,3 +21,5 @@ export * from "./Product/ProductInfo/ProductInfo";
 export * from "./Product/ProductConfigurator/ProductConfigurator";
 
 export * from "./Product/QuantitySelector/QuantitySelector";
+
+export * from "./ShoppingCart/ShoppingCart";
