@@ -35,16 +35,11 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
         </div>
         <Card.Body className="store-card-body">
           <Card.Title className="store-card-body-title">{name}</Card.Title>
-          {!stock && (
-            <Card.Subtitle className="mb-2 text-muted">
-              <strong>AGOTADO</strong>
-            </Card.Subtitle>
-          )}
         </Card.Body>
         <ListGroup className="list-group-flush store-card-list-group">
-          <ListGroup.Item className="store-card-list-group-item">
+          {/* <ListGroup.Item className="store-card-list-group-item">
             <strong>Molienda:</strong> {grinding}
-          </ListGroup.Item>
+          </ListGroup.Item> */}
           <ListGroup.Item className="store-card-list-group-item">
             <strong>Tostión:</strong> {roastOptions}
           </ListGroup.Item>
@@ -56,7 +51,6 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
           <Card.Text className="store-card-body-title">$ {price}</Card.Text>
           <Button
             onClick={() => navigate(`${URLS.store}/${id}`)}
-            // onClick={() => alert("¡Próximamente podrás comprar este producto!")}
             variant="secondary"
             className="fmc-button"
             style={{ minWidth: "100%" }}

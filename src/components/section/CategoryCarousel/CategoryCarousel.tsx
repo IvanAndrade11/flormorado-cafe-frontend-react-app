@@ -48,6 +48,7 @@ export const CategoryCarousel: React.FC = () => {
           ) : (
             <Carousel
               id="fmc-carousel-category"
+              className="px-5"
               data-bs-theme="dark"
               indicators={false}
               fade

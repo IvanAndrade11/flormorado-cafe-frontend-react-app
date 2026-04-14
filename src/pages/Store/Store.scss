@@ -18,6 +18,7 @@
   transition:
     transform var(--duration) var(--easing),
     box-shadow var(--duration) var(--easing);
+  animation: fadeInUp 0.5s ease forwards;
 
   &:hover {
     transform: scale(1.04);
@@ -28,7 +29,7 @@
 .store-card-image-container {
   position: relative;
   aspect-ratio: 3/4;
-  border-radius: var(--radius);
+  border-radius: var(--radius) var(--radius) 0 0;
   overflow: hidden;
   background: #fff;
   box-shadow: var(--shadow);
@@ -81,4 +82,5 @@
   padding-top: 0 !important;
   text-align: center;
   background: $secondary-beige-gradient;
+  border-radius: 0 0 var(--radius) var(--radius);
 }
