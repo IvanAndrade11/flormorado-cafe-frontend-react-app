@@ -14,6 +14,12 @@ export const mainSlice = createSlice({
     setCategoryTitle: (state, action) => {
       state.session.categoryTitle = action.payload;
     },
+    setShowCart: (state, action) => {
+      state.session.showCart = action.payload;
+    },
+    setCart: (state, action) => {
+      state.session.cart = action.payload;
+    },
     restartFlow: () => ({ ...initialState }),
   },
 });

@@ -1,23 +1,35 @@
-// ProductConfigurator.jsx
-import { useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import { QuantitySelector } from "../QuantitySelector/QuantitySelector";
 import "./ProductConfigurator.scss";
 
-export const ProductConfigurator = ({ product }: { product: any }) => {
+import { useEffect, useState } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { QuantitySelector } from "../QuantitySelector/QuantitySelector";
+import { GRINDING_OPTIONS } from "@/utils/constants";
+import { setCart, setShowCart } from "@/utils/constants/redux/sets";
+import { ICoffeeProduct } from "@/types/configCat";
+import store from "@/app/providers/redux/store";
+
+export const ProductConfigurator = ({
+  product,
+}: {
+  product: ICoffeeProduct;
+}) => {
   const [quantity, setQuantity] = useState(1);
   const [grinding, setGrinding] = useState(product.grinding);
+  const [productCount, setProductCount] = useState(0);
+
+  const { cart } = store.getState().main.session;
 
   const handleAddToCart = () => {
-    const item = {
-      id: product.id,
-      quantity,
-      grinding,
-      price: product.price,
-    };
-
-    console.log("Agregar al carrito:", item);
+    const item = { ...product, id: `${productCount + 1}`, quantity, grinding };
+    const newCart = [...cart, item];
+    setCart(newCart);
+    setShowCart(true);
+    setProductCount((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    console.log("Nuevo Carrito", cart);
+  }, [cart]);
 
   return (
     <Form className="mt-4 configurator-controls">
@@ -29,10 +41,11 @@ export const ProductConfigurator = ({ product }: { product: any }) => {
               value={grinding}
               onChange={(e) => setGrinding(e.target.value)}
             >
-              <option>Fina</option>
-              <option>Media</option>
-              <option>Gruesa</option>
-              <option>En grano</option>
+              {GRINDING_OPTIONS.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.value}
+                </option>
+              ))}
             </Form.Select>
           </Form.Group>
         </Col>

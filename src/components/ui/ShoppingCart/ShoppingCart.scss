@@ -49,3 +49,20 @@
     transition: height 0.5s;
   }
 }
+
+.fmc-cart-icon {
+  width: 2rem;
+}
+
+.fmc-store-cart-buttons {
+  border-top: 1px solid #e9ecef;
+  display: inline-grid;
+}
+
+.fmc-cart-img-product {
+  width: 5rem;
+}
+
+.fmc-cart-item {
+  padding-left: 0 !important;
+}

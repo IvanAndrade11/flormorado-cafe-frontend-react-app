@@ -133,3 +133,22 @@ export const CAFE_FILTERS = [
   //   ],
   // },
 ];
+
+export const GRINDING_OPTIONS = [
+  {
+    id: "fina",
+    value: "Fina",
+  },
+  {
+    id: "media",
+    value: "Media",
+  },
+  {
+    id: "gruesa",
+    value: "Gruesa",
+  },
+  {
+    id: "grano",
+    value: "En grano",
+  },
+];

@@ -33,6 +33,7 @@ export interface ICoffeeProduct {
   category: string;
   type: string;
   origin: string;
+  quantity?: number;
 
   createdAt?: string | number | Date;
 }

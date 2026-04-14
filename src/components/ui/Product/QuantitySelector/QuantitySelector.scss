@@ -4,6 +4,20 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  &.is-cart {
+    gap: 0.5rem;
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      font-size: 1.2rem;
+      border-radius: 6px;
+    }
+    .qty-value {
+      width: 30px;
+      font-size: 1.1rem;
+    }
+  }
 }
 
 .qty-btn {

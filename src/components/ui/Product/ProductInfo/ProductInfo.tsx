@@ -1,4 +1,4 @@
-import { Badge, Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import "./ProductInfo.scss";
 
 export const ProductInfo = ({ product }: { product: any }) => {
