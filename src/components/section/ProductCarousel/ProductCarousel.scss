@@ -1,0 +1,37 @@
+@use "../../../styles/globals.scss" as *;
+
+.fmc-carousel-product-section {
+  background-color: transparent;
+
+  .fmc-carousel-title {
+    background-color: transparent !important;
+    color: white;
+
+    @media (max-width: 768px) {
+      color: $principal-purple;
+    }
+
+    a {
+      display: block;
+      cursor: pointer;
+      padding-bottom: 60px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+
+      @media (max-width: 768px) {
+        padding-bottom: 40px;
+      }
+    }
+  }
+
+  .carousel {
+    padding-bottom: 20px;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 6%;
+    filter: invert(1);
+  }
+}
