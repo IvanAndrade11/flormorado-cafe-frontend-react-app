@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { QuantitySelector } from "../QuantitySelector/QuantitySelector";
 import { GRINDING_OPTIONS } from "@/utils/constants";
-import { setCart, setShowCart } from "@/utils/constants/redux/sets";
+import {
+  setCart,
+  setShowCart,
+  setShowToast,
+  setToastMessage,
+} from "@/utils/constants/redux/sets";
 import { ICoffeeProduct } from "@/types/configCat";
 import store from "@/app/providers/redux/store";
 
@@ -14,17 +19,32 @@ export const ProductConfigurator = ({
   product: ICoffeeProduct;
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const [grinding, setGrinding] = useState(product.grinding);
-  const [productCount, setProductCount] = useState(0);
+  const [grinding, setGrinding] = useState(GRINDING_OPTIONS[0].id);
 
   const { cart } = store.getState().main.session;
 
   const handleAddToCart = () => {
-    const item = { ...product, id: `${productCount + 1}`, quantity, grinding };
-    const newCart = [...cart, item];
+    const cartItemId = `${product.id}-${grinding}`;
+    const existingItemIndex = cart.findIndex(
+      (item: ICoffeeProduct) => item.id === cartItemId,
+    );
+
+    let newCart = [...cart];
+
+    if (existingItemIndex >= 0) {
+      newCart[existingItemIndex] = {
+        ...newCart[existingItemIndex],
+        quantity: (newCart[existingItemIndex].quantity || 1) + quantity,
+      };
+    } else {
+      const item = { ...product, id: cartItemId, quantity, grinding };
+      newCart.push(item);
+    }
+
     setCart(newCart);
     setShowCart(true);
-    setProductCount((prev) => prev + 1);
+    setShowToast(true);
+    setToastMessage("Producto agregado al carrito");
   };
 
   useEffect(() => {

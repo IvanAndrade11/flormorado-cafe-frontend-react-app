@@ -12,13 +12,12 @@ export const setCategoryTitle = createSetter<string>(
   mainSlice.actions.setCategoryTitle,
 );
 export const setShowCart = createSetter<boolean>(mainSlice.actions.setShowCart);
+export const setShowToast = createSetter<boolean>(
+  mainSlice.actions.setShowToast,
+);
+export const setToastMessage = createSetter<string>(
+  mainSlice.actions.setToastMessage,
+);
 export const setCart = createSetter<ICoffeeProduct[]>(
   mainSlice.actions.setCart,
 );
-
-export default {
-  setFlags,
-  setLoader,
-  setCategoryTitle,
-  setShowCart,
-};

@@ -1,0 +1,29 @@
+.fmc-cart-item {
+  padding-left: 0 !important;
+  position: relative;
+}
+
+.fmc-cart-img-product {
+  margin-top: 0.5rem;
+  width: 5rem;
+}
+
+.fmc-cart-delete-btn {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  filter: opacity(0.5);
+
+  img {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  &:hover {
+    filter: opacity(1);
+  }
+}

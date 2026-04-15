@@ -4,6 +4,10 @@ export interface ISession {
   loader: boolean;
   categoryTitle: "CAFÉ" | "SAGÚ" | "OTROS PRODUCTOS" | "NUESTROS PRODUCTOS";
   showCart: boolean;
+  toast: {
+    show: boolean;
+    message: string;
+  };
   cart: ICoffeeProduct[];
 }
 

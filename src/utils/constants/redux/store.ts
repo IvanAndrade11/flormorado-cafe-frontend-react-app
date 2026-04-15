@@ -5,6 +5,10 @@ export const initialState: IMainState = {
     loader: true,
     categoryTitle: "NUESTROS PRODUCTOS",
     showCart: false,
+    toast: {
+      show: false,
+      message: "",
+    },
     cart: [],
   },
   flags: {},

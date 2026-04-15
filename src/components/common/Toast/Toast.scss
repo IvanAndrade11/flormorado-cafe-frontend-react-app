@@ -1,0 +1,17 @@
+@use "../../../styles/globals.scss" as *;
+
+.fmc-cart-toast {
+  position: fixed;
+  top: 88vh;
+  right: 1.1vh;
+  z-index: 11112 !important;
+  animation: fadeInUp 0.5s ease forwards;
+  animation: fadeOutDown 0.5s ease forwards;
+  div {
+    font-family: $font-flormorado;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: $principal-beige !important;
+    color: $principal-purple !important;
+  }
+}

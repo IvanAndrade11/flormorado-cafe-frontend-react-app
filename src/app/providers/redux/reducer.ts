@@ -17,6 +17,12 @@ export const mainSlice = createSlice({
     setShowCart: (state, action) => {
       state.session.showCart = action.payload;
     },
+    setShowToast: (state, action) => {
+      state.session.toast.show = action.payload;
+    },
+    setToastMessage: (state, action) => {
+      state.session.toast.message = action.payload;
+    },
     setCart: (state, action) => {
       state.session.cart = action.payload;
     },
