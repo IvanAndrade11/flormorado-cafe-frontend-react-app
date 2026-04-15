@@ -1,5 +1,3 @@
-export * from "./Image/Image";
-
 export * from "./ListItemWithIcon/ListItemWithIcon";
 
 export * from "./Title/Title";
