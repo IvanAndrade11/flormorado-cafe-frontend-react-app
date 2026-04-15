@@ -18,6 +18,7 @@
   transition:
     transform var(--duration) var(--easing),
     box-shadow var(--duration) var(--easing);
+  animation: fadeInUp 0.5s ease forwards;
 
   &:hover {
     transform: scale(1.04);
@@ -28,7 +29,7 @@
 .store-card-image-container {
   position: relative;
   aspect-ratio: 3/4;
-  border-radius: var(--radius);
+  border-radius: var(--radius) var(--radius) 0 0;
   overflow: hidden;
   background: #fff;
   box-shadow: var(--shadow);
@@ -60,11 +61,11 @@
 .store-card-body-title {
   font-family: "Economica", sans-serif;
   font-weight: 700;
-  font-size: 1.8rem !important;
+  font-size: 2rem !important;
 
-  @media screen and (max-width: 990px) {
-    font-size: 1.5rem !important;
-  }
+  // @media screen and (max-width: 990px) {
+  //   font-size: 1.5rem !important;
+  // }
 }
 
 .store-card-list-group {
@@ -81,4 +82,5 @@
   padding-top: 0 !important;
   text-align: center;
   background: $secondary-beige-gradient;
+  border-radius: 0 0 var(--radius) var(--radius);
 }

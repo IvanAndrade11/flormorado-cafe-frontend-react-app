@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Col, ListGroup, Button } from "react-bootstrap";
 
 import { ICoffeeProduct } from "@/types/configCat";
+import { useNavigate } from "react-router-dom";
+import { URLS } from "@/utils/constants";
 
 export const StoreCard: React.FC<ICoffeeProduct> = ({
   id,
@@ -13,9 +15,14 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
   variety,
   price,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Col key={id}>
-      <Card className="store-card">
+      <Card
+        className="store-card"
+        onClick={() => navigate(`${URLS.store}/${id}`)}
+      >
         <div className="store-card-image-container">
           <Card.Img
             variant="top"
@@ -28,16 +35,11 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
         </div>
         <Card.Body className="store-card-body">
           <Card.Title className="store-card-body-title">{name}</Card.Title>
-          {!stock && (
-            <Card.Subtitle className="mb-2 text-muted">
-              <strong>AGOTADO</strong>
-            </Card.Subtitle>
-          )}
         </Card.Body>
         <ListGroup className="list-group-flush store-card-list-group">
-          <ListGroup.Item className="store-card-list-group-item">
+          {/* <ListGroup.Item className="store-card-list-group-item">
             <strong>Molienda:</strong> {grinding}
-          </ListGroup.Item>
+          </ListGroup.Item> */}
           <ListGroup.Item className="store-card-list-group-item">
             <strong>Tostión:</strong> {roastOptions}
           </ListGroup.Item>
@@ -48,8 +50,7 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
         <Card.Body className="store-card-body-button">
           <Card.Text className="store-card-body-title">$ {price}</Card.Text>
           <Button
-            // onClick={() => navigate(`/producto/${item.id}`)}
-            onClick={() => alert("¡Próximamente podrás comprar este producto!")}
+            onClick={() => navigate(`${URLS.store}/${id}`)}
             variant="secondary"
             className="fmc-button"
             style={{ minWidth: "100%" }}

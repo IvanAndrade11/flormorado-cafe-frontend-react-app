@@ -5,7 +5,7 @@ import React from "react";
 
 export const Origins: React.FC = () => {
   return (
-    <div className="container mt-5">
+    <div className="container">
       <Title title="EL ORIGEN DE NUESTRO CAFÉ" />
     </div>
   );

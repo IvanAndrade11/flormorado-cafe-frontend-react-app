@@ -1,6 +1,14 @@
+import { ICoffeeProduct } from "../configCat";
+
 export interface ISession {
   loader: boolean;
   categoryTitle: "CAFÉ" | "SAGÚ" | "OTROS PRODUCTOS" | "NUESTROS PRODUCTOS";
+  showCart: boolean;
+  toast: {
+    show: boolean;
+    message: string;
+  };
+  cart: ICoffeeProduct[];
 }
 
 export interface IMainState {

@@ -7,6 +7,7 @@ import {
   Banner,
   InfiniteCarousel,
   CategoryCarousel,
+  ProductCarousel,
 } from "@/components/section";
 import { images } from "@/utils/constants";
 
@@ -20,6 +21,8 @@ export const Landing: React.FC = () => {
   return (
     <>
       <Banner img={images.LogoNombre} />
+
+      <ProductCarousel />
 
       <InfiniteCarousel />
 

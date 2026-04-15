@@ -6,7 +6,7 @@ export interface ICoffeeGrower {
 
 export interface ICategory {
   id: string;
-  name: string;
+  name: "CAFÉ" | "SAGÚ" | "OTROS PRODUCTOS";
   imageUrl: string;
 }
 
@@ -33,6 +33,7 @@ export interface ICoffeeProduct {
   category: string;
   type: string;
   origin: string;
+  quantity?: number;
 
   createdAt?: string | number | Date;
 }

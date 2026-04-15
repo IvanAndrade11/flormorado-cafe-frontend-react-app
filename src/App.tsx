@@ -3,7 +3,7 @@ import Router from "./app/router";
 
 import { Navbar, Footer } from "./components/layout";
 import { useInit } from "./hooks/useInit";
-import { Loader } from "./components/common";
+import { Loader, ToastFmc } from "./components/common";
 
 export const App: React.FC = () => {
   const { loader } = useInit();
@@ -16,6 +16,7 @@ export const App: React.FC = () => {
         <Router />
         <Footer />
       </Suspense>
+      <ToastFmc />
     </div>
   );
 };

@@ -4,6 +4,12 @@ export const initialState: IMainState = {
   session: {
     loader: true,
     categoryTitle: "NUESTROS PRODUCTOS",
+    showCart: false,
+    toast: {
+      show: false,
+      message: "",
+    },
+    cart: [],
   },
   flags: {},
 };

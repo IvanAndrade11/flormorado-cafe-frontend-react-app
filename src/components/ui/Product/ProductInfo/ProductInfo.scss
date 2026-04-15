@@ -1,0 +1,90 @@
+@use "@/styles/globals.scss" as *;
+
+.product-info {
+  animation: fadeIn 0.5s ease 0.2s forwards;
+  opacity: 0;
+  // padding: 1rem 0;
+}
+
+.product-price {
+  font-family: "Economica", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: $principal-cafe;
+
+  .price-per-gram {
+    font-size: 1rem;
+    color: #777;
+  }
+
+  span {
+    font-size: 1.2rem;
+    color: #777;
+    margin-left: 6px;
+    font-weight: 400;
+  }
+
+  &.is-product-detail {
+    font-size: 1.5rem;
+    margin-top: 3rem;
+  }
+}
+
+.stock-badge {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.5em 1em;
+  background-color: $principal-verde !important;
+  color: white;
+}
+
+.product-description {
+  margin-top: 1.5rem;
+  line-height: 1.8;
+  // color: #4a4a4a;
+  color: $principal-verde;
+  white-space: pre-line;
+  font-size: 1.1rem;
+}
+
+hr {
+  border-color: rgba($principal-purple, 0.2);
+  margin: 2rem 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.product-attributes {
+  background-color: $principal-beige-oscuro;
+  border: none;
+  padding: 2rem;
+  border-radius: 18px;
+  animation: fadeIn 0.4s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.product-attributes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-attributes li {
+  font-size: 1rem;
+  color: $principal-cafe;
+  margin-bottom: 0.5rem;
+
+  strong {
+    display: block;
+    color: $principal-purple;
+    font-family: "Economica", sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    // margin-bottom: 0.2rem;
+  }
+}

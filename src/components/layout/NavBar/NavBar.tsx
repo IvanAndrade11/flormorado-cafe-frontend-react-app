@@ -4,9 +4,14 @@ import React, { useEffect, useState } from "react";
 import NavbarBs from "react-bootstrap/Navbar";
 import { isMobile } from "react-device-detect";
 import { Button, Container, Nav, Offcanvas, Accordion } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { CarouselMessage, PopDropdown, WhatsAppButton } from "@/components/ui";
+import {
+  CarouselMessage,
+  PopDropdown,
+  WhatsAppButton,
+  ShoppingCart,
+} from "@/components/ui";
 import {
   icons,
   images,
@@ -22,6 +27,8 @@ import { NavbarMenuItem } from "@/types/components";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -113,6 +120,12 @@ export const Navbar: React.FC = () => {
                           <Accordion.Item eventKey={item.title}>
                             <Accordion.Header className="fmc-navbar-accordion-mobile">
                               <span onClick={() => redirect(item.url)}>
+                                <img
+                                  src={icons.GrainCoffee}
+                                  alt="Grano de Café Flormorado"
+                                  width="17"
+                                  className="d-inline-block align-top mx-2"
+                                />
                                 {item.title}
                               </span>
                             </Accordion.Header>
@@ -140,34 +153,45 @@ export const Navbar: React.FC = () => {
                         onClick={() => redirect(item.url)}
                         className="fmc-navbar-link nav-link mx-2"
                       >
+                        {isMobile && (
+                          <img
+                            src={icons.GrainCoffee}
+                            alt="Grano de Café Flormorado"
+                            width="17"
+                            className="d-inline-block mx-2"
+                          />
+                        )}
                         {item.title}
                       </Nav.Link>
                     ),
                   )}
                 </Nav>
 
-                <Button
-                  onClick={() => redirect(URLS.categories)}
-                  className="fmc-navbar-button"
-                >
-                  <>
-                    Ir a la tienda
-                    <span>
-                      <img
-                        src={icons.Basket2}
-                        alt="Tienda - Flormorado Café"
-                        width="20"
-                        className="d-inline-block align-top ms-1"
-                      />
-                    </span>
-                  </>
-                </Button>
+                {!pathname.includes(URLS.store) && (
+                  <Button
+                    onClick={() => redirect(URLS.categories)}
+                    className="fmc-navbar-button"
+                  >
+                    <>
+                      Ir a la tienda
+                      <span>
+                        <img
+                          src={icons.Basket2}
+                          alt="Tienda - Flormorado Café"
+                          width="20"
+                          className="d-inline-block align-top ms-1"
+                        />
+                      </span>
+                    </>
+                  </Button>
+                )}
               </Offcanvas.Body>
             </NavbarBs.Offcanvas>
           </Container>
         </NavbarBs>
       </div>
       <WhatsAppButton />
+      <ShoppingCart />
     </div>
   );
 };

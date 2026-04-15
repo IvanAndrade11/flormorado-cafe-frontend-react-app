@@ -15,6 +15,7 @@ import CoffeeGrains from "@/assets/images/illustrations/coffee_grains.svg";
 import FlowerOne from "@/assets/images/illustrations/flower_one.svg";
 
 import LogoLoading from "@/assets/images/animations/logo-loading.gif";
+import LogoLoading1 from "@/assets/images/animations/logo-loading1.gif";
 
 const logos = {
   LogoFondoBeige,
@@ -38,5 +39,6 @@ export const images = {
   ...logos,
   Banner,
   LogoLoading,
+  LogoLoading1,
   Background1,
 };
