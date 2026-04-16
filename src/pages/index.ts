@@ -10,8 +10,8 @@ export * from "./Contact/Contact";
 
 export * from "./Blog/Blog";
 
-export * from "./Categories/Categories";
+export * from "./Store/Categories/Categories";
 
-export * from "./BlogPost/BlogPost";
+export * from "./Blog/BlogPost/BlogPost";
 
-export * from "./ProductDetail/ProductDetail";
+export * from "./Store/ProductDetail/ProductDetail";
