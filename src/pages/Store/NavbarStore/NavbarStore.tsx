@@ -1,10 +1,8 @@
-import { INavbarStore } from "@/types/components";
 import "./NavbarStore.scss";
 
-import { CAFE_FILTERS, icons, STORE_ORDER_BY } from "@/utils/constants";
-
 import { useState } from "react";
-
+import { INavbarStore } from "@/types/components";
+import { CAFE_FILTERS, icons, STORE_ORDER_BY } from "@/utils/constants";
 import {
   Button,
   Container,
@@ -20,7 +18,6 @@ export const NavbarStore: React.FC<INavbarStore> = ({
   orderBy,
   filter,
   clearFilters,
-  selected,
 }) => {
   const [show, setShow] = useState(false);
 

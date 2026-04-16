@@ -1,0 +1,30 @@
+@use "@/styles/globals.scss" as *;
+
+.fmc-navbar-button {
+  background-color: $principal-purple;
+  border: 1px solid $principal-purple;
+  padding: 8px 16px;
+  margin: 12px 14px;
+
+  &:hover {
+    background-color: #83365c;
+    border: 1px solid $principal-cafe;
+    box-shadow: 0px 8px 8px rgba(0, 129, 255, 0.24);
+  }
+
+  &:active {
+    background-color: #4c1e35 !important;
+    transform: translateY(2px);
+  }
+
+  span {
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  @media screen and (max-width: 990px) {
+    width: 100%;
+    margin: 60px 0px;
+  }
+}

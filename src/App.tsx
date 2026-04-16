@@ -4,6 +4,7 @@ import Router from "./app/router";
 import { Navbar, Footer } from "./components/layout";
 import { useInit } from "./hooks/useInit";
 import { Loader, ToastFmc } from "./components/common";
+import { WhatsAppButton, ShoppingCart } from "./components/ui";
 
 export const App: React.FC = () => {
   const { loader } = useInit();
@@ -17,6 +18,8 @@ export const App: React.FC = () => {
         <Footer />
       </Suspense>
       <ToastFmc />
+      <WhatsAppButton />
+      <ShoppingCart />
     </div>
   );
 };

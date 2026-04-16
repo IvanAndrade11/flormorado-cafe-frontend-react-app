@@ -9,6 +9,7 @@ export const URLS = {
   blog: "/blog",
   store: "/tienda",
   categories: "/tienda/categorias",
+  checkout: "/checkout",
 };
 
 export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [

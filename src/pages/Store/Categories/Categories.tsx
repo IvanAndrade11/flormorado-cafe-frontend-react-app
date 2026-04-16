@@ -7,7 +7,7 @@ import store from "@/app/providers/redux/store";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
 import { ICategory } from "@/types/configCat";
-import { CategoryCard } from "@/components/ui/CategoryCard/CategoryCard";
+import { CategoryCard } from "@/components/ui/Store/CategoryCard/CategoryCard";
 
 export const Categories: React.FC = () => {
   const [categoriesList, setCategoriesList] = React.useState<ICategory[]>([]);

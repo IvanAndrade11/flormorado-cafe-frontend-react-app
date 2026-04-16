@@ -6,7 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import store from "@/app/providers/redux/store";
 
 import { StoreCard, Title } from "@/components/ui";
-import { NavbarStore } from "@/components/layout";
+import { NavbarStore } from "./NavbarStore/NavbarStore";
 
 import { setLoader } from "@/utils/constants/redux/sets";
 import {

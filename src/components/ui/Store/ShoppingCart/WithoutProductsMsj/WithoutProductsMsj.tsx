@@ -1,5 +1,3 @@
-import "./WithoutProductsMsj.scss";
-
 import { Button } from "react-bootstrap";
 import { icons } from "@/utils/constants";
 import { setShowCart } from "@/utils/constants/redux/sets";

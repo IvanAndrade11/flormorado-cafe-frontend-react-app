@@ -15,3 +15,5 @@ export * from "./Store/Categories/Categories";
 export * from "./Blog/BlogPost/BlogPost";
 
 export * from "./Store/ProductDetail/ProductDetail";
+
+export * from "./Checkout/Checkout";

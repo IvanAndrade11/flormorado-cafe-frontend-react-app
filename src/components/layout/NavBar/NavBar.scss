@@ -54,60 +54,6 @@
   color: $principal-purple;
 }
 
-.fmc-navbar-button {
-  background-color: $principal-purple;
-  border: 1px solid $principal-purple;
-  padding: 8px 16px;
-  margin: 12px 14px;
-
-  &:hover {
-    background-color: #83365c;
-    border: 1px solid $principal-cafe;
-    box-shadow: 0px 8px 8px rgba(0, 129, 255, 0.24);
-  }
-
-  &:active {
-    background-color: #4c1e35 !important;
-    transform: translateY(2px);
-  }
-
-  span {
-    img {
-      filter: brightness(0) invert(1);
-    }
-  }
-
-  @media screen and (max-width: 990px) {
-    width: 100%;
-    margin: 60px 0px;
-  }
-}
-
-.fmc-navbar-accordion-mobile {
-  margin: 0 0.5rem;
-
-  button {
-    color: $principal-verde !important;
-    background-color: transparent !important;
-    height: 65px;
-    padding: 20px 0px !important;
-    border: none;
-    border-radius: 0 !important;
-    border-bottom: 1px solid $principal-purple !important;
-    box-shadow: none !important;
-
-    &:hover,
-    &:focus,
-    &:not(.collapsed) {
-      border: none;
-      color: $principal-verde !important;
-      background-color: transparent !important;
-      border-bottom: 2px solid $principal-verde !important;
-      box-shadow: none !important;
-    }
-  }
-}
-
 .fmc-offcanvas .accordion-item {
   border: none;
   background-color: transparent;

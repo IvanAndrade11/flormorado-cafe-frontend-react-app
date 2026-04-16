@@ -1,4 +1,6 @@
-import { ICoffeeProduct } from "@/types/configCat";
+import { NavbarMenuItem } from "@/types/components";
+import { IBlog, ICoffeeProduct } from "@/types/configCat";
+import { URLS } from "./data";
 
 export const scrollToSection = (id: string) => {
   const e = document.getElementById(id);
@@ -24,4 +26,12 @@ export const getProductPrice = (item: ICoffeeProduct) => {
 
 export const formatPrice = (price: number) => {
   return new Intl.NumberFormat("es-CO").format(price);
+};
+
+export const getBlogSubItems = (blog: IBlog): NavbarMenuItem[] => {
+  return blog.entries.map((entry) => ({
+    id: entry.id,
+    title: entry.title,
+    url: `${URLS.blog}/${entry.slug}`,
+  }));
 };
