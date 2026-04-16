@@ -19,9 +19,10 @@ export const BottomButtons = ({ navigate }: { navigate: NavigateFunction }) => {
         Seguir comprando
       </Button>
       <Button
-        onClick={() =>
-          alert("Próximamente podrás finalizar la compra de tus productos!")
-        }
+        onClick={() => {
+          setShowCart(false);
+          navigate(URLS.checkout);
+        }}
         className="fmc-button mb-3 mx-3"
       >
         Finalizar compra

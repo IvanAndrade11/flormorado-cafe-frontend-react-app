@@ -18,6 +18,7 @@ export const PopDropdown: React.FC<{
       id="popover-basic"
       onPointerEnter={() => setHoveredDropdown(true)}
       onPointerLeave={() => setHoveredDropdown(false)}
+      key={item.id}
     >
       <ListGroup>
         {subItems?.map((subItem) => (

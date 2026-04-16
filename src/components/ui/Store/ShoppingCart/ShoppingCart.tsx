@@ -27,7 +27,8 @@ export const ShoppingCart = () => {
 
   return (
     <>
-      {(pathname.includes(URLS.store) || totalItems > 0) && (
+      {(pathname.includes(URLS.store) ||
+        (!pathname.includes(URLS.checkout) && totalItems > 0)) && (
         <CartFloatButton totalItems={totalItems} />
       )}
       <Offcanvas

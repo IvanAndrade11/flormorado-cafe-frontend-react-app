@@ -19,3 +19,5 @@ export * from "./Store/Product/ProductConfigurator/ProductConfigurator";
 export * from "./Store/Product/QuantitySelector/QuantitySelector";
 
 export * from "./Store/ShoppingCart/ShoppingCart";
+
+export * from "./Store/NavbarStore/NavbarStore";
