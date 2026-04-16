@@ -7,7 +7,7 @@ import { NavigateFunction } from "react-router-dom";
 
 export const BottomButtons = ({ navigate }: { navigate: NavigateFunction }) => {
   return (
-    <div className="fmc-store-cart-buttons mt-3 pt-4">
+    <div className="fmc-store-cart-buttons mt-1 pt-4">
       <Button
         onClick={() => {
           navigate(URLS.store);

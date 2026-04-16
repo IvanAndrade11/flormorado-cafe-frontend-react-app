@@ -1,0 +1,12 @@
+@import "../../../../styles/globals.scss";
+
+.fmc-character-alert {
+  color: $principal-verde;
+  font-size: 1.4rem;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.fmc-tooltip {
+  z-index: 11115 !important;
+}

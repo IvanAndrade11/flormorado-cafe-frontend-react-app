@@ -1,7 +1,8 @@
+import { useMemo } from "react";
 import "./ShoppingCart.scss";
 
 import { Offcanvas, Image } from "react-bootstrap";
-import { icons, URLS } from "@/utils/constants";
+import { formatPrice, icons, URLS } from "@/utils/constants";
 import { setShowCart } from "@/utils/constants/redux/sets";
 import { ICoffeeProduct } from "@/types/configCat";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -11,6 +12,7 @@ import { WithoutProductsMsj } from "./WithoutProductsMsj/WithoutProductsMsj";
 
 import store from "@/app/providers/redux/store";
 import { BottomButtons } from "./BottomButtons/BottomButtons";
+import { TotalView } from "./TotalView/TotalView";
 
 export const ShoppingCart = () => {
   const navigate = useNavigate();
@@ -52,7 +54,12 @@ export const ShoppingCart = () => {
             <WithoutProductsMsj navigate={navigate} />
           )}
         </Offcanvas.Body>
-        {totalItems > 0 && <BottomButtons navigate={navigate} />}
+        {totalItems > 0 && (
+          <>
+            <TotalView cart={cart} showSub={false} />
+            <BottomButtons navigate={navigate} />
+          </>
+        )}
       </Offcanvas>
     </>
   );

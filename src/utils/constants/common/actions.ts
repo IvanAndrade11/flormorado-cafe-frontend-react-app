@@ -19,5 +19,9 @@ export const getProductPrice = (item: ICoffeeProduct) => {
     typeof item.price === "string" ? item.price.replace(/\./g, "") : item.price,
   );
   const total = numericPrice * Number(item.quantity || 1);
-  return new Intl.NumberFormat("es-CO").format(total);
+  return formatPrice(total);
+};
+
+export const formatPrice = (price: number) => {
+  return new Intl.NumberFormat("es-CO").format(price);
 };
