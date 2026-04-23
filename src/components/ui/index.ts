@@ -21,3 +21,7 @@ export * from "./Store/Product/QuantitySelector/QuantitySelector";
 export * from "./Store/ShoppingCart/ShoppingCart";
 
 export * from "./Store/NavbarStore/NavbarStore";
+
+export * from "./Store/ShoppingCart/ShoppingCart";
+
+export * from "./Store/ShoppingCart/ProductListGroup/ProductListGroup";

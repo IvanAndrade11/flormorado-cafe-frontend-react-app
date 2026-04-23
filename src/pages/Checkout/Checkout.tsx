@@ -1,60 +1,66 @@
-import { ProductListGroup } from "@/components/ui/Store/ShoppingCart/ProductListGroup/ProductListGroup";
+import { ProductListGroup } from "@/components/ui";
 import "./Checkout.scss";
 
-import React from "react";
-import {
-  Accordion,
-  Alert,
-  Card,
-  Col,
-  Container,
-  Row,
-  useAccordionButton,
-} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Accordion, Alert, Col, Container, Image, Row } from "react-bootstrap";
 import store from "@/app/providers/redux/store";
 import { TotalView } from "@/components/ui/Store/ShoppingCart/TotalView/TotalView";
+import { images } from "@/utils/constants";
+import { Link } from "react-router-dom";
+import { CheckoutForm } from "./CheckoutForm/CheckoutForm";
+import { CONTACT_FORM_FIELDS } from "@/utils/constants/common/forms";
 
 export const Checkout: React.FC = () => {
   const { cart } = store.getState().main.session;
+  const [activeKey, setActiveKey] = useState<string>("contact");
+
+  const [form, setForm] = useState();
+
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
+
   return (
-    <Container className="my-5">
+    <Container>
+      <Row className="text-center fmc-checkout-logo">
+        <Link to="/">
+          <Image src={images.LogoNombre} alt="Flormorado Café" />
+        </Link>
+      </Row>
+
       <Row>
-        <Col>
-          <Accordion defaultActiveKey="0">
-            <Card>
-              <Card.Header>Información de Contacto</Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <CustomToggle eventKey="1">
-                    Pasar al siguiente paso
-                  </CustomToggle>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            <Card>
-              <Card.Header>Datos de Entrega</Card.Header>
-              <Accordion.Collapse eventKey="1">
-                <Card.Body>
-                  <>
-                    <CustomToggle eventKey="0">Volver!</CustomToggle>
-                    <CustomToggle eventKey="2">Siguiente!</CustomToggle>
-                  </>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            <Card>
-              <Card.Header>Pago</Card.Header>
-              <Accordion.Collapse eventKey="2">
-                <Card.Body>
-                  <>
-                    <CustomToggle eventKey="1">Volver!</CustomToggle>
-                  </>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
+        <Col md={7} className="mb-3">
+          <Accordion activeKey={activeKey}>
+            <CheckoutForm
+              title="Información de Contacto"
+              formFields={CONTACT_FORM_FIELDS}
+              eventKey={"contact"}
+              setActiveKey={setActiveKey}
+              setForm={setForm}
+              nextActiveKey="delivery"
+              labelBtn="Continuar"
+            />
+            <CheckoutForm
+              title="Datos de Entrega"
+              formFields={CONTACT_FORM_FIELDS}
+              eventKey={"delivery"}
+              setActiveKey={setActiveKey}
+              setForm={setForm}
+              nextActiveKey="payment"
+              labelBtn="Continuar"
+            />
+            <CheckoutForm
+              title="Pago"
+              formFields={CONTACT_FORM_FIELDS}
+              eventKey={"payment"}
+              setActiveKey={setActiveKey}
+              setForm={setForm}
+              nextActiveKey="end"
+              labelBtn="Realizar pedido"
+            />
           </Accordion>
         </Col>
-        <Col>
+        <Col md={5} className="mb-3">
           <Alert variant="success">
             <Alert.Heading>
               Tu compra es <strong>100% segura</strong>
@@ -78,25 +84,3 @@ export const Checkout: React.FC = () => {
     </Container>
   );
 };
-
-function CustomToggle({
-  children,
-  eventKey,
-}: {
-  children: React.ReactNode;
-  eventKey: string;
-}) {
-  const decoratedOnClick = useAccordionButton(eventKey, () =>
-    console.log("totally custom!"),
-  );
-
-  return (
-    <button
-      type="button"
-      style={{ backgroundColor: "pink" }}
-      onClick={decoratedOnClick}
-    >
-      {children}
-    </button>
-  );
-}

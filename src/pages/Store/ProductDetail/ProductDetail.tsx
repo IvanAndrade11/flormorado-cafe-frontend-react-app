@@ -88,13 +88,7 @@ export const ProductDetail = () => {
       <div className="mb-4">
         <Link
           to={URLS.store}
-          className="text-decoration-none d-inline-flex align-items-center"
-          style={{
-            color: "#6d2649",
-            fontWeight: 700,
-            fontSize: "1.3rem",
-            fontFamily: '"Economica", sans-serif',
-          }}
+          className="text-decoration-none d-inline-flex align-items-center fmc-back-button"
         >
           <span className="me-2 fs-4">←</span> Volver a la tienda
         </Link>

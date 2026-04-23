@@ -2,6 +2,7 @@ import IconNext from "@/assets/icons/common/icon-next.svg";
 import ArrowRight from "@/assets/icons/common/arrow-right.svg";
 import DeletePurple from "@/assets/icons/common/delete-purple.svg";
 import GrainCoffee from "@/assets/icons/common/grain-coffee.svg";
+import Success from "@/assets/icons/common/success.svg";
 
 import Mail from "@/assets/icons/contact/mail.svg";
 import Phone from "@/assets/icons/contact/phone.svg";
@@ -32,6 +33,7 @@ const common = {
   ArrowRight,
   DeletePurple,
   GrainCoffee,
+  Success,
 };
 
 const contact = {

@@ -31,7 +31,7 @@ export const Banner: React.FC<IBanner> = ({ img }) => {
         </div>
       ) : (
         <div className="banner-container">
-          <img src={img} alt="Banner Flormorado Café" />
+          <img src={img} alt="Flormorado Café" />
         </div>
       )}
     </>

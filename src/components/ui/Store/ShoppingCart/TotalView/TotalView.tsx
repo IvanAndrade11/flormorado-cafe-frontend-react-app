@@ -45,11 +45,6 @@ export const TotalView = ({
           Envío:
         </span>
         <span style={{ display: "inline-flex" }}>
-          {shippingCost === 0 ? (
-            <span className="text-success fw-bold fs-5">¡Gratis!</span>
-          ) : (
-            <span className="text-dark fmc-offcanvas-title fs-5">{`$ ${formatPrice(shippingCost)}`}</span>
-          )}
           <OverlayTrigger
             overlay={
               <Tooltip
@@ -60,7 +55,12 @@ export const TotalView = ({
               </Tooltip>
             }
           >
-            <span className="fmc-character-alert fw-bold">&#9888;</span>
+            {/* <span className="fmc-character-alert fw-bold">&#9888;</span> */}
+            {shippingCost === 0 ? (
+              <span className="text-success fw-bold fs-5">¡Gratis!</span>
+            ) : (
+              <span className="text-dark fmc-offcanvas-title fs-5">{`$ ${formatPrice(shippingCost)}`}</span>
+            )}
           </OverlayTrigger>
         </span>
       </div>

@@ -31,9 +31,9 @@ export const NavContent: React.FC<{ handleClose: () => void }> = ({
         {NAVBAR_MENU_ITEMS.map((item) =>
           item.dropdown ? (
             isMobile ? (
-              <MenuMobile item={item} redirect={redirect} />
+              <MenuMobile key={item.id} item={item} redirect={redirect} />
             ) : (
-              <PopDropdown item={item} redirect={redirect} />
+              <PopDropdown key={item.id} item={item} redirect={redirect} />
             )
           ) : (
             <Nav.Link
