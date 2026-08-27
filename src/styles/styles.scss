@@ -64,9 +64,21 @@ html {
     transform: translateY(2px);
   }
 
+  &:disabled {
+    background-color: #6d314f;
+    border: 1px solid $principal-cafe;
+  }
+
   span {
     img {
       filter: brightness(0) invert(1);
     }
   }
+}
+
+.fmc-back-button {
+  color: #6d2649;
+  font-weight: 700;
+  font-size: 1.3rem;
+  font-family: "Economica", sans-serif;
 }

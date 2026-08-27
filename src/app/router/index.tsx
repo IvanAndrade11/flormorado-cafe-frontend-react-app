@@ -11,6 +11,7 @@ import {
   Blog,
   BlogPost,
   ProductDetail,
+  Checkout,
 } from "@/pages";
 
 import { URLS } from "@/utils/constants";
@@ -31,6 +32,7 @@ export default (): React.JSX.Element => {
         <Route path={URLS.contact} element={<Contact />} />
         <Route path={URLS.blog} element={<Blog />} />
         <Route path={`${URLS.blog}/:slug`} element={<BlogPost />} />
+        <Route path={URLS.checkout} element={<Checkout />} />
       </Routes>
     </>
   );

@@ -1,5 +1,3 @@
-export * from "./Image/Image";
-
 export * from "./ListItemWithIcon/ListItemWithIcon";
 
 export * from "./Title/Title";
@@ -8,18 +6,22 @@ export * from "./WhatsAppButton/WhatsAppButton";
 
 export * from "./CarouselMessage/CarouselMessage";
 
-export * from "./CategoryCard/CategoryCard";
+export * from "./Store/CategoryCard/CategoryCard";
 
-export * from "./StoreCard/StoreCard";
+export * from "./Store/StoreCard/StoreCard";
 
-export * from "./PopDropdown/PopDropdown";
+export * from "./Store/Product/ProductGallery/ProductGallery";
 
-export * from "./Product/ProductGallery/ProductGallery";
+export * from "./Store/Product/ProductInfo/ProductInfo";
 
-export * from "./Product/ProductInfo/ProductInfo";
+export * from "./Store/Product/ProductConfigurator/ProductConfigurator";
 
-export * from "./Product/ProductConfigurator/ProductConfigurator";
+export * from "./Store/Product/QuantitySelector/QuantitySelector";
 
-export * from "./Product/QuantitySelector/QuantitySelector";
+export * from "./Store/ShoppingCart/ShoppingCart";
 
-export * from "./ShoppingCart/ShoppingCart";
+export * from "./Store/NavbarStore/NavbarStore";
+
+export * from "./Store/ShoppingCart/ShoppingCart";
+
+export * from "./Store/ShoppingCart/ProductListGroup/ProductListGroup";

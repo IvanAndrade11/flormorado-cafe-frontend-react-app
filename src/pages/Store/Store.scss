@@ -1,4 +1,4 @@
-@use "../../styles/globals.scss" as *;
+@use "@/styles/globals.scss" as *;
 
 :root {
   --duration: 0.45s;
@@ -62,10 +62,6 @@
   font-family: "Economica", sans-serif;
   font-weight: 700;
   font-size: 2rem !important;
-
-  // @media screen and (max-width: 990px) {
-  //   font-size: 1.5rem !important;
-  // }
 }
 
 .store-card-list-group {

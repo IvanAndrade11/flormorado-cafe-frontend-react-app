@@ -28,3 +28,31 @@ export interface NavbarMenuItem {
   dropdown?: boolean;
   subItems?: NavbarMenuItem[];
 }
+
+export interface ICheckoutForm {
+  title: string;
+  formFields: IFormFields[];
+  eventKey: string;
+  setActiveKey: (key: string) => void;
+  setForm: (tmpForm: any) => void;
+  nextActiveKey: string;
+  labelBtn: string;
+}
+
+export interface IFormFields {
+  rowId: number;
+  cols: IFormCols[];
+}
+
+export interface IFormCols {
+  colId: number;
+  md: number;
+  name: string;
+  label: string;
+  type: string;
+  required: boolean;
+  pattern: string | undefined;
+  minLength: number;
+  maxLength: number;
+  feedback: string;
+}

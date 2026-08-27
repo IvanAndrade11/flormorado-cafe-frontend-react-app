@@ -1,8 +1,8 @@
-import React from "react";
 import "./Footer.scss";
+import React from "react";
 
-import { Image } from "@/components/ui";
 import { images, icons } from "@/utils/constants";
+import { Image } from "react-bootstrap";
 
 export const Footer: React.FC = () => {
   return (

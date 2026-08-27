@@ -2,13 +2,10 @@ import "./Store.scss";
 
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
-import store from "@/app/providers/redux/store";
-
-import { StoreCard, Title } from "@/components/ui";
-import { NavbarStore } from "@/components/layout";
-
+import { StoreCard, Title, NavbarStore } from "@/components/ui";
 import { setLoader } from "@/utils/constants/redux/sets";
+import { OrderId, SelectedFilters } from "@/types/store";
+import { ICoffeeProduct } from "@/types/configCat";
 import {
   createEmptyFilters,
   filterProducts,
@@ -16,9 +13,7 @@ import {
   orderProducts,
   parseFilterId,
 } from "@/utils/constants";
-
-import { OrderId, SelectedFilters } from "@/types/store";
-import { ICoffeeProduct } from "@/types/configCat";
+import store from "@/app/providers/redux/store";
 
 export const Store: React.FC = () => {
   const [allProducts, setAllProducts] = useState<ICoffeeProduct[]>([]);

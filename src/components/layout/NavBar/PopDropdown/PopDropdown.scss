@@ -1,0 +1,12 @@
+@use "@/styles/globals.scss" as *;
+
+.fmc-dropdown-item {
+  color: $principal-purple !important;
+  background-color: $principal-beige !important;
+  width: 250px !important;
+
+  &:hover {
+    background-color: $principal-purple !important;
+    color: $principal-beige !important;
+  }
+}
