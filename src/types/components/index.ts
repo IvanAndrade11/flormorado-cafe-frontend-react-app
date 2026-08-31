@@ -1,4 +1,4 @@
-import { OrderId } from "../store";
+import { OrderId, SelectedFilters } from "../store";
 
 export interface ICard {
   title: string;
@@ -18,7 +18,7 @@ export interface INavbarStore {
   orderBy: (id: OrderId) => void;
   filter: (id: string) => void;
   clearFilters: () => void;
-  selected: number;
+  selected: SelectedFilters;
 }
 
 export interface NavbarMenuItem {
