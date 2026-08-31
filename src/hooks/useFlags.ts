@@ -1,24 +1,36 @@
 import * as configCat from "configcat-react";
 
 export const useFlags = () => {
-  const { value: testFlag } = configCat.useFeatureFlag("testFlag", false);
+  const { value: testFlag, loading: testFlagLoading } =
+    configCat.useFeatureFlag("testFlag", false);
 
-  const { value: storeProducts } = configCat.useFeatureFlag(
-    "storeProducts",
+  const { value: storeProducts, loading: storeProductsLoading } =
+    configCat.useFeatureFlag("storeProducts", "Default");
+
+  const { value: storeCategories, loading: storeCategoriesLoading } =
+    configCat.useFeatureFlag("storeCategories", "Default");
+
+  const { value: coffeeGrowers, loading: coffeeGrowersLoading } =
+    configCat.useFeatureFlag("coffeeGrowers", "Default");
+
+  const { value: blog, loading: blogLoading } = configCat.useFeatureFlag(
+    "blog",
     "Default",
   );
 
-  const { value: storeCategories } = configCat.useFeatureFlag(
-    "storeCategories",
-    "Default",
-  );
+  const loading =
+    testFlagLoading ||
+    storeProductsLoading ||
+    storeCategoriesLoading ||
+    coffeeGrowersLoading ||
+    blogLoading;
 
-  const { value: coffeeGrowers } = configCat.useFeatureFlag(
-    "coffeeGrowers",
-    "Default",
-  );
-
-  const { value: blog } = configCat.useFeatureFlag("blog", "Default");
-
-  return { testFlag, storeProducts, storeCategories, coffeeGrowers, blog };
+  return {
+    testFlag,
+    storeProducts,
+    storeCategories,
+    coffeeGrowers,
+    blog,
+    loading,
+  };
 };
