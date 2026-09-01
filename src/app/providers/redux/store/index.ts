@@ -2,9 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import reducer from "../reducer";
 import { initialState } from "@/utils/constants/redux/store";
 import { ICoffeeProduct } from "@/types/configCat";
-
-const CART_STORAGE_KEY = "fmc-cart";
-const CART_TTL_MS = 14 * 24 * 60 * 60 * 1000; // 14 días
+import { CART_STORAGE_KEY, CART_TTL_MS } from "@/utils/constants/storage/data";
 
 interface StoredCart {
   cart: ICoffeeProduct[];
