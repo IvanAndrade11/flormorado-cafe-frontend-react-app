@@ -64,8 +64,7 @@ export const CONTACT_FORM_FIELDS = [
         colId: 1,
         md: 12,
         name: "saveInfo",
-        label:
-          "Guardar mi información para una próxima compra",
+        label: "Guardar mi información para una próxima compra",
         type: "checkbox",
         required: false,
         pattern: undefined,
@@ -250,7 +249,8 @@ export const PAYMENT_FORM_FIELDS = [
         colId: 1,
         md: 12,
         name: "defaultConfirmationNote",
-        label: "Te enviaremos la confirmación del pedido a tu correo electrónico.",
+        label:
+          "Te enviaremos la confirmación del pedido a tu correo electrónico.",
         type: "note",
         required: false,
         pattern: undefined,
@@ -287,8 +287,7 @@ export const PAYMENT_FORM_FIELDS = [
         colId: 1,
         md: 12,
         name: "notifyByWhatsApp",
-        label:
-          "Envíame la confirmación también por WhatsApp",
+        label: "Envíame la confirmación también por WhatsApp",
         type: "checkbox",
         required: false,
         pattern: undefined,
