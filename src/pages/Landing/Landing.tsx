@@ -1,6 +1,6 @@
 import "./Landing.scss";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { isDesktop } from "react-device-detect";
 
 import {
@@ -12,12 +12,6 @@ import {
 import { images } from "@/utils/constants";
 
 export const Landing: React.FC = () => {
-  useEffect(() => {
-    // ✅ Limpiar datos
-    localStorage.clear();
-    sessionStorage.clear();
-  }, []);
-
   return (
     <>
       <Banner img={images.LogoNombre} />

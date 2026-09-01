@@ -79,7 +79,7 @@ export const Store: React.FC = () => {
                 orderBy={orderBy}
                 filter={filter}
                 clearFilters={clearFilters}
-                selected={selected.size.size}
+                selected={selected}
               />
             </Col>
           </Row>

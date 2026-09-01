@@ -57,4 +57,244 @@ export const CONTACT_FORM_FIELDS = [
       },
     ],
   },
+  {
+    rowId: 3,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "saveInfo",
+        label: "Guardar mi información para una próxima compra",
+        type: "checkbox",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "",
+      },
+    ],
+  },
+  {
+    rowId: 4,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "whtsppOptIn",
+        label: "Enviarme novedades y ofertas por WhatsApp",
+        type: "checkbox",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "",
+      },
+    ],
+  },
+];
+
+export const BOGOTA_NEARBY_CITIES = [
+  { value: "bogota", label: "Bogotá D.C." },
+  { value: "soacha", label: "Soacha" },
+  { value: "chia", label: "Chía" },
+  { value: "cota", label: "Cota" },
+  { value: "cajica", label: "Cajicá" },
+  { value: "la-calera", label: "La Calera" },
+  { value: "mosquera", label: "Mosquera" },
+  { value: "funza", label: "Funza" },
+];
+
+export const DELIVERY_FORM_FIELDS = [
+  {
+    rowId: 1,
+    cols: [
+      {
+        colId: 1,
+        md: 6,
+        name: "city",
+        label: "Ciudad / Municipio",
+        type: "select",
+        required: true,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "Selecciona la ciudad o municipio de entrega.",
+        options: BOGOTA_NEARBY_CITIES,
+      },
+      {
+        colId: 2,
+        md: 6,
+        name: "neighborhood",
+        label: "Barrio",
+        type: "text",
+        required: true,
+        pattern: undefined,
+        minLength: 3,
+        maxLength: 30,
+        feedback: "Por favor, ingresa tu barrio.",
+      },
+    ],
+  },
+  {
+    rowId: 2,
+    cols: [
+      {
+        colId: 1,
+        md: 5,
+        name: "address",
+        label: "Dirección",
+        type: "text",
+        required: true,
+        pattern: undefined,
+        minLength: 8,
+        maxLength: 60,
+        feedback:
+          "Ingresa una dirección con formato válido, ej: Calle 123 # 45-67.",
+      },
+      {
+        colId: 2,
+        md: 7,
+        name: "additionalInfo",
+        label: "Indicaciones adicionales (opcional)",
+        type: "text",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 60,
+        feedback: "",
+      },
+    ],
+  },
+];
+
+export const PAYMENT_FORM_FIELDS = [
+  {
+    rowId: 1,
+    cols: [
+      {
+        colId: 1,
+        md: 5,
+        name: "documentType",
+        label: "Tipo de documento",
+        type: "select",
+        required: true,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "Selecciona tu tipo de documento.",
+        options: [
+          { value: "CC", label: "Cédula de ciudadanía" },
+          { value: "CE", label: "Cédula de extranjería" },
+          { value: "NIT", label: "NIT" },
+          { value: "PA", label: "Pasaporte" },
+        ],
+      },
+      {
+        colId: 2,
+        md: 7,
+        name: "documentNumber",
+        label: "Número de documento",
+        type: "text",
+        required: true,
+        pattern: "^[0-9]{5,15}$",
+        minLength: 5,
+        maxLength: 15,
+        feedback: "Ingresa un número de documento válido.",
+      },
+    ],
+  },
+  {
+    rowId: 2,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "paymentMethod",
+        label: "Método de pago",
+        type: "select",
+        required: true,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "Selecciona un método de pago.",
+        options: [
+          { value: "cash_on_delivery", label: "Pago contraentrega" },
+          { value: "bre_b", label: "Llave BRE-B" },
+        ],
+      },
+    ],
+  },
+  {
+    rowId: 3,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "breKey",
+        label: "Llave BRE-B",
+        type: "text",
+        required: true,
+        pattern: undefined,
+        minLength: 6,
+        maxLength: 60,
+        feedback: "Ingresa la llave BRE-B con la que vas a pagar.",
+        showWhen: { field: "paymentMethod", equals: "bre_b" },
+      },
+    ],
+  },
+  {
+    rowId: 4,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "defaultConfirmationNote",
+        label:
+          "Te enviaremos la confirmación del pedido a tu correo electrónico.",
+        type: "note",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "",
+        hideWhen: { field: "paymentMethod", equals: "bre_b" },
+      },
+    ],
+  },
+  {
+    rowId: 5,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "breConfirmationNote",
+        label:
+          "Te enviaremos la confirmación del pedido y del pago realizado con tu llave BRE-B a tu correo electrónico.",
+        type: "note",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "",
+        showWhen: { field: "paymentMethod", equals: "bre_b" },
+      },
+    ],
+  },
+  {
+    rowId: 6,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "notifyByWhatsApp",
+        label: "Envíame la confirmación también por WhatsApp",
+        type: "checkbox",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "",
+      },
+    ],
+  },
 ];

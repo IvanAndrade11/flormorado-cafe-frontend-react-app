@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppSelector } from "@/app/providers/redux";
 import { useFlags } from "./useFlags";
 import { setFlags, setLoader } from "@/utils/constants/redux/sets";
@@ -5,14 +6,14 @@ import { setFlags, setLoader } from "@/utils/constants/redux/sets";
 export const useInit = () => {
   const { loader } = useAppSelector((s) => s.main.session);
 
-  const flags = useFlags();
+  const { loading, ...flags } = useFlags();
 
-  setTimeout(() => {
-    if (flags.testFlag) {
-      setLoader(false);
+  useEffect(() => {
+    if (!loading) {
       setFlags(flags);
+      setLoader(false);
     }
-  }, 1000);
+  }, [loading]);
 
   return { loader };
 };

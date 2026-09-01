@@ -19,6 +19,19 @@ npm run prettier:check   # check formatting without writing
 
 There is no test runner, linter (ESLint), or type-check script configured in this repo — `tsc` type errors surface only through `ts-loader` during `npm start` / `npm run build`. There is no single-test command since there are no tests.
 
+## Commit messages
+
+Follow the existing history's convention, one line, no body:
+
+```
+:gitmoji: TICKET-ID: short lowercase description, no trailing period
+```
+
+- `TICKET-ID` is the Jira-style ticket the branch is for (e.g. `FMC-0010`), matching the `feature/TICKET-ID` branch name.
+- Keep the description short and imperative (e.g. `fix loader stuck when flag never resolves`, not a multi-sentence explanation).
+- Pick the gitmoji by change type, matching prior usage in this repo: `:sparkles:` new feature, `:bug:` bug fix, `:lipstick:` UI/style only, `:memo:` docs, `:package:` deps/config, `:building_construction:` architecture/structural change, `:boom:` breaking change, `:wrench:` tooling/config.
+- Do not add a commit body — if the change needs more explanation than the one-line subject, put that explanation in the PR description instead.
+
 ## Environment
 
 Env vars are injected via `dotenv-webpack`, which picks the file based on webpack mode:

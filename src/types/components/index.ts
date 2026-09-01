@@ -1,4 +1,4 @@
-import { OrderId } from "../store";
+import { OrderId, SelectedFilters } from "../store";
 
 export interface ICard {
   title: string;
@@ -18,7 +18,7 @@ export interface INavbarStore {
   orderBy: (id: OrderId) => void;
   filter: (id: string) => void;
   clearFilters: () => void;
-  selected: number;
+  selected: SelectedFilters;
 }
 
 export interface NavbarMenuItem {
@@ -34,9 +34,10 @@ export interface ICheckoutForm {
   formFields: IFormFields[];
   eventKey: string;
   setActiveKey: (key: string) => void;
-  setForm: (tmpForm: any) => void;
+  setForm: (tmpForm: Record<string, string | boolean>) => void;
   nextActiveKey: string;
   labelBtn: string;
+  defaultValues?: Record<string, string | boolean>;
 }
 
 export interface IFormFields {
@@ -55,4 +56,7 @@ export interface IFormCols {
   minLength: number;
   maxLength: number;
   feedback: string;
+  options?: { value: string; label: string }[];
+  showWhen?: { field: string; equals: string };
+  hideWhen?: { field: string; equals: string };
 }
