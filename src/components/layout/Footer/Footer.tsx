@@ -31,19 +31,32 @@ export const Footer: React.FC = () => {
         <div className="footer-block-info-center">
           <ul>
             <li>
-              <a href="https://www.facebook.com/flormoradocafe" target="_blank">
+              <a
+                href="https://www.facebook.com/flormoradocafe"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={icons.Facebook} alt="Facebook Flormorado Café" />
               </a>
               <a
                 href="https://www.instagram.com/flormoradocafe/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <img src={icons.Instagram} alt="Instagram Flormorado Café" />
               </a>
-              <a href="https://wa.me/573132316080" target="_blank">
+              <a
+                href="https://wa.me/573132316080"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={icons.WhatsApp} alt="WhatsApp Flormorado Café" />
               </a>
-              <a href="https://www.youtube.com/@flormoradocafe" target="_blank">
+              <a
+                href="https://www.youtube.com/@flormoradocafe"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={icons.YouTube} alt="YouTube Flormorado Café" />
               </a>
             </li>

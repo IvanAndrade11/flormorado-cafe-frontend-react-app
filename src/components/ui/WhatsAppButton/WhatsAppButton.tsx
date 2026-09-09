@@ -8,7 +8,11 @@ export const WhatsAppButton = () => {
 
   return (
     !pathname.includes(URLS.checkout) && (
-      <a href="https://wa.me/573132316080" target="_blank">
+      <a
+        href="https://wa.me/573132316080"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src={icons.WhatsApp}
           className={`sticky-button sticky`}

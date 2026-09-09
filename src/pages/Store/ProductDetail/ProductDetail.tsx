@@ -9,33 +9,60 @@ import {
   Title,
 } from "@/components/ui";
 import store from "@/app/providers/redux/store";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { ICoffeeProduct } from "@/types/configCat";
 import { URLS } from "@/utils/constants";
 import { isMobile } from "react-device-detect";
 
+const ProductTitle = ({ product }: { product: ICoffeeProduct }) => (
+  <>
+    {!product.stock && (
+      <div className="text-end">
+        <Badge pill bg="secondary" className="stock-badge">
+          Agotado
+        </Badge>
+      </div>
+    )}
+    <h1 className={`product-title text-center ${isMobile ? "mb-3" : ""}`}>
+      {product.name}
+    </h1>
+  </>
+);
+
+const ProductDescription = ({ product }: { product: ICoffeeProduct }) => (
+  <>
+    <div className="product-tags">
+      <span className="tag-title">Etiquetas relacionadas:</span>
+      <div>
+        {product.tags.map((tag: string) => (
+          <Badge key={tag} className="me-2 product-tag-badge">
+            #{tag}
+          </Badge>
+        ))}
+      </div>
+    </div>
+
+    <section className="product-description-section">
+      <p style={{ whiteSpace: "pre-line" }}>{product.productDescription}</p>
+    </section>
+  </>
+);
+
 export const ProductDetail = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState<ICoffeeProduct | undefined>(undefined);
-
   const { storeProducts } = store.getState().main.flags;
 
-  useEffect(() => {
-    setLoader(true);
-  }, []);
+  const product = useMemo<ICoffeeProduct | undefined>(() => {
+    if (!storeProducts) return undefined;
+    const { products } = JSON.parse(storeProducts) as {
+      products: ICoffeeProduct[];
+    };
+    return products.find((item: ICoffeeProduct) => item.id === productId);
+  }, [storeProducts, productId]);
 
   useEffect(() => {
-    if (storeProducts) {
-      const { products } = JSON.parse(storeProducts) as {
-        products: ICoffeeProduct[];
-      };
-      const productFinded: ICoffeeProduct | undefined = products.find(
-        (post: ICoffeeProduct) => post.id === productId,
-      );
-      setProduct(productFinded);
-      setLoader(false);
-    }
+    setLoader(!storeProducts);
   }, [storeProducts]);
 
   if (!product)
@@ -44,44 +71,6 @@ export const ProductDetail = () => {
         <Title title="El producto no existe o no está disponible." />
       </Container>
     );
-
-  const ProductTitle = () => {
-    return (
-      <>
-        {!product.stock && (
-          <div className="text-end">
-            <Badge pill bg="secondary" className="stock-badge">
-              Agotado
-            </Badge>
-          </div>
-        )}
-        <h1 className={`product-title text-center ${isMobile ? "mb-3" : ""}`}>
-          {product.name}
-        </h1>
-      </>
-    );
-  };
-
-  const ProductDescription = () => {
-    return (
-      <>
-        <div className="product-tags">
-          <span className="tag-title">Etiquetas relacionadas:</span>
-          <div>
-            {product.tags.map((tag: string) => (
-              <Badge key={tag} className="me-2 product-tag-badge">
-                #{tag}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        <section className="product-description-section">
-          <p style={{ whiteSpace: "pre-line" }}>{product.productDescription}</p>
-        </section>
-      </>
-    );
-  };
 
   return (
     <Container className="py-3">
@@ -95,16 +84,16 @@ export const ProductDetail = () => {
       </div>
       <Row className="fmc-product-detail gy-5">
         <Col lg={6}>
-          {isMobile && <ProductTitle />}
+          {isMobile && <ProductTitle product={product} />}
           <ProductGallery imageUrl={product.imageUrl} />
-          {!isMobile && <ProductDescription />}
+          {!isMobile && <ProductDescription product={product} />}
         </Col>
 
         <Col lg={6}>
-          {!isMobile && <ProductTitle />}
+          {!isMobile && <ProductTitle product={product} />}
           <ProductInfo product={product} />
           <ProductConfigurator product={product} />
-          {isMobile && <ProductDescription />}
+          {isMobile && <ProductDescription product={product} />}
         </Col>
       </Row>
     </Container>

@@ -1,6 +1,6 @@
 import "./CategoryCarousel.scss";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { isDesktop } from "react-device-detect";
 import { Row, Carousel, Container } from "react-bootstrap";
 
@@ -11,22 +11,18 @@ import { ICategory } from "@/types/configCat";
 import { CategoryCard } from "@/components/ui";
 
 export const CategoryCarousel: React.FC = () => {
-  const [categoriesList, setCategoriesList] = React.useState<ICategory[]>([]);
-
   const { storeCategories } = store.getState().main.flags;
 
-  useEffect(() => {
-    setLoader(true);
-  }, []);
+  const categoriesList = useMemo<ICategory[]>(() => {
+    if (!storeCategories) return [];
+    const { categories } = JSON.parse(storeCategories) as {
+      categories: ICategory[];
+    };
+    return categories;
+  }, [storeCategories]);
 
   useEffect(() => {
-    if (storeCategories) {
-      const { categories } = JSON.parse(storeCategories) as {
-        categories: ICategory[];
-      };
-      setCategoriesList(categories);
-      setLoader(false);
-    }
+    setLoader(!storeCategories);
   }, [storeCategories]);
 
   return (

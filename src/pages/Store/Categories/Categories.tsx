@@ -1,6 +1,6 @@
 import "./Categories.scss";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Row } from "react-bootstrap";
 
 import store from "@/app/providers/redux/store";
@@ -10,22 +10,18 @@ import { ICategory } from "@/types/configCat";
 import { CategoryCard } from "@/components/ui/Store/CategoryCard/CategoryCard";
 
 export const Categories: React.FC = () => {
-  const [categoriesList, setCategoriesList] = React.useState<ICategory[]>([]);
-
   const { storeCategories } = store.getState().main.flags;
 
-  useEffect(() => {
-    setLoader(true);
-  }, []);
+  const categoriesList = useMemo<ICategory[]>(() => {
+    if (!storeCategories) return [];
+    const { categories } = JSON.parse(storeCategories) as {
+      categories: ICategory[];
+    };
+    return categories;
+  }, [storeCategories]);
 
   useEffect(() => {
-    if (storeCategories) {
-      const { categories } = JSON.parse(storeCategories) as {
-        categories: ICategory[];
-      };
-      setCategoriesList(categories);
-      setLoader(false);
-    }
+    setLoader(!storeCategories);
   }, [storeCategories]);
 
   return (

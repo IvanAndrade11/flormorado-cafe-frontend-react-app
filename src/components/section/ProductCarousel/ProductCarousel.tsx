@@ -1,6 +1,6 @@
 import "./ProductCarousel.scss";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { isDesktop } from "react-device-detect";
 import { Row, Carousel, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -12,21 +12,16 @@ import { StoreCard } from "@/components/ui";
 import { setCategoryTitle } from "@/utils/constants/redux/sets";
 
 export const ProductCarousel: React.FC = () => {
-  const [productsList, setProductsList] = useState<ICoffeeProduct[]>([]);
   const navigate = useNavigate();
 
   const { storeProducts } = store.getState().main.flags;
 
-  useEffect(() => {
-    if (storeProducts) {
-      const { products } = JSON.parse(storeProducts) as {
-        products: ICoffeeProduct[];
-      };
-
-      const cafeProducts = products.filter((item) => item.category === "CAFÉ");
-
-      setProductsList(cafeProducts);
-    }
+  const productsList = useMemo<ICoffeeProduct[]>(() => {
+    if (!storeProducts) return [];
+    const { products } = JSON.parse(storeProducts) as {
+      products: ICoffeeProduct[];
+    };
+    return products.filter((item) => item.category === "CAFÉ");
   }, [storeProducts]);
 
   const chunkSize = isDesktop ? 3 : 1;

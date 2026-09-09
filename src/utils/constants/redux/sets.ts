@@ -1,12 +1,15 @@
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { mainSlice } from "@/app/providers/redux/reducer";
 import store from "@/app/providers/redux/store";
-import { ICoffeeProduct } from "@/types/configCat";
+import { ICoffeeProduct, IFeatureFlags } from "@/types/configCat";
 
-const createSetter = <T>(action: (payload: T) => any) => {
+const createSetter = <T>(action: ActionCreatorWithPayload<T>) => {
   return (value: T) => store.dispatch(action(value));
 };
 
-export const setFlags = createSetter<any>(mainSlice.actions.setFlags);
+export const setFlags = createSetter<Partial<IFeatureFlags>>(
+  mainSlice.actions.setFlags,
+);
 export const setLoader = createSetter<boolean>(mainSlice.actions.setLoader);
 export const setCategoryTitle = createSetter<string>(
   mainSlice.actions.setCategoryTitle,

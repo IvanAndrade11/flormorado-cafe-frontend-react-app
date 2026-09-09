@@ -1,6 +1,6 @@
 import "./BlogPost.scss";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image, Badge } from "react-bootstrap";
 
@@ -13,24 +13,19 @@ export const BlogPost: React.FC = () => {
   const { slug } = useParams();
   const { blog } = store.getState().main.flags;
 
-  const [entry, setEntry] = useState<IBlogEntry | undefined>(undefined);
-
-  useEffect(() => {
-    setLoader(true);
-  }, []);
-
-  useEffect(() => {
-    if (blog) {
-      const { blogFlormorado }: IBlogFlormorado = JSON.parse(blog) as {
-        blogFlormorado: IBlog;
-      };
-      const search: IBlogEntry | undefined = blogFlormorado.entries.find(
-        (post: IBlogEntry) => post.slug === slug,
-      );
-      setEntry(search);
-      setLoader(false);
-    }
+  const entry = useMemo<IBlogEntry | undefined>(() => {
+    if (!blog) return undefined;
+    const { blogFlormorado }: IBlogFlormorado = JSON.parse(blog) as {
+      blogFlormorado: IBlog;
+    };
+    return blogFlormorado.entries.find(
+      (post: IBlogEntry) => post.slug === slug,
+    );
   }, [blog, slug]);
+
+  useEffect(() => {
+    setLoader(!blog);
+  }, [blog]);
 
   if (!entry) {
     return (

@@ -29,7 +29,7 @@ export const ProductConfigurator = ({
       (item: ICoffeeProduct) => item.id === cartItemId,
     );
 
-    let newCart = [...cart];
+    const newCart = [...cart];
 
     if (existingItemIndex >= 0) {
       newCart[existingItemIndex] = {

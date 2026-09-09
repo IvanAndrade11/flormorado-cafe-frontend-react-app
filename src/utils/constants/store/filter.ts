@@ -35,7 +35,7 @@ export const filterProducts = (
 
   return products.filter((p) => {
     for (const g of activeGroups) {
-      const value = (p as any)[g];
+      const value = p[g];
       if (!selected[g].has(value)) return false;
     }
     return true;

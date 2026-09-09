@@ -1,11 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "@/utils/constants";
+import { IFeatureFlags } from "@/types/configCat";
 
 export const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    setFlags: (state, action) => {
+    setFlags: (state, action: PayloadAction<Partial<IFeatureFlags>>) => {
       state.flags = { ...action.payload };
     },
     setLoader: (state, action) => {

@@ -6,14 +6,27 @@ import { setFlags, setLoader } from "@/utils/constants/redux/sets";
 export const useInit = () => {
   const { loader } = useAppSelector((s) => s.main.session);
 
-  const { loading, ...flags } = useFlags();
+  const {
+    loading,
+    testFlag,
+    storeProducts,
+    storeCategories,
+    coffeeGrowers,
+    blog,
+  } = useFlags();
 
   useEffect(() => {
     if (!loading) {
-      setFlags(flags);
+      setFlags({
+        testFlag,
+        storeProducts,
+        storeCategories,
+        coffeeGrowers,
+        blog,
+      });
       setLoader(false);
     }
-  }, [loading]);
+  }, [loading, testFlag, storeProducts, storeCategories, coffeeGrowers, blog]);
 
   return { loader };
 };

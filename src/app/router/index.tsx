@@ -17,7 +17,7 @@ import {
 import { URLS } from "@/utils/constants";
 import { ScrollToTop } from "@/components/common";
 
-export default (): React.JSX.Element => {
+const Router = (): React.JSX.Element => {
   return (
     <>
       <ScrollToTop />
@@ -37,3 +37,5 @@ export default (): React.JSX.Element => {
     </>
   );
 };
+
+export default Router;
