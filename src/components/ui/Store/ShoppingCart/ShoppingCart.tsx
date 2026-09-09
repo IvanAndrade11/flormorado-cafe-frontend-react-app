@@ -1,8 +1,7 @@
-import { useMemo } from "react";
 import "./ShoppingCart.scss";
 
 import { Offcanvas, Image } from "react-bootstrap";
-import { formatPrice, icons, URLS } from "@/utils/constants";
+import { icons, URLS } from "@/utils/constants";
 import { setShowCart } from "@/utils/constants/redux/sets";
 import { ICoffeeProduct } from "@/types/configCat";
 import { useNavigate, useLocation } from "react-router-dom";

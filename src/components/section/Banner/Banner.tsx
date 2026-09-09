@@ -17,7 +17,6 @@ export const Banner: React.FC<IBanner> = ({ img }) => {
             muted
             loop
             playsInline
-            webkit-playsinline="true"
             controls={false}
             controlsList="nodownload noplaybackrate noremoteplayback nofullscreen"
             disablePictureInPicture

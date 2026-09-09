@@ -84,7 +84,6 @@ export interface IBlogImage {
   alt: string;
   caption?: string;
 }
-``;
 
 export interface IBlogAuthor {
   name: string;

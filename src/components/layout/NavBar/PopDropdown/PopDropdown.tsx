@@ -23,6 +23,7 @@ export const PopDropdown: React.FC<{
       <ListGroup>
         {subItems?.map((subItem) => (
           <ListGroup.Item
+            key={subItem.id}
             className="fmc-dropdown-item py-3"
             action
             onClick={() => redirect(subItem.url)}

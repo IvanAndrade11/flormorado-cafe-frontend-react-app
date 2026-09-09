@@ -10,7 +10,6 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
   name,
   imageUrl,
   stock,
-  grinding,
   roastOptions,
   variety,
   price,

@@ -1,7 +1,7 @@
 import { Title } from "@/components/ui";
 import "./Blog.scss";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Container, Row, Col, Card, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,22 +12,18 @@ import { IBlog, IBlogEntry, IBlogFlormorado } from "@/types/configCat";
 export const Blog: React.FC = () => {
   const navigate = useNavigate();
 
-  const [blogList, setBlogList] = React.useState<IBlogEntry[]>([]);
-
   const { blog } = store.getState().main.flags;
 
-  useEffect(() => {
-    setLoader(true);
-  }, []);
+  const blogList = useMemo<IBlogEntry[]>(() => {
+    if (!blog) return [];
+    const { blogFlormorado }: IBlogFlormorado = JSON.parse(blog) as {
+      blogFlormorado: IBlog;
+    };
+    return blogFlormorado.entries;
+  }, [blog]);
 
   useEffect(() => {
-    if (blog) {
-      const { blogFlormorado }: IBlogFlormorado = JSON.parse(blog) as {
-        blogFlormorado: IBlog;
-      };
-      setBlogList(blogFlormorado.entries);
-      setLoader(false);
-    }
+    setLoader(!blog);
   }, [blog]);
 
   if (!blogList.length) {

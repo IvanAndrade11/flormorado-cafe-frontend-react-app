@@ -4,7 +4,7 @@ import { URLS } from "./data";
 
 export const scrollToSection = (id: string) => {
   const e = document.getElementById(id);
-  e && e.scrollIntoView({ behavior: "smooth" });
+  if (e) e.scrollIntoView({ behavior: "smooth" });
 };
 
 export const productsByCategory = (

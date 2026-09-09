@@ -16,7 +16,6 @@ import {
 import store from "@/app/providers/redux/store";
 
 export const Store: React.FC = () => {
-  const [allProducts, setAllProducts] = useState<ICoffeeProduct[]>([]);
   const [orderId, setOrderId] = useState<OrderId>("older");
   const [selected, setSelected] =
     useState<SelectedFilters>(createEmptyFilters());
@@ -24,21 +23,17 @@ export const Store: React.FC = () => {
   const { categoryTitle } = store.getState().main.session;
   const { storeProducts } = store.getState().main.flags;
 
-  useEffect(() => {
-    setLoader(true);
-  }, []);
-
-  useEffect(() => {
-    if (storeProducts) {
-      const { products } = JSON.parse(storeProducts) as {
-        products: ICoffeeProduct[];
-      };
-      const base = productsByCategory(products, categoryTitle);
-
-      base && setAllProducts(base);
-      setLoader(false);
-    }
+  const allProducts = useMemo<ICoffeeProduct[]>(() => {
+    if (!storeProducts) return [];
+    const { products } = JSON.parse(storeProducts) as {
+      products: ICoffeeProduct[];
+    };
+    return productsByCategory(products, categoryTitle);
   }, [storeProducts, categoryTitle]);
+
+  useEffect(() => {
+    setLoader(!storeProducts);
+  }, [storeProducts]);
 
   const visibleProducts = useMemo(() => {
     const filtered = filterProducts(allProducts, selected);

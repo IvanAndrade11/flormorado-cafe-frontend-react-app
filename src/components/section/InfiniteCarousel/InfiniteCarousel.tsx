@@ -1,6 +1,6 @@
 import "./InfiniteCarousel.scss";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
 import store from "@/app/providers/redux/store";
@@ -9,24 +9,20 @@ import { scrollToSection } from "@/utils/constants";
 import { ICoffeeGrower } from "@/types/configCat";
 
 export const InfiniteCarousel: React.FC = () => {
-  const [growersList, setGrowersList] = React.useState<ICoffeeGrower[]>([]);
-  const [growersLength, setGrowersLength] = React.useState<number>(0);
-
   const { coffeeGrowers } = store.getState().main.flags;
 
-  useEffect(() => {
-    setLoader(true);
-  }, []);
+  const growersList = useMemo<ICoffeeGrower[]>(() => {
+    if (!coffeeGrowers) return [];
+    const { growers } = JSON.parse(coffeeGrowers) as {
+      growers: ICoffeeGrower[];
+    };
+    return [...growers, ...growers];
+  }, [coffeeGrowers]);
+
+  const growersLength = growersList.length;
 
   useEffect(() => {
-    if (coffeeGrowers) {
-      const { growers } = JSON.parse(coffeeGrowers) as {
-        growers: ICoffeeGrower[];
-      };
-      setGrowersList([...growers, ...growers]);
-      setGrowersLength(growers.length * 2);
-      setLoader(false);
-    }
+    setLoader(!coffeeGrowers);
   }, [coffeeGrowers]);
 
   return (
