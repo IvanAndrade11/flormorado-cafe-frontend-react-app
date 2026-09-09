@@ -1,4 +1,4 @@
-import { ICoffeeProduct } from "../configCat";
+import { ICoffeeProduct, IFeatureFlags } from "../configCat";
 
 export interface ISession {
   loader: boolean;
@@ -13,7 +13,7 @@ export interface ISession {
 
 export interface IMainState {
   session: ISession;
-  flags: any;
+  flags: Partial<IFeatureFlags>;
 }
 
 export type OrderId =

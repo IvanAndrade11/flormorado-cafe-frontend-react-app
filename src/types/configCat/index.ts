@@ -4,6 +4,14 @@ export interface ICoffeeGrower {
   img: string;
 }
 
+export interface IFeatureFlags {
+  testFlag: boolean;
+  storeProducts: string;
+  storeCategories: string;
+  coffeeGrowers: string;
+  blog: string;
+}
+
 export interface ICategory {
   id: string;
   name: "CAFÉ" | "SAGÚ" | "OTROS PRODUCTOS";
@@ -20,7 +28,7 @@ export interface ICoffeeProduct {
   grinding: string;
   roastOptions: string;
   variety: string;
-  availableWeights: string;
+  size: string;
   price: string;
   shippingPrice: number;
   process: {

@@ -1,7 +1,8 @@
 import { Card, Row, Col } from "react-bootstrap";
 import "./ProductInfo.scss";
+import { ICoffeeProduct } from "@/types/configCat";
 
-export const ProductInfo = ({ product }: { product: any }) => {
+export const ProductInfo = ({ product }: { product: ICoffeeProduct }) => {
   const { process } = product;
   return (
     <div className="product-info">
@@ -11,8 +12,8 @@ export const ProductInfo = ({ product }: { product: any }) => {
             ${product.price} <span>COP</span>
             <div className="price-per-gram">
               Precio por gramo $
-              {Number(
-                product.price.replace(/\./g, "") / Number(product.size),
+              {(
+                Number(product.price.replace(/\./g, "")) / Number(product.size)
               ).toFixed(1)}
             </div>
           </div>
