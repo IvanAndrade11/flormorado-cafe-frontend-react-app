@@ -17,7 +17,7 @@ export const ListItemWithIcon = ({
         cursor: onClick ? "pointer" : "default",
       }}
     >
-      <img src={icon} />
+      <img src={icon} alt="" />
       <span>{text}</span>
     </li>
   );

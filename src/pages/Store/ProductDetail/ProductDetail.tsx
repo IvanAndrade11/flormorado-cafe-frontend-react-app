@@ -85,7 +85,10 @@ export const ProductDetail = () => {
       <Row className="fmc-product-detail gy-5">
         <Col lg={6}>
           {isMobile && <ProductTitle product={product} />}
-          <ProductGallery imageUrl={product.imageUrl} />
+          <ProductGallery
+            imageUrl={product.imageUrl}
+            productName={product.name}
+          />
           {!isMobile && <ProductDescription product={product} />}
         </Col>
 
