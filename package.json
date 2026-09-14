@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "bootstrap": "^5.3.8",
     "configcat-react": "^5.0.1",
+    "dompurify": "^3.4.15",
     "react": "^19.2.4",
     "react-bootstrap": "^2.10.10",
     "react-device-detect": "^2.2.3",

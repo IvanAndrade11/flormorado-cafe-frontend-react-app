@@ -1,5 +1,6 @@
 import "./BlogPost.scss";
 
+import DOMPurify from "dompurify";
 import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image, Badge } from "react-bootstrap";
@@ -23,6 +24,11 @@ export const BlogPost: React.FC = () => {
     );
   }, [blog, slug]);
 
+  const sanitizedContent = useMemo(
+    () => DOMPurify.sanitize(entry?.content?.body || ""),
+    [entry],
+  );
+
   useEffect(() => {
     setLoader(!blog);
   }, [blog]);
@@ -38,7 +44,6 @@ export const BlogPost: React.FC = () => {
   const {
     title,
     excerpt,
-    content,
     featuredImage,
     author,
     categories,
@@ -105,7 +110,7 @@ export const BlogPost: React.FC = () => {
           <article
             className="blog-content"
             dangerouslySetInnerHTML={{
-              __html: content?.body || "",
+              __html: sanitizedContent,
             }}
           />
 
