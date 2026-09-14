@@ -9,6 +9,7 @@ import store from "@/app/providers/redux/store";
 import { IBlog, IBlogEntry, IBlogFlormorado } from "@/types/configCat";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
 export const BlogPost: React.FC = () => {
   const { slug } = useParams();
@@ -28,6 +29,12 @@ export const BlogPost: React.FC = () => {
     () => DOMPurify.sanitize(entry?.content?.body || ""),
     [entry],
   );
+
+  useDocumentMeta({
+    title: entry?.seo?.metaTitle || entry?.title,
+    description: entry?.seo?.metaDescription || entry?.excerpt,
+    image: entry?.seo?.metaImage || entry?.featuredImage?.url,
+  });
 
   useEffect(() => {
     setLoader(!blog);
