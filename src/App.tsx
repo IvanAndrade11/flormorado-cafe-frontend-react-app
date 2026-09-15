@@ -12,11 +12,11 @@ export const App: React.FC = () => {
   return (
     <div className="fm-container">
       <Loader show={loader} />
+      <Navbar />
       <Suspense fallback={<Loader show={true} />}>
-        <Navbar />
         <Router />
-        <Footer />
       </Suspense>
+      <Footer />
       <ToastFmc />
       <WhatsAppButton />
       <ShoppingCart />

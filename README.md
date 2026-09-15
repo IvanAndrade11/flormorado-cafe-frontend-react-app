@@ -28,9 +28,10 @@
 - **Landing page** con carruseles de productos y categorías.
 - **Tienda** con catálogo de productos, filtros avanzados (tipo, marca, tamaño, origen, variedad) y ordenamiento.
 - **Detalle de producto** con configurador de molienda, cantidad y carrito de compras.
-- **Blog** con artículos dinámicos.
-- **Páginas institucionales**: Sobre nosotros, Orígenes y Contacto.
-- **Carrito de compras** con agrupación inteligente de productos por tipo de molienda.
+- **Blog** con artículos dinámicos y contenido HTML sanitizado (DOMPurify).
+- **Páginas institucionales**: Sobre nosotros, Orígenes, Contacto y Términos y condiciones.
+- **Carrito de compras** con agrupación inteligente de productos por tipo de molienda y persistencia en `localStorage`.
+- **Checkout** en 3 pasos (contacto, entrega y pago) con guardado opcional de datos para compras futuras.
 - **Feature flags** con ConfigCat para habilitar o deshabilitar funcionalidades de forma remota.
 - **Diseño responsive** optimizado para desktop y dispositivos móviles.
 
@@ -49,7 +50,11 @@
 | **Bundler**          | Webpack 5 (con ts-loader, sass-loader, dotenv-webpack)         |
 | **Feature Flags**    | ConfigCat (auto-polling)                                       |
 | **Device Detection** | react-device-detect                                            |
+| **Sanitización HTML**| DOMPurify (contenido del blog)                                 |
 | **Formateo**         | Prettier                                                       |
+| **Linter**           | ESLint 9 (flat config) + typescript-eslint + eslint-plugin-react/react-hooks |
+| **Testing**          | Jest + Testing Library (`@testing-library/react`)               |
+| **CI**               | GitHub Actions (type-check, lint, formato, tests y build en cada PR a `main`) |
 | **Deploy**           | GitHub Pages (`gh-pages`) con dominio personalizado             |
 
 ---
@@ -159,6 +164,10 @@ Las variables de entorno se gestionan a través de [`dotenv-webpack`](https://ww
 | **`predeploy`**      | *(automático)*         | Ejecuta `build` y crea `dist/CNAME` con el dominio `flormoradocafe.com`.                                    |
 | **`prettier`**       | `npm run prettier`     | Formatea todo el código fuente con Prettier.                                                                |
 | **`prettier:check`** | `npm run prettier:check` | Verifica que el código cumpla con las reglas de formato de Prettier (sin modificar archivos).              |
+| **`lint`**           | `npm run lint`         | Corre ESLint sobre `src/**/*.{ts,tsx}`.                                                                      |
+| **`lint:fix`**       | `npm run lint:fix`     | Corre ESLint con `--fix` para corregir automáticamente lo que se pueda.                                     |
+| **`test`**           | `npm test`             | Corre la suite de pruebas con Jest una sola vez.                                                             |
+| **`test:watch`**     | `npm run test:watch`   | Corre Jest en modo watch, re-ejecutando las pruebas al guardar cambios.                                     |
 
 ---
 
@@ -199,10 +208,12 @@ flormorado-cafe-frontend-react-app/
 │   └── icon.svg                # Favicon SVG
 │
 ├── src/
+│   ├── __mocks__/               # Stubs de assets/estilos para Jest (fileMock.js)
+│   │
 │   ├── app/
 │   │   ├── providers/
-│   │   │   └── redux/          # Redux store, reducers y acciones
-│   │   └── router/             # Configuración de rutas (React Router)
+│   │   │   └── redux/          # Redux store (con persistencia del carrito en localStorage), reducers y acciones
+│   │   └── router/             # Configuración de rutas (React Router, páginas cargadas con React.lazy)
 │   │
 │   ├── assets/
 │   │   ├── fonts/              # Fuentes personalizadas (Economica)
@@ -219,18 +230,21 @@ flormorado-cafe-frontend-react-app/
 │   │
 │   ├── hooks/                  # Custom hooks
 │   │   ├── useFlags.ts         # Hook para feature flags (ConfigCat)
-│   │   └── useInit.ts          # Hook de inicialización de la app
+│   │   ├── useInit.ts          # Hook de inicialización de la app
+│   │   └── useDocumentMeta.ts  # Hook para aplicar título/meta tags SEO por página
 │   │
 │   ├── pages/                  # Páginas de la aplicación
 │   │   ├── Landing/            # Página principal
 │   │   ├── Store/              # Catálogo de productos con filtros
-│   │   ├── ProductDetail/      # Detalle y configurador de producto
-│   │   ├── Categories/         # Categorías de productos
+│   │   │   ├── Categories/     # Vista por categorías
+│   │   │   └── ProductDetail/  # Detalle y configurador de producto
 │   │   ├── About/              # Sobre nosotros
 │   │   ├── Origins/            # Orígenes del café
 │   │   ├── Contact/            # Página de contacto
 │   │   ├── Blog/               # Lista de artículos
-│   │   └── BlogPost/           # Artículo individual
+│   │   │   └── BlogPost/       # Artículo individual (con sanitización DOMPurify)
+│   │   ├── Checkout/           # Flujo de checkout (contacto → entrega → pago)
+│   │   └── Terms/              # Términos y condiciones (contenido de ejemplo)
 │   │
 │   ├── services/               # Servicios y APIs externas (en desarrollo)
 │   │
@@ -246,9 +260,10 @@ flormorado-cafe-frontend-react-app/
 │   │
 │   ├── utils/
 │   │   └── constants/          # Constantes de la aplicación
-│   │       ├── common/         # URLs, menú de navegación, utilidades
+│   │       ├── common/         # URLs, menú de navegación, campos de formularios, utilidades
 │   │       ├── media/          # Rutas a íconos, imágenes y videos
-│   │       ├── redux/          # Estado inicial del store
+│   │       ├── redux/          # Estado inicial del store y setters tipados
+│   │       ├── storage/        # Claves de localStorage (carrito, checkout)
 │   │       └── store/          # Datos, filtros y ordenamiento de tienda
 │   │
 │   ├── App.tsx                 # Componente raíz
@@ -258,8 +273,14 @@ flormorado-cafe-frontend-react-app/
 ├── docs/                       # Documentación del proyecto
 │   └── configCat/              # Documentación de feature flags
 │
+├── .github/
+│   └── workflows/ci.yml        # CI: type-check, lint, formato, tests y build en cada PR a main
+│
 ├── webpack.config.js           # Configuración de Webpack
 ├── tsconfig.json               # Configuración de TypeScript
+├── eslint.config.js            # Configuración de ESLint (flat config)
+├── jest.config.js              # Configuración de Jest
+├── jest.setup.ts               # Setup de Jest (matchers de @testing-library/jest-dom)
 ├── package.json                # Dependencias y scripts del proyecto
 └── .gitignore                  # Archivos ignorados por Git
 ```
@@ -279,8 +300,10 @@ flormorado-cafe-frontend-react-app/
 | `/contacto`             | Contact           | Formulario de contacto                       |
 | `/blog`                 | Blog              | Lista de artículos del blog                  |
 | `/blog/:slug`           | BlogPost          | Artículo individual del blog                 |
+| `/checkout`             | Checkout          | Flujo de compra: contacto, entrega y pago    |
+| `/terminos-y-condiciones` | Terms           | Términos y condiciones (contenido de ejemplo) |
 
-> **Nota:** Al usar HashRouter, las rutas en producción se acceden como `https://flormoradocafe.com/#/tienda`.
+> **Nota:** Al usar HashRouter, las rutas en producción se acceden como `https://flormoradocafe.com/#/tienda`. Cada página se carga de forma diferida (`React.lazy`), en su propio chunk de JavaScript.
 
 ---
 

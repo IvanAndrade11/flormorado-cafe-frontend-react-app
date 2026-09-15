@@ -1,4 +1,4 @@
-import "./Navbar.scss";
+import "./NavBar.scss";
 
 import React, { useEffect, useState } from "react";
 import NavbarBs from "react-bootstrap/Navbar";

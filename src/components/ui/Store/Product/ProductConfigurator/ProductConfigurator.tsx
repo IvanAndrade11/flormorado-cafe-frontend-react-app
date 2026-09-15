@@ -1,6 +1,6 @@
 import "./ProductConfigurator.scss";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { QuantitySelector } from "../QuantitySelector/QuantitySelector";
 import { GRINDING_OPTIONS } from "@/utils/constants";
@@ -46,10 +46,6 @@ export const ProductConfigurator = ({
     setShowToast(true);
     setToastMessage("Producto agregado al carrito");
   };
-
-  useEffect(() => {
-    console.log("Nuevo Carrito", cart);
-  }, [cart]);
 
   return (
     <Form className="mt-4 configurator-controls">

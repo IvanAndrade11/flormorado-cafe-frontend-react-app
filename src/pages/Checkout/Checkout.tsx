@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Accordion, Alert, Col, Container, Image, Row } from "react-bootstrap";
 import store from "@/app/providers/redux/store";
 import { TotalView } from "@/components/ui/Store/ShoppingCart/TotalView/TotalView";
-import { images } from "@/utils/constants";
+import { images, URLS } from "@/utils/constants";
 import { Link } from "react-router-dom";
 import { CheckoutForm } from "./CheckoutForm/CheckoutForm";
 import {
@@ -118,7 +118,10 @@ export const Checkout: React.FC = () => {
             </Alert.Heading>
             <p className="mb-0">
               Al realizar el pago, aceptas nuestros{" "}
-              <a href="#">términos y condiciones</a>.
+              <Link to={URLS.terms} target="_blank" rel="noopener noreferrer">
+                términos y condiciones
+              </Link>
+              .
             </p>
           </Alert>
           <Accordion defaultActiveKey="0">

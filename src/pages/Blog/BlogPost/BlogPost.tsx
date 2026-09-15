@@ -1,5 +1,6 @@
 import "./BlogPost.scss";
 
+import DOMPurify from "dompurify";
 import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image, Badge } from "react-bootstrap";
@@ -8,6 +9,7 @@ import store from "@/app/providers/redux/store";
 import { IBlog, IBlogEntry, IBlogFlormorado } from "@/types/configCat";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
 export const BlogPost: React.FC = () => {
   const { slug } = useParams();
@@ -22,6 +24,17 @@ export const BlogPost: React.FC = () => {
       (post: IBlogEntry) => post.slug === slug,
     );
   }, [blog, slug]);
+
+  const sanitizedContent = useMemo(
+    () => DOMPurify.sanitize(entry?.content?.body || ""),
+    [entry],
+  );
+
+  useDocumentMeta({
+    title: entry?.seo?.metaTitle || entry?.title,
+    description: entry?.seo?.metaDescription || entry?.excerpt,
+    image: entry?.seo?.metaImage || entry?.featuredImage?.url,
+  });
 
   useEffect(() => {
     setLoader(!blog);
@@ -38,7 +51,6 @@ export const BlogPost: React.FC = () => {
   const {
     title,
     excerpt,
-    content,
     featuredImage,
     author,
     categories,
@@ -105,7 +117,7 @@ export const BlogPost: React.FC = () => {
           <article
             className="blog-content"
             dangerouslySetInnerHTML={{
-              __html: content?.body || "",
+              __html: sanitizedContent,
             }}
           />
 
