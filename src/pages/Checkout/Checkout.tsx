@@ -204,12 +204,7 @@ export const Checkout: React.FC = () => {
 
     switch (result.kind) {
       case "created": {
-        const snapshot = buildConfirmation(
-          payload,
-          cart,
-          result.orderId,
-          result.total,
-        );
+        const snapshot = buildConfirmation(payload, cart, result);
         saveLastOrder(snapshot);
         setConfirmation(snapshot);
         // El carrito se vacía solo aquí, con el pedido ya confirmado: si algo

@@ -30,6 +30,7 @@ export interface IOrderPayload {
     email: string;
     phone: string;
     whatsappOptIn: boolean;
+    marketingConsentVersion: string;
   };
   delivery: {
     city: string;
@@ -48,8 +49,20 @@ export type OrderFailure =
   | { code: "precio_desactualizado"; productId: string; actual: number }
   | { code: "total_no_coincide"; actual: number };
 
+/** A dónde transferir en un pago por BRE-B. Lo define el backend, no la tienda. */
+export interface IBreBInstructions {
+  key: string;
+  holder: string;
+}
+
 export type SubmitOrderResult =
-  | { kind: "created"; orderId: string; total: number; alreadyExisted: boolean }
+  | {
+      kind: "created";
+      orderId: string;
+      total: number;
+      alreadyExisted: boolean;
+      breB?: IBreBInstructions;
+    }
   | { kind: "stale_cart"; failures: OrderFailure[] }
   | { kind: "invalid" }
   | { kind: "unavailable" };
@@ -60,6 +73,7 @@ export interface IOrderConfirmation {
   email: string;
   paymentMethod: PaymentMethod;
   breKey?: string;
+  breB?: IBreBInstructions;
   items: {
     key: string;
     name: string;

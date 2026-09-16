@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import store from "@/app/providers/redux/store";
 import { ICoffeeProduct } from "@/types/configCat";
+import { WHATSAPP_MARKETING_CONSENT } from "@/utils/constants/common/forms";
 import { setCart, setFlags } from "@/utils/constants/redux/sets";
 import { LAST_ORDER_STORAGE_KEY } from "@/utils/constants/storage/data";
 import { Checkout } from "./Checkout";
@@ -54,7 +55,7 @@ const renderCheckout = () =>
 const type = (label: string, value: string) =>
   fireEvent.change(screen.getByLabelText(label), { target: { value } });
 
-const fillAndSubmit = () => {
+const fillAndSubmit = (paymentMethod = "cash_on_delivery") => {
   type("Nombre", "María");
   type("Apellido", "Restrepo");
   type("Correo electrónico", "maria@example.com");
@@ -68,7 +69,8 @@ const fillAndSubmit = () => {
 
   type("Tipo de documento", "CC");
   type("Número de documento", "1012345678");
-  type("Método de pago", "cash_on_delivery");
+  type("Método de pago", paymentMethod);
+  if (paymentMethod === "bre_b") type("Llave BRE-B", "@maria");
   fireEvent.click(screen.getByRole("button", { name: "Realizar pedido" }));
 };
 
@@ -116,6 +118,49 @@ describe("Checkout", () => {
       },
     ]);
     expect(sent.declaredTotal).toBe(97000);
+  });
+
+  it("en un pago por BRE-B muestra a dónde transferir y deja copiar la llave", async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText },
+      configurable: true,
+    });
+    setCart([cartLine()]);
+    fetchMock.mockResolvedValue(
+      response(201, {
+        orderId: "FM-20260916-004",
+        total: 97000,
+        preciosVerificados: true,
+        instruccionesPago: {
+          llave: "@flormorado",
+          titular: "Flormorado Café",
+        },
+      }),
+    );
+
+    renderCheckout();
+    fillAndSubmit("bre_b");
+
+    expect(await screen.findByText("@flormorado")).toBeInTheDocument();
+    expect(screen.getByText("Flormorado Café")).toBeInTheDocument();
+    // En el encabezado y en el paso que pide escribirlo en la transferencia.
+    expect(screen.getAllByText("FM-20260916-004")).toHaveLength(2);
+    expect(screen.getByRole("img", { name: /Código QR/ })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Copiar llave" }));
+    expect(writeText).toHaveBeenCalledWith("@flormorado");
+    expect(
+      await screen.findByRole("button", { name: "¡Copiada!" }),
+    ).toBeInTheDocument();
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(sent.payment).toEqual(
+      expect.objectContaining({ method: "bre_b", breKey: "@maria" }),
+    );
+    expect(sent.contact.marketingConsentVersion).toBe(
+      WHATSAPP_MARKETING_CONSENT.version,
+    );
   });
 
   it("actualiza un carrito con precios viejos y pide confirmar de nuevo", async () => {

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Código QR de prueba">
+  <!-- Marcador de posición: reemplazar por el QR oficial que genera el banco para la llave BRE-B. -->
+  <rect width="240" height="240" fill="#fff6e6"/>
+  <rect x="10" y="10" width="220" height="220" fill="none" stroke="#6d2649" stroke-width="3" stroke-dasharray="10 7"/>
+  <g fill="none" stroke="#6d2649" stroke-width="6">
+    <rect x="30" y="30" width="44" height="44"/>
+    <rect x="166" y="30" width="44" height="44"/>
+    <rect x="30" y="166" width="44" height="44"/>
+  </g>
+  <text x="120" y="112" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#6d2649">QR DE PRUEBA</text>
+  <text x="120" y="138" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#3b2314">No escanear</text>
+  <text x="120" y="154" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#3b2314">Reemplazar por el QR del banco</text>
+</svg>
