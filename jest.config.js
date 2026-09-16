@@ -11,5 +11,8 @@ module.exports = {
     "^@pages/(.*)$": "<rootDir>/src/pages/$1",
     "^@assets/(.*)$": "<rootDir>/src/assets/$1",
   },
-  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
+  // .claude/worktrees guarda copias completas del repo que crean las sesiones
+  // en segundo plano; sin esto jest corre sus pruebas y choca con sus mocks.
+  testPathIgnorePatterns: ["/node_modules/", "/dist/", "<rootDir>/.claude/"],
+  modulePathIgnorePatterns: ["<rootDir>/.claude/"],
 };
