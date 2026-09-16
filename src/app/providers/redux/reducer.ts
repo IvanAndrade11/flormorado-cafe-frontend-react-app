@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "@/utils/constants";
 import { IFeatureFlags } from "@/types/configCat";
+import { CategoryTitle } from "@/types/store";
 
 export const mainSlice = createSlice({
   name: "main",
@@ -12,7 +13,7 @@ export const mainSlice = createSlice({
     setLoader: (state, action) => {
       state.session.loader = action.payload;
     },
-    setCategoryTitle: (state, action) => {
+    setCategoryTitle: (state, action: PayloadAction<CategoryTitle>) => {
       state.session.categoryTitle = action.payload;
     },
     setShowCart: (state, action) => {

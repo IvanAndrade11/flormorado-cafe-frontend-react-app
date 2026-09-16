@@ -1,0 +1,57 @@
+// Estructura del flag `coffeeGrowers` de ConfigCat.
+//
+// El valor del flag es un STRING que contiene este JSON: hay que pasarlo por
+// JSON.parse antes de usarlo (`JSON.parse(coffeeGrowers) as { growers: ICoffeeGrower[] }`).
+// Son los caficultores aliados que se muestran en el carrusel infinito del
+// landing ("Conoce nuestros caficultores aliados").
+//
+// Se consume en un solo lugar:
+//   - src/components/section/InfiniteCarousel/InfiniteCarousel.tsx
+//
+// Tipo correspondiente: `ICoffeeGrower` en src/types/configCat/index.ts
+//
+// Capturado del flag real el 2026-09-15.
+
+{
+  "growers": [
+    {
+      "id": 0, // Usado para identificar al caficultor. OJO: hoy el componente NO lo usa (la key de React es el índice), y el valor real es un NÚMERO, no un string
+      "name": "Carlos Andrade", // Usado para el texto bajo la foto y para el alert de "Proximamente podrás conocer más acerca de ..."
+      "img": "https://res.cloudinary.com/dcbnyk8uk/image/upload/v1773696873/carlos-andrade_frbxrx.jpg" // Usado para la foto del carrusel (Cloudinary). El campo se llama `img`, no `imageUrl` como en los otros flags
+    },
+    {
+      "id": 1,
+      "name": "Irma Ortiz",
+      "img": "https://res.cloudinary.com/dcbnyk8uk/image/upload/v1773696868/irma-ortiz_hwea8b.jpg"
+    },
+    {
+      "...": "los demás caficultores tienen exactamente los mismos tres campos"
+    }
+  ]
+}
+
+// Notas que no se ven en la estructura:
+//
+// 1. DISCREPANCIA DE TIPO: `ICoffeeGrower` declara `id: string`, pero en el
+//    flag real los ids son NÚMEROS (0, 1, 2, 3, 4). TypeScript no lo detecta
+//    porque el JSON.parse se castea con `as`, sin validación en runtime. Hoy no
+//    rompe nada porque `id` no se usa — el carrusel usa el índice del array
+//    como key de React — pero cualquier código nuevo que compare
+//    `grower.id === "2"` va a fallar en silencio.
+//
+// 2. El campo de la imagen se llama `img`, no `imageUrl`. En storeProducts y
+//    storeCategories el mismo dato se llama `imageUrl`. Es la trampa más fácil
+//    de pisar al copiar código entre carruseles.
+//
+// 3. El carrusel duplica la lista para dar la ilusión de scroll infinito
+//    (`[...growers, ...growers]`), así que cada caficultor se renderiza dos
+//    veces. Es por eso que la key es el índice y no el `id`: con el `id` habría
+//    keys repetidas.
+//
+// 4. Ninguno de los tres campos es opcional en la práctica: los cinco
+//    caficultores los traen todos. No hay campo de biografía ni de detalle —
+//    hacer clic sólo abre un `alert` de "Proximamente". Si algún día se agrega
+//    una página de caficultor, ahí es donde `id` empezaría a importar (y donde
+//    habría que arreglar primero el tipo de la nota 1).
+//
+// 5. Al 2026-09-15 hay 5 caficultores.

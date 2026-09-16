@@ -1,0 +1,80 @@
+// Estructura del flag `storeCategories` de ConfigCat.
+//
+// El valor del flag es un STRING que contiene este JSON: hay que pasarlo por
+// JSON.parse antes de usarlo (`JSON.parse(storeCategories) as { categories: ICategory[] }`).
+// Son las categorías que se muestran como tarjetas y que sirven de entrada a la
+// tienda: al hacer clic en una, su `name` se guarda en Redux como
+// `session.categoryTitle` y con eso se filtra el catálogo de storeProducts.
+//
+// Se consume en:
+//   - src/components/section/CategoryCarousel/CategoryCarousel.tsx (home)
+//   - src/pages/Store/Categories/Categories.tsx                    (página de categorías)
+//   - ambos renderizan CategoryCard, que es quien hace setCategoryTitle(name)
+//
+// Tipo correspondiente: `ICategory` en src/types/configCat/index.ts
+//
+// Capturado del flag real el 2026-09-15.
+
+{
+  "categories": [
+    {
+      "id": "cafe", // Usado para la key de React de la tarjeta; NO se usa para filtrar ni para la URL
+      "name": "CAFÉ", // Usado para el título de la tarjeta y como valor de filtro: se guarda en Redux y se compara contra el `category` de cada producto
+      "imageUrl": "https://res.cloudinary.com/dcbnyk8uk/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1772672178/coffee_trgnjj.jpg" // Usado para la imagen de la tarjeta de categoría (Cloudinary, ya recortada a 300x300 por la URL)
+    },
+    {
+      "id": "sagu",
+      "name": "SAGÚ",
+      "imageUrl": "https://res.cloudinary.com/dcbnyk8uk/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1772672178/sagu_abbf0k.jpg"
+    },
+    {
+      "id": "otros",
+      "name": "OTROS PRODUCTOS",
+      "imageUrl": "https://res.cloudinary.com/dcbnyk8uk/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1772672178/metodos_nhmule.jpg"
+    }
+  ]
+}
+
+// Notas que no se ven en la estructura:
+//
+// 1. `name` no es sólo texto: es la llave del filtro. `productsByCategory`
+//    (src/utils/constants/common/actions.ts) compara `product.category === title`
+//    por igualdad EXACTA de string, con mayúsculas y tildes. En el tipo
+//    `ICategory` está declarado como unión literal
+//    `"CAFÉ" | "SAGÚ" | "OTROS PRODUCTOS"` (ver nota 3).
+//
+// 2. El `name` viaja a Redux tal cual y termina comparándose con el `category`
+//    de los productos, así que una diferencia de tilde o de mayúscula vacía la
+//    tienda entera. Ya pasó una vez: ProductCarousel llamaba
+//    `setCategoryTitle("Café")` en vez de "CAFÉ", y "Explora Nuestro Café"
+//    abría la tienda sin productos. En FMC-0015 se cerró ese camino tipándolo
+//    con `CategoryTitle` (src/types/store/index.ts): hoy `setCategoryTitle` y
+//    `productsByCategory` sólo aceptan los cuatro literales válidos, así que un
+//    "Café" mal escrito ya no compila.
+//
+// 3. Lo que el tipo NO puede proteger es el otro lado: este flag se edita en
+//    ConfigCat, y `ICategory["name"]` es una unión literal escrita a mano. Si
+//    alguien renombra una categoría allá (por ejemplo "CAFÉ" -> "Cafe"), el
+//    tipo pasa a mentir, el `as` del JSON.parse no valida nada y la tienda
+//    vuelve a quedar vacía sin un solo error de compilación. Renombrar una
+//    categoría implica tocar tres lugares a la vez: este flag, el `category`
+//    de los productos en storeProducts, y la unión en src/types/configCat.
+//
+// 4. El único `title` que NO filtra es "NUESTROS PRODUCTOS": es el valor
+//    inicial de `session.categoryTitle` y significa "mostrar todo". No es una
+//    categoría de este flag — no viene de ConfigCat, está en el tipo
+//    `ISession` (src/types/store/index.ts).
+//
+// 5. Hoy sólo "CAFÉ" tiene productos. "SAGÚ" y "OTROS PRODUCTOS" se muestran en
+//    el home y en la página de categorías, pero al entrar la tienda dice
+//    "No hay productos disponibles", porque ningún producto de storeProducts
+//    tiene esa categoría. Es contenido publicado antes que el catálogo.
+//
+// 6. `id` está tipado como string y los valores reales son strings ("cafe",
+//    "sagu", "otros"), a diferencia de coffeeGrowers, donde los ids son
+//    números. No hay convención compartida entre flags: cada uno usa lo suyo.
+//
+// 7. Las imágenes ya vienen con las transformaciones de Cloudinary embebidas en
+//    la URL (w_300,h_300,c_fill,f_auto,q_auto). Si se reemplaza la imagen desde
+//    ConfigCat conviene conservar ese segmento, porque el CSS no redimensiona:
+//    la tarjeta muestra la imagen tal como llega.

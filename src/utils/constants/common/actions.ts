@@ -1,5 +1,6 @@
 import { NavbarMenuItem } from "@/types/components";
 import { IBlog, ICoffeeProduct } from "@/types/configCat";
+import { CategoryTitle } from "@/types/store";
 import { URLS } from "./data";
 
 export const scrollToSection = (id: string) => {
@@ -9,7 +10,7 @@ export const scrollToSection = (id: string) => {
 
 export const productsByCategory = (
   products: ICoffeeProduct[],
-  title: string,
+  title: CategoryTitle,
 ) => {
   return title !== "NUESTROS PRODUCTOS"
     ? products.filter((item) => item.category === title)

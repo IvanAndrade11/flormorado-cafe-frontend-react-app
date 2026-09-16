@@ -3,15 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Card, Col } from "react-bootstrap";
 import { setCategoryTitle } from "@/utils/constants/redux/sets";
 import { URLS } from "@/utils/constants";
+import { ICategory } from "@/types/configCat";
+import { CategoryTitle } from "@/types/store";
 
-export const CategoryCard: React.FC<{
-  id: string;
-  name: string;
-  imageUrl: string;
-}> = ({ id, name, imageUrl }) => {
+export const CategoryCard: React.FC<ICategory> = ({ id, name, imageUrl }) => {
   const navigate = useNavigate();
 
-  const redirect = (url: string, categoryTitle: string) => {
+  const redirect = (url: string, categoryTitle: CategoryTitle) => {
     setCategoryTitle(categoryTitle);
     navigate(url);
   };

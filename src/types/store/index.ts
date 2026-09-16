@@ -1,8 +1,14 @@
 import { ICoffeeProduct, IFeatureFlags } from "../configCat";
 
+export type CategoryTitle =
+  | "CAFÉ"
+  | "SAGÚ"
+  | "OTROS PRODUCTOS"
+  | "NUESTROS PRODUCTOS"; // catch-all: no es una categoría de storeCategories
+
 export interface ISession {
   loader: boolean;
-  categoryTitle: "CAFÉ" | "SAGÚ" | "OTROS PRODUCTOS" | "NUESTROS PRODUCTOS";
+  categoryTitle: CategoryTitle;
   showCart: boolean;
   toast: {
     show: boolean;
