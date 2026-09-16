@@ -1,0 +1,106 @@
+// Estructura del flag `storeProducts` de ConfigCat.
+//
+// El valor del flag es un STRING que contiene este JSON: hay que pasarlo por
+// JSON.parse antes de usarlo (`JSON.parse(storeProducts) as { products: ICoffeeProduct[] }`).
+// Es el catálogo completo de la tienda: no hay backend ni API de productos, así
+// que todo lo que se ve en la tienda sale de aquí.
+//
+// Se consume en cuatro lugares:
+//   - src/pages/Store/Store.tsx                              (listado, filtros y ordenamiento)
+//   - src/pages/Store/ProductDetail/ProductDetail.tsx        (página de detalle, busca por `id`)
+//   - src/components/section/ProductCarousel/ProductCarousel.tsx (carrusel del landing)
+//   - de ahí pasa al carrito (ShoppingCart) al añadir un producto
+//
+// Tipo correspondiente: `ICoffeeProduct` en src/types/configCat/index.ts
+//
+// Capturado del flag real el 2026-09-15.
+
+{
+  "products": [
+    {
+      "id": "FLORMORADO500", // Usado para la URL de detalle (/#/store/:productId) y como base del id del carrito
+      "stock": true, // Usado para habilitar la compra: si es false la tarjeta muestra "AGOTADO" y el botón queda deshabilitado
+      "brand": "flormorado", // Usado para el filtro "Marca" de la tienda; debe coincidir exacto con un option.id de CAFE_FILTERS
+      "name": "FLORMORADO CAFÉ 500 G", // Usado para el título de la tarjeta, el h1 del detalle, el alt de la imagen y la línea del carrito
+      "imageUrl": "https://res.cloudinary.com/dcbnyk8uk/image/upload/v1773372874/FMC-item-1_jb6cu4.png", // Usado para la imagen de la tarjeta, la galería del detalle y la miniatura del carrito (Cloudinary)
+      "shortDescription": "Café de origen 100% Colombiano\nRegión Boyacá\nPresentación 500 g", // Usado para el bloque corto del detalle; los \n SÍ se ven como saltos de línea (white-space: pre-line)
+      "grinding": "Gruesa", // Usado sólo como valor por defecto del catálogo; el configurador lo reemplaza por la molienda que elige el cliente
+      "roastOptions": "Media", // Usado para la fila "Tostión" de la tarjeta y del detalle
+      "variety": "Blend", // Usado para la fila "Variedad" de la tarjeta/detalle y para el filtro "Variedad"
+      "size": "500", // Usado para el filtro "Tamaño" y para calcular el precio por gramo; es la presentación en gramos como STRING sin unidad
+      "price": "45.000", // Usado para el precio de la tarjeta, del detalle y del carrito. OJO: string en formato colombiano con punto de miles; hay que quitar los puntos antes de convertir a número ("45.000" -> 45000)
+      "shippingPrice": 7000, // Usado para el costo de envío del carrito; es un NÚMERO en pesos (no string, a diferencia de price)
+      "process": {
+        "benefit": "Lavado", // Usado para la fila "Beneficio" del detalle
+        "drying": "Marquesina - Sol", // Usado para la fila "Secado" del detalle
+        "controlledFermentation": "14 horas" // Usado para la fila "Fermentación (controlada)" del detalle
+      },
+      "productDescription": "xxxxx", // Usado para la descripción larga del detalle; también respeta saltos de línea (whiteSpace: pre-line)
+      "tags": ["Café de origen", "Caficultor", "Flormorado Café", "Boyacá"], // Usado para los badges "Etiquetas relacionadas" del detalle; texto libre, no filtran nada
+      "category": "CAFÉ", // Usado para filtrar la tienda por categoría; debe coincidir exacto con un `name` del flag storeCategories
+      "type": "origin", // Usado para el filtro "Tipo de café" (origin | specialty)
+      "origin": "somondoco" // Usado para la fila "Origen" del detalle y para el filtro "Origen"
+    },
+    {
+      "...": "los demás productos tienen exactamente los mismos campos, ninguno opcional"
+    }
+  ]
+}
+
+// Notas que no se ven en la estructura:
+//
+// 1. `price` es un STRING en formato colombiano con punto de miles ("45.000",
+//    "240.000"). `shippingPrice` en cambio es un NÚMERO (7000). No hay que
+//    asumir que los dos precios se tratan igual: el primero pasa por
+//    `parseCOP` / `.replace(/\./g, "")` y el segundo se usa tal cual.
+//
+// 2. `quantity` NO existe en el catálogo. Lo agrega el frontend al añadir un
+//    producto al carrito, por eso en `ICoffeeProduct` está como opcional.
+//    Lo mismo pasa con el `id`: en el carrito deja de ser el id del catálogo y
+//    pasa a ser `${product.id}-${grinding}` (ProductConfigurator.tsx), para que
+//    el mismo café con dos moliendas sean dos líneas distintas del carrito.
+//
+// 3. `stock: false` significa agotado. Hoy lo está FLORMORADO340.
+//
+// 4. `grinding` del catálogo es sólo un valor por defecto y no se muestra en
+//    ningún lado: la tarjeta tiene esa fila comentada, y al añadir al carrito
+//    el configurador lo sobrescribe con el `id` de GRINDING_OPTIONS
+//    (src/utils/constants/store/data.ts), que va en minúscula: "fina", "media",
+//    "gruesa", "grano". Por eso el carrito muestra "Molienda: gruesa" y no
+//    "Gruesa" como dice el catálogo.
+//
+// 5. Los valores que alimentan filtros (`type`, `brand`, `size`, `origin`,
+//    `variety`) se comparan por igualdad EXACTA de string contra las opciones
+//    hardcodeadas en CAFE_FILTERS (src/utils/constants/store/data.ts). Son
+//    sensibles a mayúsculas y a tildes: "Arábico" con tilde filtra, "arabico"
+//    no. Agregar un valor nuevo en ConfigCat sin agregar la opción en
+//    CAFE_FILTERS deja el producto sin forma de filtrarse.
+//    Al revés también pasa, y hoy pasa: el filtro "Variedad" ofrece "Castillo",
+//    "Caturra" y "Otros", y ningún producto del catálogo tiene esas variedades
+//    (sólo hay "Blend" y "Arábico"), así que esas tres opciones siempre dejan
+//    la tienda vacía. Es el mismo problema que tuvo el filtro de "Tamaño" con
+//    el campo inexistente `availableWeights`, pero del lado del catálogo.
+//
+// 6. `createdAt` está declarado en `ICoffeeProduct` como opcional, y el flag
+//    real NO lo trae en ningún producto. Los ordenamientos "Más recientes" y
+//    "Más antiguos" no ordenan por fecha: `getTimeValue`
+//    (src/utils/constants/store/order.ts) cae al índice original del array,
+//    así que en la práctica sólo devuelven el catálogo en el orden de ConfigCat
+//    y su reverso. Para que ordenen de verdad hay que agregar `createdAt` a
+//    cada producto en ConfigCat (ISO 8601).
+//
+// 7. `category` debe coincidir con un `name` del flag storeCategories, que hoy
+//    son "CAFÉ", "SAGÚ" y "OTROS PRODUCTOS". Los 5 productos son de categoría
+//    "CAFÉ": las otras dos categorías se ven en el home pero llevan a una
+//    tienda vacía ("No hay productos disponibles").
+//
+// 8. Reglas de precio del carrito (TotalView.tsx):
+//      subtotal = Σ (price sin puntos) × quantity
+//      envío    = subtotal >= 150000 ? 0 : cart[0].shippingPrice
+//      total    = subtotal + envío
+//    El envío sale del PRIMER producto del carrito, no de la suma ni del mayor.
+//    Hoy es inofensivo porque los 5 productos comparten shippingPrice = 7000,
+//    pero deja de serlo si alguna vez se agrega uno con un envío distinto.
+//
+// 9. Al 2026-09-15 el catálogo tiene 5 productos, todos de categoría CAFÉ:
+//    FLORMORADO500, FLORMORADO340 (agotado), OCA250, OCA500 y OCA3000.

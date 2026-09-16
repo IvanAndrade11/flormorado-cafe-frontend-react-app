@@ -1,0 +1,36 @@
+// Estructura del flag `testFlag` de ConfigCat.
+//
+// A diferencia de los otros cuatro flags, `testFlag` NO contiene JSON: es un
+// booleano nativo de ConfigCat. No hay que hacer JSON.parse — el valor llega ya
+// como `true`/`false`.
+//
+// Se lee en src/hooks/useFlags.ts y useInit.ts lo guarda en Redux
+// (`main.flags.testFlag`), pero al 2026-09-15 ningún componente lo consume:
+// es un flag de prueba para verificar que la conexión con ConfigCat funciona.
+//
+// Tipo correspondiente: `testFlag: boolean` dentro de `IFeatureFlags`
+// (src/types/configCat/index.ts)
+//
+// Capturado del flag real el 2026-09-15.
+
+{
+  "testFlag": true // Usado para comprobar que ConfigCat responde y que el polling está activo; no controla ninguna funcionalidad de la app
+}
+
+// Notas que no se ven en la estructura:
+//
+// 1. Este archivo es sólo documentación: el valor del flag es el booleano
+//    suelto `true`, no un objeto. El envoltorio `{ "testFlag": ... }` está aquí
+//    únicamente para mantener el formato de la carpeta.
+//
+// 2. En el CDN de ConfigCat se distingue de los demás por el tipo: `testFlag`
+//    llega en `j.f.testFlag.v.b` (boolean), mientras que storeProducts,
+//    storeCategories, coffeeGrowers y blog llegan en `j.f.<flag>.v.s` (string).
+//
+// 3. El default del SDK es `false` (useFlags.ts), a diferencia de los flags de
+//    contenido, cuyo default es la cadena "Default" — que no es JSON válido y
+//    reventaría el JSON.parse si llegara a usarse. Por eso todos los
+//    consumidores comprueban primero que el flag exista antes de parsearlo.
+//
+// 4. Aunque no se use, entra en el `loading` agregado de `useFlags`: el loader
+//    de la app no desaparece hasta que ConfigCat resuelve también este flag.
