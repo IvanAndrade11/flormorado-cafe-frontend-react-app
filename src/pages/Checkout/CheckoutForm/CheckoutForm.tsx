@@ -8,6 +8,7 @@ import {
   FloatingLabel,
   Form,
   Row,
+  Spinner,
 } from "react-bootstrap";
 import { ICheckoutForm, IFormCols } from "@/types/components";
 import { CheckoutHeader } from "../CheckoutHeader/CheckoutHeader";
@@ -21,6 +22,8 @@ export const CheckoutForm: React.FC<ICheckoutForm> = ({
   nextActiveKey,
   labelBtn,
   defaultValues,
+  submitting = false,
+  submitError,
 }) => {
   const [validated, setValidated] = useState(false);
   const [values, setValues] = useState<Record<string, string | boolean>>(
@@ -61,7 +64,7 @@ export const CheckoutForm: React.FC<ICheckoutForm> = ({
 
     setForm(formValues);
     setValidated(true);
-    setActiveKey(nextActiveKey);
+    if (nextActiveKey) setActiveKey(nextActiveKey);
   };
 
   return (
@@ -80,92 +83,118 @@ export const CheckoutForm: React.FC<ICheckoutForm> = ({
             onSubmit={handleSubmit}
             className="mt-3"
           >
-            {formFields.map((row) => (
-              <Row key={row.rowId}>
-                {row.cols.map((col) => {
-                  if (!isVisible(col)) return null;
+            {/* Bloqueado mientras se envía: cambiar un dato a mitad del envío
+                haría que la confirmación no coincida con lo que se guardó. */}
+            <fieldset disabled={submitting}>
+              {formFields.map((row) => (
+                <Row key={row.rowId}>
+                  {row.cols.map((col) => {
+                    if (!isVisible(col)) return null;
 
-                  if (col.type === "note") {
-                    return (
-                      <Col key={col.colId} md={col.md} className="mb-4">
-                        <Alert variant="info" className="mb-0">
-                          {col.label}
-                        </Alert>
-                      </Col>
-                    );
-                  }
+                    if (col.type === "note") {
+                      return (
+                        <Col key={col.colId} md={col.md} className="mb-4">
+                          <Alert variant="info" className="mb-0">
+                            {col.label}
+                          </Alert>
+                        </Col>
+                      );
+                    }
 
-                  if (col.type === "checkbox") {
-                    return (
-                      <Col key={col.colId} md={col.md} className="mb-4">
-                        <Form.Check
-                          type="checkbox"
-                          id={col.name}
-                          label={col.label}
-                          checked={!!values[col.name]}
-                          onChange={(e) =>
-                            setFieldValue(col.name, e.target.checked)
-                          }
-                        />
-                      </Col>
-                    );
-                  }
-
-                  return (
-                    <Form.Group
-                      key={col.colId}
-                      as={Col}
-                      md={col.md}
-                      controlId={col.name}
-                      className="mb-4"
-                    >
-                      <FloatingLabel controlId={col.name} label={col.label}>
-                        {col.type === "select" ? (
-                          <Form.Select
-                            required={col.required}
-                            name={col.name}
-                            value={(values[col.name] as string) ?? ""}
+                    if (col.type === "checkbox") {
+                      return (
+                        <Col key={col.colId} md={col.md} className="mb-4">
+                          <Form.Check
+                            type="checkbox"
+                            id={col.name}
+                            label={col.label}
+                            checked={!!values[col.name]}
                             onChange={(e) =>
-                              setFieldValue(col.name, e.target.value)
-                            }
-                          >
-                            <option value="" disabled>
-                              Selecciona una opción
-                            </option>
-                            {col.options?.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        ) : (
-                          <Form.Control
-                            required={col.required}
-                            type={col.type}
-                            name={col.name}
-                            placeholder={col.label}
-                            pattern={col.pattern}
-                            minLength={col.minLength}
-                            maxLength={col.maxLength}
-                            value={(values[col.name] as string) ?? ""}
-                            onChange={(e) =>
-                              setFieldValue(col.name, e.target.value)
+                              setFieldValue(col.name, e.target.checked)
                             }
                           />
-                        )}
-                        <Form.Control.Feedback type="invalid">
-                          {col.feedback}
-                        </Form.Control.Feedback>
-                      </FloatingLabel>
-                    </Form.Group>
-                  );
-                })}
-              </Row>
-            ))}
+                        </Col>
+                      );
+                    }
+
+                    return (
+                      <Form.Group
+                        key={col.colId}
+                        as={Col}
+                        md={col.md}
+                        controlId={col.name}
+                        className="mb-4"
+                      >
+                        <FloatingLabel controlId={col.name} label={col.label}>
+                          {col.type === "select" ? (
+                            <Form.Select
+                              required={col.required}
+                              name={col.name}
+                              value={(values[col.name] as string) ?? ""}
+                              onChange={(e) =>
+                                setFieldValue(col.name, e.target.value)
+                              }
+                            >
+                              <option value="" disabled>
+                                Selecciona una opción
+                              </option>
+                              {col.options?.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          ) : (
+                            <Form.Control
+                              required={col.required}
+                              type={col.type}
+                              name={col.name}
+                              placeholder={col.label}
+                              pattern={col.pattern}
+                              minLength={col.minLength}
+                              maxLength={col.maxLength}
+                              value={(values[col.name] as string) ?? ""}
+                              onChange={(e) =>
+                                setFieldValue(col.name, e.target.value)
+                              }
+                            />
+                          )}
+                          <Form.Control.Feedback type="invalid">
+                            {col.feedback}
+                          </Form.Control.Feedback>
+                        </FloatingLabel>
+                      </Form.Group>
+                    );
+                  })}
+                </Row>
+              ))}
+            </fieldset>
             <hr className="mt-1 mb-4" />
+            {submitError && (
+              <Alert variant="danger" className="mb-4" role="alert">
+                {submitError}
+              </Alert>
+            )}
             <div className="d-flex justify-content-center">
-              <Button type="submit" className="fmc-button">
-                {labelBtn}
+              <Button
+                type="submit"
+                className="fmc-button"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      aria-hidden="true"
+                      className="me-2"
+                    />
+                    Enviando pedido…
+                  </>
+                ) : (
+                  labelBtn
+                )}
               </Button>
             </div>
           </Form>

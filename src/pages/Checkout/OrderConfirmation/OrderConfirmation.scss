@@ -1,0 +1,184 @@
+@use "@/styles/globals.scss" as *;
+
+// La página tiene una foto de fondo a pantalla completa: sin una superficie
+// propia, el número de pedido se pierde sobre la imagen.
+.fmc-order-confirmation {
+  max-width: 46rem;
+  margin: 0 auto 3rem;
+  padding: 0.5rem 1.75rem 2rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
+  color: $principal-cafe;
+
+  @media screen and (max-width: 576px) {
+    padding: 0.5rem 1rem 1.5rem;
+  }
+
+  h1,
+  h2 {
+    font-family: "Economica";
+    font-weight: bold;
+    color: $principal-purple;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    text-align: center;
+    padding: 1.5rem 0 1.75rem;
+
+    h1 {
+      font-size: 2.6rem;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__eyebrow {
+    margin-top: 0.75rem !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $principal-verde;
+  }
+
+  &__number {
+    margin-top: 0.5rem !important;
+    font-size: 1.15rem;
+
+    strong {
+      display: block;
+      font-family: "Economica";
+      font-size: 2.1rem;
+      letter-spacing: 0.04em;
+      color: $principal-purple;
+    }
+  }
+
+  &__email {
+    max-width: 32rem;
+    margin-top: 0.5rem !important;
+  }
+
+  &__next {
+    background: $principal-beige;
+    border-left: 4px solid $principal-purple;
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+
+    h2 {
+      font-size: 1.35rem;
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1.5rem;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__block {
+    border: 1px solid $principal-beige-oscuro;
+    border-radius: 0.5rem;
+    padding: 1.1rem 1.25rem;
+    background: #fff;
+
+    address {
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+
+  &__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid $principal-beige-oscuro;
+    }
+
+    small {
+      display: block;
+      color: #8a7566;
+    }
+  }
+
+  &__amount {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__totals {
+    margin: 0.75rem 0 0;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.15rem 0;
+    }
+
+    dt {
+      font-weight: normal;
+      color: #8a7566;
+    }
+
+    dd {
+      margin: 0;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__total {
+    margin-top: 0.35rem;
+    padding-top: 0.5rem !important;
+    border-top: 1px solid $principal-beige-oscuro;
+
+    dt {
+      color: $principal-cafe !important;
+      font-weight: bold !important;
+    }
+
+    dd {
+      font-family: "Economica";
+      font-weight: bold;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: $principal-purple;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}

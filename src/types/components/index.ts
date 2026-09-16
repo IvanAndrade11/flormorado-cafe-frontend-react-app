@@ -25,9 +25,13 @@ export interface ICheckoutForm {
   eventKey: string;
   setActiveKey: (key: string) => void;
   setForm: (tmpForm: Record<string, string | boolean>) => void;
-  nextActiveKey: string;
+  // Sin siguiente paso, el panel queda abierto: el último paso espera la
+  // respuesta del backend en vez de cerrarse.
+  nextActiveKey?: string;
   labelBtn: string;
   defaultValues?: Record<string, string | boolean>;
+  submitting?: boolean;
+  submitError?: React.ReactNode;
 }
 
 export interface IFormFields {

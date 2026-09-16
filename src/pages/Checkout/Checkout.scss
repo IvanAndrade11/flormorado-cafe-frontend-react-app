@@ -22,3 +22,14 @@
   color: $principal-purple;
   font-size: 1.5rem;
 }
+
+.fmc-checkout-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+
+  h1 {
+    font-family: "Economica";
+    font-weight: bold;
+    color: $principal-purple;
+  }
+}
