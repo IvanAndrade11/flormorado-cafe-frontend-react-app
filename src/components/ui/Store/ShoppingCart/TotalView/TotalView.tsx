@@ -1,6 +1,6 @@
 import "./TotalView.scss";
 
-import { formatPrice } from "@/utils/constants";
+import { computeCartTotals, formatPrice } from "@/utils/constants";
 import { ICoffeeProduct } from "@/types/configCat";
 import { useMemo } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -12,23 +12,11 @@ export const TotalView = ({
   cart: ICoffeeProduct[];
   showSub: boolean;
 }) => {
-  const subTotal = useMemo(() => {
-    return cart.reduce((acc: number, item: ICoffeeProduct) => {
-      const numericPrice = Number(
-        typeof item.price === "string"
-          ? item.price.replace(/\./g, "")
-          : item.price,
-      );
-      return acc + numericPrice * (item.quantity || 1);
-    }, 0);
-  }, [cart]);
-
-  const shippingCost = useMemo(() => {
-    if (cart.length === 0) return 0;
-    return subTotal >= 150000 ? 0 : cart[0].shippingPrice || 0;
-  }, [cart, subTotal]);
-
-  const finalTotal = subTotal + shippingCost;
+  const {
+    subtotal: subTotal,
+    shipping: shippingCost,
+    total: finalTotal,
+  } = useMemo(() => computeCartTotals(cart), [cart]);
 
   return (
     <div className="mt-4 pt-3 border-top px-3">
