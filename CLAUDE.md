@@ -90,4 +90,8 @@ The idempotency key is tied to the payload's content, not to the page: retrying 
 
 The checkout reads the cart with `useAppSelector`, not `store.getState()`, so the summary re-renders when a stale cart gets repriced.
 
+**WhatsApp marketing consent.** The "novedades y ofertas" checkbox label comes from `WHATSAPP_MARKETING_CONSENT` in `src/utils/constants/common/forms.ts`, and its `version` travels with every order (`contact.marketingConsentVersion`), checked or not. The backend stores it as proof of what the customer agreed to under Colombia's Ley 1581, so **changing the label text requires bumping the version** — otherwise old consents would appear to cover wording the customer never saw.
+
+**BRE-B payments.** For `bre_b` orders the backend returns `instruccionesPago` (company key and account holder), and `OrderConfirmation` shows the exact amount, the key with a copy button, the holder name the customer must see in their banking app, and the order number to write in the transfer message. The key is deliberately not a frontend constant: the backend is the single source for both this screen and the confirmation email. Copy is the primary action because most customers are on the same phone that would have to scan the QR. The QR (`images.BreBQr`, `src/assets/images/payments/`) must be the **official image from the bank app** — BRE-B QRs follow an interoperable standard and a home-made one won't scan.
+
 **Styling**: Sass/SCSS co-located per component/page (`Component.scss` next to `Component.tsx`), plus global variables/mixins in `src/styles/globals.scss` and app-wide rules in `src/styles/styles.scss`. Bootstrap 5 / React Bootstrap is used alongside custom SCSS.
