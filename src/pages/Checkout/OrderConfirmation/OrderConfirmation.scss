@@ -85,7 +85,7 @@
       margin-bottom: 0.25rem;
     }
 
-    p {
+    > p {
       margin: 0;
     }
   }
@@ -180,5 +180,123 @@
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+  }
+}
+
+.fmc-breb {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 0.4rem;
+
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__amount {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+
+    strong {
+      color: $principal-purple;
+      white-space: nowrap;
+    }
+  }
+
+  &__key {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    padding: 0.55rem 0.75rem;
+    background: #fff;
+    border: 1px solid $principal-beige-oscuro;
+    border-radius: 0.5rem;
+
+    code {
+      flex: 1 1 auto;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: $principal-cafe;
+      word-break: break-all;
+    }
+  }
+
+  &__key-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7566;
+  }
+
+  .fmc-button.fmc-breb__copy {
+    min-width: auto;
+    padding: 0.25rem 0.8rem;
+  }
+
+  // Siempre en el DOM para que el lector de pantalla anuncie el error; vacío no
+  // ocupa espacio.
+  &__feedback {
+    margin: 0.35rem 0 0.4rem;
+    font-size: 0.85rem;
+    color: #a3391c;
+
+    &:empty {
+      margin: 0;
+    }
+  }
+
+  &__steps {
+    margin: 0.75rem 0 0.5rem;
+    padding-left: 1.2rem;
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  // El cliente lo copia en su transferencia: partido en el guion se lee como
+  // dos datos distintos.
+  &__order {
+    white-space: nowrap;
+  }
+
+  &__after {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  &__qr {
+    margin: 0;
+    text-align: center;
+
+    img {
+      width: 150px;
+      height: 150px;
+      padding: 6px;
+      background: #fff;
+      border: 1px solid $principal-beige-oscuro;
+      border-radius: 0.35rem;
+    }
+
+    figcaption {
+      max-width: 150px;
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      color: #8a7566;
+    }
+
+    @media screen and (max-width: 576px) {
+      img {
+        width: 120px;
+        height: 120px;
+      }
+
+      figcaption {
+        max-width: none;
+      }
+    }
   }
 }

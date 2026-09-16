@@ -5,7 +5,10 @@ import {
   OrderFailure,
   SubmitOrderResult,
 } from "@/types/orders";
-import { BOGOTA_NEARBY_CITIES } from "@/utils/constants/common/forms";
+import {
+  BOGOTA_NEARBY_CITIES,
+  WHATSAPP_MARKETING_CONSENT,
+} from "@/utils/constants/common/forms";
 import {
   computeCartTotals,
   getCatalogProductId,
@@ -74,6 +77,9 @@ export const buildOrderPayload = (
       email: text(form, "email"),
       phone: text(form, "phone"),
       whatsappOptIn: checked(form, "whtsppOptIn"),
+      // Viaja siempre, marque o no la casilla: el backend guarda qué texto vio
+      // el cliente al responder, que es la prueba de su decisión.
+      marketingConsentVersion: WHATSAPP_MARKETING_CONSENT.version,
     },
     delivery: {
       city: text(form, "city"),
@@ -101,11 +107,12 @@ export const buildOrderPayload = (
 const cityLabel = (city: string) =>
   BOGOTA_NEARBY_CITIES.find((option) => option.value === city)?.label ?? city;
 
+type CreatedOrder = Extract<SubmitOrderResult, { kind: "created" }>;
+
 export const buildConfirmation = (
   payload: IOrderPayload,
   cart: ICoffeeProduct[],
-  orderId: string,
-  total: number,
+  { orderId, total, breB }: CreatedOrder,
 ): IOrderConfirmation => {
   const { subtotal, shipping } = computeCartTotals(cart);
   const { payment, delivery } = payload;
@@ -115,6 +122,7 @@ export const buildConfirmation = (
     email: payload.contact.email,
     paymentMethod: payment.method,
     ...(payment.method === "bre_b" ? { breKey: payment.breKey } : {}),
+    ...(breB ? { breB } : {}),
     items: cart.map((item) => ({
       key: item.id,
       name: item.name,
@@ -172,12 +180,15 @@ const attemptOnce = async (
         orderId: string;
         total: number;
         yaExistia?: boolean;
+        instruccionesPago?: { llave: string; titular: string };
       };
+      const pago = body.instruccionesPago;
       return {
         kind: "created",
         orderId: body.orderId,
         total: body.total,
         alreadyExisted: body.yaExistia === true,
+        ...(pago ? { breB: { key: pago.llave, holder: pago.titular } } : {}),
       };
     }
 

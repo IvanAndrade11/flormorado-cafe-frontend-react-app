@@ -7,6 +7,10 @@ import Banner from "@/assets/images/banners/banner-hero.jpg";
 
 import Background1 from "@/assets/images/backgrounds/background1.jpg";
 
+// PENDIENTE: marcador de prueba. Reemplazar por el QR oficial del banco para la
+// llave BRE-B antes de mezclar FMC-0017 (si es PNG, cambiar la extensión aquí).
+import BreBQr from "@/assets/images/payments/breb-qr.svg";
+
 import GirlCollecting from "@/assets/images/illustrations/girl_collecting.svg";
 import GirlStanding from "@/assets/images/illustrations/girl_standing.svg";
 import CoffeePlant from "@/assets/images/illustrations/coffee_plant.svg";
@@ -41,4 +45,5 @@ export const images = {
   LogoLoading,
   LogoLoading1,
   Background1,
+  BreBQr,
 };

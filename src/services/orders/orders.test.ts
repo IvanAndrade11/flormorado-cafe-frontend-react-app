@@ -1,5 +1,6 @@
 import { ICoffeeProduct } from "@/types/configCat";
 import { IOrderPayload } from "@/types/orders";
+import { WHATSAPP_MARKETING_CONSENT } from "@/utils/constants/common/forms";
 import {
   buildConfirmation,
   buildOrderPayload,
@@ -65,6 +66,7 @@ describe("buildOrderPayload", () => {
         email: "maria@example.com",
         phone: "3001234567",
         whatsappOptIn: true,
+        marketingConsentVersion: WHATSAPP_MARKETING_CONSENT.version,
       },
       delivery: {
         city: "chia",
@@ -137,12 +139,12 @@ describe("buildConfirmation", () => {
       "llave",
     );
 
-    const confirmation = buildConfirmation(
-      payload,
-      cart,
-      "FM-20260916-001",
-      97000,
-    );
+    const confirmation = buildConfirmation(payload, cart, {
+      kind: "created",
+      orderId: "FM-20260916-001",
+      total: 97000,
+      alreadyExisted: false,
+    });
 
     expect(confirmation).toEqual(
       expect.objectContaining({
@@ -169,6 +171,30 @@ describe("buildConfirmation", () => {
         lineTotal: 90000,
       },
     ]);
+  });
+});
+
+describe("buildConfirmation con BRE-B", () => {
+  it("lleva a la confirmación las instrucciones que dio el backend", () => {
+    const payload = buildOrderPayload(
+      { ...form, paymentMethod: "bre_b", breKey: "@maria" },
+      cart,
+      "llave",
+    );
+
+    const confirmation = buildConfirmation(payload, cart, {
+      kind: "created",
+      orderId: "FM-20260916-002",
+      total: 97000,
+      alreadyExisted: false,
+      breB: { key: "@flormorado", holder: "Flormorado Café" },
+    });
+
+    expect(confirmation.breKey).toBe("@maria");
+    expect(confirmation.breB).toEqual({
+      key: "@flormorado",
+      holder: "Flormorado Café",
+    });
   });
 });
 
@@ -227,6 +253,25 @@ describe("submitOrder", () => {
     expect(fetchImpl).toHaveBeenCalledWith(
       "https://api.test/orders",
       expect.objectContaining({ method: "POST" }),
+    );
+  });
+
+  it("traduce las instrucciones de pago BRE-B de la respuesta", async () => {
+    const fetchImpl = jest.fn().mockResolvedValue(
+      json(201, {
+        orderId: "FM-2",
+        total: 97000,
+        instruccionesPago: { llave: "@flormorado", titular: "Flormorado Café" },
+      }),
+    );
+
+    const result = await submitOrder(payload, { fetchImpl, sleep: noWait });
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        kind: "created",
+        breB: { key: "@flormorado", holder: "Flormorado Café" },
+      }),
     );
   });
 
