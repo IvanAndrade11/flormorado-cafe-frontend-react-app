@@ -39,7 +39,7 @@ export const ProductCarousel: React.FC = () => {
   }
 
   const navigateToStore = () => {
-    setCategoryTitle("Café");
+    setCategoryTitle("CAFÉ");
     navigate(URLS.store);
   };
 

@@ -2,6 +2,7 @@ import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { mainSlice } from "@/app/providers/redux/reducer";
 import store from "@/app/providers/redux/store";
 import { ICoffeeProduct, IFeatureFlags } from "@/types/configCat";
+import { CategoryTitle } from "@/types/store";
 
 const createSetter = <T>(action: ActionCreatorWithPayload<T>) => {
   return (value: T) => store.dispatch(action(value));
@@ -11,7 +12,7 @@ export const setFlags = createSetter<Partial<IFeatureFlags>>(
   mainSlice.actions.setFlags,
 );
 export const setLoader = createSetter<boolean>(mainSlice.actions.setLoader);
-export const setCategoryTitle = createSetter<string>(
+export const setCategoryTitle = createSetter<CategoryTitle>(
   mainSlice.actions.setCategoryTitle,
 );
 export const setShowCart = createSetter<boolean>(mainSlice.actions.setShowCart);
