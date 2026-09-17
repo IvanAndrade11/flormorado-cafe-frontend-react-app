@@ -13,7 +13,7 @@
 }
 
 .store-card {
-  background-image: url("../../assets/images/illustrations/coffee_plant.svg");
+  background-image: url("@/assets/images/illustrations/coffee_plant.svg");
   background-size: cover;
   transition:
     transform var(--duration) var(--easing),
