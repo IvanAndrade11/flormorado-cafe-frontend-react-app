@@ -29,9 +29,10 @@
 - **Tienda** con catálogo de productos, filtros avanzados (tipo, marca, tamaño, origen, variedad) y ordenamiento.
 - **Detalle de producto** con configurador de molienda, cantidad y carrito de compras.
 - **Blog** con artículos dinámicos y contenido HTML sanitizado (DOMPurify).
-- **Páginas institucionales**: Sobre nosotros, Orígenes, Contacto y Términos y condiciones.
+- **Páginas institucionales**: Sobre nosotros, Orígenes y Términos y condiciones.
 - **Carrito de compras** con agrupación inteligente de productos por tipo de molienda y persistencia en `localStorage`.
 - **Checkout** en 3 pasos (contacto, entrega y pago) con guardado opcional de datos para compras futuras. Al confirmar, envía el pedido al backend de pedidos y muestra una pantalla de confirmación con el número de pedido.
+- **Contacto** con formulario de un solo paso (nombre, teléfono opcional, correo, asunto y mensaje) que envía el mensaje al backend, el cual lo reenvía por correo al negocio.
 - **Feature flags** con ConfigCat para habilitar o deshabilitar funcionalidades de forma remota.
 - **Diseño responsive** optimizado para desktop y dispositivos móviles.
 
@@ -74,7 +75,7 @@ src/
 │   └── ui/           → Componentes de interfaz (Cards, Product, ShoppingCart, etc.)
 ├── hooks/            → Custom hooks (useFlags, useInit)
 ├── pages/            → Vistas/páginas de la aplicación
-├── services/         → Integraciones externas (envío de pedidos al backend)
+├── services/         → Integraciones externas (envío de pedidos y de mensajes de contacto al backend)
 ├── styles/           → Estilos globales y variables SCSS
 ├── types/            → Definiciones de tipos TypeScript
 └── utils/            → Utilidades y constantes
@@ -143,9 +144,9 @@ Las variables de entorno se gestionan a través de [`dotenv-webpack`](https://ww
 | ---------------- | ------------------------------------------------------ | --------- |
 | `NODE_ENV`       | Entorno de ejecución                                   | `.env.*`  |
 | `SDK_CNFCT`      | SDK Key de ConfigCat (feature flags)                   | `.env.*`  |
-| `ORDERS_API_URL` | URL del [backend de pedidos](https://github.com/IvanAndrade11/flormorado-cafe-backend-orders) | `.env.*`  |
+| `ORDERS_API_URL` | URL del [backend de pedidos](https://github.com/IvanAndrade11/flormorado-cafe-backend-orders), usado tanto por el checkout como por el formulario de contacto | `.env.*`  |
 
-`ORDERS_API_URL` es opcional: si falta, el checkout usa la URL de producción. En `.env.development` conviene apuntarla a `http://localhost:8787` para probar contra el backend corriendo en local con `wrangler dev`.
+`ORDERS_API_URL` es opcional: si falta, el checkout y el formulario de contacto usan la URL de producción. En `.env.development` conviene apuntarla a `http://localhost:8787` para probar contra el backend corriendo en local con `wrangler dev`.
 
 **Archivos de entorno:**
 
@@ -249,7 +250,7 @@ flormorado-cafe-frontend-react-app/
 │   │   ├── Checkout/           # Flujo de checkout (contacto → entrega → pago)
 │   │   └── Terms/              # Términos y condiciones (contenido de ejemplo)
 │   │
-│   ├── services/               # Integraciones externas (orders: envío de pedidos)
+│   ├── services/               # Integraciones externas (orders: envío de pedidos; contact: envío de mensajes)
 │   │
 │   ├── styles/
 │   │   ├── globals.scss        # Variables SCSS (colores, gradientes, tipografía)
@@ -300,7 +301,7 @@ flormorado-cafe-frontend-react-app/
 | `/tienda/categorias`    | Categories        | Vista por categorías                         |
 | `/sobre-nosotros`       | About             | Información sobre Flormorado Café            |
 | `/origenes`             | Origins           | Historia y orígenes del café                 |
-| `/contacto`             | Contact           | Formulario de contacto                       |
+| `/contacto`             | Contact           | Formulario de contacto (envía el mensaje al backend, que lo reenvía por correo) |
 | `/blog`                 | Blog              | Lista de artículos del blog                  |
 | `/blog/:slug`           | BlogPost          | Artículo individual del blog                 |
 | `/checkout`             | Checkout          | Flujo de compra: contacto, entrega y pago    |
