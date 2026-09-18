@@ -1,0 +1,106 @@
+@use "@/styles/globals.scss" as *;
+
+.fmc-contact {
+  padding-bottom: 2rem;
+
+  &__lead {
+    max-width: 42rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: $principal-cafe;
+  }
+
+  &__textarea {
+    height: 140px;
+    resize: vertical;
+  }
+
+  // La página tiene una foto de fondo a pantalla completa: sin una superficie
+  // propia, el formulario y el texto de consentimiento pierden contraste.
+  &__surface {
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
+    margin: 0 0 2rem;
+    padding: 2rem 1.5rem 0.5rem;
+
+    @media screen and (max-width: 576px) {
+      padding: 1.5rem 1rem 0.5rem;
+    }
+  }
+
+  &__consent {
+    font-size: 0.85rem;
+    color: #8a7566;
+    margin-bottom: 1.25rem;
+
+    a {
+      color: $principal-purple;
+    }
+  }
+
+  &__info {
+    background: $principal-beige;
+    border-left: 4px solid $principal-purple;
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 1.5rem 1.75rem;
+
+    h2 {
+      font-family: "Economica";
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: $principal-purple;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+
+    li {
+      margin-bottom: 0.85rem;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: $principal-cafe;
+      text-decoration: none;
+
+      &:hover {
+        color: $principal-purple;
+      }
+    }
+
+    img {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__hours {
+    padding-top: 1rem;
+    border-top: 1px solid $principal-beige-oscuro;
+    color: $principal-cafe;
+
+    strong {
+      color: $principal-purple;
+    }
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
