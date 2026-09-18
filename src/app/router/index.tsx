@@ -43,6 +43,9 @@ const Checkout = lazy(() =>
 const Terms = lazy(() =>
   import("@/pages/Terms/Terms").then((m) => ({ default: m.Terms })),
 );
+const Panel = lazy(() =>
+  import("@/pages/Panel/Panel").then((m) => ({ default: m.Panel })),
+);
 
 const Router = (): React.JSX.Element => {
   return (
@@ -61,6 +64,7 @@ const Router = (): React.JSX.Element => {
         <Route path={`${URLS.blog}/:slug`} element={<BlogPost />} />
         <Route path={URLS.checkout} element={<Checkout />} />
         <Route path={URLS.terms} element={<Terms />} />
+        <Route path={URLS.panel} element={<Panel />} />
       </Routes>
     </>
   );

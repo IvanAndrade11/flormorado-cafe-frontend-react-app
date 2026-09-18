@@ -19,3 +19,5 @@ export * from "./Store/ProductDetail/ProductDetail";
 export * from "./Checkout/Checkout";
 
 export * from "./Terms/Terms";
+
+export * from "./Panel/Panel";

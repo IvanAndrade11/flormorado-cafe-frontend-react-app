@@ -11,6 +11,7 @@ export const URLS = {
   categories: "/tienda/categorias",
   checkout: "/checkout",
   terms: "/terminos-y-condiciones",
+  panel: "/panel",
 };
 
 export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
