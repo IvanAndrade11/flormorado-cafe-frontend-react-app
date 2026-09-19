@@ -32,25 +32,41 @@ export const Panel: React.FC = () => {
   }
 
   return (
-    <div className="container fmc-panel">
-      <div className="fmc-panel__header">
-        <Title title="PANEL DE CONTROL" />
-        <Button variant="outline-secondary" size="sm" onClick={handleLogout}>
-          Cerrar sesión
-        </Button>
-      </div>
+    <div className="container fmc-panel mb-5">
+      <div className="fmc-panel__surface">
+        <div className="fmc-panel__header">
+          <div className="pt-2">
+            <p className="fmc-panel__eyebrow">
+              Flormorado Café · uso interno
+              <Button className="fmc-panel__logout" onClick={handleLogout}>
+                Cerrar sesión
+              </Button>
+            </p>
+            <Title title="PANEL DE CONTROL" />
+            <p className="fmc-panel__dek">
+              Aquí ves cómo va el negocio: qué pedidos hay que preparar, quién
+              autorizó recibir novedades y quién te ha escrito por el formulario
+              de contacto.
+            </p>
+          </div>
+        </div>
 
-      <Tabs defaultActiveKey="pedidos" className="mb-4" id="fmc-panel-tabs">
-        <Tab eventKey="pedidos" title="Pedidos">
-          <OrdersPanel onUnauthorized={handleUnauthorized} />
-        </Tab>
-        <Tab eventKey="clientes" title="Clientes">
-          <CustomersPanel onUnauthorized={handleUnauthorized} />
-        </Tab>
-        <Tab eventKey="mensajes" title="Mensajes de contacto">
-          <ContactMessagesPanel onUnauthorized={handleUnauthorized} />
-        </Tab>
-      </Tabs>
+        <Tabs
+          defaultActiveKey="pedidos"
+          className="mb-4 fmc-panel-tabs"
+          id="fmc-panel-tabs"
+        >
+          <Tab eventKey="pedidos" title="Pedidos">
+            <OrdersPanel onUnauthorized={handleUnauthorized} />
+          </Tab>
+          <Tab eventKey="clientes" title="Clientes">
+            <CustomersPanel onUnauthorized={handleUnauthorized} />
+          </Tab>
+          <Tab eventKey="mensajes" title="Mensajes de contacto">
+            <ContactMessagesPanel onUnauthorized={handleUnauthorized} />
+          </Tab>
+        </Tabs>
+      </div>
     </div>
   );
 };

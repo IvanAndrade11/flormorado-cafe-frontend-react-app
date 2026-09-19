@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, Button, Form, Spinner, Table } from "react-bootstrap";
+import { Button, Form, Spinner, Table } from "react-bootstrap";
 
 import { AdminUnauthorizedError, fetchOrders } from "@/services/admin";
 import { IAdminOrderListItem } from "@/types/admin";
-import { formatPrice, ORDER_STATUS_LABELS } from "@/utils/constants";
+import { orderStatusVariant, ORDER_STATUS_LABELS } from "@/utils/constants";
 
+import { PanelBadge } from "../PanelBadge/PanelBadge";
+import { cop, formatDate } from "../panelFormat";
 import { OrderDetail } from "./OrderDetail/OrderDetail";
 
 interface OrdersPanelProps {
@@ -20,16 +22,6 @@ const STATUS_FILTER_OPTIONS = [
   { value: "entregado", label: "Entregado" },
   { value: "cancelado", label: "Cancelado" },
 ];
-
-const cop = (value: number) => `$ ${formatPrice(value)}`;
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleString("es-CO", {
-    day: "numeric",
-    month: "short",
-    hour: "numeric",
-    minute: "2-digit",
-  });
 
 export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
   const [orders, setOrders] = useState<IAdminOrderListItem[]>([]);
@@ -82,6 +74,11 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
 
   return (
     <div className="fmc-panel__section">
+      <p className="fmc-panel__tab-lead">
+        Los pedidos más recientes primero. Haz clic en uno para ver el detalle
+        completo y avanzarlo de estado a medida que lo preparas.
+      </p>
+
       <Form className="fmc-panel__filters" onSubmit={handleSearch}>
         <Form.Control
           type="search"
@@ -96,7 +93,11 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
             </option>
           ))}
         </Form.Select>
-        <Button type="submit" variant="outline-secondary">
+        <Button
+          type="submit"
+          className="fmc-panel__filter-button"
+          variant="outline-secondary"
+        >
           Buscar
         </Button>
       </Form>
@@ -109,56 +110,54 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
       )}
 
       {!loading && loadError && (
-        <Alert variant="danger" role="alert">
+        <div className="fmc-panel__error" role="alert">
           No se pudieron cargar los pedidos. Intenta de nuevo.
-        </Alert>
+        </div>
       )}
 
       {!loading && !loadError && orders.length === 0 && (
-        <Alert variant="secondary" role="status">
+        <div className="fmc-panel__empty" role="status">
           No hay pedidos con ese filtro.
-        </Alert>
+        </div>
       )}
 
       {!loading && !loadError && orders.length > 0 && (
         <>
           <p className="fmc-panel__count">{total} pedido(s)</p>
-          <Table responsive hover className="fmc-panel__table">
-            <thead>
-              <tr>
-                <th>Número</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Ciudad</th>
-                <th>Total</th>
-                <th>Pago</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr
-                  key={order.id}
-                  className="fmc-panel__row"
-                  onClick={() => setSelectedId(order.id)}
-                >
-                  <td>{order.id}</td>
-                  <td>{formatDate(order.created_at)}</td>
-                  <td>
-                    {order.customer_name} {order.customer_surname}
-                  </td>
-                  <td>{order.city}</td>
-                  <td>{cop(order.total)}</td>
-                  <td>
-                    {order.payment_method === "bre_b"
-                      ? "BRE-B"
-                      : "Contraentrega"}
-                  </td>
-                  <td>{ORDER_STATUS_LABELS[order.status] ?? order.status}</td>
+          <div className="fmc-panel__table-wrap">
+            <Table responsive hover className="fmc-panel__table">
+              <thead>
+                <tr>
+                  <th>Número</th>
+                  <th>Fecha</th>
+                  <th>Cliente</th>
+                  <th>Total</th>
+                  <th>Estado</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr
+                    key={order.id}
+                    className="fmc-panel__row"
+                    onClick={() => setSelectedId(order.id)}
+                  >
+                    <td>{order.id}</td>
+                    <td>{formatDate(order.created_at)}</td>
+                    <td>
+                      {order.customer_name} {order.customer_surname}
+                    </td>
+                    <td>{cop(order.total)}</td>
+                    <td>
+                      <PanelBadge variant={orderStatusVariant(order.status)}>
+                        {ORDER_STATUS_LABELS[order.status] ?? order.status}
+                      </PanelBadge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
         </>
       )}
 

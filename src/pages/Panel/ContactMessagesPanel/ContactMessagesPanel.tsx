@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, Badge, Button, Spinner, Table } from "react-bootstrap";
+import { Button, Spinner, Table } from "react-bootstrap";
 
 import {
   AdminUnauthorizedError,
@@ -8,17 +8,12 @@ import {
 } from "@/services/admin";
 import { IAdminContactMessage } from "@/types/admin";
 
+import { PanelBadge } from "../PanelBadge/PanelBadge";
+import { formatDate } from "../panelFormat";
+
 interface ContactMessagesPanelProps {
   onUnauthorized: () => void;
 }
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleString("es-CO", {
-    day: "numeric",
-    month: "short",
-    hour: "numeric",
-    minute: "2-digit",
-  });
 
 // Mismas etiquetas que SUBJECT_OPTIONS en Contact.tsx.
 const SUBJECT_LABELS: Record<string, string> = {
@@ -58,7 +53,7 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
   // react-hooks/set-state-in-effect exige que fijar estado ocurra en un
   // callback, no de forma síncrona en el cuerpo del efecto.
   useEffect(() => {
-    void Promise.resolve().then(load);
+    void Promise.resolve().then(() => load());
   }, [load]);
 
   const handleToggle = async (message: IAdminContactMessage) => {
@@ -79,93 +74,99 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
     }
   };
 
-  if (loading) {
-    return (
-      <div className="fmc-panel__loading">
-        <Spinner animation="border" size="sm" className="me-2" />
-        Cargando mensajes…
-      </div>
-    );
-  }
-
-  if (loadError) {
-    return (
-      <Alert variant="danger" role="alert">
-        No se pudieron cargar los mensajes. Intenta de nuevo.
-      </Alert>
-    );
-  }
-
-  if (messages.length === 0) {
-    return (
-      <Alert variant="secondary" role="status">
-        No hay mensajes de contacto todavía.
-      </Alert>
-    );
-  }
-
   return (
-    <Table responsive hover className="fmc-panel__table">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Nombre</th>
-          <th>Contacto</th>
-          <th>Asunto</th>
-          <th>Mensaje</th>
-          <th>Estado</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {messages.map((message) => (
-          <tr key={message.id}>
-            <td>{formatDate(message.created_at)}</td>
-            <td>{message.name}</td>
-            <td>
-              {message.email}
-              {message.phone && (
-                <>
-                  <br />
-                  {message.phone}
-                </>
-              )}
-            </td>
-            <td>{SUBJECT_LABELS[message.subject] ?? message.subject}</td>
-            <td className="fmc-panel__message-cell">{message.message}</td>
-            <td>
-              {message.status === "atendido" ? (
-                <Badge bg="success">Atendido</Badge>
-              ) : (
-                <Badge bg="warning" text="dark">
-                  Nuevo
-                </Badge>
-              )}
-            </td>
-            <td>
-              <Button
-                size="sm"
-                variant="outline-secondary"
-                disabled={updatingId === message.id}
-                onClick={() => handleToggle(message)}
-              >
-                {updatingId === message.id ? (
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    aria-hidden="true"
-                  />
-                ) : message.status === "atendido" ? (
-                  "Marcar como nuevo"
-                ) : (
-                  "Marcar atendido"
-                )}
-              </Button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <div className="fmc-panel__section">
+      <p className="fmc-panel__tab-lead">
+        Mensajes de quienes te escriben desde la página de contacto. Se guardan
+        aquí aunque el correo al negocio falle, así que revisa también los que
+        dicen “No llegó”. Márcalos como atendidos para llevar el control de a
+        quién ya le respondiste.
+      </p>
+
+      {loading && (
+        <div className="fmc-panel__loading">
+          <Spinner animation="border" size="sm" className="me-2" />
+          Cargando mensajes…
+        </div>
+      )}
+
+      {!loading && loadError && (
+        <div className="fmc-panel__error" role="alert">
+          No se pudieron cargar los mensajes. Intenta de nuevo.
+        </div>
+      )}
+
+      {!loading && !loadError && messages.length === 0 && (
+        <div className="fmc-panel__empty" role="status">
+          No hay mensajes de contacto todavía.
+        </div>
+      )}
+
+      {!loading && !loadError && messages.length > 0 && (
+        <div className="fmc-panel__table-wrap">
+          <Table responsive hover className="fmc-panel__table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>Asunto</th>
+                <th>Mensaje</th>
+                <th>Estado</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {messages.map((message) => (
+                <tr key={message.id}>
+                  <td>{formatDate(message.created_at)}</td>
+                  <td>{message.name}</td>
+                  <td>
+                    {message.email}
+                    {message.phone && (
+                      <>
+                        <br />
+                        {message.phone}
+                      </>
+                    )}
+                  </td>
+                  <td>{SUBJECT_LABELS[message.subject] ?? message.subject}</td>
+                  <td className="fmc-panel__message-cell">{message.message}</td>
+                  <td>
+                    {message.status === "atendido" ? (
+                      <PanelBadge variant="done">Atendido</PanelBadge>
+                    ) : (
+                      <PanelBadge variant="wait">Nuevo</PanelBadge>
+                    )}
+                  </td>
+                  <td>
+                    <Button
+                      size="sm"
+                      variant="outline-secondary"
+                      className="fmc-panel__status-button"
+                      disabled={updatingId === message.id}
+                      onClick={() => handleToggle(message)}
+                    >
+                      {updatingId === message.id ? (
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          aria-hidden="true"
+                        />
+                      ) : message.status === "atendido" ? (
+                        "Marcar como nuevo"
+                      ) : (
+                        "Marcar atendido"
+                      )}
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      )}
+    </div>
   );
 };

@@ -1,17 +1,70 @@
 @use "@/styles/globals.scss" as *;
 
-.fmc-panel {
-  padding-bottom: 3rem;
+// Mismos tonos que los correos del backend (src/templates/*.ts) y el plan de
+// trabajo del proyecto: así el panel se siente parte del mismo sistema, no
+// una pantalla aparte.
+$panel-ink: #3b2314;
+$panel-muted: $principal-purple;
+$panel-rule: #e8e0d0;
+$panel-plum-wash: #f1dee7;
+$panel-done: #12603a;
+$panel-done-wash: #dcebe0;
+$panel-wait: #8a6a12;
+$panel-wait-wash: #f2e7c8;
+$panel-block: #a3391c;
+$panel-block-wash: #f6ded3;
 
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+.fmc-panel {
+  &__surface {
+    @media screen and (max-width: 576px) {
+      padding: 1.5rem 1.25rem 2rem;
+      border-radius: 0.75rem;
+    }
   }
 
   &--login {
-    max-width: 24rem;
+    max-width: 26rem;
+  }
+
+  &__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $panel-muted;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__dek {
+    color: $principal-beige;
+    background: rgba($principal-purple, 0.65);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  &__dek:hover {
+    background: $principal-purple;
+  }
+
+  &__logout {
+    background: #fff;
+    border: 1px solid $principal-purple;
+    color: $principal-purple;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 0.4rem 1.1rem;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      background: $principal-purple;
+      border-color: $principal-purple;
+      color: #fff;
+    }
   }
 
   &__login-form {
@@ -19,6 +72,26 @@
     border-radius: 0.75rem;
     box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
     padding: 2rem 1.5rem;
+  }
+
+  &__login-lead {
+    color: $principal-purple;
+    margin: 0 0 1.25rem;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  &__tab-lead {
+    color: $principal-beige;
+    background: rgba($principal-verde, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    margin: 0 0 1.25rem;
+  }
+
+  &__tab-lead:hover {
+    background: $principal-verde;
   }
 
   &__filters {
@@ -30,41 +103,201 @@
     .form-control,
     .form-select {
       max-width: 16rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  &__filter-button {
+    border-radius: 0.5rem;
+    border-color: $panel-rule;
+    color: $principal-purple;
+    background: $principal-beige;
+    font-size: 0.92rem;
+
+    &:hover {
+      background: $principal-purple;
+      border-color: $principal-beige;
+      color: $principal-beige;
     }
   }
 
   &__loading {
     display: flex;
     align-items: center;
-    color: $principal-cafe;
+    color: $panel-muted;
     padding: 2rem 0;
   }
 
+  &__empty {
+    background: #fbefda;
+    border: 1px solid $panel-rule;
+    border-radius: 0.75rem;
+    padding: 1.1rem 1.25rem;
+    color: $panel-ink;
+  }
+
+  &__error {
+    background: $panel-block-wash;
+    border: 1px solid $panel-block;
+    border-radius: 0.75rem;
+    padding: 1.1rem 1.25rem;
+    color: $panel-ink;
+  }
+
   &__count {
-    color: $principal-cafe;
-    font-size: 0.85rem;
+    color: $principal-purple;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  // El truco para redondear una tabla: el radio va en el contenedor, no en
+  // <table>, porque las celdas rellenan las esquinas del elemento tabla.
+  &__table-wrap {
+    background: #fff;
+    border: 1px solid $panel-rule;
+    border-radius: 0.9rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
   }
 
   &__table {
-    background: #fff;
+    margin-bottom: 0;
+
+    thead th {
+      background: #fbefda;
+      color: $principal-purple;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-bottom: 1px solid $panel-rule;
+      white-space: nowrap;
+    }
+
+    tbody td {
+      vertical-align: middle;
+      border-color: #f0e8da;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
   }
 
   &__row {
     cursor: pointer;
   }
 
+  &__message-cell {
+    max-width: 22rem;
+    white-space: pre-wrap;
+  }
+
+  &__badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    white-space: nowrap;
+
+    &--plum {
+      background: $panel-plum-wash;
+      color: $principal-purple;
+    }
+
+    &--wait {
+      background: $panel-wait-wash;
+      color: $panel-wait;
+    }
+
+    &--done {
+      background: $panel-done-wash;
+      color: $panel-done;
+    }
+
+    &--block {
+      background: $panel-block-wash;
+      color: $panel-block;
+    }
+
+    &--muted {
+      background: #f0e8da;
+      color: $panel-muted;
+    }
+  }
+
+  // Mismo bloque "Qué sigue" / "Qué empacar" que llevan los correos: un
+  // rótulo corto y en mayúsculas, seguido de la instrucción concreta.
+  &__callout {
+    background: $panel-plum-wash;
+    border-radius: 0.6rem;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0 1.5rem;
+
+    &-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: $principal-purple;
+      margin-bottom: 0.3rem;
+    }
+
+    &-body {
+      margin: 0;
+      color: $panel-ink;
+    }
+
+    &--warn {
+      background: $panel-wait-wash;
+
+      .fmc-panel__callout-label {
+        color: $panel-wait;
+      }
+    }
+  }
+
+  &__detail-section {
+    margin-top: 1.75rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__section-title {
+    font-family: "Economica", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: $principal-purple;
+    margin: 0 0 0.75rem;
+  }
+
   &__detail-grid {
+    border: 1px solid $principal-purple;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: $principal-beige;
+    box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
+    gap: 1.5rem;
 
-    h3 {
-      font-size: 0.9rem;
+    dt {
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: $principal-purple;
-      margin-bottom: 0.35rem;
+      letter-spacing: 0.06em;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $panel-muted;
+      margin-bottom: 0.3rem;
+    }
+
+    dd {
+      margin: 0 0 1rem;
+      line-height: 1.5;
     }
 
     @media screen and (max-width: 576px) {
@@ -72,21 +305,101 @@
     }
   }
 
-  &__status-actions {
+  &__status-row {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 0.6rem;
-    margin: 1rem 0 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__status-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1.5rem;
+  }
+
+  &__status-button {
+    font-weight: 600;
+    font-size: 0.85rem;
+
+    &.btn-outline-primary {
+      color: $principal-verde;
+      background-color: $principal-beige;
+      border-color: $principal-verde;
+
+      &:hover {
+        color: $principal-beige;
+        background: $principal-verde;
+        border-color: $principal-verde;
+      }
+    }
   }
 
   &__history {
-    padding-left: 1.1rem;
-    color: $principal-cafe;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: $panel-muted;
     font-size: 0.85rem;
+
+    li {
+      padding: 0.5rem 0;
+      border-top: 1px solid $panel-rule;
+
+      &:first-child {
+        border-top: none;
+      }
+    }
   }
 
-  &__message-cell {
-    max-width: 22rem;
-    white-space: pre-wrap;
+  .fmc-panel-tabs {
+    .nav-tabs {
+      // El color y el peso se heredan del .nav
+      background: $principal-beige;
+      border-bottom: 0;
+      margin: 0;
+    }
+
+    .nav-link {
+      border: 0;
+      background: transparent;
+      color: $panel-muted;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+      transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
+      padding: 1rem 1.25rem;
+    }
+
+    .nav-link:hover {
+      color: $principal-beige;
+      background-color: rgba($principal-purple, 0.65);
+      border-bottom-color: $principal-beige;
+    }
+
+    .nav-link.active {
+      background: #fff;
+      border-color: $principal-purple;
+      color: $principal-purple;
+    }
+
+    // El contenido del tab lo envuelve un div blanco bordeado; esto hace
+    // que se note dónde termina el panel y dónde empieza el contenido, y
+    // “recorta” la celda activa al borde del panel.
+    .tab-content {
+      background: #fff;
+      border-bottom: 1px solid $panel-rule;
+      border-left: 1px solid $panel-rule;
+      padding: 1.5rem 1.5rem 2rem;
+      border-radius: 0 0 0.75rem 0.75rem; // sólo esquinas inferiores
+
+      @media screen and (max-width: 576px) {
+        padding: 1.25rem 1rem 1.75rem;
+        border-radius: 0 0 0.5rem 0.5rem;
+      }
+    }
   }
 }

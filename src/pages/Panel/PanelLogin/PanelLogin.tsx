@@ -35,6 +35,11 @@ export const PanelLogin: React.FC<PanelLoginProps> = ({ onSuccess }) => {
 
   return (
     <Form className="fmc-panel__login-form" onSubmit={handleSubmit}>
+      <p className="fmc-panel__login-lead">
+        Bienvenido de nuevo. Ingresa la clave para ver los pedidos, los clientes
+        y los mensajes de contacto.
+      </p>
+
       <Form.Group controlId="panel-key" className="mb-3">
         <Form.Label>Clave del panel</Form.Label>
         <Form.Control

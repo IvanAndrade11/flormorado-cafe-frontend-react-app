@@ -38,3 +38,37 @@ export const nextOrderStatuses = (
   const forward = index < flow.length - 1 ? [flow[index + 1]] : [];
   return [...forward, CANCELLED];
 };
+
+export type OrderStatusVariant = "plum" | "wait" | "done" | "block";
+
+/** Con qué color pintar el estado: nuevo/plum, en curso/wait, entregado/done, cancelado/block. */
+export const orderStatusVariant = (status: string): OrderStatusVariant => {
+  if (status === "entregado") return "done";
+  if (status === "cancelado") return "block";
+  if (status === "nuevo") return "plum";
+  return "wait";
+};
+
+/**
+ * El mismo tono informativo de "Qué sigue" en el correo de confirmación
+ * (src/templates/orderConfirmation.ts del backend): decirle al administrador
+ * qué falta, no solo cuál es el estado actual.
+ */
+export const nextStepHint = (
+  paymentMethod: string,
+  status: string,
+): string | null => {
+  if (status === "nuevo" && paymentMethod === "bre_b") {
+    return 'Verifica que la transferencia a la llave BRE-B haya llegado antes de marcar "Pago confirmado".';
+  }
+  if (status === "nuevo" || status === "pago_confirmado") {
+    return 'Cuando lo tengas listo para salir, márcalo "En preparación".';
+  }
+  if (status === "en_preparacion") {
+    return 'Cuando esté empacado, márcalo "Por entregar".';
+  }
+  if (status === "por_entregar") {
+    return 'Márcalo "Entregado" en cuanto el cliente lo reciba.';
+  }
+  return null;
+};
