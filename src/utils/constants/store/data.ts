@@ -50,10 +50,6 @@ export const CAFE_FILTERS = [
         id: "flormorado",
         value: "Flormorado",
       },
-      {
-        id: "oca",
-        value: "Oca",
-      },
     ],
   },
   {

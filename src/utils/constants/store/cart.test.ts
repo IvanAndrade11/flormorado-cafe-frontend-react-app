@@ -97,9 +97,9 @@ describe("getCatalogProductId", () => {
   });
 
   it("funciona aunque el id del catálogo tenga guiones", () => {
-    const line = cartLine(catalogProduct({ id: "OCA-500" }), "grano", 1);
+    const line = cartLine(catalogProduct({ id: "FLORMORADO-500" }), "grano", 1);
 
-    expect(getCatalogProductId(line)).toBe("OCA-500");
+    expect(getCatalogProductId(line)).toBe("FLORMORADO-500");
   });
 
   it("deja intacto un id que no termina en la molienda", () => {
