@@ -32,7 +32,8 @@
 - **Páginas institucionales**: Sobre nosotros, Orígenes y Términos y condiciones.
 - **Carrito de compras** con agrupación inteligente de productos por tipo de molienda y persistencia en `localStorage`.
 - **Checkout** en 3 pasos (contacto, entrega y pago) con guardado opcional de datos para compras futuras. Al confirmar, envía el pedido al backend de pedidos y muestra una pantalla de confirmación con el número de pedido.
-- **Contacto** con formulario de un solo paso (nombre, teléfono opcional, correo, asunto y mensaje) que envía el mensaje al backend, el cual lo reenvía por correo al negocio.
+- **Contacto** con formulario de un solo paso (nombre, teléfono opcional, correo, asunto y mensaje) que envía el mensaje al backend, el cual lo guarda y lo reenvía por correo al negocio.
+- **Panel de control** (`/panel`, `FMC-0020`) protegido por clave: pedidos con búsqueda (número, documento, celular, correo o nombre) y cambio de estado, clientes con búsqueda, filtro por novedades, historial y baja de novedades por WhatsApp, y mensajes de contacto con seguimiento. Cada fila abre su detalle en un modal. Consume la API del backend de pedidos.
 - **Feature flags** con ConfigCat para habilitar o deshabilitar funcionalidades de forma remota.
 - **Diseño responsive** optimizado para desktop y dispositivos móviles.
 
@@ -248,9 +249,10 @@ flormorado-cafe-frontend-react-app/
 │   │   ├── Blog/               # Lista de artículos
 │   │   │   └── BlogPost/       # Artículo individual (con sanitización DOMPurify)
 │   │   ├── Checkout/           # Flujo de checkout (contacto → entrega → pago)
-│   │   └── Terms/              # Términos y condiciones (contenido de ejemplo)
+│   │   ├── Terms/              # Términos y condiciones (contenido de ejemplo)
+│   │   └── Panel/              # Panel de control (pedidos, clientes, mensajes de contacto)
 │   │
-│   ├── services/               # Integraciones externas (orders: envío de pedidos; contact: envío de mensajes)
+│   ├── services/               # Integraciones externas (orders: envío de pedidos; contact: envío de mensajes; admin: API del panel)
 │   │
 │   ├── styles/
 │   │   ├── globals.scss        # Variables SCSS (colores, gradientes, tipografía)
@@ -306,6 +308,7 @@ flormorado-cafe-frontend-react-app/
 | `/blog/:slug`           | BlogPost          | Artículo individual del blog                 |
 | `/checkout`             | Checkout          | Flujo de compra: contacto, entrega y pago    |
 | `/terminos-y-condiciones` | Terms           | Términos y condiciones (contenido de ejemplo) |
+| `/panel`                | Panel             | Panel de control (pedidos, clientes, mensajes de contacto), protegido por clave |
 
 > **Nota:** Al usar HashRouter, las rutas en producción se acceden como `https://flormoradocafe.com/#/tienda`. Cada página se carga de forma diferida (`React.lazy`), en su propio chunk de JavaScript.
 
