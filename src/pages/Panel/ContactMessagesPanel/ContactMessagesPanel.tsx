@@ -9,7 +9,7 @@ import {
 import { IAdminContactMessage } from "@/types/admin";
 
 import { PanelBadge } from "../PanelBadge/PanelBadge";
-import { formatDate } from "../panelFormat";
+import { formatDate, hasNotificationFailure } from "../panelFormat";
 import {
   ContactMessageDetail,
   SUBJECT_LABELS,
@@ -130,6 +130,14 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
                       <PanelBadge variant="done">Atendido</PanelBadge>
                     ) : (
                       <PanelBadge variant="wait">Nuevo</PanelBadge>
+                    )}
+                    {hasNotificationFailure(message.email_status) && (
+                      <>
+                        {" "}
+                        <PanelBadge variant="block">
+                          Notificación fallida
+                        </PanelBadge>
+                      </>
                     )}
                   </td>
                 </tr>

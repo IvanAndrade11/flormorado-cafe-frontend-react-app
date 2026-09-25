@@ -11,6 +11,8 @@ export interface SubmitContactOptions {
   sleep?: (ms: number) => Promise<void>;
   timeoutMs?: number;
   baseUrl?: string;
+  /** Token de Turnstile; se reenvía igual en cada reintento (ver `submitOrder`). */
+  turnstileToken?: string;
 }
 
 type Attempt = SubmitContactResult | "retry";
@@ -20,6 +22,7 @@ const attemptOnce = async (
   fetchImpl: typeof fetch,
   baseUrl: string,
   timeoutMs: number,
+  turnstileToken?: string,
 ): Promise<Attempt> => {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -27,7 +30,10 @@ const attemptOnce = async (
   try {
     const response = await fetchImpl(`${baseUrl}/contact`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(turnstileToken ? { "X-Turnstile-Token": turnstileToken } : {}),
+      },
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
@@ -37,6 +43,8 @@ const attemptOnce = async (
     }
 
     if (response.status === 400) return { kind: "invalid" };
+
+    if (response.status === 403) return { kind: "verification_failed" };
 
     // Solo se reintentan fallas que pueden ser pasajeras. Un 4xx no va a
     // cambiar por insistir.
@@ -58,10 +66,17 @@ export const submitContact = async (
     sleep = wait,
     timeoutMs = 15000,
     baseUrl = ORDERS_API_URL,
+    turnstileToken,
   }: SubmitContactOptions = {},
 ): Promise<SubmitContactResult> => {
   for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
-    const outcome = await attemptOnce(payload, fetchImpl, baseUrl, timeoutMs);
+    const outcome = await attemptOnce(
+      payload,
+      fetchImpl,
+      baseUrl,
+      timeoutMs,
+      turnstileToken,
+    );
     if (outcome !== "retry") return outcome;
 
     if (attempt < RETRY_DELAYS_MS.length) await sleep(RETRY_DELAYS_MS[attempt]);

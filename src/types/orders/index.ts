@@ -65,6 +65,8 @@ export type SubmitOrderResult =
     }
   | { kind: "stale_cart"; failures: OrderFailure[] }
   | { kind: "invalid" }
+  // Turnstile no pudo confirmar que quien envía es una persona.
+  | { kind: "verification_failed" }
   | { kind: "unavailable" };
 
 /** Lo que muestra la pantalla de confirmación, capturado antes de vaciar el carrito. */

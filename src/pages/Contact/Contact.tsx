@@ -1,7 +1,8 @@
+import { Turnstile, type TurnstileHandle } from "@/components/common";
 import { Title } from "@/components/ui";
 import "./Contact.scss";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Alert,
   Button,
@@ -46,11 +47,15 @@ const UNAVAILABLE_MESSAGE =
 const INVALID_MESSAGE =
   "Algunos datos no pasaron la validación. Revisa el formulario e inténtalo de nuevo.";
 
+const VERIFICATION_MESSAGE =
+  "No pudimos verificar que eres una persona. Recarga la página, revisa que ningún bloqueador de contenido esté frenando la verificación e inténtalo de nuevo.";
+
 export const Contact: React.FC = () => {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<SubmitContactResult | null>(null);
+  const turnstile = useRef<TurnstileHandle>(null);
 
   const setField = (name: keyof FormState, value: string) =>
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -75,7 +80,12 @@ export const Contact: React.FC = () => {
 
     setSubmitting(true);
     setResult(null);
-    const outcome = await submitContact(payload);
+    // Sin la clave del widget (o con el widget bloqueado) no hay token y la
+    // petición sale sin él; decide el backend si lo exige.
+    const turnstileToken = await turnstile.current?.getToken();
+    const outcome = await submitContact(payload, { turnstileToken });
+    // Un token vale una sola vez: el siguiente envío necesita uno nuevo.
+    turnstile.current?.reset();
     setSubmitting(false);
     setResult(outcome);
 
@@ -240,11 +250,18 @@ export const Contact: React.FC = () => {
                 {INVALID_MESSAGE}
               </Alert>
             )}
+            {result?.kind === "verification_failed" && (
+              <Alert variant="danger" className="mb-4" role="alert">
+                {VERIFICATION_MESSAGE}
+              </Alert>
+            )}
             {result?.kind === "unavailable" && (
               <Alert variant="danger" className="mb-4" role="alert">
                 {UNAVAILABLE_MESSAGE}
               </Alert>
             )}
+
+            <Turnstile ref={turnstile} action="contact" />
 
             <div className="d-flex justify-content-center">
               <Button

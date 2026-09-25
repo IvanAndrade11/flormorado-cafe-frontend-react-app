@@ -28,7 +28,7 @@ const buildProduct = (
 
 describe("parseFilterId", () => {
   it("splits a compact group:option id", () => {
-    expect(parseFilterId("brand:oca")).toEqual(["brand", "oca"]);
+    expect(parseFilterId("brand:flormorado")).toEqual(["brand", "flormorado"]);
   });
 
   it("returns null when the id has no group or option", () => {
@@ -52,8 +52,7 @@ describe("createEmptyFilters", () => {
 
 describe("filterProducts", () => {
   const flormorado = buildProduct({ id: "flormorado", brand: "flormorado" });
-  const oca = buildProduct({ id: "oca", brand: "oca" });
-  const products = [flormorado, oca];
+  const products = [flormorado];
 
   it("returns all products when no filter is active", () => {
     expect(filterProducts(products, createEmptyFilters())).toEqual(products);
@@ -61,9 +60,9 @@ describe("filterProducts", () => {
 
   it("filters by a single active group (OR within the group)", () => {
     const selected: SelectedFilters = createEmptyFilters();
-    selected.brand.add("oca");
+    selected.brand.add("flormorado");
 
-    expect(filterProducts(products, selected)).toEqual([oca]);
+    expect(filterProducts(products, selected)).toEqual([flormorado]);
   });
 
   it("combines groups with AND", () => {

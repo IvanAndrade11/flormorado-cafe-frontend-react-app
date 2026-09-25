@@ -10,6 +10,10 @@ export interface IAdminOrderListItem {
   total: number;
   payment_method: string;
   status: string;
+  // Opcionales: el backend en producción puede ser anterior a FMC-0021 y no
+  // mandarlos todavía.
+  email_status?: string;
+  whatsapp_status?: string;
 }
 
 export interface IAdminOrderItem {
