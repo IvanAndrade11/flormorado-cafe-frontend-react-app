@@ -29,3 +29,9 @@ export const notificationInfo = (status: string): NotificationInfo => {
   if (status === "no_aplica") return { label: "No aplica", variant: "muted" };
   return { label: status, variant: "muted" };
 };
+
+/** "12 pedido(s)", o "Mostrando 50 de 120" cuando la lista se recortó y hay que afinar la búsqueda. */
+export const countLabel = (shown: number, total: number, noun: string) =>
+  shown < total
+    ? `Mostrando ${shown} de ${total} ${noun} — afina la búsqueda para ver el resto`
+    : `${total} ${noun}`;

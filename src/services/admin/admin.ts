@@ -3,6 +3,7 @@ import {
   ContactMessageStatus,
   IAdminContactMessage,
   IAdminCustomer,
+  IAdminCustomerDetail,
   IAdminOrderDetail,
   IAdminOrderListItem,
 } from "@/types/admin";
@@ -116,8 +117,25 @@ export const updateOrderStatus = (id: string, status: string) =>
     body: { status },
   });
 
-export const fetchCustomers = () =>
-  request<{ clientes: IAdminCustomer[] }>("/admin/customers");
+export interface FetchCustomersParams {
+  q?: string;
+  /** "1" solo quienes autorizaron novedades, "0" solo los que están de baja. */
+  marketing?: string;
+}
+
+export const fetchCustomers = (params: FetchCustomersParams = {}) => {
+  const search = new URLSearchParams();
+  if (params.q) search.set("q", params.q);
+  if (params.marketing) search.set("marketing", params.marketing);
+  const qs = search.toString();
+
+  return request<{ clientes: IAdminCustomer[]; total: number }>(
+    `/admin/customers${qs ? `?${qs}` : ""}`,
+  );
+};
+
+export const fetchCustomerDetail = (id: number) =>
+  request<IAdminCustomerDetail>(`/admin/customers/${id}`);
 
 export const optOutCustomer = (id: number) =>
   request<{ ok: true }>(`/admin/customers/${id}/opt-out`, { method: "PATCH" });

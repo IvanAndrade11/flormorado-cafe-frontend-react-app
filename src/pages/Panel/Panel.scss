@@ -105,6 +105,22 @@ $panel-block-wash: #f6ded3;
       max-width: 16rem;
       border-radius: 0.5rem;
     }
+
+    .fmc-panel__search {
+      flex: 1 1 18rem;
+      max-width: 28rem;
+    }
+  }
+
+  &__filter-clear {
+    color: $principal-purple;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__filter-button {
@@ -188,9 +204,22 @@ $panel-block-wash: #f6ded3;
     cursor: pointer;
   }
 
+  // En la tabla el mensaje es solo una vista previa: completo se lee en el modal.
   &__message-cell {
     max-width: 22rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__message-box {
+    background: $principal-beige;
+    border: 1px solid $panel-rule;
+    border-radius: 0.6rem;
+    padding: 1rem 1.1rem;
+    margin: 0;
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
   }
 
   &__badge {

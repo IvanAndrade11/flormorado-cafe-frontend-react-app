@@ -70,6 +70,8 @@ export interface IAdminCustomer {
   name: string;
   surname: string;
   email: string;
+  document_type: string;
+  document_number: string;
   city: string;
   whatsapp_marketing: number;
   marketing_updated_at: string;
@@ -77,6 +79,22 @@ export interface IAdminCustomer {
   updated_at: string;
   pedidos: number;
   total_comprado: number;
+}
+
+/** Un pedido del historial del cliente, con lo que respondió en la casilla de novedades. */
+export interface IAdminCustomerOrder {
+  id: string;
+  created_at: string;
+  status: string;
+  payment_method: string;
+  total: number;
+  whatsapp_opt_in: number;
+  marketing_consent_version: string | null;
+}
+
+export interface IAdminCustomerDetail {
+  cliente: IAdminCustomer;
+  historial: IAdminCustomerOrder[];
 }
 
 export type ContactMessageStatus = "nuevo" | "atendido";

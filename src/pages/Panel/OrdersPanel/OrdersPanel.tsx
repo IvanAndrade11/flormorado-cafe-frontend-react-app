@@ -1,12 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Form, Spinner, Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 
 import { AdminUnauthorizedError, fetchOrders } from "@/services/admin";
 import { IAdminOrderListItem } from "@/types/admin";
 import { orderStatusVariant, ORDER_STATUS_LABELS } from "@/utils/constants";
 
 import { PanelBadge } from "../PanelBadge/PanelBadge";
-import { cop, formatDate } from "../panelFormat";
+import {
+  EMPTY_FILTERS,
+  PanelFilters,
+  type PanelFilterValues,
+} from "../PanelFilters/PanelFilters";
+import { cop, countLabel, formatDate } from "../panelFormat";
 import { OrderDetail } from "./OrderDetail/OrderDetail";
 
 interface OrdersPanelProps {
@@ -28,16 +33,18 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
-  const [q, setQ] = useState("");
-  const [status, setStatus] = useState("");
+  const [applied, setApplied] = useState<PanelFilterValues>(EMPTY_FILTERS);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const load = useCallback(
-    async (params: { q?: string; status?: string } = {}) => {
+    async (filters: PanelFilterValues = EMPTY_FILTERS) => {
       setLoading(true);
       setLoadError(false);
       try {
-        const { pedidos, total: count } = await fetchOrders(params);
+        const { pedidos, total: count } = await fetchOrders({
+          q: filters.q || undefined,
+          status: filters.option || undefined,
+        });
         setOrders(pedidos);
         setTotal(count);
       } catch (error) {
@@ -63,44 +70,30 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
     void Promise.resolve().then(() => load());
   }, [load]);
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    load({ q: q.trim() || undefined, status: status || undefined });
+  const handleSearch = (filters: PanelFilterValues) => {
+    setApplied(filters);
+    load(filters);
   };
 
   const handleStatusChanged = () => {
-    load({ q: q.trim() || undefined, status: status || undefined });
+    load(applied);
   };
 
   return (
     <div className="fmc-panel__section">
       <p className="fmc-panel__tab-lead">
-        Los pedidos más recientes primero. Haz clic en uno para ver el detalle
-        completo y avanzarlo de estado a medida que lo preparas.
+        Los pedidos más recientes primero. Busca por número de pedido,
+        documento, celular, correo o nombre del cliente. Haz clic en uno para
+        ver el detalle completo y avanzarlo de estado a medida que lo preparas.
       </p>
 
-      <Form className="fmc-panel__filters" onSubmit={handleSearch}>
-        <Form.Control
-          type="search"
-          placeholder="Buscar por número de pedido"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-        />
-        <Form.Select value={status} onChange={(e) => setStatus(e.target.value)}>
-          {STATUS_FILTER_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </Form.Select>
-        <Button
-          type="submit"
-          className="fmc-panel__filter-button"
-          variant="outline-secondary"
-        >
-          Buscar
-        </Button>
-      </Form>
+      <PanelFilters
+        searchLabel="Buscar pedidos"
+        placeholder="Número de pedido, documento, celular, correo o nombre"
+        optionLabel="Filtrar por estado"
+        options={STATUS_FILTER_OPTIONS}
+        onSearch={handleSearch}
+      />
 
       {loading && (
         <div className="fmc-panel__loading">
@@ -123,7 +116,9 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
 
       {!loading && !loadError && orders.length > 0 && (
         <>
-          <p className="fmc-panel__count">{total} pedido(s)</p>
+          <p className="fmc-panel__count">
+            {countLabel(orders.length, total, "pedido(s)")}
+          </p>
           <div className="fmc-panel__table-wrap">
             <Table responsive hover className="fmc-panel__table">
               <thead>

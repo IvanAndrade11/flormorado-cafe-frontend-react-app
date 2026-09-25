@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Spinner, Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 
 import {
   AdminUnauthorizedError,
@@ -10,19 +10,14 @@ import { IAdminContactMessage } from "@/types/admin";
 
 import { PanelBadge } from "../PanelBadge/PanelBadge";
 import { formatDate } from "../panelFormat";
+import {
+  ContactMessageDetail,
+  SUBJECT_LABELS,
+} from "./ContactMessageDetail/ContactMessageDetail";
 
 interface ContactMessagesPanelProps {
   onUnauthorized: () => void;
 }
-
-// Mismas etiquetas que SUBJECT_OPTIONS en Contact.tsx.
-const SUBJECT_LABELS: Record<string, string> = {
-  pedido: "Estado de un pedido",
-  producto: "Preguntas sobre un producto",
-  mayoristas: "Ventas al por mayor / aliados",
-  prensa: "Prensa y medios",
-  otro: "Otro",
-};
 
 export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
   onUnauthorized,
@@ -30,7 +25,8 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
   const [messages, setMessages] = useState<IAdminContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
-  const [updatingId, setUpdatingId] = useState<number | null>(null);
+  const [updating, setUpdating] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -57,7 +53,7 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
   }, [load]);
 
   const handleToggle = async (message: IAdminContactMessage) => {
-    setUpdatingId(message.id);
+    setUpdating(true);
     try {
       await updateContactMessageStatus(
         message.id,
@@ -70,17 +66,21 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
         return;
       }
     } finally {
-      setUpdatingId(null);
+      setUpdating(false);
     }
   };
+
+  // El modal lee el mensaje de la lista, no de una copia: así, al recargar
+  // tras cambiar el estado, muestra el valor nuevo.
+  const selected = messages.find((message) => message.id === selectedId);
 
   return (
     <div className="fmc-panel__section">
       <p className="fmc-panel__tab-lead">
-        Mensajes de quienes te escriben desde la página de contacto. Se guardan
-        aquí aunque el correo al negocio falle, así que revisa también los que
-        dicen “No llegó”. Márcalos como atendidos para llevar el control de a
-        quién ya le respondiste.
+        Mensajes de quienes te escriben desde la página de contacto. Haz clic en
+        uno para leerlo completo, responderle y marcarlo como atendido. Se
+        guardan aquí aunque el correo al negocio falle, así que revisa también
+        los que dicen “No llegó”.
       </p>
 
       {loading && (
@@ -109,27 +109,20 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
               <tr>
                 <th>Fecha</th>
                 <th>Nombre</th>
-                <th>Contacto</th>
                 <th>Asunto</th>
                 <th>Mensaje</th>
                 <th>Estado</th>
-                <th />
               </tr>
             </thead>
             <tbody>
               {messages.map((message) => (
-                <tr key={message.id}>
+                <tr
+                  key={message.id}
+                  className="fmc-panel__row"
+                  onClick={() => setSelectedId(message.id)}
+                >
                   <td>{formatDate(message.created_at)}</td>
                   <td>{message.name}</td>
-                  <td>
-                    {message.email}
-                    {message.phone && (
-                      <>
-                        <br />
-                        {message.phone}
-                      </>
-                    )}
-                  </td>
                   <td>{SUBJECT_LABELS[message.subject] ?? message.subject}</td>
                   <td className="fmc-panel__message-cell">{message.message}</td>
                   <td>
@@ -139,33 +132,20 @@ export const ContactMessagesPanel: React.FC<ContactMessagesPanelProps> = ({
                       <PanelBadge variant="wait">Nuevo</PanelBadge>
                     )}
                   </td>
-                  <td>
-                    <Button
-                      size="sm"
-                      variant="outline-secondary"
-                      className="fmc-panel__status-button"
-                      disabled={updatingId === message.id}
-                      onClick={() => handleToggle(message)}
-                    >
-                      {updatingId === message.id ? (
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          aria-hidden="true"
-                        />
-                      ) : message.status === "atendido" ? (
-                        "Marcar como nuevo"
-                      ) : (
-                        "Marcar atendido"
-                      )}
-                    </Button>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </div>
+      )}
+
+      {selected && (
+        <ContactMessageDetail
+          message={selected}
+          updating={updating}
+          onToggle={() => handleToggle(selected)}
+          onClose={() => setSelectedId(null)}
+        />
       )}
     </div>
   );
