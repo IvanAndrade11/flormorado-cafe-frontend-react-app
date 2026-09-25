@@ -1,3 +1,4 @@
+import { Turnstile, type TurnstileHandle } from "@/components/common";
 import { ProductListGroup } from "@/components/ui";
 import "./Checkout.scss";
 
@@ -116,6 +117,9 @@ const UNAVAILABLE_MESSAGE =
 const INVALID_MESSAGE =
   "Algunos datos no pasaron la validación. Revisa tu información de contacto, entrega y pago, y vuelve a intentarlo.";
 
+const VERIFICATION_MESSAGE =
+  "No pudimos verificar que eres una persona. Recarga la página, revisa que ningún bloqueador de contenido esté frenando la verificación e inténtalo de nuevo. Tu carrito sigue guardado.";
+
 const staleCartMessage = (
   repriced: string[],
   removed: string[],
@@ -177,6 +181,7 @@ export const Checkout: React.FC = () => {
   // Si el envío falla, reintentar el mismo pedido reusa la llave y el backend
   // devuelve el que ya creó; pero si el cliente cambia algo, es otro pedido.
   const attempt = useRef<{ key: string; fingerprint: string } | null>(null);
+  const turnstile = useRef<TurnstileHandle>(null);
 
   const handleStepSubmit = (formValues: FormValues) => {
     setForm((prev) => {
@@ -199,7 +204,12 @@ export const Checkout: React.FC = () => {
 
     setSubmitting(true);
     setSubmitError(null);
-    const result = await submitOrder(payload);
+    // Sin la clave del widget (o con el widget bloqueado) no hay token y la
+    // petición sale sin él; decide el backend si lo exige.
+    const turnstileToken = await turnstile.current?.getToken();
+    const result = await submitOrder(payload, { turnstileToken });
+    // Un token vale una sola vez: el siguiente intento necesita uno nuevo.
+    turnstile.current?.reset();
     setSubmitting(false);
 
     switch (result.kind) {
@@ -230,6 +240,9 @@ export const Checkout: React.FC = () => {
       }
       case "invalid":
         setSubmitError(INVALID_MESSAGE);
+        return;
+      case "verification_failed":
+        setSubmitError(VERIFICATION_MESSAGE);
         return;
       default:
         setSubmitError(UNAVAILABLE_MESSAGE);
@@ -291,6 +304,7 @@ export const Checkout: React.FC = () => {
                 submitError={submitError}
               />
             </Accordion>
+            <Turnstile ref={turnstile} action="checkout" />
           </Col>
           <Col md={5} className="mb-3">
             <Alert variant="success">

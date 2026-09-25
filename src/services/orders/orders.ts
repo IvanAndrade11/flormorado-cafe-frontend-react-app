@@ -154,6 +154,12 @@ export interface SubmitOrderOptions {
   sleep?: (ms: number) => Promise<void>;
   timeoutMs?: number;
   baseUrl?: string;
+  /**
+   * Token de Turnstile. Se reenvía igual en cada reintento: el backend lo
+   * verifica con la llave de idempotencia del pedido, así que repetirlo no lo
+   * "gasta" dos veces.
+   */
+  turnstileToken?: string;
 }
 
 type Attempt = SubmitOrderResult | "retry";
@@ -163,6 +169,7 @@ const attemptOnce = async (
   fetchImpl: typeof fetch,
   baseUrl: string,
   timeoutMs: number,
+  turnstileToken?: string,
 ): Promise<Attempt> => {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -170,7 +177,10 @@ const attemptOnce = async (
   try {
     const response = await fetchImpl(`${baseUrl}/orders`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(turnstileToken ? { "X-Turnstile-Token": turnstileToken } : {}),
+      },
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
@@ -199,6 +209,8 @@ const attemptOnce = async (
 
     if (response.status === 400) return { kind: "invalid" };
 
+    if (response.status === 403) return { kind: "verification_failed" };
+
     // Solo se reintentan fallas que pueden ser pasajeras. Un 4xx no va a
     // cambiar por insistir.
     if (response.status === 429 || response.status >= 500) return "retry";
@@ -220,10 +232,17 @@ export const submitOrder = async (
     sleep = wait,
     timeoutMs = 15000,
     baseUrl = ORDERS_API_URL,
+    turnstileToken,
   }: SubmitOrderOptions = {},
 ): Promise<SubmitOrderResult> => {
   for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
-    const outcome = await attemptOnce(payload, fetchImpl, baseUrl, timeoutMs);
+    const outcome = await attemptOnce(
+      payload,
+      fetchImpl,
+      baseUrl,
+      timeoutMs,
+      turnstileToken,
+    );
     if (outcome !== "retry") return outcome;
 
     if (attempt < RETRY_DELAYS_MS.length) await sleep(RETRY_DELAYS_MS[attempt]);

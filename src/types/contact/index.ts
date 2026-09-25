@@ -12,4 +12,6 @@ export interface IContactPayload {
 export type SubmitContactResult =
   | { kind: "sent" }
   | { kind: "invalid" }
+  // Turnstile no pudo confirmar que quien envía es una persona.
+  | { kind: "verification_failed" }
   | { kind: "unavailable" };

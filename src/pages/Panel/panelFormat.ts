@@ -30,6 +30,11 @@ export const notificationInfo = (status: string): NotificationInfo => {
   return { label: status, variant: "muted" };
 };
 
+/** ¿Alguna de las notificaciones falló? Sirve para marcar la fila en la lista. */
+export const hasNotificationFailure = (
+  ...statuses: (string | undefined)[]
+): boolean => statuses.some((status) => status?.startsWith("fallo"));
+
 /** "12 pedido(s)", o "Mostrando 50 de 120" cuando la lista se recortó y hay que afinar la búsqueda. */
 export const countLabel = (shown: number, total: number, noun: string) =>
   shown < total

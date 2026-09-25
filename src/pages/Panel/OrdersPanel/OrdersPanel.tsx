@@ -11,7 +11,12 @@ import {
   PanelFilters,
   type PanelFilterValues,
 } from "../PanelFilters/PanelFilters";
-import { cop, countLabel, formatDate } from "../panelFormat";
+import {
+  cop,
+  countLabel,
+  formatDate,
+  hasNotificationFailure,
+} from "../panelFormat";
 import { OrderDetail } from "./OrderDetail/OrderDetail";
 
 interface OrdersPanelProps {
@@ -147,6 +152,17 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
                       <PanelBadge variant={orderStatusVariant(order.status)}>
                         {ORDER_STATUS_LABELS[order.status] ?? order.status}
                       </PanelBadge>
+                      {hasNotificationFailure(
+                        order.email_status,
+                        order.whatsapp_status,
+                      ) && (
+                        <>
+                          {" "}
+                          <PanelBadge variant="block">
+                            Notificación fallida
+                          </PanelBadge>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
