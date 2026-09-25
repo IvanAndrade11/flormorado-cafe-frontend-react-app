@@ -70,7 +70,7 @@ src/
 ├── app/              → Configuración de la aplicación (router, providers, Redux store)
 ├── assets/           → Recursos estáticos (imágenes, íconos, fuentes, videos)
 ├── components/       → Componentes reutilizables organizados por capa
-│   ├── common/       → Componentes genéricos (Loader, ScrollToTop, Toast)
+│   ├── common/       → Componentes genéricos (Loader, ScrollToTop, Toast, Turnstile)
 │   ├── layout/       → Estructura de página (Navbar, NavbarStore, Footer)
 │   ├── section/      → Secciones de contenido (Banner, Carruseles)
 │   └── ui/           → Componentes de interfaz (Cards, Product, ShoppingCart, etc.)
@@ -146,8 +146,11 @@ Las variables de entorno se gestionan a través de [`dotenv-webpack`](https://ww
 | `NODE_ENV`       | Entorno de ejecución                                   | `.env.*`  |
 | `SDK_CNFCT`      | SDK Key de ConfigCat (feature flags)                   | `.env.*`  |
 | `ORDERS_API_URL` | URL del [backend de pedidos](https://github.com/IvanAndrade11/flormorado-cafe-backend-orders), usado tanto por el checkout como por el formulario de contacto | `.env.*`  |
+| `TURNSTILE_SITE_KEY` | Clave **pública** del widget de [Turnstile](https://developers.cloudflare.com/turnstile/) (captcha de Cloudflare) del checkout y el formulario de contacto | `.env.*`  |
 
 `ORDERS_API_URL` es opcional: si falta, el checkout y el formulario de contacto usan la URL de producción. En `.env.development` conviene apuntarla a `http://localhost:8787` para probar contra el backend corriendo en local con `wrangler dev`.
+
+`TURNSTILE_SITE_KEY` también es opcional: sin ella el captcha no se muestra y las peticiones salen sin token, que es lo que espera un backend que todavía no exige la verificación. Para probar en local sirve la clave `1x00000000000000000000BB` (siempre pasa) junto con `TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA` en el `.dev.vars` del backend. `.env.example` lista todas las variables.
 
 **Archivos de entorno:**
 
@@ -227,7 +230,7 @@ flormorado-cafe-frontend-react-app/
 │   │   └── videos/             # Videos para banners y secciones
 │   │
 │   ├── components/
-│   │   ├── common/             # Loader, ScrollToTop, Toast
+│   │   ├── common/             # Loader, ScrollToTop, Toast, Turnstile
 │   │   ├── layout/             # Navbar, NavbarStore, Footer
 │   │   ├── section/            # Banner, CategoryCarousel, InfiniteCarousel, ProductCarousel
 │   │   └── ui/                 # CarouselMessage, CategoryCard, Product, ShoppingCart,
