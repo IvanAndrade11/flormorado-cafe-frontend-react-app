@@ -33,7 +33,7 @@
 - **Carrito de compras** con agrupación inteligente de productos por tipo de molienda y persistencia en `localStorage`.
 - **Checkout** en 3 pasos (contacto, entrega y pago) con guardado opcional de datos para compras futuras. Al confirmar, envía el pedido al backend de pedidos y muestra una pantalla de confirmación con el número de pedido.
 - **Contacto** con formulario de un solo paso (nombre, teléfono opcional, correo, asunto y mensaje) que envía el mensaje al backend, el cual lo guarda y lo reenvía por correo al negocio.
-- **Panel de control** (`/panel`, `FMC-0020`) protegido por clave: pedidos con cambio de estado, clientes con baja de novedades por WhatsApp y mensajes de contacto con seguimiento. Consume la API del backend de pedidos.
+- **Panel de control** (`/panel`, `FMC-0020`) protegido por clave: pedidos con búsqueda (número, documento, celular, correo o nombre) y cambio de estado, clientes con búsqueda, filtro por novedades, historial y baja de novedades por WhatsApp, y mensajes de contacto con seguimiento. Cada fila abre su detalle en un modal. Consume la API del backend de pedidos.
 - **Feature flags** con ConfigCat para habilitar o deshabilitar funcionalidades de forma remota.
 - **Diseño responsive** optimizado para desktop y dispositivos móviles.
 
