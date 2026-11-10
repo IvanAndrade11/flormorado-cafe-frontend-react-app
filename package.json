@@ -22,7 +22,7 @@
   "dependencies": {
     "@fontsource/source-sans-3": "^5.3.1",
     "@popperjs/core": "^2.11.8",
-    "@reduxjs/toolkit": "^2.13.0",
+    "@reduxjs/toolkit": "^2.14.0",
     "bootstrap": "^5.3.8",
     "configcat-react": "^5.1.0",
     "dompurify": "^3.4.17",
