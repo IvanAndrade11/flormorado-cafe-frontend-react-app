@@ -204,6 +204,13 @@ $panel-block-wash: #f6ded3;
     cursor: pointer;
   }
 
+  // Una ficha suprimida no tiene nombre que mostrar: en su lugar va una nota,
+  // que no debe leerse como si fuera el dato.
+  &__muted {
+    color: $panel-muted;
+    font-style: italic;
+  }
+
   // En la tabla el mensaje es solo una vista previa: completo se lee en el modal.
   &__message-cell {
     max-width: 22rem;

@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { DATA_POLICY } from "@/utils/constants/common/legal";
 import { Contact } from "./Contact";
 
 const response = (status: number, body: unknown = {}) =>
@@ -50,6 +51,7 @@ describe("Contact", () => {
       email: "maria@example.com",
       subject: "producto",
       message: "¿Este café es apto para prensa francesa?",
+      privacyPolicyVersion: DATA_POLICY.version,
     });
   });
 

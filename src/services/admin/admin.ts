@@ -140,6 +140,14 @@ export const fetchCustomerDetail = (id: number) =>
 export const optOutCustomer = (id: number) =>
   request<{ ok: true }>(`/admin/customers/${id}/opt-out`, { method: "PATCH" });
 
+// No es un borrado: anonimiza la ficha y borra los mensajes de contacto, pero
+// los pedidos se conservan por el deber contable. De ahí el verbo PATCH.
+export const suppressCustomer = (id: number) =>
+  request<{ ok: true; yaEstaba: boolean; mensajesBorrados: number }>(
+    `/admin/customers/${id}/suppress`,
+    { method: "PATCH" },
+  );
+
 export const fetchContactMessages = () =>
   request<{ mensajes: IAdminContactMessage[] }>("/admin/contact-messages");
 

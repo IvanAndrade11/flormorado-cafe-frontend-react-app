@@ -78,6 +78,8 @@ export interface IAdminCustomer {
   marketing_updated_at: string;
   created_at: string;
   updated_at: string;
+  /** Fecha en que se atendió una solicitud de supresión. null = ficha vigente. */
+  suppressed_at: string | null;
   pedidos: number;
   total_comprado: number;
 }
@@ -91,6 +93,7 @@ export interface IAdminCustomerOrder {
   total: number;
   whatsapp_opt_in: number;
   marketing_consent_version: string | null;
+  privacy_policy_version: string | null;
 }
 
 export interface IAdminCustomerDetail {
