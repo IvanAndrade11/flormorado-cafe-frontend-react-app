@@ -272,9 +272,11 @@
     margin: 0;
     text-align: center;
 
+    // El QR del banco tiene 83 módulos de lado: por debajo de ~180px cada
+    // módulo queda en menos de 2px y la cámara del cliente deja de leerlo.
     img {
-      width: 150px;
-      height: 150px;
+      width: 180px;
+      height: 180px;
       padding: 6px;
       background: #fff;
       border: 1px solid $principal-beige-oscuro;
@@ -282,7 +284,7 @@
     }
 
     figcaption {
-      max-width: 150px;
+      max-width: 180px;
       margin-top: 0.35rem;
       font-size: 0.78rem;
       color: #8a7566;
@@ -290,8 +292,8 @@
 
     @media screen and (max-width: 576px) {
       img {
-        width: 120px;
-        height: 120px;
+        width: 150px;
+        height: 150px;
       }
 
       figcaption {
