@@ -1,6 +1,5 @@
 import { ICoffeeProduct } from "@/types/configCat";
 import { IOrderPayload } from "@/types/orders";
-import { WHATSAPP_MARKETING_CONSENT } from "@/utils/constants/common/forms";
 import {
   buildConfirmation,
   buildOrderPayload,
@@ -40,7 +39,6 @@ const form = {
   email: "maria@example.com",
   phone: "3001234567",
   saveInfo: false,
-  whtsppOptIn: true,
   city: "chia",
   neighborhood: "Centro",
   address: "Calle 12 # 4-56",
@@ -48,7 +46,6 @@ const form = {
   documentType: "CC",
   documentNumber: "1012345678",
   paymentMethod: "cash_on_delivery",
-  notifyByWhatsApp: false,
 };
 
 const UUID_V4 =
@@ -65,8 +62,6 @@ describe("buildOrderPayload", () => {
         surname: "Restrepo",
         email: "maria@example.com",
         phone: "3001234567",
-        whatsappOptIn: true,
-        marketingConsentVersion: WHATSAPP_MARKETING_CONSENT.version,
       },
       delivery: {
         city: "chia",
@@ -77,7 +72,6 @@ describe("buildOrderPayload", () => {
         method: "cash_on_delivery",
         documentType: "CC",
         documentNumber: "1012345678",
-        notifyByWhatsApp: false,
       },
       items: [
         {

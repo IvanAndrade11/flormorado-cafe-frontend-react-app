@@ -11,8 +11,9 @@ export const EMPTY_FILTERS: PanelFilterValues = { q: "", option: "" };
 interface PanelFiltersProps {
   searchLabel: string;
   placeholder: string;
-  optionLabel: string;
-  options: { value: string; label: string }[];
+  // Sin opciones no se dibuja el selector (Clientes solo busca por texto).
+  optionLabel?: string;
+  options?: { value: string; label: string }[];
   onSearch: (values: PanelFilterValues) => void;
 }
 
@@ -50,17 +51,19 @@ export const PanelFilters: React.FC<PanelFiltersProps> = ({
         value={q}
         onChange={(e) => setQ(e.target.value)}
       />
-      <Form.Select
-        aria-label={optionLabel}
-        value={option}
-        onChange={(e) => setOption(e.target.value)}
-      >
-        {options.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
-      </Form.Select>
+      {options && (
+        <Form.Select
+          aria-label={optionLabel}
+          value={option}
+          onChange={(e) => setOption(e.target.value)}
+        >
+          {options.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </Form.Select>
+      )}
       <Button
         type="submit"
         className="fmc-panel__filter-button"

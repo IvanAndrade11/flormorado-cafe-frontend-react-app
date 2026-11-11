@@ -13,7 +13,6 @@ export interface IAdminOrderListItem {
   // Opcionales: el backend en producción puede ser anterior a FMC-0021 y no
   // mandarlos todavía.
   email_status?: string;
-  whatsapp_status?: string;
 }
 
 export interface IAdminOrderItem {
@@ -44,8 +43,6 @@ export interface IAdminOrder {
   customer_surname: string;
   email: string;
   phone: string;
-  whatsapp_opt_in: number;
-  notify_whatsapp: number;
   city: string;
   neighborhood: string;
   address: string;
@@ -58,7 +55,6 @@ export interface IAdminOrder {
   shipping: number;
   total: number;
   email_status: string;
-  whatsapp_status: string;
   prices_verified: number;
 }
 
@@ -77,23 +73,19 @@ export interface IAdminCustomer {
   document_type: string;
   document_number: string;
   city: string;
-  whatsapp_marketing: number;
-  marketing_updated_at: string;
   created_at: string;
   updated_at: string;
   pedidos: number;
   total_comprado: number;
 }
 
-/** Un pedido del historial del cliente, con lo que respondió en la casilla de novedades. */
+/** Un pedido del historial del cliente. */
 export interface IAdminCustomerOrder {
   id: string;
   created_at: string;
   status: string;
   payment_method: string;
   total: number;
-  whatsapp_opt_in: number;
-  marketing_consent_version: string | null;
 }
 
 export interface IAdminCustomerDetail {
