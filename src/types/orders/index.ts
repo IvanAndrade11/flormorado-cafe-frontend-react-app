@@ -17,9 +17,9 @@ interface IPaymentIdentity {
   documentNumber: string;
 }
 
-export type IOrderPaymentPayload =
-  | ({ method: "cash_on_delivery" } & IPaymentIdentity)
-  | ({ method: "bre_b"; breKey: string } & IPaymentIdentity);
+export type IOrderPaymentPayload = {
+  method: "cash_on_delivery" | "bre_b";
+} & IPaymentIdentity;
 
 export interface IOrderPayload {
   idempotencyKey: string;
@@ -73,7 +73,6 @@ export interface IOrderConfirmation {
   orderId: string;
   email: string;
   paymentMethod: PaymentMethod;
-  breKey?: string;
   breB?: IBreBInstructions;
   items: {
     key: string;

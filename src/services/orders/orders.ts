@@ -86,13 +86,11 @@ export const buildOrderPayload = (
       address: text(form, "address"),
       ...(additionalInfo ? { additionalInfo } : {}),
     },
-    // La llave BRE-B solo viaja si ese es el método: el estado del checkout
-    // puede conservarla de un intento anterior en el que el cliente la escribió
-    // y luego cambió a contraentrega.
-    payment:
-      text(form, "paymentMethod") === "bre_b"
-        ? { method: "bre_b", breKey: text(form, "breKey"), ...identity }
-        : { method: "cash_on_delivery", ...identity },
+    payment: {
+      method:
+        text(form, "paymentMethod") === "bre_b" ? "bre_b" : "cash_on_delivery",
+      ...identity,
+    },
     items: cart.map((item) => ({
       productId: getCatalogProductId(item),
       quantity: item.quantity || 1,
@@ -120,7 +118,6 @@ export const buildConfirmation = (
     orderId,
     email: payload.contact.email,
     paymentMethod: payment.method,
-    ...(payment.method === "bre_b" ? { breKey: payment.breKey } : {}),
     ...(breB ? { breB } : {}),
     items: cart.map((item) => ({
       key: item.id,
