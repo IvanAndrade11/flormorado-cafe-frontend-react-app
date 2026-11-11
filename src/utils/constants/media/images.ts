@@ -7,9 +7,12 @@ import Banner from "@/assets/images/banners/banner-hero.jpg";
 
 import Background1 from "@/assets/images/backgrounds/background1.jpg";
 
-// PENDIENTE: marcador de prueba. Reemplazar por el QR oficial del banco para la
-// llave BRE-B antes de mezclar FMC-0017 (si es PNG, cambiar la extensión aquí).
-import BreBQr from "@/assets/images/payments/breb-qr.svg";
+// QR BRE-B oficial de la llave de la empresa. Es estático y sin monto, así que
+// el cliente digita el valor en su banco. Se regeneró a partir del contenido
+// exacto del QR que entregó el banco, para que quede derecho y nítido: si
+// alguna vez cambia la llave, hay que pedirle el QR nuevo al banco, no editar
+// este archivo.
+import BreBQr from "@/assets/images/payments/breb-qr.png";
 
 import GirlCollecting from "@/assets/images/illustrations/girl_collecting.svg";
 import GirlStanding from "@/assets/images/illustrations/girl_standing.svg";
