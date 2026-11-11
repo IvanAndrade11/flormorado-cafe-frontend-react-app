@@ -303,7 +303,7 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
                       <th>Total</th>
                       <th>Estado</th>
                       <th>Casilla de novedades</th>
-                      <th>Política aceptada</th>
+                      <th>Aceptó</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -325,8 +325,15 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
                             : "Sin marcar"}
                         </td>
                         <td>
-                          {order.privacy_policy_version
-                            ? `Versión ${order.privacy_policy_version}`
+                          {order.privacy_policy_version || order.terms_version
+                            ? [
+                                order.privacy_policy_version &&
+                                  `Política ${order.privacy_policy_version}`,
+                                order.terms_version &&
+                                  `Términos ${order.terms_version}`,
+                              ]
+                                .filter(Boolean)
+                                .join(" · ")
                             : "Sin registro"}
                         </td>
                       </tr>

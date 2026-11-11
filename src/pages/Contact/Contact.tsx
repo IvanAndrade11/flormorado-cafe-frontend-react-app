@@ -50,6 +50,16 @@ const INVALID_MESSAGE =
 const VERIFICATION_MESSAGE =
   "No pudimos verificar que eres una persona. Recarga la página, revisa que ningún bloqueador de contenido esté frenando la verificación e inténtalo de nuevo.";
 
+/** Fecha y hora de radicación, como la pide el literal g del artículo 50. */
+const formatTicketDate = (iso: string): string =>
+  new Date(iso).toLocaleString("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
 export const Contact: React.FC = () => {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
@@ -249,6 +259,14 @@ export const Contact: React.FC = () => {
               <Alert variant="success" className="mb-4" role="alert">
                 ¡Gracias por escribirnos! Recibimos tu mensaje y te
                 responderemos pronto a tu correo.
+                {result.ticket && (
+                  <>
+                    {" "}
+                    Tu radicado es <strong>{result.ticket}</strong>
+                    {result.at ? ` (${formatTicketDate(result.at)})` : ""}.
+                    Menciónalo si necesitas hacerle seguimiento.
+                  </>
+                )}
               </Alert>
             )}
             {result?.kind === "invalid" && (

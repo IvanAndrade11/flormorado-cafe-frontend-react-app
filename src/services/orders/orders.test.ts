@@ -1,7 +1,7 @@
 import { ICoffeeProduct } from "@/types/configCat";
 import { IOrderPayload } from "@/types/orders";
 import { WHATSAPP_MARKETING_CONSENT } from "@/utils/constants/common/forms";
-import { DATA_POLICY } from "@/utils/constants/common/legal";
+import { DATA_POLICY, TERMS } from "@/utils/constants/common/legal";
 import {
   buildConfirmation,
   buildOrderPayload,
@@ -68,6 +68,7 @@ describe("buildOrderPayload", () => {
         whatsappOptIn: true,
         marketingConsentVersion: WHATSAPP_MARKETING_CONSENT.version,
         privacyPolicyVersion: DATA_POLICY.version,
+        termsVersion: TERMS.version,
       },
       delivery: {
         city: "chia",

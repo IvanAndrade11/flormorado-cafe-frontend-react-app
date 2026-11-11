@@ -9,7 +9,7 @@ import {
   BOGOTA_NEARBY_CITIES,
   WHATSAPP_MARKETING_CONSENT,
 } from "@/utils/constants/common/forms";
-import { DATA_POLICY } from "@/utils/constants/common/legal";
+import { DATA_POLICY, TERMS } from "@/utils/constants/common/legal";
 import {
   computeCartTotals,
   getCatalogProductId,
@@ -81,6 +81,7 @@ export const buildOrderPayload = (
       // el cliente al responder, que es la prueba de su decisión.
       marketingConsentVersion: WHATSAPP_MARKETING_CONSENT.version,
       privacyPolicyVersion: DATA_POLICY.version,
+      termsVersion: TERMS.version,
     },
     delivery: {
       city: text(form, "city"),
