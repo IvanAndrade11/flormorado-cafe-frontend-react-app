@@ -30,6 +30,10 @@ export interface IOrderPayload {
     phone: string;
     whatsappOptIn: boolean;
     marketingConsentVersion: string;
+    // Versión de la política de tratamiento de datos vigente al hacer el
+    // pedido. La aceptación es implícita, así que esto es la prueba de qué se
+    // le informó al cliente.
+    privacyPolicyVersion: string;
   };
   delivery: {
     city: string;

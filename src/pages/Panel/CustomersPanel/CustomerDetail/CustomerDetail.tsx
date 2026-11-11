@@ -214,6 +214,7 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
                       <th>Total</th>
                       <th>Estado</th>
                       <th>Casilla de novedades</th>
+                      <th>Política aceptada</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -233,6 +234,11 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
                           {order.whatsapp_opt_in
                             ? `Marcada${order.marketing_consent_version ? ` · texto ${order.marketing_consent_version}` : ""}`
                             : "Sin marcar"}
+                        </td>
+                        <td>
+                          {order.privacy_policy_version
+                            ? `Versión ${order.privacy_policy_version}`
+                            : "Sin registro"}
                         </td>
                       </tr>
                     ))}

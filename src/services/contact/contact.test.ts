@@ -6,6 +6,7 @@ const payload: IContactPayload = {
   email: "maria@example.com",
   subject: "producto",
   message: "¿Este café es apto para prensa francesa?",
+  privacyPolicyVersion: "1.0",
 };
 
 const json = (status: number, body: unknown = {}) =>

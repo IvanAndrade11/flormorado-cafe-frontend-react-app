@@ -13,7 +13,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { icons, URLS } from "@/utils/constants";
+import { DATA_POLICY, icons, URLS } from "@/utils/constants";
 import { IContactPayload, SubmitContactResult } from "@/types/contact";
 import { submitContact } from "@/services/contact";
 
@@ -75,6 +75,7 @@ export const Contact: React.FC = () => {
       email: form.email.trim(),
       subject: form.subject,
       message: form.message.trim(),
+      privacyPolicyVersion: DATA_POLICY.version,
       ...(phone ? { phone } : {}),
     };
 

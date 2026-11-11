@@ -91,6 +91,7 @@ export interface IAdminCustomerOrder {
   total: number;
   whatsapp_opt_in: number;
   marketing_consent_version: string | null;
+  privacy_policy_version: string | null;
 }
 
 export interface IAdminCustomerDetail {
