@@ -310,7 +310,7 @@ flormorado-cafe-frontend-react-app/
 | `/blog`                 | Blog              | Lista de artículos del blog                  |
 | `/blog/:slug`           | BlogPost          | Artículo individual del blog                 |
 | `/checkout`             | Checkout          | Flujo de compra: contacto, entrega y pago    |
-| `/terminos-y-condiciones` | Terms           | Términos y condiciones (contenido de ejemplo) |
+| `/terminos-y-condiciones` | Terms           | Términos y condiciones de venta (Ley 1480 de 2011) |
 | `/politica-de-datos` | Privacy         | Política de tratamiento de datos personales (Ley 1581 de 2012) |
 | `/panel`                | Panel             | Panel de control (pedidos, clientes, mensajes de contacto), protegido por clave |
 
