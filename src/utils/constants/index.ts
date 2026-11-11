@@ -9,3 +9,4 @@ export * from "./store/data";
 export * from "./store/filter";
 export * from "./store/order";
 export * from "./store/cart";
+export * from "./common/legal";

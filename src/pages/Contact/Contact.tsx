@@ -236,7 +236,12 @@ export const Contact: React.FC = () => {
               <Link to={URLS.terms} target="_blank" rel="noopener noreferrer">
                 términos y condiciones
               </Link>{" "}
-              y autorizas el tratamiento de tus datos para darte respuesta.
+              y autorizas el tratamiento de tus datos para darte respuesta,
+              conforme a nuestra{" "}
+              <Link to={URLS.privacy} target="_blank" rel="noopener noreferrer">
+                política de tratamiento de datos personales
+              </Link>
+              .
             </p>
 
             {result?.kind === "sent" && (

@@ -20,4 +20,6 @@ export * from "./Checkout/Checkout";
 
 export * from "./Terms/Terms";
 
+export * from "./Privacy/Privacy";
+
 export * from "./Panel/Panel";
