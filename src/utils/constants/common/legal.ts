@@ -3,9 +3,9 @@
 // Decreto 1074 de 2015) exige publicar estos datos, así que viven en una sola
 // constante y no repartidos por la página.
 //
-// `isDataControllerComplete()` existe para que un dato a medias no se publique
-// como definitivo: mientras algún valor contenga "PENDIENTE", la página muestra
-// sola un aviso de borrador.
+// Son datos legalmente exigibles: aquí no va un valor de relleno ni un
+// "pendiente de confirmar". Si alguno cambia (otra razón social, otro
+// domicilio), se actualiza junto con `DATA_POLICY` de abajo.
 
 export const DATA_CONTROLLER = {
   brand: "Flormorado Café",
@@ -29,7 +29,3 @@ export const DATA_POLICY = {
   version: "1.0",
   effectiveDate: "11 de noviembre de 2026",
 } as const;
-
-/** Un dato sin confirmar no puede publicarse como si fuera definitivo. */
-export const isDataControllerComplete = (): boolean =>
-  !Object.values(DATA_CONTROLLER).some((value) => value.includes("PENDIENTE"));

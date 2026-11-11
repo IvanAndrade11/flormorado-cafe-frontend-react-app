@@ -1,24 +1,15 @@
 import { Title } from "@/components/ui";
 import { DATA_CONTROLLER, DATA_POLICY, URLS } from "@/utils/constants";
-import { isDataControllerComplete } from "@/utils/constants";
 import "./Privacy.scss";
 
 import React from "react";
-import { Alert, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const Privacy: React.FC = () => {
   return (
     <div className="container py-4 fmc-legal">
       <Title title="POLÍTICA DE TRATAMIENTO DE DATOS PERSONALES" />
-
-      {!isDataControllerComplete() && (
-        <Alert variant="warning" className="my-4">
-          Borrador: faltan por confirmar los datos de identificación del
-          responsable (razón social, NIT, domicilio y dirección). El resto del
-          texto ya es definitivo.
-        </Alert>
-      )}
 
       <p className="fmc-legal__intro">
         Esta política explica qué datos personales recogemos en{" "}
