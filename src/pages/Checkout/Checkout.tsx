@@ -315,6 +315,14 @@ export const Checkout: React.FC = () => {
                 Al realizar el pago, aceptas nuestros{" "}
                 <Link to={URLS.terms} target="_blank" rel="noopener noreferrer">
                   términos y condiciones
+                </Link>{" "}
+                y el tratamiento de tus datos conforme a la{" "}
+                <Link
+                  to={URLS.privacy}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  política de tratamiento de datos personales
                 </Link>
                 .
               </p>

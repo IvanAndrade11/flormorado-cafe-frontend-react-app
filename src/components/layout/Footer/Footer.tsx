@@ -1,8 +1,9 @@
 import "./Footer.scss";
 import React from "react";
 
-import { images, icons } from "@/utils/constants";
+import { images, icons, URLS } from "@/utils/constants";
 import { Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
   return (
@@ -24,6 +25,18 @@ export const Footer: React.FC = () => {
                 <img src={icons.Phone} alt="Teléfono Flormorado Café" />
                 +57 313 231 60 80
               </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="footer-block-info">
+          <p style={{ fontWeight: "bold" }}>Legal</p>
+          <ul>
+            <li>
+              <Link to={URLS.privacy}>Política de tratamiento de datos</Link>
+            </li>
+            <li>
+              <Link to={URLS.terms}>Términos y condiciones</Link>
             </li>
           </ul>
         </div>
