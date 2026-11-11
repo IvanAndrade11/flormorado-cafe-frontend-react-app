@@ -48,7 +48,6 @@ const form = {
   documentType: "CC",
   documentNumber: "1012345678",
   paymentMethod: "cash_on_delivery",
-  notifyByWhatsApp: false,
 };
 
 const UUID_V4 =
@@ -77,7 +76,6 @@ describe("buildOrderPayload", () => {
         method: "cash_on_delivery",
         documentType: "CC",
         documentNumber: "1012345678",
-        notifyByWhatsApp: false,
       },
       items: [
         {

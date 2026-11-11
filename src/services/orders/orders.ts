@@ -64,7 +64,6 @@ export const buildOrderPayload = (
   const identity = {
     documentType: text(form, "documentType"),
     documentNumber: text(form, "documentNumber"),
-    notifyByWhatsApp: checked(form, "notifyByWhatsApp"),
   };
 
   const additionalInfo = text(form, "additionalInfo");

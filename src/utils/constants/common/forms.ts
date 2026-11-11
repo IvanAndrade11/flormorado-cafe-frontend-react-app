@@ -288,21 +288,4 @@ export const PAYMENT_FORM_FIELDS = [
       },
     ],
   },
-  {
-    rowId: 6,
-    cols: [
-      {
-        colId: 1,
-        md: 12,
-        name: "notifyByWhatsApp",
-        label: "Envíame la confirmación también por WhatsApp",
-        type: "checkbox",
-        required: false,
-        pattern: undefined,
-        minLength: 0,
-        maxLength: 0,
-        feedback: "",
-      },
-    ],
-  },
 ];

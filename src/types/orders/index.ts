@@ -15,7 +15,6 @@ export interface IOrderItemPayload {
 interface IPaymentIdentity {
   documentType: string;
   documentNumber: string;
-  notifyByWhatsApp: boolean;
 }
 
 export type IOrderPaymentPayload =

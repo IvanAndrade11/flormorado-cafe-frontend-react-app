@@ -13,7 +13,6 @@ export interface IAdminOrderListItem {
   // Opcionales: el backend en producción puede ser anterior a FMC-0021 y no
   // mandarlos todavía.
   email_status?: string;
-  whatsapp_status?: string;
 }
 
 export interface IAdminOrderItem {
@@ -45,7 +44,6 @@ export interface IAdminOrder {
   email: string;
   phone: string;
   whatsapp_opt_in: number;
-  notify_whatsapp: number;
   city: string;
   neighborhood: string;
   address: string;
@@ -58,7 +56,6 @@ export interface IAdminOrder {
   shipping: number;
   total: number;
   email_status: string;
-  whatsapp_status: string;
   prices_verified: number;
 }
 

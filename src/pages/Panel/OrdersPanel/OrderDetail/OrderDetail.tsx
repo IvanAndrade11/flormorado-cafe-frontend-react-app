@@ -89,9 +89,6 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({
     : null;
 
   const emailInfo = detail ? notificationInfo(detail.order.email_status) : null;
-  const whatsappInfo = detail
-    ? notificationInfo(detail.order.whatsapp_status)
-    : null;
 
   return (
     <Modal show onHide={onClose} size="lg" centered scrollable>
@@ -175,14 +172,6 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({
                       {emailInfo && (
                         <PanelBadge variant={emailInfo.variant}>
                           {emailInfo.label}
-                        </PanelBadge>
-                      )}
-                    </div>
-                    <div className="fmc-panel__status-row mt-2">
-                      WhatsApp:{" "}
-                      {whatsappInfo && (
-                        <PanelBadge variant={whatsappInfo.variant}>
-                          {whatsappInfo.label}
                         </PanelBadge>
                       )}
                     </div>

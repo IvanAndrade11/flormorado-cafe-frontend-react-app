@@ -17,7 +17,7 @@ export interface NotificationInfo {
 }
 
 /**
- * `email_status`/`whatsapp_status` del backend traen texto interno para
+ * `email_status` del backend trae texto interno para
  * depurar ("fallo: internal error; reference = ..."), no para mostrárselo al
  * negocio. Esto lo traduce a algo legible.
  */
