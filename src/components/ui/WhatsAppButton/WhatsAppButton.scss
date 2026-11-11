@@ -1,34 +1,32 @@
 @use "@/styles/globals.scss" as *;
 
+// Ancla del par de botones flotantes: está en todas las páginas, mientras que
+// el carrito aparece y desaparece. Si el que se mueve fuera este, el botón
+// saltaría de sitio cada vez que el cliente vacía el carrito.
 .sticky-button {
-  font-size: 14px;
   position: relative;
-  padding: 10px 20px;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  height: 90px;
-  font-family: $font-flormorado;
   cursor: pointer;
-  font-weight: 500;
 
   &.sticky {
     display: block !important;
     position: fixed;
-    border-radius: 56px;
-    top: 50vh;
-    right: 20px;
+    // Anclado a la esquina, no a un porcentaje de la altura. Con `top: 50vh`
+    // (80vh en móvil) quedaba flotando en mitad de la pantalla y tapaba lo que
+    // hubiera justo ahí: el "+" de cantidad en la página de producto y los
+    // enlaces del pie.
+    bottom: var(--fab-offset);
+    right: var(--fab-offset);
+    width: var(--fab-size);
+    height: var(--fab-size);
+    object-fit: contain;
+    border-radius: 50%;
     z-index: 10000;
     opacity: 1;
-    transform: translateY(-50%);
+    transition: transform 0.25s ease;
 
-    @media (max-width: 991px) {
-      top: 80vh;
-    }
-
+    // Crecer de alto movía el botón y descuadraba el par; escalar no.
     &:hover {
-      height: 100px;
-      transition: height 0.5s;
+      transform: scale(1.08);
     }
   }
 }
