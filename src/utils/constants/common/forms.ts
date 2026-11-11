@@ -1,3 +1,11 @@
+// Este texto es lo que el cliente autoriza al marcar la casilla (Ley 1581 de
+// 2012), y cada pedido guarda la versión que vio como prueba. Si cambia el
+// texto, tiene que cambiar la versión.
+export const WHATSAPP_MARKETING_CONSENT = {
+  version: "2026-09-16",
+  label: "Enviarme novedades y ofertas por WhatsApp",
+};
+
 export const CONTACT_FORM_FIELDS = [
   {
     rowId: 1,
@@ -65,6 +73,23 @@ export const CONTACT_FORM_FIELDS = [
         md: 12,
         name: "saveInfo",
         label: "Guardar mi información para una próxima compra",
+        type: "checkbox",
+        required: false,
+        pattern: undefined,
+        minLength: 0,
+        maxLength: 0,
+        feedback: "",
+      },
+    ],
+  },
+  {
+    rowId: 4,
+    cols: [
+      {
+        colId: 1,
+        md: 12,
+        name: "whtsppOptIn",
+        label: WHATSAPP_MARKETING_CONSENT.label,
         type: "checkbox",
         required: false,
         pattern: undefined,

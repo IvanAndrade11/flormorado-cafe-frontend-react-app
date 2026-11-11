@@ -28,6 +28,8 @@ export interface IOrderPayload {
     surname: string;
     email: string;
     phone: string;
+    whatsappOptIn: boolean;
+    marketingConsentVersion: string;
   };
   delivery: {
     city: string;

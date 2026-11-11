@@ -4,6 +4,7 @@ import { Spinner, Table } from "react-bootstrap";
 import { AdminUnauthorizedError, fetchCustomers } from "@/services/admin";
 import { IAdminCustomer } from "@/types/admin";
 
+import { PanelBadge } from "../PanelBadge/PanelBadge";
 import {
   EMPTY_FILTERS,
   PanelFilters,
@@ -11,6 +12,12 @@ import {
 } from "../PanelFilters/PanelFilters";
 import { cop, countLabel } from "../panelFormat";
 import { CustomerDetail } from "./CustomerDetail/CustomerDetail";
+
+const MARKETING_FILTER_OPTIONS = [
+  { value: "", label: "Todas las novedades" },
+  { value: "1", label: "Autorizadas" },
+  { value: "0", label: "De baja" },
+];
 
 interface CustomersPanelProps {
   onUnauthorized: () => void;
@@ -33,6 +40,7 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
       try {
         const { clientes, total: count } = await fetchCustomers({
           q: filters.q || undefined,
+          marketing: filters.option || undefined,
         });
         setCustomers(clientes);
         setTotal(count);
@@ -65,13 +73,17 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
     <div className="fmc-panel__section">
       <p className="fmc-panel__tab-lead">
         Cada cliente queda identificado por su celular, con los datos de su
-        último pedido. Busca por nombre, celular, correo o documento y haz clic
-        en un cliente para ver su historial de pedidos.
+        último pedido. Busca por nombre, celular, correo o documento, o filtra
+        por quién autorizó novedades. Haz clic en un cliente para ver su
+        historial y, si te pide dejar de recibir novedades, darlo de baja — la
+        Ley 1581 exige que puedan revocar la autorización cuando quieran.
       </p>
 
       <PanelFilters
         searchLabel="Buscar clientes"
         placeholder="Nombre, celular, correo o documento"
+        optionLabel="Filtrar por novedades"
+        options={MARKETING_FILTER_OPTIONS}
         onSearch={handleSearch}
       />
 
@@ -90,7 +102,7 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
 
       {!loading && !loadError && customers.length === 0 && (
         <div className="fmc-panel__empty" role="status">
-          {applied.q
+          {applied.q || applied.option
             ? "No hay clientes con ese filtro."
             : "Todavía no hay clientes registrados."}
         </div>
@@ -109,6 +121,7 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
                   <th>Celular</th>
                   <th>Pedidos</th>
                   <th>Total comprado</th>
+                  <th>Novedades por WhatsApp</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,6 +137,13 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
                     <td>{customer.phone}</td>
                     <td>{customer.pedidos}</td>
                     <td>{cop(customer.total_comprado)}</td>
+                    <td>
+                      {customer.whatsapp_marketing ? (
+                        <PanelBadge variant="done">Autorizadas</PanelBadge>
+                      ) : (
+                        <PanelBadge variant="muted">De baja</PanelBadge>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -136,6 +156,7 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
         <CustomerDetail
           customerId={selectedId}
           onClose={() => setSelectedId(null)}
+          onOptedOut={() => load(applied)}
           onUnauthorized={onUnauthorized}
         />
       )}

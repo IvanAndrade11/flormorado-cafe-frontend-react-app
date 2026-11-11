@@ -5,7 +5,10 @@ import {
   OrderFailure,
   SubmitOrderResult,
 } from "@/types/orders";
-import { BOGOTA_NEARBY_CITIES } from "@/utils/constants/common/forms";
+import {
+  BOGOTA_NEARBY_CITIES,
+  WHATSAPP_MARKETING_CONSENT,
+} from "@/utils/constants/common/forms";
 import {
   computeCartTotals,
   getCatalogProductId,
@@ -28,6 +31,8 @@ const text = (form: FormValues, key: string) => {
   const value = form[key];
   return typeof value === "string" ? value.trim() : "";
 };
+
+const checked = (form: FormValues, key: string) => form[key] === true;
 
 /** UUID v4. `randomUUID` no existe en navegadores anteriores a Safari 15.4. */
 export const createIdempotencyKey = (): string => {
@@ -70,6 +75,10 @@ export const buildOrderPayload = (
       surname: text(form, "surname"),
       email: text(form, "email"),
       phone: text(form, "phone"),
+      whatsappOptIn: checked(form, "whtsppOptIn"),
+      // Viaja siempre, marque o no la casilla: el backend guarda qué texto vio
+      // el cliente al responder, que es la prueba de su decisión.
+      marketingConsentVersion: WHATSAPP_MARKETING_CONSENT.version,
     },
     delivery: {
       city: text(form, "city"),

@@ -65,7 +65,10 @@ const saveInfoIfRequested = (values: FormValues) => {
       return;
     }
 
-    const toPersist: FormValues = { saveInfo: true };
+    const toPersist: FormValues = {
+      saveInfo: true,
+      whtsppOptIn: !!values.whtsppOptIn,
+    };
     [...CONTACT_FIELD_NAMES, ...DELIVERY_FIELD_NAMES].forEach((name) => {
       if (values[name] !== undefined) toPersist[name] = values[name];
     });

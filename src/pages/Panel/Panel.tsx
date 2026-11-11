@@ -44,9 +44,9 @@ export const Panel: React.FC = () => {
             </p>
             <Title title="PANEL DE CONTROL" />
             <p className="fmc-panel__dek">
-              Aquí ves cómo va el negocio: qué pedidos hay que preparar, quiénes
-              son tus clientes y quién te ha escrito por el formulario de
-              contacto.
+              Aquí ves cómo va el negocio: qué pedidos hay que preparar, quién
+              autorizó recibir novedades y quién te ha escrito por el formulario
+              de contacto.
             </p>
           </div>
         </div>

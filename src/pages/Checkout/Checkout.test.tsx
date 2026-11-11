@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import store from "@/app/providers/redux/store";
 import { ICoffeeProduct } from "@/types/configCat";
+import { WHATSAPP_MARKETING_CONSENT } from "@/utils/constants/common/forms";
 import { setCart, setFlags } from "@/utils/constants/redux/sets";
 import { LAST_ORDER_STORAGE_KEY } from "@/utils/constants/storage/data";
 import { Checkout } from "./Checkout";
@@ -156,6 +157,9 @@ describe("Checkout", () => {
     const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
     expect(sent.payment).toEqual(
       expect.objectContaining({ method: "bre_b", breKey: "@maria" }),
+    );
+    expect(sent.contact.marketingConsentVersion).toBe(
+      WHATSAPP_MARKETING_CONSENT.version,
     );
   });
 
