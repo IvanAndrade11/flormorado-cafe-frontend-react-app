@@ -1,6 +1,5 @@
 import { Title } from "@/components/ui";
 import { DATA_CONTROLLER, DATA_POLICY, URLS } from "@/utils/constants";
-import "./Privacy.scss";
 
 import React from "react";
 import { Table } from "react-bootstrap";

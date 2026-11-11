@@ -82,3 +82,77 @@ html {
   font-size: 1.3rem;
   font-family: "Economica", sans-serif;
 }
+
+// Páginas legales (política de datos y términos): comparten maquetación
+// porque son el mismo tipo de documento.
+.fmc-legal {
+  max-width: 54rem;
+
+  // Un documento largo sobre la foto de fondo del sitio se vuelve difícil de
+  // leer. Misma superficie blanca que ya usan la confirmación del pedido y el
+  // formulario de contacto, para que las tres se sientan la misma pieza.
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
+  // Sobrescribe el canal estrecho de `.container`: a 54rem de ancho el texto
+  // no puede ir pegado al borde de la tarjeta.
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+
+  @media screen and (max-width: 576px) {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+
+  h3 {
+    margin-top: 1.25rem;
+  }
+
+  &__intro {
+    font-size: 1.05rem;
+  }
+
+  ul {
+    margin-bottom: 1rem;
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  &__table {
+    th[scope="row"] {
+      width: 32%;
+      font-weight: 600;
+    }
+  }
+}
+
+// Botones flotantes (WhatsApp y carrito). Comparten esquina y se colocan uno al
+// lado del otro, así que su tamaño y separación salen de aquí: si uno cambia,
+// el otro se reubica solo y el pie sabe cuánto espacio dejarles libre.
+:root {
+  // 16px de margen es el patrón habitual de Material; por debajo, en un
+  // celular, los botones chocan con las esquinas redondeadas y con la zona del
+  // gesto de borde.
+  --fab-offset: 1rem;
+  // 56px es el FAB regular de Material y queda holgado sobre los 44x44 que las
+  // guías de accesibilidad recomiendan como objetivo táctil (WCAG 2.5.5). Por
+  // debajo de 44 se vuelve difícil de acertar con el pulgar.
+  --fab-size: 56px;
+  --fab-gap: 0.75rem;
+}
+
+// Mientras el pie está a la vista los botones se esconden, en vez de reservar
+// una franja vacía al final de cada página para que no lo tapen.
+.fmc-fab-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

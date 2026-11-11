@@ -1,24 +1,91 @@
 @use "@/styles/globals.scss" as *;
 
+// El pie tuvo dos versiones que fallaban por la misma razón de fondo: el
+// contenido se repartía a lo ancho de la ventana completa. Con `position:
+// absolute` se superponía, y con flex y `space-between` se desparramaba — entre
+// más ancha la pantalla, más lejos quedaba el logo del resto.
+//
+// La solución es acotar el ancho del contenido y centrarlo, igual que hace
+// `.container` en el resto del sitio: así se ve igual de compacto en un portátil
+// que en un monitor de 27". Las columnas van alineadas a la izquierda porque una
+// lista de enlaces centrada cuesta más de recorrer con la vista; lo único
+// centrado es la línea de copyright, que es lo menos importante de la página.
 .footer-fm {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  margin-top: auto; // ✅ Esto empuja el footer al final
+  margin-top: auto; // empuja el pie al final de la página
+  flex-shrink: 0;
   background-color: $principal-beige;
-  border-top: 1px solid #e5e5e5; // Opcional: línea separadora
-  flex-shrink: 0; // ✅ Evita que el footer se encoja
+  border-top: 1px solid #e5e5e5;
+  padding: 2.5rem 1.5rem 0;
 
-  img {
-    max-height: 120px;
-    height: auto;
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    // Columnas iguales: con la marca al centro, cualquier asimetría de anchos
+    // haría que el logo no quede realmente centrado en el pie.
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem 3rem;
+    align-items: start;
   }
 
-  .logo-letra {
-    max-height: 150px;
-    padding: 0px !important;
+  // El orden del DOM es el de lectura —marca, contacto, legal— que es el que
+  // siguen el teclado y los lectores de pantalla, y el que se ve en móvil. En
+  // escritorio solo se reubican las celdas, sin alterar ese orden.
+  // La fila va explícita: la colocación automática de grid no retrocede a una
+  // columna anterior, así que sin esto «Legal» —que va primera en pantalla
+  // pero última en el DOM— caería a una segunda fila.
+  &__brand {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  // Las laterales se espejan hacia afuera para que el centrado del logo se lea
+  // como una decisión y no como un descuadre.
+  &__col--contact {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  &__col--legal {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  // La fila de redes es más ancha que el logo, así que alinearlos al borde de
+  // la columna dejaba el logo visiblemente corrido. Se centran entre sí.
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__logo {
+    max-height: 135px;
+    height: auto;
+    width: auto;
+  }
+
+  &__social {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+
+    // Varios de estos SVG declaran `width="100%"` y no traen tamaño propio.
+    // Dentro de un contenedor flex ese porcentaje no tiene contra qué
+    // resolverse y la imagen colapsa a cero, así que van con medidas
+    // explícitas en vez de depender del tamaño intrínseco.
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    margin: 0 0 0.75rem;
   }
 
   ul {
@@ -27,63 +94,90 @@
     margin: 0;
   }
 
-  ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  ul li a {
+  a {
     text-decoration: none;
     color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  ul li a img {
-    max-height: 23px;
-    height: auto;
-    margin-right: 0.5rem;
+  &__col ul li {
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
   }
 
-  .footer-block-info {
-    padding: 0.5rem 3rem;
+  // Los íconos de contacto se alinean con la primera línea del texto, no con el
+  // centro del bloque: un correo que se parta en dos líneas dejaría el ícono
+  // flotando a media altura.
+  &__col ul li a {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      margin-top: 0.1rem;
+      flex: none;
+    }
   }
 
-  .footer-block-info-center {
-    width: 300px;
-    margin-top: 8rem;
-    position: absolute;
-    left: 50%;
-    top: auto; // centra verticalmente sobre el footer
-    transform: translate(-50%, -50%);
+  &__bottom {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    border-top: 1px solid rgba(59, 35, 20, 0.12);
+    padding: 1rem 0 1.5rem;
     text-align: center;
-    z-index: 2; // sobre los demás si se cruzan
-    pointer-events: auto;
 
     p {
-      margin-top: 2rem;
+      margin: 0;
       font-size: 12px;
-    }
-
-    ul li a img {
-      max-height: 30px;
+      color: #8a7566;
     }
   }
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 2rem 1.25rem 0;
 
-    img {
-      max-height: 60px;
+    &__inner {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      justify-items: center;
+      text-align: center;
     }
 
-    .footer-block-info {
-      padding: 0.5rem 1rem;
+    // En una sola columna las celdas vuelven a fluir en el orden del DOM.
+    &__brand,
+    &__col--legal,
+    &__col--contact {
+      grid-column: auto;
+      grid-row: auto;
+      text-align: center;
     }
 
-    .footer-block-info-center {
-      display: none;
+    &__brand {
+      gap: 0.5rem;
     }
 
-    .logo-letra {
-      max-height: 130px;
+    &__logo {
+      max-height: 115px;
+    }
+
+    &__title {
+      margin-bottom: 0.5rem;
+    }
+
+    &__bottom {
+      margin-top: 1.5rem;
+      // Los botones flotantes se esconden solos cuando este pie entra en
+      // pantalla (`useFooterOnScreen`), así que no hay que reservarles sitio.
+      // Este margen es la red de seguridad para un navegador sin
+      // `IntersectionObserver`: deja libre el alto de un botón, que es el caso
+      // normal —el carrito solo aparece si hay productos.
+      padding-bottom: calc(var(--fab-offset) + var(--fab-size) + 0.5rem);
     }
   }
 }
