@@ -238,24 +238,6 @@ export const PAYMENT_FORM_FIELDS = [
       {
         colId: 1,
         md: 12,
-        name: "breKey",
-        label: "Llave BRE-B",
-        type: "text",
-        required: true,
-        pattern: undefined,
-        minLength: 6,
-        maxLength: 60,
-        feedback: "Ingresa la llave BRE-B con la que vas a pagar.",
-        showWhen: { field: "paymentMethod", equals: "bre_b" },
-      },
-    ],
-  },
-  {
-    rowId: 4,
-    cols: [
-      {
-        colId: 1,
-        md: 12,
         name: "defaultConfirmationNote",
         label:
           "Te enviaremos la confirmación del pedido a tu correo electrónico.",
@@ -270,14 +252,14 @@ export const PAYMENT_FORM_FIELDS = [
     ],
   },
   {
-    rowId: 5,
+    rowId: 4,
     cols: [
       {
         colId: 1,
         md: 12,
         name: "breConfirmationNote",
         label:
-          "Te enviaremos la confirmación del pedido y del pago realizado con tu llave BRE-B a tu correo electrónico.",
+          "Te enviaremos la confirmación del pedido y las instrucciones para pagar con la llave BRE-B a tu correo electrónico.",
         type: "note",
         required: false,
         pattern: undefined,
@@ -285,23 +267,6 @@ export const PAYMENT_FORM_FIELDS = [
         maxLength: 0,
         feedback: "",
         showWhen: { field: "paymentMethod", equals: "bre_b" },
-      },
-    ],
-  },
-  {
-    rowId: 6,
-    cols: [
-      {
-        colId: 1,
-        md: 12,
-        name: "notifyByWhatsApp",
-        label: "Envíame la confirmación también por WhatsApp",
-        type: "checkbox",
-        required: false,
-        pattern: undefined,
-        minLength: 0,
-        maxLength: 0,
-        feedback: "",
       },
     ],
   },

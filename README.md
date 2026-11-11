@@ -29,7 +29,7 @@
 - **Tienda** con catálogo de productos, filtros avanzados (tipo, marca, tamaño, origen, variedad) y ordenamiento.
 - **Detalle de producto** con configurador de molienda, cantidad y carrito de compras.
 - **Blog** con artículos dinámicos y contenido HTML sanitizado (DOMPurify).
-- **Páginas institucionales**: Sobre nosotros, Orígenes y Términos y condiciones.
+- **Páginas institucionales**: Sobre nosotros, Orígenes, Términos y condiciones y Política de tratamiento de datos personales.
 - **Carrito de compras** con agrupación inteligente de productos por tipo de molienda y persistencia en `localStorage`.
 - **Checkout** en 3 pasos (contacto, entrega y pago) con guardado opcional de datos para compras futuras. Al confirmar, envía el pedido al backend de pedidos y muestra una pantalla de confirmación con el número de pedido.
 - **Contacto** con formulario de un solo paso (nombre, teléfono opcional, correo, asunto y mensaje) que envía el mensaje al backend, el cual lo guarda y lo reenvía por correo al negocio.
@@ -311,6 +311,7 @@ flormorado-cafe-frontend-react-app/
 | `/blog/:slug`           | BlogPost          | Artículo individual del blog                 |
 | `/checkout`             | Checkout          | Flujo de compra: contacto, entrega y pago    |
 | `/terminos-y-condiciones` | Terms           | Términos y condiciones (contenido de ejemplo) |
+| `/politica-de-datos` | Privacy         | Política de tratamiento de datos personales (Ley 1581 de 2012) |
 | `/panel`                | Panel             | Panel de control (pedidos, clientes, mensajes de contacto), protegido por clave |
 
 > **Nota:** Al usar HashRouter, las rutas en producción se acceden como `https://flormoradocafe.com/#/tienda`. Cada página se carga de forma diferida (`React.lazy`), en su propio chunk de JavaScript.

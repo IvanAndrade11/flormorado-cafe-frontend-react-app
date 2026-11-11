@@ -11,6 +11,7 @@ export const URLS = {
   categories: "/tienda/categorias",
   checkout: "/checkout",
   terms: "/terminos-y-condiciones",
+  privacy: "/politica-de-datos",
   panel: "/panel",
 };
 

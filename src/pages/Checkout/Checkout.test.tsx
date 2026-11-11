@@ -70,7 +70,6 @@ const fillAndSubmit = (paymentMethod = "cash_on_delivery") => {
   type("Tipo de documento", "CC");
   type("Número de documento", "1012345678");
   type("Método de pago", paymentMethod);
-  if (paymentMethod === "bre_b") type("Llave BRE-B", "@maria");
   fireEvent.click(screen.getByRole("button", { name: "Realizar pedido" }));
 };
 
@@ -155,9 +154,8 @@ describe("Checkout", () => {
     ).toBeInTheDocument();
 
     const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(sent.payment).toEqual(
-      expect.objectContaining({ method: "bre_b", breKey: "@maria" }),
-    );
+    expect(sent.payment).toEqual(expect.objectContaining({ method: "bre_b" }));
+    expect(sent.payment).not.toHaveProperty("breKey");
     expect(sent.contact.marketingConsentVersion).toBe(
       WHATSAPP_MARKETING_CONSENT.version,
     );
@@ -225,7 +223,6 @@ describe("Checkout", () => {
         orderId: "FM-20260916-002",
         email: "maria@example.com",
         paymentMethod: "bre_b",
-        breKey: "@maria",
         items: [],
         subtotal: 0,
         shipping: 0,
@@ -241,7 +238,9 @@ describe("Checkout", () => {
     renderCheckout();
 
     expect(screen.getByText("FM-20260916-002")).toBeInTheDocument();
-    expect(screen.getByText("@maria")).toBeInTheDocument();
+    expect(
+      screen.getByText(/Elegiste pagar con llave BRE-B/),
+    ).toBeInTheDocument();
   });
 
   it("invita a ir a la tienda cuando el carrito está vacío", () => {

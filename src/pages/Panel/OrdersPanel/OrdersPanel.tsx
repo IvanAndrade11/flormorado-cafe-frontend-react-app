@@ -152,10 +152,7 @@ export const OrdersPanel: React.FC<OrdersPanelProps> = ({ onUnauthorized }) => {
                       <PanelBadge variant={orderStatusVariant(order.status)}>
                         {ORDER_STATUS_LABELS[order.status] ?? order.status}
                       </PanelBadge>
-                      {hasNotificationFailure(
-                        order.email_status,
-                        order.whatsapp_status,
-                      ) && (
+                      {hasNotificationFailure(order.email_status) && (
                         <>
                           {" "}
                           <PanelBadge variant="block">

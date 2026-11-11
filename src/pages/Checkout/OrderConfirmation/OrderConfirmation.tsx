@@ -93,7 +93,6 @@ export const OrderConfirmation: React.FC<{
     orderId,
     email,
     paymentMethod,
-    breKey,
     breB,
     items,
     subtotal,
@@ -131,9 +130,9 @@ export const OrderConfirmation: React.FC<{
           <BreBPayment instructions={breB} orderId={orderId} total={total} />
         ) : (
           <p>
-            Registramos tu llave BRE-B <strong>{breKey}</strong>. Te
-            contactaremos para completar el pago, y empezamos a preparar tu
-            pedido en cuanto lo confirmemos.
+            Elegiste pagar con llave BRE-B. Te contactaremos para indicarte cómo
+            completar el pago, y empezamos a preparar tu pedido en cuanto lo
+            confirmemos.
           </p>
         )}
       </div>

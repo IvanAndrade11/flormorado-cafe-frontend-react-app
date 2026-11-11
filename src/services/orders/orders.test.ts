@@ -48,7 +48,6 @@ const form = {
   documentType: "CC",
   documentNumber: "1012345678",
   paymentMethod: "cash_on_delivery",
-  notifyByWhatsApp: false,
 };
 
 const UUID_V4 =
@@ -77,7 +76,6 @@ describe("buildOrderPayload", () => {
         method: "cash_on_delivery",
         documentType: "CC",
         documentNumber: "1012345678",
-        notifyByWhatsApp: false,
       },
       items: [
         {
@@ -99,22 +97,14 @@ describe("buildOrderPayload", () => {
     expect(payload.items[0].productId).toBe("FLORMORADO500");
   });
 
-  it("incluye la llave BRE-B solo cuando ese es el método", () => {
+  it("no manda la llave del cliente: la que importa es la de la empresa", () => {
     const breB = buildOrderPayload(
-      { ...form, paymentMethod: "bre_b", breKey: "@maria" },
+      { ...form, paymentMethod: "bre_b" },
       cart,
       "llave",
     );
-    expect(breB.payment).toEqual(
-      expect.objectContaining({ method: "bre_b", breKey: "@maria" }),
-    );
-
-    const cash = buildOrderPayload(
-      { ...form, paymentMethod: "cash_on_delivery", breKey: "@vieja" },
-      cart,
-      "llave",
-    );
-    expect(cash.payment).not.toHaveProperty("breKey");
+    expect(breB.payment).toEqual(expect.objectContaining({ method: "bre_b" }));
+    expect(breB.payment).not.toHaveProperty("breKey");
   });
 
   it("manda las indicaciones adicionales solo si hay algo escrito", () => {
@@ -177,7 +167,7 @@ describe("buildConfirmation", () => {
 describe("buildConfirmation con BRE-B", () => {
   it("lleva a la confirmación las instrucciones que dio el backend", () => {
     const payload = buildOrderPayload(
-      { ...form, paymentMethod: "bre_b", breKey: "@maria" },
+      { ...form, paymentMethod: "bre_b" },
       cart,
       "llave",
     );
@@ -190,7 +180,6 @@ describe("buildConfirmation con BRE-B", () => {
       breB: { key: "@flormorado", holder: "Flormorado Café" },
     });
 
-    expect(confirmation.breKey).toBe("@maria");
     expect(confirmation.breB).toEqual({
       key: "@flormorado",
       holder: "Flormorado Café",
