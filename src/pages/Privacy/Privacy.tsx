@@ -270,6 +270,17 @@ export const Privacy: React.FC = () => {
         </li>
       </ul>
 
+      <p>
+        Cuando pidas que <strong>suprimamos</strong> tus datos, borramos tu
+        ficha de cliente —nombre, correo, documento y celular— y los mensajes
+        que nos hayas enviado por el formulario.{" "}
+        <strong>Tus pedidos se conservan</strong> tal como están: son el soporte
+        contable que las normas comerciales y tributarias nos obligan a guardar,
+        y la ley permite negar la supresión en ese caso. Cuando venza ese plazo,
+        también se van. Te lo decimos de frente para que sepas exactamente qué
+        queda.
+      </p>
+
       <h2 className="h5 mt-4">8. Cómo ejercerlos</h2>
       <p>
         Escríbenos a{" "}

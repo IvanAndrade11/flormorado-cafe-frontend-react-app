@@ -132,13 +132,21 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
                     onClick={() => setSelectedId(customer.id)}
                   >
                     <td>
-                      {customer.name} {customer.surname}
+                      {customer.suppressed_at ? (
+                        <span className="fmc-panel__muted">
+                          Datos suprimidos
+                        </span>
+                      ) : (
+                        `${customer.name} ${customer.surname}`
+                      )}
                     </td>
-                    <td>{customer.phone}</td>
+                    <td>{customer.suppressed_at ? "—" : customer.phone}</td>
                     <td>{customer.pedidos}</td>
                     <td>{cop(customer.total_comprado)}</td>
                     <td>
-                      {customer.whatsapp_marketing ? (
+                      {customer.suppressed_at ? (
+                        <PanelBadge variant="muted">Suprimido</PanelBadge>
+                      ) : customer.whatsapp_marketing ? (
                         <PanelBadge variant="done">Autorizadas</PanelBadge>
                       ) : (
                         <PanelBadge variant="muted">De baja</PanelBadge>
@@ -156,7 +164,7 @@ export const CustomersPanel: React.FC<CustomersPanelProps> = ({
         <CustomerDetail
           customerId={selectedId}
           onClose={() => setSelectedId(null)}
-          onOptedOut={() => load(applied)}
+          onChanged={() => load(applied)}
           onUnauthorized={onUnauthorized}
         />
       )}

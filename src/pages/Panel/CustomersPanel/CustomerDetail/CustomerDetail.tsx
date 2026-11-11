@@ -5,6 +5,7 @@ import {
   AdminUnauthorizedError,
   fetchCustomerDetail,
   optOutCustomer,
+  suppressCustomer,
 } from "@/services/admin";
 import { IAdminCustomerDetail } from "@/types/admin";
 import { orderStatusVariant, ORDER_STATUS_LABELS } from "@/utils/constants";
@@ -15,22 +16,24 @@ import { cop, formatDate } from "../../panelFormat";
 interface CustomerDetailProps {
   customerId: number;
   onClose: () => void;
-  onOptedOut: () => void;
+  onChanged: () => void;
   onUnauthorized: () => void;
 }
 
 export const CustomerDetail: React.FC<CustomerDetailProps> = ({
   customerId,
   onClose,
-  onOptedOut,
+  onChanged,
   onUnauthorized,
 }) => {
   const [detail, setDetail] = useState<IAdminCustomerDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
-  const [confirming, setConfirming] = useState(false);
+  const [confirming, setConfirming] = useState<"baja" | "supresion" | null>(
+    null,
+  );
   const [updating, setUpdating] = useState(false);
-  const [actionError, setActionError] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -55,33 +58,52 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
     void Promise.resolve().then(() => load());
   }, [load]);
 
-  const handleOptOut = async () => {
+  // Las dos acciones son el mismo flujo: confirmar, llamar, recargar. Lo único
+  // que cambia es qué se llama y qué decir si falla.
+  const run = async (accion: () => Promise<unknown>, error: string) => {
     setUpdating(true);
-    setActionError(false);
+    setActionError(null);
     try {
-      await optOutCustomer(customerId);
-      setConfirming(false);
-      onOptedOut();
+      await accion();
+      setConfirming(null);
+      onChanged();
       await load();
-    } catch (error) {
-      if (error instanceof AdminUnauthorizedError) {
+    } catch (e) {
+      if (e instanceof AdminUnauthorizedError) {
         onUnauthorized();
         return;
       }
-      setActionError(true);
+      setActionError(error);
     } finally {
       setUpdating(false);
     }
   };
 
+  const handleOptOut = () =>
+    run(
+      () => optOutCustomer(customerId),
+      "No se pudo dar de baja al cliente. Intenta de nuevo.",
+    );
+
+  const handleSuppress = () =>
+    run(
+      () => suppressCustomer(customerId),
+      "No se pudieron suprimir los datos del cliente. Intenta de nuevo.",
+    );
+
   const customer = detail?.cliente;
+  const suppressed = Boolean(customer?.suppressed_at);
   const authorized = customer?.whatsapp_marketing === 1;
 
   return (
     <Modal show onHide={onClose} size="lg" centered scrollable>
       <Modal.Header closeButton>
         <Modal.Title>
-          {customer ? `${customer.name} ${customer.surname}` : "Cliente"}
+          {!customer
+            ? "Cliente"
+            : suppressed
+              ? "Datos suprimidos"
+              : `${customer.name} ${customer.surname}`}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -154,19 +176,20 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
 
               {actionError && (
                 <div className="fmc-panel__error mb-3" role="alert">
-                  No se pudo dar de baja al cliente. Intenta de nuevo.
+                  {actionError}
                 </div>
               )}
 
               {authorized &&
-                (confirming ? (
+                !suppressed &&
+                (confirming === "baja" ? (
                   <div className="fmc-panel__status-actions">
                     <Button
                       size="sm"
                       variant="outline-danger"
                       className="fmc-panel__status-button"
                       disabled={updating}
-                      onClick={handleOptOut}
+                      onClick={() => void handleOptOut()}
                     >
                       {updating ? (
                         <Spinner
@@ -184,7 +207,7 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
                       variant="outline-secondary"
                       className="fmc-panel__status-button"
                       disabled={updating}
-                      onClick={() => setConfirming(false)}
+                      onClick={() => setConfirming(null)}
                     >
                       Cancelar
                     </Button>
@@ -195,9 +218,75 @@ export const CustomerDetail: React.FC<CustomerDetailProps> = ({
                       size="sm"
                       variant="outline-danger"
                       className="fmc-panel__status-button"
-                      onClick={() => setConfirming(true)}
+                      onClick={() => setConfirming("baja")}
                     >
                       Dar de baja de las novedades
+                    </Button>
+                  </div>
+                ))}
+            </div>
+
+            <div className="fmc-panel__detail-section">
+              <h3 className="fmc-panel__section-title">
+                Supresión de datos:{" "}
+                {suppressed ? (
+                  <PanelBadge variant="muted">Atendida</PanelBadge>
+                ) : (
+                  <PanelBadge variant="done">Ficha vigente</PanelBadge>
+                )}
+              </h3>
+
+              <div className="fmc-panel__callout">
+                <p className="fmc-panel__callout-label">
+                  {suppressed ? "Qué pasó" : "Qué borra y qué no"}
+                </p>
+                <p className="fmc-panel__callout-body">
+                  {suppressed
+                    ? `Se atendió el ${formatDate(customer.suppressed_at as string)}. Esta ficha ya no conserva nombre, correo, documento ni celular, y sus mensajes del formulario de contacto se borraron. Sus pedidos siguen abajo: la ley permite conservarlos porque son soporte contable.`
+                    : "Si el cliente pide que borres sus datos tienes quince días hábiles para resolver. Al suprimir desaparecen de esta ficha su nombre, correo, documento y celular, y se borran todos sus mensajes del formulario de contacto. Sus pedidos se conservan tal como están, con los datos que llevan, porque son el soporte contable que las normas obligan a guardar: la ley permite negar la supresión en ese caso. Si te pregunta, esa es la respuesta exacta."}
+                </p>
+              </div>
+
+              {!suppressed &&
+                (confirming === "supresion" ? (
+                  <div className="fmc-panel__status-actions">
+                    <Button
+                      size="sm"
+                      variant="outline-danger"
+                      className="fmc-panel__status-button"
+                      disabled={updating}
+                      onClick={() => void handleSuppress()}
+                    >
+                      {updating ? (
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        "Sí, suprimir — no se puede deshacer"
+                      )}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline-secondary"
+                      className="fmc-panel__status-button"
+                      disabled={updating}
+                      onClick={() => setConfirming(null)}
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="fmc-panel__status-actions">
+                    <Button
+                      size="sm"
+                      variant="outline-danger"
+                      className="fmc-panel__status-button"
+                      onClick={() => setConfirming("supresion")}
+                    >
+                      Suprimir los datos del cliente
                     </Button>
                   </div>
                 ))}
