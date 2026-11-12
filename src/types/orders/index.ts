@@ -34,6 +34,9 @@ export interface IOrderPayload {
     // pedido. La aceptación es implícita, así que esto es la prueba de qué se
     // le informó al cliente.
     privacyPolicyVersion: string;
+    // Versión de los términos y condiciones vigentes al comprar: es lo que
+    // permite saber qué condiciones aceptó cada cliente.
+    termsVersion: string;
   };
   delivery: {
     city: string;

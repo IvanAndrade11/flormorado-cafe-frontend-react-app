@@ -14,7 +14,10 @@ export interface IContactPayload {
 }
 
 export type SubmitContactResult =
-  | { kind: "sent" }
+  // El radicado y su fecha son lo que el artículo 50 de la Ley 1480 obliga a
+  // darle al cliente por cada PQR. Opcionales porque un backend anterior no
+  // los devuelve, y un mensaje enviado no deja de estarlo por eso.
+  | { kind: "sent"; ticket?: string; at?: string }
   | { kind: "invalid" }
   // Turnstile no pudo confirmar que quien envía es una persona.
   | { kind: "verification_failed" }

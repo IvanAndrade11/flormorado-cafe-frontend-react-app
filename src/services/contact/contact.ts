@@ -39,7 +39,11 @@ const attemptOnce = async (
     });
 
     if (response.status === 200 || response.status === 201) {
-      return { kind: "sent" };
+      const body = (await response.json().catch(() => ({}))) as {
+        radicado?: string;
+        fecha?: string;
+      };
+      return { kind: "sent", ticket: body.radicado, at: body.fecha };
     }
 
     if (response.status === 400) return { kind: "invalid" };

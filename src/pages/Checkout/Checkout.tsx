@@ -13,7 +13,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { TotalView } from "@/components/ui/Store/ShoppingCart/TotalView/TotalView";
-import { images, URLS } from "@/utils/constants";
+import { DELIVERY_WINDOW, images, URLS } from "@/utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { CheckoutForm } from "./CheckoutForm/CheckoutForm";
 import { OrderConfirmation } from "./OrderConfirmation/OrderConfirmation";
@@ -311,6 +311,10 @@ export const Checkout: React.FC = () => {
               <Alert.Heading>
                 Tu compra es <strong>100% segura</strong>
               </Alert.Heading>
+              <p>
+                Entregamos en <strong>{DELIVERY_WINDOW}</strong> en Bogotá y
+                municipios aledaños.
+              </p>
               <p className="mb-0">
                 Al realizar el pago, aceptas nuestros{" "}
                 <Link to={URLS.terms} target="_blank" rel="noopener noreferrer">

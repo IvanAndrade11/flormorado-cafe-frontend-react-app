@@ -3,10 +3,13 @@
 .fmc-cart-toast {
   position: fixed;
   top: 85vh;
-  right: 1.5vh;
+  right: 7vh;
   z-index: 11112 !important;
   animation: fadeInUp 0.5s ease forwards;
   animation: fadeOutDown 0.5s ease forwards;
+  @media screen and (max-width: 600px) {
+    right: 1.5vh;
+  }
   div {
     font-family: $font-flormorado;
     font-size: 16px;

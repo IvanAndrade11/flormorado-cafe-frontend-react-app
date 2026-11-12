@@ -1,51 +1,84 @@
 @use "@/styles/globals.scss" as *;
 
-.shopping-cart-button {
-  font-size: 18px;
-  position: relative;
-  padding: 10px 20px;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  height: 90px;
+// Se apila encima del botón de WhatsApp, en la misma esquina. Lo que antes
+// obligaba a separarlos —la franja vacía que había que reservar al final de
+// cada página para que no taparan el pie— lo resuelve ahora
+// `useFooterOnScreen`, que los esconde mientras el pie está a la vista.
+//
+// Antes estaba en `top: 40vh` (70vh en móvil) con `right: 3.3vh` — un
+// desplazamiento horizontal medido en unidades de *altura*, que movía el botón
+// de sitio al cambiar el alto de la ventana.
+.fmc-cart-fab {
+  position: fixed;
+  bottom: calc(var(--fab-offset) + var(--fab-size) + var(--fab-gap));
+  right: var(--fab-offset);
+  z-index: 10000;
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 0;
   cursor: pointer;
+  transition: transform 0.25s ease;
 
-  &.shopping-cart {
-    display: block !important;
-    position: fixed;
-    top: 40vh;
-    right: 3.3vh;
-    z-index: 10000;
-    opacity: 1;
-    transform: translateY(-50%);
+  &:hover {
+    transform: scale(1.08);
+  }
 
-    @media (max-width: 991px) {
-      top: 70vh;
-    }
+  img {
+    width: var(--fab-size);
+    height: var(--fab-size);
+    object-fit: contain;
+    display: block;
+  }
 
-    &:hover {
-      height: 100px;
-      transition: height 0.5s;
-    }
+  // El contador cuelga de la esquina del propio botón, así que lo sigue solo.
+  // Antes se posicionaba con sus propias coordenadas en `vh` y había que
+  // recalcularlas a mano cada vez que el botón se movía.
+  &__badge {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.35rem;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 6px rgba(59, 35, 20, 0.25);
   }
 }
 
-.shopping-cart-badge {
-  z-index: 10001 !important;
-  padding: 0.5rem;
-  width: 2rem;
-  height: 2rem;
-  top: 37vh !important;
-  right: 4vh !important;
-
-  @media (max-width: 991px) {
-    top: 67vh !important;
+// Un latido corto cuando cambia el contador, no uno permanente: un botón que
+// late sin parar compite con el contenido y termina cansando, que es lo
+// contrario de lo que se busca. El aviso va en el momento en que algo cambia,
+// que es cuando el cliente necesita verlo.
+@keyframes fmc-cart-pop {
+  0% {
+    transform: scale(1);
   }
+  30% {
+    transform: scale(1.22);
+  }
+  55% {
+    transform: scale(0.94);
+  }
+  75% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-  &:hover {
-    height: 32px !important;
-    color: white !important;
-    background-color: $principal-purple !important;
-    transition: height 0.5s;
+.fmc-cart-fab--pulse {
+  animation: fmc-cart-pop 0.45s ease-in-out 2;
+}
+
+// Hay quien marea con el movimiento en pantalla y lo configura en su sistema.
+// El contador sigue ahí: la información no depende de la animación.
+@media (prefers-reduced-motion: reduce) {
+  .fmc-cart-fab--pulse {
+    animation: none;
   }
 }
