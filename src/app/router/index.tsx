@@ -4,51 +4,19 @@ import { Routes, Route } from "react-router-dom";
 import { URLS } from "@/utils/constants";
 import { ScrollToTop } from "@/components/common";
 
-const Landing = lazy(() =>
-  import("@/pages/Landing/Landing").then((m) => ({ default: m.Landing })),
-);
-const Categories = lazy(() =>
-  import("@/pages/Store/Categories/Categories").then((m) => ({
-    default: m.Categories,
-  })),
-);
-const Store = lazy(() =>
-  import("@/pages/Store/Store").then((m) => ({ default: m.Store })),
-);
-const ProductDetail = lazy(() =>
-  import("@/pages/Store/ProductDetail/ProductDetail").then((m) => ({
-    default: m.ProductDetail,
-  })),
-);
-const About = lazy(() =>
-  import("@/pages/About/About").then((m) => ({ default: m.About })),
-);
-const Origins = lazy(() =>
-  import("@/pages/Origins/Origins").then((m) => ({ default: m.Origins })),
-);
-const Contact = lazy(() =>
-  import("@/pages/Contact/Contact").then((m) => ({ default: m.Contact })),
-);
-const Blog = lazy(() =>
-  import("@/pages/Blog/Blog").then((m) => ({ default: m.Blog })),
-);
-const BlogPost = lazy(() =>
-  import("@/pages/Blog/BlogPost/BlogPost").then((m) => ({
-    default: m.BlogPost,
-  })),
-);
-const Checkout = lazy(() =>
-  import("@/pages/Checkout/Checkout").then((m) => ({ default: m.Checkout })),
-);
-const Terms = lazy(() =>
-  import("@/pages/Terms/Terms").then((m) => ({ default: m.Terms })),
-);
-const Privacy = lazy(() =>
-  import("@/pages/Privacy/Privacy").then((m) => ({ default: m.Privacy })),
-);
-const Panel = lazy(() =>
-  import("@/pages/Panel/Panel").then((m) => ({ default: m.Panel })),
-);
+const Landing = lazy(() => import("@/pages/Landing"));
+const Categories = lazy(() => import("@/pages/Store/Categories"));
+const Store = lazy(() => import("@/pages/Store"));
+const ProductDetail = lazy(() => import("@/pages/Store/ProductDetail"));
+const About = lazy(() => import("@/pages/About"));
+const Origins = lazy(() => import("@/pages/Origins"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Blog = lazy(() => import("@/pages/Blog"));
+const BlogPost = lazy(() => import("@/pages/Blog/BlogPost"));
+const Checkout = lazy(() => import("@/pages/Checkout"));
+const Terms = lazy(() => import("@/pages/Terms"));
+const Privacy = lazy(() => import("@/pages/Privacy"));
+const Panel = lazy(() => import("@/pages/Panel"));
 
 const Router = (): React.JSX.Element => {
   return (
