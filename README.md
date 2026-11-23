@@ -29,7 +29,7 @@
 - **Tienda** con catálogo de productos, filtros avanzados (tipo, marca, tamaño, origen, variedad) y ordenamiento.
 - **Detalle de producto** con configurador de molienda, cantidad y carrito de compras.
 - **Blog** con artículos dinámicos y contenido HTML sanitizado (DOMPurify).
-- **Páginas institucionales**: Sobre nosotros, Orígenes, Términos y condiciones y Política de tratamiento de datos personales.
+- **Páginas institucionales**: Nuestro propósito, Sobre nosotros, Orígenes, Términos y condiciones y Política de tratamiento de datos personales.
 - **Carrito de compras** con agrupación inteligente de productos por tipo de molienda y persistencia en `localStorage`.
 - **Checkout** en 3 pasos (contacto, entrega y pago) con guardado opcional de datos para compras futuras. Al confirmar, envía el pedido al backend de pedidos y muestra una pantalla de confirmación con el número de pedido.
 - **Contacto** con formulario de un solo paso (nombre, teléfono opcional, correo, asunto y mensaje) que envía el mensaje al backend, el cual lo guarda y lo reenvía por correo al negocio.
@@ -247,6 +247,7 @@ flormorado-cafe-frontend-react-app/
 │   │   │   ├── Categories/     # Vista por categorías
 │   │   │   └── ProductDetail/  # Detalle y configurador de producto
 │   │   ├── About/              # Sobre nosotros
+│   │   ├── Purpose/            # Nuestro propósito (contenido en utils/constants/common/purpose.ts)
 │   │   ├── Origins/            # Orígenes del café
 │   │   ├── Contact/            # Página de contacto
 │   │   ├── Blog/               # Lista de artículos
@@ -305,6 +306,7 @@ flormorado-cafe-frontend-react-app/
 | `/tienda/:productId`    | ProductDetail     | Detalle y configurador de un producto        |
 | `/tienda/categorias`    | Categories        | Vista por categorías                         |
 | `/sobre-nosotros`       | About             | Información sobre Flormorado Café            |
+| `/nuestro-proposito`    | Purpose           | Qué hacemos, nuestra historia, impacto y propósito |
 | `/origenes`             | Origins           | Historia y orígenes del café                 |
 | `/contacto`             | Contact           | Formulario de contacto (envía el mensaje al backend, que lo reenvía por correo) |
 | `/blog`                 | Blog              | Lista de artículos del blog                  |
