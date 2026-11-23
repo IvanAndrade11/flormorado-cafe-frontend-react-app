@@ -54,3 +54,38 @@ export interface IFormCols {
   showWhen?: { field: string; equals: string };
   hideWhen?: { field: string; equals: string };
 }
+
+// Contenido de «Nuestro propósito»; vive en `constants/common/purpose`.
+export interface IPurposeImage {
+  src: string;
+  alt: string;
+}
+
+export interface IPurposeHighlight {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface IPurposeSection {
+  id: string;
+  // Etiqueta sobre el título, con la forma de las categorías del blog.
+  eyebrow: string;
+  question: string;
+  paragraphs: string[];
+  image: IPurposeImage;
+  // Segunda foto para las secciones que nombran más de un producto.
+  secondaryImage?: IPurposeImage;
+  quote?: string;
+  highlights?: IPurposeHighlight[];
+  // "list": junto al texto. "cards": a todo el ancho, para variar el ritmo.
+  highlightsLayout?: "list" | "cards";
+}
+
+export interface IPurposeCredit {
+  id: string;
+  work: string;
+  url: string;
+  author: string;
+  license: string;
+}
