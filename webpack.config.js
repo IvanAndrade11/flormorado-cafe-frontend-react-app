@@ -36,7 +36,13 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.css$/i,
-                    use: ["style-loader", "css-loader"],
+                    use: [
+                        "style-loader",
+                        // sin sourceMap en producción: style-loader inyecta el
+                        // css desde el js, así que el mapa viajaría dentro del
+                        // bundle y lo descargaría cada visitante
+                        { loader: "css-loader", options: { sourceMap: !isProd } },
+                    ],
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)$/i,
@@ -49,7 +55,11 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.s[ac]ss$/i,
-                    use: ['style-loader', 'css-loader', 'sass-loader']
+                    use: [
+                        "style-loader",
+                        { loader: "css-loader", options: { sourceMap: !isProd } },
+                        { loader: "sass-loader", options: { sourceMap: !isProd } },
+                    ],
                 },
                 {
                     test: /\.(mp4|webm|ogg|ogv|mov)$/i,
