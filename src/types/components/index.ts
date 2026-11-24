@@ -69,8 +69,6 @@ export interface IPurposeHighlight {
 
 export interface IPurposeSection {
   id: string;
-  // Etiqueta sobre el título, con la forma de las categorías del blog.
-  eyebrow: string;
   question: string;
   paragraphs: string[];
   image: IPurposeImage;

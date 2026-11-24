@@ -5,7 +5,7 @@ import {
 } from "@/types/components";
 
 // Fuera de `media/images.ts`: el pie usa ese objeto y las ataría al chunk inicial.
-import HeroCafetal from "@/assets/images/purpose/hero-cafetal.jpg";
+import CoffeeGrains from "@/assets/images/illustrations/coffee_grains.svg";
 import QueHacemos from "@/assets/images/purpose/que-hacemos.jpg";
 import HarinaDeSagu from "@/assets/images/purpose/harina-de-sagu.jpg";
 import NuestraHistoria from "@/assets/images/purpose/nuestra-historia.jpg";
@@ -13,8 +13,8 @@ import NuestroImpacto from "@/assets/images/purpose/nuestro-impacto.jpg";
 import NuestroProposito from "@/assets/images/purpose/nuestro-proposito.jpg";
 
 export const PURPOSE_HERO: IPurposeImage = {
-  src: HeroCafetal,
-  alt: "Ladera sembrada de café en una finca colombiana, con montañas al fondo",
+  src: CoffeeGrains,
+  alt: "Ilustración de una flor de café y granos en distintos estados de maduración",
 };
 
 export const PURPOSE_LEAD =
@@ -24,7 +24,6 @@ export const PURPOSE_LEAD =
 export const PURPOSE_SECTIONS: IPurposeSection[] = [
   {
     id: "que-hacemos",
-    eyebrow: "Qué hacemos",
     question: "¿Qué hacemos?",
     paragraphs: [
       "Conectamos lo mejor del campo colombiano con tu mesa. FLORMORADO representa un origen que florece gracias a la diversidad y riqueza sensorial de los mejores cafés de regiones como Boyacá, Caldas y Tolima, junto con productos tradicionales como la harina de sagú.",
@@ -74,7 +73,6 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
   },
   {
     id: "nuestra-historia",
-    eyebrow: "Nuestra historia",
     question: "¿Cuál es nuestra historia?",
     paragraphs: [
       "FLORMORADO nació de una semilla plantada con amor en tiempos de incertidumbre y del profundo convencimiento de que la tierra tiene un alma que merece ser honrada. Comenzamos cultivando en época de pandemia en una finca que, en su momento, no era cafetera y que hoy dio luz y vida a este proyecto.",
@@ -89,7 +87,6 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
   },
   {
     id: "nuestro-impacto",
-    eyebrow: "Nuestro impacto",
     question: "¿Cómo buscamos impactar?",
     paragraphs: [
       "Nuestro impacto se mide en dignidad, equidad y futuro para las familias agricultoras. Actuamos a través de tres pilares concretos.",
@@ -122,7 +119,6 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
   },
   {
     id: "nuestro-proposito",
-    eyebrow: "Nuestro propósito",
     question: "¿Cuál es nuestro propósito?",
     paragraphs: [
       "Nuestro propósito es transformar la forma en que el mundo ve y valora el agro colombiano. Queremos que FLORMORADO sea recordado no solo por la calidad de su café, sino porque cada empaque lleva impreso el nombre de su autor, abriendo camino para que los consumidores reconozcan y compren directamente al agricultor.",
@@ -137,13 +133,6 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
 
 // Fotos provisionales: CC BY y CC BY-SA obligan a atribuir. Se borra con ellas.
 export const PURPOSE_IMAGE_CREDITS: IPurposeCredit[] = [
-  {
-    id: "hero-cafetal",
-    work: "Coffee Farm",
-    url: "https://commons.wikimedia.org/wiki/File:Coffee_Farm_(45255016475).jpg",
-    author: "Paul from Hacketts Cove",
-    license: "CC BY 2.0",
-  },
   {
     id: "que-hacemos",
     work: "Hand holding coffee cherries",

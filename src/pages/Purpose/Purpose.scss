@@ -11,19 +11,14 @@
   }
 
   .purpose-hero {
-    margin-bottom: 2.5rem;
+    // Ilustración sobre fondo transparente: ni recorte, ni marco, ni sombra.
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
 
     img {
+      display: block;
       width: 100%;
-      // Recorta el CSS, para que la foto definitiva entre con cualquier proporción.
-      aspect-ratio: 21 / 9;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-      @media screen and (max-width: 768px) {
-        aspect-ratio: 16 / 10;
-      }
+      height: auto;
     }
   }
 
@@ -53,6 +48,7 @@
 
     img {
       width: 100%;
+      // Recorta el CSS, para que la foto definitiva entre con cualquier proporción.
       aspect-ratio: 4 / 3;
       object-fit: cover;
       border-radius: 16px;
@@ -68,25 +64,13 @@
     }
   }
 
-  .purpose-badge {
-    background-color: transparent !important;
-    border: 1px solid $principal-verde;
-    color: $principal-verde !important;
-    font-weight: 600;
-    padding: 0.4em 0.9em;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
   .purpose-question {
     font-family: "Economica", sans-serif;
     font-size: 2.5rem;
     color: $principal-cafe;
     font-weight: 700;
     line-height: 1.15;
-    margin-top: 0.75rem;
+    margin-top: 0;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba($principal-cafe, 0.15);
@@ -116,7 +100,6 @@
   }
 
   .purpose-bean {
-    color: $principal-purple;
     flex: 0 0 auto;
   }
 
