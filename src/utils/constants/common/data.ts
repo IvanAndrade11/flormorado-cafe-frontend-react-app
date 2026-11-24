@@ -4,6 +4,7 @@ export const URLS = {
   all: "*",
   home: "/",
   about: "/sobre-nosotros",
+  purpose: "/nuestro-proposito",
   origins: "/origenes",
   contact: "/contacto",
   blog: "/blog",
@@ -29,7 +30,7 @@ export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
       { id: "metodos", title: "Métodos de café", url: URLS.home },
     ],
   },
-  { id: "purpose", title: "Nuestro propósito", url: URLS.origins },
+  { id: "purpose", title: "Nuestro propósito", url: URLS.purpose },
   {
     id: "origins",
     title: "Orígenes",

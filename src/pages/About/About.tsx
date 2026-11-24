@@ -6,7 +6,7 @@ import React from "react";
 export const About: React.FC = () => {
   return (
     <div className="container">
-      <Title title="NUESTRO PROPÓSITO" />
+      <Title title="CONÓCENOS" />
     </div>
   );
 };
