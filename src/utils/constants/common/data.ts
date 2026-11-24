@@ -17,7 +17,7 @@ export const URLS = {
 
 // Páginas con fondo propio de lado a lado: el navbar no puede ir transparente
 // encima, así que va sólido y se invierte a morado al pasar el cursor.
-export const SOLID_NAVBAR_URLS: string[] = [URLS.purpose];
+export const SOLID_NAVBAR_URLS: string[] = [URLS.purpose, URLS.origins];
 
 export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
   { id: "home", title: "Inicio", url: URLS.home },
@@ -60,7 +60,11 @@ export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
     url: URLS.origins,
     dropdown: true,
     subItems: [
-      { id: "originCoffees", title: "Cafés de origen", url: URLS.origins },
+      {
+        id: "originCoffees",
+        title: "Cafés de origen",
+        url: `${URLS.origins}#cafes-de-origen`,
+      },
       { id: "sagu", title: "Harina de sagú", url: URLS.origins },
       { id: "methods", title: "Métodos de preparación", url: URLS.origins },
     ],

@@ -1,13 +1,14 @@
 @use "@/styles/globals.scss" as *;
 
-// Toma el lenguaje visual del blog: superficie beige, Economica, tarjetas.
-.purpose-page {
+// Maquetación de las páginas de relato (propósito, orígenes). Toma el lenguaje
+// visual del blog: superficie beige, Economica, tarjetas.
+.fmc-story {
   font-family: $font-flormorado;
   width: 100%;
   background-color: $principal-beige;
   padding: 3rem 0 4rem;
 
-  .purpose-lead {
+  .fmc-story-lead {
     color: $principal-purple;
     padding: 1rem 0 2.5rem;
 
@@ -19,6 +20,18 @@
 
       @media screen and (max-width: 768px) {
         font-size: 1.7rem;
+      }
+
+      // Sola, la frase abre la página, así que se centra y crece.
+      &--solo {
+        max-width: 38rem;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 2.6rem;
+
+        @media screen and (max-width: 768px) {
+          font-size: 2rem;
+        }
       }
     }
 
@@ -35,23 +48,23 @@
     }
   }
 
-  .purpose-section {
+  .fmc-story-section {
     margin-top: 4rem;
 
     // Por clase y no `> .row`: la fila de tarjetas no se debe invertir.
-    &--reverse .purpose-section__row {
+    &--reverse .fmc-story-section__row {
       @media screen and (min-width: 992px) {
         flex-direction: row-reverse;
       }
     }
   }
 
-  .purpose-section__text--solo {
+  .fmc-story-section__text--solo {
     max-width: 48rem;
     margin: 0 auto;
   }
 
-  .purpose-figure {
+  .fmc-story-figure {
     margin: 0;
 
     img {
@@ -71,7 +84,7 @@
     }
   }
 
-  .purpose-question {
+  .fmc-story-question {
     font-family: "Economica", sans-serif;
     font-size: 2.5rem;
     color: $principal-cafe;
@@ -87,14 +100,14 @@
     }
   }
 
-  .purpose-paragraph {
+  .fmc-story-paragraph {
     font-size: 1.05rem;
     line-height: 1.8;
     color: #212529;
     margin-bottom: 1.25rem;
   }
 
-  .purpose-quote {
+  .fmc-story-quote {
     background: $secondary-beige-gradient;
     border-left: 4px solid $principal-verde;
     margin: 1.5rem 0;
@@ -106,11 +119,11 @@
     border-radius: 0 8px 8px 0;
   }
 
-  .purpose-bean {
+  .fmc-story-bean {
     flex: 0 0 auto;
   }
 
-  .purpose-list {
+  .fmc-story-list {
     list-style: none;
     padding-left: 0;
     margin-top: 1.5rem;
@@ -125,7 +138,7 @@
       line-height: 1.65;
       color: #212529;
 
-      .purpose-bean {
+      .fmc-story-bean {
         // Centra el grano con la primera línea del texto.
         margin-top: 0.2rem;
       }
@@ -136,10 +149,10 @@
     }
   }
 
-  .purpose-cards {
+  .fmc-story-cards {
     margin-top: 2.5rem;
 
-    .purpose-card {
+    .fmc-story-card {
       border: none;
       border-radius: 12px;
       background-color: #ffffff;
@@ -156,7 +169,7 @@
         padding: 1.75rem;
       }
 
-      .purpose-bean {
+      .fmc-story-bean {
         display: block;
       }
 
@@ -179,7 +192,7 @@
     }
   }
 
-  .purpose-cta {
+  .fmc-story-cta {
     background: rgba($principal-purple, 0.92);
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);

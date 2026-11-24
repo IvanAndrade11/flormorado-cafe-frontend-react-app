@@ -305,7 +305,7 @@ flormorado-cafe-frontend-react-app/
 | `/tienda/:productId`    | ProductDetail     | Detalle y configurador de un producto        |
 | `/tienda/categorias`    | Categories        | Vista por categorías                         |
 | `/nuestro-proposito`    | Purpose           | Qué hacemos, nuestra historia, impacto y propósito |
-| `/origenes`             | Origins           | Historia y orígenes del café                 |
+| `/origenes`             | Origins           | Cafés de origen y el mapa de los tres orígenes |
 | `/contacto`             | Contact           | Formulario de contacto (envía el mensaje al backend, que lo reenvía por correo) |
 | `/blog`                 | Blog              | Lista de artículos del blog                  |
 | `/blog/:slug`           | BlogPost          | Artículo individual del blog                 |

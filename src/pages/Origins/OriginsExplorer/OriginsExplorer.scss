@@ -1,0 +1,236 @@
+@use "@/styles/globals.scss" as *;
+
+.fmc-origins {
+  margin-top: 4rem;
+
+  &__map {
+    position: sticky;
+    top: 7rem;
+
+    @media screen and (max-width: 991px) {
+      position: static;
+      max-width: 22rem;
+      margin: 0 auto;
+    }
+  }
+
+  &__picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  &__tab {
+    flex: 1 1 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+    border: 1px solid rgba($principal-cafe, 0.2);
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease;
+
+    &:hover {
+      border-color: $principal-purple;
+      background-color: rgba($principal-purple, 0.08);
+    }
+
+    &[aria-pressed="true"] {
+      background-color: $principal-purple;
+      border-color: $principal-purple;
+
+      .fmc-origins__tab-department {
+        color: $principal-beige;
+      }
+
+      .fmc-origins__tab-town {
+        color: rgba($principal-beige, 0.8);
+      }
+    }
+  }
+
+  &__tab-department {
+    font-family: "Economica", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: $principal-cafe;
+  }
+
+  &__tab-town {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+}
+
+.fmc-origins-map {
+  width: 100%;
+  height: auto;
+
+  &__country {
+    fill: rgba($principal-cafe, 0.07);
+    stroke: rgba($principal-cafe, 0.35);
+    stroke-width: 0.4;
+  }
+
+  &__origin {
+    cursor: pointer;
+  }
+
+  &__department {
+    fill: rgba($principal-purple, 0.3);
+    stroke: $principal-beige;
+    stroke-width: 0.3;
+    transition: fill 0.3s ease;
+  }
+
+  &__halo {
+    fill: $principal-purple;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &__marker {
+    fill: $principal-beige;
+    stroke: $principal-purple;
+    stroke-width: 0.6;
+  }
+
+  &__pill {
+    fill: $principal-beige;
+    stroke: rgba($principal-cafe, 0.2);
+    stroke-width: 0.3;
+    transition: fill 0.3s ease;
+  }
+
+  &__label {
+    font-family: "Economica", sans-serif;
+    font-weight: 700;
+    fill: $principal-cafe;
+    transition: fill 0.3s ease;
+  }
+
+  &__origin:hover &__department {
+    fill: rgba($principal-purple, 0.55);
+  }
+
+  &__origin.is-selected {
+    .fmc-origins-map__department {
+      fill: $principal-purple;
+    }
+
+    .fmc-origins-map__halo {
+      opacity: 0.3;
+    }
+
+    .fmc-origins-map__pill {
+      fill: $principal-purple;
+      stroke: $principal-purple;
+    }
+
+    .fmc-origins-map__label {
+      fill: $principal-beige;
+    }
+  }
+}
+
+.fmc-origins-detail {
+  animation: fmc-origins-in 0.35s ease;
+
+  &__nickname {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: $principal-verde;
+    margin-bottom: 0.25rem;
+  }
+
+  &__title {
+    font-family: "Economica", sans-serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: $principal-cafe;
+    margin-bottom: 0.5rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.9rem;
+    }
+  }
+
+  &__headline {
+    font-family: "Economica", sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: $principal-purple;
+    margin-bottom: 1.25rem;
+  }
+
+  &__data {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    background: $secondary-beige-gradient;
+    border-radius: 12px;
+
+    @media screen and (max-width: 575px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    dt {
+      font-family: "Economica", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $principal-cafe;
+      margin-bottom: 0.2rem;
+    }
+
+    dd {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #212529;
+      margin-bottom: 0;
+    }
+  }
+
+  &__subtitle {
+    font-family: "Economica", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $principal-cafe;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__choose {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    padding: 1.1rem 1.4rem;
+    border-left: 4px solid $principal-verde;
+    border-radius: 0 8px 8px 0;
+    background-color: rgba($principal-verde, 0.08);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: $principal-cafe;
+  }
+}
+
+@keyframes fmc-origins-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
