@@ -10,10 +10,9 @@
     margin-bottom: 5rem;
   }
 
-  // La cita de entrada y el cierre son la misma pieza.
+  // Cita de entrada y cierre: mismo relleno, distinto fondo.
   .purpose-band {
     padding: 2.75rem 2rem;
-    color: $principal-purple;
 
     @media screen and (max-width: 768px) {
       padding: 2rem 1.25rem;
@@ -21,6 +20,8 @@
   }
 
   .purpose-lead {
+    color: $principal-purple;
+
     &__text {
       font-family: "Economica", sans-serif;
       font-size: 2.1rem;
@@ -186,6 +187,10 @@
   }
 
   .purpose-cta {
+    background: rgba($principal-purple, 0.92);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    color: $principal-beige;
     margin-top: 4.5rem;
     text-align: center;
 
@@ -214,8 +219,24 @@
       justify-content: center;
     }
 
-    &__link {
+    // Invertido: sobre el morado del bloque, un botón morado se pierde.
+    .fmc-button {
+      background-color: $principal-beige;
+      border-color: $principal-beige;
       color: $principal-purple;
+      font-weight: 600;
+
+      &:hover,
+      &:active {
+        background-color: #ffffff !important;
+        border-color: #ffffff;
+        color: $principal-purple;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      }
+    }
+
+    &__link {
+      color: $principal-beige;
       font-weight: 700;
       font-size: 0.9rem;
       text-transform: uppercase;
@@ -225,8 +246,8 @@
       transition: border-color 0.3s ease;
 
       &:hover {
-        color: $principal-cafe;
-        border-bottom-color: $principal-purple;
+        color: #ffffff;
+        border-bottom-color: $principal-beige;
       }
     }
   }
