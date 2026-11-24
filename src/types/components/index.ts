@@ -55,28 +55,52 @@ export interface IFormCols {
   hideWhen?: { field: string; equals: string };
 }
 
-// Contenido de «Nuestro propósito»; vive en `constants/common/purpose`.
-export interface IPurposeImage {
+// Contenido de las páginas de relato (propósito, orígenes), que lo pintan con
+// los componentes de `@/components/section`.
+export interface IStoryImage {
   src: string;
   alt: string;
 }
 
-export interface IPurposeHighlight {
+export interface IStoryHighlight {
   id: string;
   title: string;
   description: string;
 }
 
-export interface IPurposeSection {
+export interface IStorySection {
   id: string;
-  question: string;
+  // Sin encabezado la sección es solo texto, para entrar a lo que sigue.
+  question?: string;
   paragraphs: string[];
   // Sin ilustración, la sección se pinta en una sola columna centrada.
-  image?: IPurposeImage;
+  image?: IStoryImage;
   // Segunda ilustración para las secciones que nombran más de un producto.
-  secondaryImage?: IPurposeImage;
+  secondaryImage?: IStoryImage;
   quote?: string;
-  highlights?: IPurposeHighlight[];
+  highlights?: IStoryHighlight[];
   // "list": junto al texto. "cards": a todo el ancho, para variar el ritmo.
   highlightsLayout?: "list" | "cards";
+}
+
+// Cada uno de los tres orígenes que el mapa de `/origenes` deja explorar. El
+// `id` es también el del departamento en el mapa.
+export interface IOriginFact {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface IOrigin {
+  id: string;
+  department: string;
+  town: string;
+  nickname: string;
+  headline: string;
+  chooseIf: string;
+  summary: string;
+  altitude: string;
+  thermalFloor: string;
+  cupProfile: string;
+  facts: IOriginFact[];
 }

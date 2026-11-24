@@ -1,4 +1,4 @@
-import { IPurposeImage, IPurposeSection } from "@/types/components";
+import { IStoryImage, IStorySection } from "@/types/components";
 
 // Fuera de `media/images.ts`: el pie usa ese objeto y las ataría al chunk inicial.
 import GirlCollecting from "@/assets/images/illustrations/girl_collecting.svg";
@@ -6,7 +6,7 @@ import GirlStanding from "@/assets/images/illustrations/girl_standing.svg";
 import CoffeeGrains from "@/assets/images/illustrations/coffee_grains.svg";
 import FlowerOne from "@/assets/images/illustrations/flower_one.svg";
 
-export const PURPOSE_LEAD_IMAGE: IPurposeImage = {
+export const PURPOSE_LEAD_IMAGE: IStoryImage = {
   src: GirlCollecting,
   alt: "Ilustración de una mujer recolectando cerezas de un cafeto",
 };
@@ -15,7 +15,7 @@ export const PURPOSE_LEAD =
   "Conectamos lo mejor del campo colombiano con los amantes del buen café, " +
   "construyendo un puente directo, transparente y humano entre el origen y tu taza.";
 
-export const PURPOSE_SECTIONS: IPurposeSection[] = [
+export const PURPOSE_SECTIONS: IStorySection[] = [
   {
     id: "que-hacemos",
     question: "¿Qué hacemos?",
