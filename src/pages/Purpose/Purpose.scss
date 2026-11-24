@@ -233,19 +233,22 @@
       }
     }
 
+    // Sin mayúsculas el enlace pierde lo que lo hacía verse pulsable, así que
+    // el subrayado pasa a estar siempre visible.
     &__link {
       color: $principal-beige;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-weight: 600;
+      font-size: 1.05rem;
       text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s ease;
+      border-bottom: 1px solid rgba($principal-beige, 0.5);
+      padding-bottom: 3px;
+      transition:
+        color 0.3s ease,
+        border-color 0.3s ease;
 
       &:hover {
         color: #ffffff;
-        border-bottom-color: $principal-beige;
+        border-bottom-color: #ffffff;
       }
     }
   }
