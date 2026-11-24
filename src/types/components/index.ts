@@ -71,19 +71,12 @@ export interface IPurposeSection {
   id: string;
   question: string;
   paragraphs: string[];
-  image: IPurposeImage;
-  // Segunda foto para las secciones que nombran más de un producto.
+  // Sin ilustración, la sección se pinta en una sola columna centrada.
+  image?: IPurposeImage;
+  // Segunda ilustración para las secciones que nombran más de un producto.
   secondaryImage?: IPurposeImage;
   quote?: string;
   highlights?: IPurposeHighlight[];
   // "list": junto al texto. "cards": a todo el ancho, para variar el ritmo.
   highlightsLayout?: "list" | "cards";
-}
-
-export interface IPurposeCredit {
-  id: string;
-  work: string;
-  url: string;
-  author: string;
-  license: string;
 }

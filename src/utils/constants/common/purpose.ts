@@ -1,16 +1,11 @@
-import {
-  IPurposeCredit,
-  IPurposeImage,
-  IPurposeSection,
-} from "@/types/components";
+import { IPurposeImage, IPurposeSection } from "@/types/components";
 
 // Fuera de `media/images.ts`: el pie usa ese objeto y las ataría al chunk inicial.
 import GirlCollecting from "@/assets/images/illustrations/girl_collecting.svg";
-import QueHacemos from "@/assets/images/purpose/que-hacemos.jpg";
-import HarinaDeSagu from "@/assets/images/purpose/harina-de-sagu.jpg";
-import NuestraHistoria from "@/assets/images/purpose/nuestra-historia.jpg";
-import NuestroImpacto from "@/assets/images/purpose/nuestro-impacto.jpg";
-import NuestroProposito from "@/assets/images/purpose/nuestro-proposito.jpg";
+import GirlStanding from "@/assets/images/illustrations/girl_standing.svg";
+import CoffeePlant from "@/assets/images/illustrations/coffee_plant.svg";
+import CoffeeGrains from "@/assets/images/illustrations/coffee_grains.svg";
+import FlowerOne from "@/assets/images/illustrations/flower_one.svg";
 
 export const PURPOSE_LEAD_IMAGE: IPurposeImage = {
   src: GirlCollecting,
@@ -30,12 +25,12 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
       "Somos un puente transparente y humano: no solo comercializamos, ponemos nombre, rostro e historia a cada cosecha. En la parte posterior de cada empaque de FLORMORADO encontrarás los datos del caficultor que hizo posible tu café y del agricultor que procesó tu sagú, para que el reconocimiento y el valor real se queden siempre en las manos de quien cultiva la tierra.",
     ],
     image: {
-      src: QueHacemos,
-      alt: "Mano de un caficultor sosteniendo cerezas de café recién recolectadas",
+      src: CoffeePlant,
+      alt: "Ilustración de una rama de cafeto con hojas, flores y cerezas",
     },
     secondaryImage: {
-      src: HarinaDeSagu,
-      alt: "Planta de sagú, de cuya raíz se obtiene la harina",
+      src: CoffeeGrains,
+      alt: "Ilustración de granos de café en distintos estados de maduración",
     },
     highlightsLayout: "list",
     highlights: [
@@ -81,8 +76,8 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
     ],
     quote: "Para nosotros, Denys e Iván, ¡el origen lo es todo!",
     image: {
-      src: NuestraHistoria,
-      alt: "Vista del Valle de Tenza desde el cerro de Somondoco, en Boyacá",
+      src: GirlStanding,
+      alt: "Ilustración de una campesina caminando con un canasto de cerezas de café",
     },
   },
   {
@@ -91,10 +86,6 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
     paragraphs: [
       "Nuestro impacto se mide en dignidad, equidad y futuro para las familias agricultoras. Actuamos a través de tres pilares concretos.",
     ],
-    image: {
-      src: NuestroImpacto,
-      alt: "Recolectora de café junto a un cafeto cargado de cerezas maduras",
-    },
     highlightsLayout: "cards",
     highlights: [
       {
@@ -125,47 +116,8 @@ export const PURPOSE_SECTIONS: IPurposeSection[] = [
       "Honramos el legado de quienes nos enseñaron a cuidar la tierra con respeto y conexión espiritual, fomentando una cultura cafetera sostenible que protege el medio ambiente y pone al campesino siempre en el primer lugar.",
     ],
     image: {
-      src: NuestroProposito,
-      alt: "Barista sirviendo leche sobre un café recién preparado",
+      src: FlowerOne,
+      alt: "Ilustración de una flor de pétalos largos",
     },
-  },
-];
-
-// Fotos provisionales: CC BY y CC BY-SA obligan a atribuir. Se borra con ellas.
-export const PURPOSE_IMAGE_CREDITS: IPurposeCredit[] = [
-  {
-    id: "que-hacemos",
-    work: "Hand holding coffee cherries",
-    url: "https://commons.wikimedia.org/wiki/File:Hand_holding_coffee_cherries.jpg",
-    author: "Daniel Case",
-    license: "CC BY-SA 4.0",
-  },
-  {
-    id: "harina-de-sagu",
-    work: "Shimipampana (Maranta arundinacea)",
-    url: "https://commons.wikimedia.org/wiki/File:Shimipampana_(Maranta_arundinacea).jpg",
-    author: "François Delonnay",
-    license: "CC BY-SA 4.0",
-  },
-  {
-    id: "nuestra-historia",
-    work: "El Valle de Tenza visto desde el cerro de Somondoco",
-    url: "https://commons.wikimedia.org/wiki/File:El_Valle_de_Tenza_visto_desde_el_cerro_de_Somondoco.jpg",
-    author: "Mendizi",
-    license: "CC BY-SA 4.0",
-  },
-  {
-    id: "nuestro-impacto",
-    work: "CiudadBarrioscoffeepicker",
-    url: "https://commons.wikimedia.org/wiki/File:CiudadBarrioscoffeepicker.jpg",
-    author: "Rainforest Alliance Guatemala",
-    license: "CC BY 2.5",
-  },
-  {
-    id: "nuestro-proposito",
-    work: "Barista pouring milk",
-    url: "https://commons.wikimedia.org/wiki/File:Barista_pouring_milk_(Unsplash).jpg",
-    author: "Tim Wright",
-    license: "CC0",
   },
 ];
