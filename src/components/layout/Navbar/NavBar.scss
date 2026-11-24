@@ -18,6 +18,72 @@
   }
 }
 
+// Páginas con fondo propio (ver `SOLID_NAVBAR_URLS`). Va después del bloque de
+// arriba a propósito: tiene su misma especificidad y gana por orden.
+.flormorado-navbar--solid {
+  background: $principal-beige;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  // El logotipo morado no pega sobre el morado del hover, así que la marca va
+  // escrita, con la Economica de los títulos de producto.
+  .flormorado-navbar__wordmark {
+    font-family: "Economica", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: 1px;
+    color: $principal-purple;
+    transition: color 0.3s ease;
+
+    @media screen and (max-width: 990px) {
+      font-size: 2rem;
+    }
+  }
+
+  // Al pasar el cursor la barra se invierte entera. Solo en escritorio: en
+  // móvil no hay cursor y el menú vive en el offcanvas.
+  @media screen and (min-width: 991px) {
+    &:hover {
+      background: $principal-purple;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+      .flormorado-navbar__wordmark {
+        color: $principal-beige;
+      }
+
+      .fmc-navbar-link,
+      .fmc-navbar-link a {
+        color: $principal-beige !important;
+      }
+
+      .fmc-navbar-link:hover,
+      .fmc-navbar-link:focus {
+        border-bottom-color: $principal-beige;
+      }
+
+      .fmc-navbar-button {
+        background-color: $principal-beige;
+        border-color: $principal-beige;
+        color: $principal-purple;
+
+        &:hover,
+        &:active {
+          background-color: #ffffff !important;
+          border-color: #ffffff;
+          color: $principal-purple;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        }
+
+        // El carrito es negro y el botón lo invierte a blanco para el morado;
+        // sobre beige hay que dejarlo como viene.
+        span img {
+          filter: none;
+        }
+      }
+    }
+  }
+}
+
 .fmc-navbar-link {
   height: 65px;
   transition: color 0.15s ease-in-out;

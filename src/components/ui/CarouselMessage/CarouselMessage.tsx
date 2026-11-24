@@ -7,8 +7,8 @@ export const CarouselMessage = () => {
         {Array.from({ length: 10 }).map((_, index) => (
           <div className="navbar-carousel-group" key={index}>
             <p>
-              Reconociendo la labor del campo - ¡Envío gratis a partir de
-              $150,000!
+              Reconociendo la labor del campo - Envío gratis por compras
+              superiores a $150.000
             </p>
           </div>
         ))}

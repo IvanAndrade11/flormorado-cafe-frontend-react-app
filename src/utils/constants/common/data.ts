@@ -3,7 +3,6 @@ import { NavbarMenuItem } from "@/types/components";
 export const URLS = {
   all: "*",
   home: "/",
-  about: "/sobre-nosotros",
   purpose: "/nuestro-proposito",
   origins: "/origenes",
   contact: "/contacto",
@@ -16,27 +15,55 @@ export const URLS = {
   panel: "/panel",
 };
 
+// Páginas con fondo propio de lado a lado: el navbar no puede ir transparente
+// encima, así que va sólido y se invierte a morado al pasar el cursor.
+export const SOLID_NAVBAR_URLS: string[] = [URLS.purpose];
+
 export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
   { id: "home", title: "Inicio", url: URLS.home },
   {
-    id: "about",
-    title: "Conócenos",
-    url: URLS.about,
+    id: "purpose",
+    title: "Nuestro propósito",
+    url: URLS.purpose,
     dropdown: true,
     subItems: [
-      { id: "origen", title: "Cafes de origen", url: URLS.home },
-      { id: "especialidad", title: "Cafes de especialidad", url: URLS.home },
-      { id: "harina", title: "Harina de sagú", url: URLS.home },
-      { id: "metodos", title: "Métodos de café", url: URLS.home },
+      {
+        id: "que-hacemos",
+        title: "¿Qué hacemos?",
+        url: `${URLS.purpose}#que-hacemos`,
+      },
+      {
+        id: "nuestra-historia",
+        title: "¿Cuál es nuestra historia?",
+        url: `${URLS.purpose}#nuestra-historia`,
+      },
+      {
+        id: "nuestro-impacto",
+        title: "¿Como buscamos impactar?",
+        url: `${URLS.purpose}#nuestro-impacto`,
+      },
+      {
+        id: "nuestro-proposito",
+        title: "¿Cuál es nuestro propósito?",
+        url: `${URLS.purpose}#nuestro-proposito`,
+      },
+      {
+        id: "botanic",
+        title: "FLORMORADO Botánico ",
+        url: `${URLS.purpose}#botanic`,
+      },
     ],
   },
-  { id: "purpose", title: "Nuestro propósito", url: URLS.purpose },
   {
     id: "origins",
     title: "Orígenes",
     url: URLS.origins,
     dropdown: true,
-    subItems: [{ id: "caficultores", title: "Caficultores", url: URLS.home }],
+    subItems: [
+      { id: "originCoffees", title: "Cafés de origen", url: URLS.origins },
+      { id: "sagu", title: "Harina de sagú", url: URLS.origins },
+      { id: "methods", title: "Métodos de preparación", url: URLS.origins },
+    ],
   },
   {
     id: "contact",

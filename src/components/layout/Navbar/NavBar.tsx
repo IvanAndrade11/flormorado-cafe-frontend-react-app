@@ -10,6 +10,7 @@ import {
   getBlogSubItems,
   images,
   NAVBAR_MENU_ITEMS,
+  SOLID_NAVBAR_URLS,
   URLS,
 } from "@/utils/constants";
 import store from "@/app/providers/redux/store";
@@ -20,6 +21,8 @@ import { Logo } from "./Logo/Logo";
 
 export const Navbar: React.FC = () => {
   const { pathname } = useLocation();
+
+  const solid = SOLID_NAVBAR_URLS.includes(pathname);
 
   const [show, setShow] = useState(false);
 
@@ -37,22 +40,31 @@ export const Navbar: React.FC = () => {
       const { blogFlormorado }: IBlogFlormorado = JSON.parse(blog) as {
         blogFlormorado: IBlog;
       };
-      NAVBAR_MENU_ITEMS[5].subItems = getBlogSubItems(blogFlormorado);
+      NAVBAR_MENU_ITEMS[4].subItems = getBlogSubItems(blogFlormorado);
       setLoader(false);
     }
   }, [blog]);
 
   return (
-    <div className="flormorado-navbar">
+    <div
+      className={`flormorado-navbar${solid ? " flormorado-navbar--solid" : ""}`}
+    >
       <CarouselMessage />
       {pathname !== URLS.checkout && (
         <div className="container">
           <NavbarBs expand="lg">
             <Container fluid>
               <NavbarBs.Brand href="/" style={{ marginRight: "0" }}>
-                <Logo src={images.Logo} width={62} />
+                {solid ? (
+                  <span className="flormorado-navbar__wordmark">
+                    FLORMORADO
+                  </span>
+                ) : (
+                  <Logo src={images.Logo} width={62} />
+                )}
               </NavbarBs.Brand>
-              {isMobile && (
+              {/* La palabra ya hace de logotipo: repetirla sobraría. */}
+              {isMobile && !solid && (
                 <a href="/">
                   <Logo src={images.LogoSoloNombreFondoBeige} width={116} />
                 </a>

@@ -3,24 +3,13 @@
 // Toma el lenguaje visual del blog: superficie beige, Economica, tarjetas.
 .purpose-page {
   font-family: $font-flormorado;
-
-  @media screen and (min-width: 1024px) {
-    background: rgba($principal-beige, 0.9);
-    margin-top: 3rem;
-    margin-bottom: 5rem;
-  }
-
-  // Cita de entrada y cierre: mismo relleno, distinto fondo.
-  .purpose-band {
-    padding: 2.75rem 2rem;
-
-    @media screen and (max-width: 768px) {
-      padding: 2rem 1.25rem;
-    }
-  }
+  width: 100%;
+  background-color: $principal-beige;
+  padding: 3rem 0 4rem;
 
   .purpose-lead {
     color: $principal-purple;
+    padding: 1rem 0 2.5rem;
 
     &__text {
       font-family: "Economica", sans-serif;
@@ -57,16 +46,20 @@
     }
   }
 
+  .purpose-section__text--solo {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
   .purpose-figure {
     margin: 0;
 
     img {
       width: 100%;
-      // Recorta el CSS, para que la foto definitiva entre con cualquier proporción.
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      // La caja es fija y la ilustración se ajusta dentro, así que una nueva
+      // entra con cualquier proporción y sin recortarse.
+      aspect-ratio: 1;
+      object-fit: contain;
     }
 
     &--secondary {
@@ -192,7 +185,12 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     color: $principal-beige;
     margin-top: 4.5rem;
+    padding: 2.75rem 2rem;
     text-align: center;
+
+    @media screen and (max-width: 768px) {
+      padding: 2rem 1.25rem;
+    }
 
     h2 {
       font-family: "Economica", sans-serif;
@@ -235,41 +233,22 @@
       }
     }
 
+    // Sin mayúsculas el enlace pierde lo que lo hacía verse pulsable, así que
+    // el subrayado pasa a estar siempre visible.
     &__link {
       color: $principal-beige;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-weight: 600;
+      font-size: 1.05rem;
       text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s ease;
+      border-bottom: 1px solid rgba($principal-beige, 0.5);
+      padding-bottom: 3px;
+      transition:
+        color 0.3s ease,
+        border-color 0.3s ease;
 
       &:hover {
         color: #ffffff;
-        border-bottom-color: $principal-beige;
-      }
-    }
-  }
-
-  .purpose-credits {
-    margin-top: 3rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgba($principal-cafe, 0.15);
-
-    p {
-      font-size: 0.78rem;
-      line-height: 1.6;
-      color: #8c98a4;
-      margin-bottom: 0;
-    }
-
-    a {
-      color: #8c98a4;
-      text-decoration: underline;
-
-      &:hover {
-        color: $principal-purple;
+        border-bottom-color: #ffffff;
       }
     }
   }
