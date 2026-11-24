@@ -5,16 +5,16 @@ import {
 } from "@/types/components";
 
 // Fuera de `media/images.ts`: el pie usa ese objeto y las ataría al chunk inicial.
-import CoffeeGrains from "@/assets/images/illustrations/coffee_grains.svg";
+import GirlCollecting from "@/assets/images/illustrations/girl_collecting.svg";
 import QueHacemos from "@/assets/images/purpose/que-hacemos.jpg";
 import HarinaDeSagu from "@/assets/images/purpose/harina-de-sagu.jpg";
 import NuestraHistoria from "@/assets/images/purpose/nuestra-historia.jpg";
 import NuestroImpacto from "@/assets/images/purpose/nuestro-impacto.jpg";
 import NuestroProposito from "@/assets/images/purpose/nuestro-proposito.jpg";
 
-export const PURPOSE_HERO: IPurposeImage = {
-  src: CoffeeGrains,
-  alt: "Ilustración de una flor de café y granos en distintos estados de maduración",
+export const PURPOSE_LEAD_IMAGE: IPurposeImage = {
+  src: GirlCollecting,
+  alt: "Ilustración de una mujer recolectando cerezas de un cafeto",
 };
 
 export const PURPOSE_LEAD =

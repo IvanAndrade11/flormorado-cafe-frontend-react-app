@@ -9,9 +9,9 @@ import { IPurposeHighlight, IPurposeSection } from "@/types/components";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import {
   icons,
-  PURPOSE_HERO,
   PURPOSE_IMAGE_CREDITS,
   PURPOSE_LEAD,
+  PURPOSE_LEAD_IMAGE,
   PURPOSE_SECTIONS,
   URLS,
 } from "@/utils/constants";
@@ -106,7 +106,7 @@ export const Purpose: React.FC = () => {
   useDocumentMeta({
     title: "Nuestro propósito | Flormorado Café",
     description: PURPOSE_LEAD,
-    image: PURPOSE_HERO.src,
+    image: PURPOSE_SECTIONS[0].image.src,
   });
 
   return (
@@ -116,11 +116,16 @@ export const Purpose: React.FC = () => {
       </div>
 
       <Container className="py-5 purpose-page card">
-        <figure className="purpose-hero">
-          <img src={PURPOSE_HERO.src} alt={PURPOSE_HERO.alt} />
-        </figure>
-
-        <p className="purpose-lead">{PURPOSE_LEAD}</p>
+        <section className="purpose-band purpose-lead">
+          <Row className="align-items-center g-4">
+            <Col xs={12} lg={7}>
+              <p className="purpose-lead__text">{PURPOSE_LEAD}</p>
+            </Col>
+            <Col xs={12} lg={5} className="purpose-lead__media">
+              <img src={PURPOSE_LEAD_IMAGE.src} alt={PURPOSE_LEAD_IMAGE.alt} />
+            </Col>
+          </Row>
+        </section>
 
         {PURPOSE_SECTIONS.map((section, index) => (
           <PurposeSectionBlock
@@ -130,7 +135,7 @@ export const Purpose: React.FC = () => {
           />
         ))}
 
-        <section className="purpose-cta">
+        <section className="purpose-band purpose-cta">
           <h2>Cada taza lleva el nombre de quien la cultivó</h2>
           <p>
             Conoce los cafés que nacen de estas fincas y la gente que los hace

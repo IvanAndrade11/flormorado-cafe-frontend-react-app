@@ -10,26 +10,46 @@
     margin-bottom: 5rem;
   }
 
-  .purpose-hero {
-    // Ilustración sobre fondo transparente: ni recorte, ni marco, ni sombra.
-    max-width: 580px;
-    margin: 0 auto 2.5rem;
+  // La cita de entrada y el cierre son la misma pieza.
+  .purpose-band {
+    background: rgba($principal-purple, 0.92);
+    border-radius: 16px;
+    padding: 2.75rem 2rem;
+    color: $principal-beige;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
+    @media screen and (max-width: 768px) {
+      padding: 2rem 1.25rem;
     }
   }
 
   .purpose-lead {
-    font-size: 1.25rem;
-    color: #495057;
-    line-height: 1.7;
-    font-style: italic;
-    border-left: 4px solid $principal-purple;
-    padding-left: 1.5rem;
-    margin-bottom: 0;
+    &__text {
+      font-family: "Economica", sans-serif;
+      font-size: 2.1rem;
+      line-height: 1.25;
+      margin-bottom: 0;
+
+      @media screen and (max-width: 768px) {
+        font-size: 1.7rem;
+      }
+    }
+
+    // Trazo café y verde: sobre el morado se perdería, va en disco beige.
+    &__media {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        max-width: 260px;
+        aspect-ratio: 1;
+        object-fit: contain;
+        background: $principal-beige;
+        border-radius: 50%;
+        padding: 1.25rem;
+      }
+    }
   }
 
   .purpose-section {
@@ -173,13 +193,8 @@
   }
 
   .purpose-cta {
-    background: rgba($principal-purple, 0.92);
-    border-radius: 16px;
-    padding: 2.75rem 2rem;
     margin-top: 4.5rem;
     text-align: center;
-    color: $principal-beige;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 
     h2 {
       font-family: "Economica", sans-serif;
