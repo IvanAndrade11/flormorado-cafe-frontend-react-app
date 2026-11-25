@@ -1,11 +1,11 @@
 @use "@/styles/globals.scss" as *;
 
 // Maquetación de las páginas de relato (propósito, orígenes). Toma el lenguaje
-// visual del blog: superficie beige, Economica, tarjetas.
+// visual del blog: banda de sección, Economica, tarjetas.
 .fmc-story {
   font-family: $font-flormorado;
   width: 100%;
-  background-color: $principal-beige;
+  background-color: $fm-surface-section;
   padding: 3rem 0 4rem;
 
   .fmc-story-lead {

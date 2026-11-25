@@ -1,4 +1,4 @@
-export * from "./Banner/Banner";
+export * from "./Hero/Hero";
 
 export * from "./InfiniteCarousel/InfiniteCarousel";
 

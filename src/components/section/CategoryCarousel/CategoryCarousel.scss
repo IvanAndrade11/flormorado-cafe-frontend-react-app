@@ -1,5 +1,4 @@
 @use "@/styles/globals.scss" as *;
-@use "@/pages/Store/Categories/Categories.scss" as *;
 
 .fmc-carousel-title {
   background-color: transparent !important;
@@ -15,6 +14,8 @@
   }
 }
 
+// Banda clara sobre el lienzo: el degradado que había antes solo servía para
+// fundirse con la foto de fondo.
 .fmc-carousel-category-section {
-  background: $principal-beige-transparent-gradient;
+  background-color: $fm-surface-section;
 }

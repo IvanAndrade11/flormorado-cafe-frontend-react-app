@@ -1,3 +1,5 @@
+import "./CategoryCard.scss";
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Col } from "react-bootstrap";

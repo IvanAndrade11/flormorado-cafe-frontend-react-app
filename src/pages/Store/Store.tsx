@@ -1,5 +1,3 @@
-import "./Store.scss";
-
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { StoreCard, Title, NavbarStore } from "@/components/ui";

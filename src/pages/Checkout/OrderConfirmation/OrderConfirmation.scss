@@ -1,7 +1,8 @@
 @use "@/styles/globals.scss" as *;
 
-// La página tiene una foto de fondo a pantalla completa: sin una superficie
-// propia, el número de pedido se pierde sobre la imagen.
+// Superficie propia: el número de pedido es lo que el cliente va a buscar al
+// volver, así que tiene que leerse como un comprobante y no como una página
+// más.
 .fmc-order-confirmation {
   max-width: 46rem;
   margin: 0 auto 3rem;

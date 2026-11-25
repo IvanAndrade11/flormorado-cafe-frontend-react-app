@@ -1,5 +1,3 @@
-import "./Categories.scss";
-
 import React, { useEffect, useMemo } from "react";
 import { Row } from "react-bootstrap";
 

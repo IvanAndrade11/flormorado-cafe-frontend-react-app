@@ -1,5 +1,59 @@
 @use "./globals.scss" as *;
 
+// Vive aquí y no en `globals.scss` porque `style-loader` compila cada SCSS de
+// componente por separado: todo lo que `globals.scss` emite se duplica una vez
+// por archivo que lo usa, y son 35.
+@font-face {
+  font-family: "Economica";
+  src: url("@assets/fonts/Economica/Economica-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Los componentes leen estos tokens con `var()`, así que no pueden ser
+// variables de Sass. Mismo motivo que el `@font-face` para tenerlos aquí.
+:root {
+  --fm-duration: 0.45s;
+  --fm-easing: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --fm-radius: 12px;
+  --fm-shadow: #{$fm-shadow-sm};
+  --fm-shadow-strong: #{$fm-shadow-lg};
+
+  // 16px de margen es el patrón habitual de Material; por debajo, en un
+  // celular, los botones flotantes chocan con las esquinas redondeadas y con la
+  // zona del gesto de borde.
+  --fab-offset: 1rem;
+  // 56px es el FAB regular de Material y queda holgado sobre los 44x44 que las
+  // guías de accesibilidad recomiendan como objetivo táctil (WCAG 2.5.5). Por
+  // debajo de 44 se vuelve difícil de acertar con el pulgar.
+  --fab-size: 56px;
+  --fab-gap: 0.75rem;
+}
+
+// Compartidos por varios componentes. Antes `fadeInUp` solo estaba declarado en
+// `ProductGallery.scss`, así que el toast del landing se quedaba sin animación
+// hasta que el visitante entraba a un producto y se cargaba ese chunk.
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 body,
 html {
   margin: 0;
@@ -7,6 +61,7 @@ html {
   border: 0;
   height: 100%;
   font-family: $font-flormorado !important;
+  color: $fm-text-body;
 }
 
 #root {
@@ -15,33 +70,27 @@ html {
   min-height: 100vh;
   min-height: 100dvh;
 
-  background-color: $principal-beige-oscuro; // ✅ Fondo garantizado
-}
-
-@media (hover: hover) and (pointer: fine) and (min-width: 991px) {
-  // Solo se aplica la imagen de fondo en desktop
-  #root {
-    background-image: url("../assets/images/backgrounds/background1.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-  }
+  background-color: $fm-surface-page;
 }
 
 .fm-container {
+  position: relative;
   width: 100%;
-  max-width: 100vw; // ✅ Evita desbordamiento horizontal
+  max-width: 100vw;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  // background-color: $principal-beige; // ✅ Fondo blanco de fm
-  overflow-x: hidden; // ✅ Previene scroll horizontal
-  overflow-y: auto; // ✅ Permite scroll vertical si es necesario
+
+  // No cambiar a `overflow-x: clip`: se probó y rompe el `position: sticky` del
+  // mapa de `/origenes`, que con este par sí se queda fijo.
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &__mf {
     width: 100%;
-    flex: 1 1 auto; // ✅ Se adapta al contenido
-    background-color: #ffffff; // ✅ Fondo blanco
+    flex: 1 1 auto;
+    background-color: $fm-surface-card;
     display: flex;
     flex-direction: column;
   }
@@ -77,10 +126,10 @@ html {
 }
 
 .fmc-back-button {
-  color: #6d2649;
+  color: $principal-purple;
   font-weight: 700;
   font-size: 1.3rem;
-  font-family: "Economica", sans-serif;
+  font-family: $font-economica;
 }
 
 // Páginas legales (política de datos y términos): comparten maquetación
@@ -88,12 +137,12 @@ html {
 .fmc-legal {
   max-width: 54rem;
 
-  // Un documento largo sobre la foto de fondo del sitio se vuelve difícil de
-  // leer. Misma superficie blanca que ya usan la confirmación del pedido y el
-  // formulario de contacto, para que las tres se sientan la misma pieza.
-  background: #fff;
+  // Un documento largo necesita despegarse del lienzo para leerse como lo que
+  // es. Misma superficie que ya usan la confirmación del pedido y el formulario
+  // de contacto, para que las tres se sientan la misma pieza.
+  background: $fm-surface-card;
   border-radius: 0.75rem;
-  box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
+  box-shadow: $fm-shadow-md;
   // Sobrescribe el canal estrecho de `.container`: a 54rem de ancho el texto
   // no puede ir pegado al borde de la tarjeta.
   padding-left: 2.25rem;
@@ -134,23 +183,8 @@ html {
   }
 }
 
-// Botones flotantes (WhatsApp y carrito). Comparten esquina y se colocan uno al
-// lado del otro, así que su tamaño y separación salen de aquí: si uno cambia,
-// el otro se reubica solo y el pie sabe cuánto espacio dejarles libre.
-:root {
-  // 16px de margen es el patrón habitual de Material; por debajo, en un
-  // celular, los botones chocan con las esquinas redondeadas y con la zona del
-  // gesto de borde.
-  --fab-offset: 1rem;
-  // 56px es el FAB regular de Material y queda holgado sobre los 44x44 que las
-  // guías de accesibilidad recomiendan como objetivo táctil (WCAG 2.5.5). Por
-  // debajo de 44 se vuelve difícil de acertar con el pulgar.
-  --fab-size: 56px;
-  --fab-gap: 0.75rem;
-}
-
-// Mientras el pie está a la vista los botones se esconden, en vez de reservar
-// una franja vacía al final de cada página para que no lo tapen.
+// Mientras el pie está a la vista los botones flotantes se esconden, en vez de
+// reservar una franja vacía al final de cada página para que no lo tapen.
 .fmc-fab-hidden {
   opacity: 0;
   visibility: hidden;

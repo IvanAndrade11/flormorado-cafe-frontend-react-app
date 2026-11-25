@@ -20,9 +20,9 @@
     resize: vertical;
   }
 
-  // La página tiene una foto de fondo a pantalla completa: sin una superficie
-  // propia, el título, la frase de entrada, el formulario y el consentimiento
-  // pierden contraste.
+  // Todo el contenido va dentro de esta tarjeta, el título incluido: un
+  // formulario largo necesita despegarse del lienzo para leerse como una pieza
+  // y no como texto suelto.
   &__surface {
     background: #fff;
     border-radius: 0.75rem;

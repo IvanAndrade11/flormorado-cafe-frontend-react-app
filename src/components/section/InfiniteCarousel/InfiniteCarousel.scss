@@ -1,9 +1,17 @@
 @use "@/styles/globals.scss" as *;
 
-:root {
-  --duration: 0.45s;
-  --easing: cubic-bezier(0.2, 0.6, 0.2, 1);
-  --shadow-strong: 0 18px 40px rgba(0, 0, 0, 0.2);
+.banner-carousel-title {
+  background: $principal-purple-gradient;
+
+  a {
+    display: block;
+    cursor: pointer;
+    padding: 64px;
+    text-align: center;
+    color: $principal-beige !important;
+    font-size: 28px;
+    font-weight: 700;
+  }
 }
 
 @keyframes scroll {
@@ -64,12 +72,12 @@
   text-align: center;
   cursor: pointer;
   transition:
-    transform var(--duration) var(--easing),
-    box-shadow var(--duration) var(--easing);
+    transform var(--fm-duration) var(--fm-easing),
+    box-shadow var(--fm-duration) var(--fm-easing);
 
   &:hover {
     transform: scale(1.04);
-    box-shadow: var(--shadow-strong);
+    box-shadow: var(--fm-shadow-strong);
   }
 }
 

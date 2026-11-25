@@ -1,3 +1,5 @@
+import "./StoreCard.scss";
+
 import React from "react";
 import { Card, Col, ListGroup, Button } from "react-bootstrap";
 
