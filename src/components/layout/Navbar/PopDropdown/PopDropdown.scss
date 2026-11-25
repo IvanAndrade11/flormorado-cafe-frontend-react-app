@@ -1,11 +1,33 @@
 @use "@/styles/globals.scss" as *;
 
+.fmc-dropdown {
+  // El disparador es un enlace de la barra como los demás, así que no lleva la
+  // flecha que Bootstrap le pone a los desplegables.
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  .dropdown-menu {
+    padding: 0;
+    margin-top: 0;
+    border: none;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    box-shadow: $fm-shadow-md;
+    max-height: min(70vh, 28rem);
+    overflow-y: auto;
+  }
+}
+
 .fmc-dropdown-item {
   color: $principal-purple !important;
   background-color: $principal-beige !important;
   width: 250px !important;
+  white-space: normal;
+  padding: 0.75rem 1rem;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $principal-purple !important;
     color: $principal-beige !important;
   }

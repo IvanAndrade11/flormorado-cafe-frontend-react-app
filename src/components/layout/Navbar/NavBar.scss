@@ -1,14 +1,41 @@
 @use "@/styles/globals.scss" as *;
 
 .flormorado-navbar {
+  // Acompaña el recorrido en vez de quedarse arriba del todo. `sticky` y no
+  // `fixed`: así ocupa su sitio en el flujo y no hay que reservarle una franja
+  // equivalente en cada pantalla.
+  position: sticky;
+  top: 0;
+  z-index: 1030; // el offcanvas de Bootstrap va a 1045 y sigue abriéndose encima
   background: $fm-surface-section;
   box-shadow: $fm-shadow-sm;
+  align-items: initial;
   transition:
+    transform 0.28s var(--fm-easing),
     background-color 0.3s ease,
     color 0.3s ease,
     box-shadow 0.3s ease;
-  max-height: 120px;
-  align-items: initial;
+
+  // Se aparta al bajar y vuelve al subir (ver `useHideOnScroll`). Mover solo
+  // `transform` deja el trabajo en el compositor; la barra no reflúa.
+  &[data-hidden="true"] {
+    transform: translateY(-100%);
+  }
+
+  // El alto lo impone la variable y no el contenido, porque de ese número
+  // dependen la compensación de las anclas y la de la portada: si lo pusiera el
+  // contenido, cambiar el logotipo descuadraría las dos.
+  > .container {
+    height: var(--fm-navbar-h);
+    display: flex;
+    align-items: center;
+
+    > .navbar {
+      width: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 
   .flormorado-navbar__brand {
     color: $principal-purple;
@@ -68,15 +95,11 @@
 }
 
 // El inicio abre con un video a todo el ancho (ver `OVERLAY_NAVBAR_URLS`): la
-// barra se superpone y va transparente para no partirlo con una franja beige.
-// El morado al pasar el cursor lo hereda del bloque de arriba, que gana por
-// especificidad: `.flormorado-navbar:hover` pesa más que esta clase sola.
-.flormorado-navbar--overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
+// barra se superpone y va translúcida para no partirlo con una franja beige.
+// En cuanto se despega del tope ya no hay video detrás, así que vuelve a ser la
+// barra de siempre: por eso los colores claros cuelgan de `:not([data-scrolled])`
+// y no hay que deshacerlos uno por uno.
+.flormorado-navbar--overlay:not([data-scrolled="true"]) {
   // No es transparente del todo: un velo que se desvanece hacia abajo. El texto
   // es beige y el video cambia de fotograma, así que sin él la barra se vuelve
   // ilegible cada vez que pasa una zona clara.
@@ -135,6 +158,12 @@
     filter: brightness(0) invert(1);
   }
 
+  @media screen and (min-width: 991px) {
+    .fmc-navbar-button:hover span img {
+      filter: none;
+    }
+  }
+
   // Bootstrap dibuja la hamburguesa con un SVG negro embebido en una variable.
   // Sobre el video no se ve, así que se reemplaza por el mismo trazo en beige.
   .navbar-toggler {
@@ -144,12 +173,6 @@
 
     &:focus {
       box-shadow: 0 0 0 0.2rem rgba(255, 246, 230, 0.3);
-    }
-  }
-
-  @media screen and (min-width: 991px) {
-    .fmc-navbar-button:hover span img {
-      filter: none;
     }
   }
 }
@@ -191,4 +214,10 @@
 .fmc-offcanvas .accordion-item {
   border: none;
   background-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flormorado-navbar {
+    transition: none;
+  }
 }

@@ -2,19 +2,27 @@ import "./NavContent.scss";
 
 import React from "react";
 import { Nav } from "react-bootstrap";
-import { icons, NAVBAR_MENU_ITEMS, scrollToSection } from "@/utils/constants";
+import { icons, scrollToSection } from "@/utils/constants";
 import { MenuMobile } from "../MenuMobile/MenuMobile";
 import { PopDropdown } from "../PopDropdown/PopDropdown";
 import { useNavigate, useLocation } from "react-router-dom";
 import { URLS } from "@/utils/constants";
-import { isMobile } from "react-device-detect";
 import { Button } from "react-bootstrap";
+import { NavbarMenuItem } from "@/types/components";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-export const NavContent: React.FC<{ handleClose: () => void }> = ({
-  handleClose,
-}) => {
+export const NavContent: React.FC<{
+  items: NavbarMenuItem[];
+  handleClose: () => void;
+}> = ({ items, handleClose }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  // Quien decide si hay hamburguesa es el `expand="lg"` de Bootstrap, no el
+  // user agent: con `isMobile` una ventana de escritorio estrecha abría el
+  // offcanvas y le metía dentro los desplegables de escritorio, y una tableta
+  // ancha recibía el acordeón con la barra desplegada.
+  const isDesktop = useMediaQuery("(min-width: 992px)");
 
   const redirect = (url: string) => {
     handleClose();
@@ -28,12 +36,12 @@ export const NavContent: React.FC<{ handleClose: () => void }> = ({
   return (
     <>
       <Nav className="justify-content-end flex-grow-1 pe-3">
-        {NAVBAR_MENU_ITEMS.map((item) =>
+        {items.map((item) =>
           item.dropdown ? (
-            isMobile ? (
-              <MenuMobile key={item.id} item={item} redirect={redirect} />
-            ) : (
+            isDesktop ? (
               <PopDropdown key={item.id} item={item} redirect={redirect} />
+            ) : (
+              <MenuMobile key={item.id} item={item} redirect={redirect} />
             )
           ) : (
             <Nav.Link
@@ -41,7 +49,7 @@ export const NavContent: React.FC<{ handleClose: () => void }> = ({
               onClick={() => redirect(item.url)}
               className="fmc-navbar-link nav-link mx-2"
             >
-              {isMobile && (
+              {!isDesktop && (
                 <img
                   src={icons.GrainCoffee}
                   alt="Grano de Café Flormorado"

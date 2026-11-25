@@ -1,55 +1,82 @@
 import "./PopDropdown.scss";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { OverlayTrigger, Popover, ListGroup, Nav } from "react-bootstrap";
+import { Dropdown, Nav, NavItem } from "react-bootstrap";
 import { NavbarMenuItem } from "@/types/components";
 
+// Abrir casi al instante y cerrar con calma: así el menú no parpadea al cruzar
+// la barra de camino a otro sitio, y da tiempo a bajar hasta el panel.
+const OPEN_DELAY = 120;
+const CLOSE_DELAY = 250;
+
+/**
+ * Desplegable de escritorio.
+ *
+ * Es el `Dropdown` de react-bootstrap y no un popover a mano porque trae de
+ * fábrica lo que hacía falta: `aria-expanded`, apertura con Enter o Espacio,
+ * recorrido con las flechas, cierre con Escape y al hacer clic fuera.
+ *
+ * Se usa `Dropdown` suelto y no `NavDropdown` porque este último no deja poner
+ * clases en el disparador, y el disparador tiene que ser un enlace de la barra
+ * como cualquier otro: con `NavDropdown` quedaban desalineados con «Inicio».
+ *
+ * Encima se le añade lo que no trae: se abre al pasar el cursor, y el clic en
+ * el título lleva a la página, como siempre.
+ */
 export const PopDropdown: React.FC<{
   item: NavbarMenuItem;
   redirect: (url: string) => void;
 }> = ({ item, redirect }) => {
-  const [hoveredDropdown, setHoveredDropdown] = useState<boolean>(false);
-  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [show, setShow] = useState(false);
+  const timer = useRef<number | undefined>(undefined);
+
+  const schedule = (next: boolean, delay: number) => {
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setShow(next), delay);
+  };
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const { id, title, url, subItems } = item;
 
-  const popDropdown = (
-    <Popover
-      id="popover-basic"
-      onPointerEnter={() => setHoveredDropdown(true)}
-      onPointerLeave={() => setHoveredDropdown(false)}
-      key={item.id}
+  const goToPage = () => {
+    window.clearTimeout(timer.current);
+    setShow(false);
+    redirect(url);
+  };
+
+  return (
+    <Dropdown
+      as={NavItem}
+      className="fmc-dropdown"
+      show={show}
+      onToggle={(next) => {
+        window.clearTimeout(timer.current);
+        setShow(next);
+      }}
+      onMouseEnter={() => schedule(true, OPEN_DELAY)}
+      onMouseLeave={() => schedule(false, CLOSE_DELAY)}
     >
-      <ListGroup>
+      <Dropdown.Toggle
+        as={Nav.Link}
+        id={`fmc-dropdown-${id}`}
+        className="fmc-navbar-link nav-link mx-2"
+        onClick={goToPage}
+      >
+        {title}
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu renderOnMount>
         {subItems?.map((subItem) => (
-          <ListGroup.Item
+          <Dropdown.Item
             key={subItem.id}
-            className="fmc-dropdown-item py-3"
-            action
+            className="fmc-dropdown-item"
             onClick={() => redirect(subItem.url)}
           >
             {subItem.title}
-          </ListGroup.Item>
+          </Dropdown.Item>
         ))}
-      </ListGroup>
-    </Popover>
-  );
-
-  return (
-    <OverlayTrigger
-      placement="bottom"
-      show={hoveredDropdown || showDropdown}
-      delay={{ show: 200, hide: 300 }}
-      overlay={popDropdown}
-      onToggle={(nextShow) => setShowDropdown(nextShow)}
-    >
-      <Nav.Link
-        key={id}
-        onClick={() => redirect(url)}
-        className="fmc-navbar-link nav-link mx-2"
-      >
-        {title}
-      </Nav.Link>
-    </OverlayTrigger>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
