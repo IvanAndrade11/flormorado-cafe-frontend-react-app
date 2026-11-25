@@ -9,6 +9,11 @@
   position: relative;
   width: 100%;
   max-height: 92vh;
+  // La cabecera se superpone al video en vez de empujarlo hacia abajo, así que
+  // la portada sube por detrás de ella y le devuelve ese alto como relleno para
+  // que el contenido no quede tapado.
+  margin-top: calc(-1 * var(--fm-header-h));
+  padding-top: var(--fm-header-h);
   overflow: hidden;
   display: flex;
   align-items: center;
