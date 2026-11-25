@@ -44,3 +44,18 @@ $font-flormorado: "Source Sans 3", sans-serif;
   font-style: normal;
   font-display: swap;
 }
+
+/* Mixins */
+
+// Encabezado de sección: lo comparten el título de `/contacto` y el de su FAQ.
+@mixin section-title {
+  font-family: "Economica", sans-serif;
+  font-weight: bold;
+  font-size: 2.4rem;
+  color: $principal-purple;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
+}

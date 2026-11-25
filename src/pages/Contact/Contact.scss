@@ -3,9 +3,14 @@
 .fmc-contact {
   padding-bottom: 2rem;
 
+  &__title {
+    @include section-title;
+    margin-bottom: 0.5rem;
+  }
+
   &__lead {
     max-width: 42rem;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1.5rem;
     text-align: center;
     color: $principal-cafe;
   }
@@ -16,12 +21,14 @@
   }
 
   // La página tiene una foto de fondo a pantalla completa: sin una superficie
-  // propia, el formulario y el texto de consentimiento pierden contraste.
+  // propia, el título, la frase de entrada, el formulario y el consentimiento
+  // pierden contraste.
   &__surface {
     background: #fff;
     border-radius: 0.75rem;
     box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
-    margin: 0 0 2rem;
+    // Separa del navbar, que es lo que antes daba el `Title` de la página.
+    margin: 3rem 0 2rem;
     padding: 2rem 1.5rem 0.5rem;
 
     @media screen and (max-width: 576px) {

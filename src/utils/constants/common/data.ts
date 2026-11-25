@@ -74,7 +74,13 @@ export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
     title: "Contáctanos",
     url: URLS.contact,
     dropdown: true,
-    subItems: [{ id: "faq", title: "Preguntas frecuentes", url: URLS.home }],
+    subItems: [
+      {
+        id: "faq",
+        title: "Preguntas frecuentes",
+        url: `${URLS.contact}#preguntas-frecuentes`,
+      },
+    ],
   },
   {
     id: "blog",
