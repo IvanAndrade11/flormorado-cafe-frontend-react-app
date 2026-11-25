@@ -16,17 +16,6 @@
   transform: scale(1.05);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .fmc-product-gallery-carousel {
   @media screen and (max-width: 1024px) {
     margin-bottom: -3rem;

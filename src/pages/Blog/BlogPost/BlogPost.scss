@@ -4,7 +4,7 @@
   font-family: "Source Sans 3", sans-serif;
 
   @media screen and (min-width: 1024px) {
-    background: rgba($principal-beige, 0.9);
+    background: $fm-surface-section;
     margin-top: 5rem;
     margin-bottom: 5rem;
   }

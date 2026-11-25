@@ -10,11 +10,13 @@
 // que en un monitor de 27". Las columnas van alineadas a la izquierda porque una
 // lista de enlaces centrada cuesta más de recorrer con la vista; lo único
 // centrado es la línea de copyright, que es lo menos importante de la página.
+// El pie va en el morado de la marca: con el sitio entero en beige, un pie
+// beige no cerraría la página, se leería como una sección más.
 .footer-fm {
   margin-top: auto; // empuja el pie al final de la página
   flex-shrink: 0;
-  background-color: $principal-beige;
-  border-top: 1px solid #e5e5e5;
+  background-color: $principal-purple;
+  color: $principal-beige;
   padding: 2.5rem 1.5rem 0;
 
   &__inner {
@@ -62,9 +64,15 @@
   }
 
   &__logo {
-    max-height: 135px;
-    height: auto;
-    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    font-size: 2.2rem;
+  }
+
+  &__isotype {
+    font-size: 6.4rem;
   }
 
   &__social {
@@ -76,10 +84,10 @@
     // Dentro de un contenedor flex ese porcentaje no tiene contra qué
     // resolverse y la imagen colapsa a cero, así que van con medidas
     // explícitas en vez de depender del tamaño intrínseco.
-    img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
+    .footer-fm__icon {
+      width: 30px;
+      height: 30px;
+      margin-top: 30px;
     }
   }
 
@@ -103,6 +111,10 @@
     }
   }
 
+  &__social a:hover .footer-fm__icon {
+    background-color: $fm-surface-card;
+  }
+
   &__col ul li {
     margin-bottom: 0.6rem;
     line-height: 1.4;
@@ -116,26 +128,71 @@
     align-items: flex-start;
     gap: 0.5rem;
 
-    img {
+    .footer-fm__icon {
       width: 20px;
       height: 20px;
-      object-fit: contain;
-      margin-top: 0.1rem;
-      flex: none;
+      margin-top: 0.15rem;
+    }
+  }
+
+  // Los iconos van como máscara y no como `<img>` porque los originales traen
+  // su propio color de marca —el azul de Facebook, el degradado de Instagram—
+  // y sobre el morado del pie se vuelven una mancha. Así el color lo pone el
+  // pie y el archivo solo aporta la silueta.
+  &__icon {
+    display: inline-block;
+    flex: none;
+    background-color: $principal-beige;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    transition: background-color 0.2s ease;
+
+    &--facebook {
+      mask-image: url("@/assets/icons/network/facebook-mono.svg");
+      -webkit-mask-image: url("@/assets/icons/network/facebook-mono.svg");
+    }
+
+    &--instagram {
+      mask-image: url("@/assets/icons/network/instagram-mono.svg");
+      -webkit-mask-image: url("@/assets/icons/network/instagram-mono.svg");
+    }
+
+    &--whatsapp {
+      mask-image: url("@/assets/icons/network/whatsapp-mono.svg");
+      -webkit-mask-image: url("@/assets/icons/network/whatsapp-mono.svg");
+    }
+
+    &--youtube {
+      mask-image: url("@/assets/icons/network/youtube-mono.svg");
+      -webkit-mask-image: url("@/assets/icons/network/youtube-mono.svg");
+    }
+
+    &--mail {
+      mask-image: url("@/assets/icons/contact/mail-mono.svg");
+      -webkit-mask-image: url("@/assets/icons/contact/mail-mono.svg");
+    }
+
+    &--phone {
+      mask-image: url("@/assets/icons/contact/phone-mono.svg");
+      -webkit-mask-image: url("@/assets/icons/contact/phone-mono.svg");
     }
   }
 
   &__bottom {
     max-width: 1100px;
     margin: 2rem auto 0;
-    border-top: 1px solid rgba(59, 35, 20, 0.12);
+    border-top: 1px solid rgba(255, 246, 230, 0.2);
     padding: 1rem 0 1.5rem;
     text-align: center;
 
     p {
       margin: 0;
       font-size: 12px;
-      color: #8a7566;
+      color: rgba(255, 246, 230, 0.75);
     }
   }
 
@@ -163,7 +220,12 @@
     }
 
     &__logo {
-      max-height: 115px;
+      font-size: 1.9rem;
+      gap: 0.7rem;
+    }
+
+    &__isotype {
+      font-size: 3.6rem;
     }
 
     &__title {

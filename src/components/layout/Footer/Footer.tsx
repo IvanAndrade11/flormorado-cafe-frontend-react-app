@@ -1,33 +1,29 @@
 import "./Footer.scss";
 import React from "react";
 
-import { CONSUMER_AUTHORITY, images, icons, URLS } from "@/utils/constants";
-import { Image } from "react-bootstrap";
+import { CONSUMER_AUTHORITY, URLS } from "@/utils/constants";
 import { Link } from "react-router-dom";
+import { Isotype, Wordmark } from "@/components/ui";
 
 const SOCIAL = [
   {
     id: "facebook",
     url: "https://www.facebook.com/flormoradocafe",
-    icon: icons.Facebook,
     label: "Facebook Flormorado Café",
   },
   {
     id: "instagram",
     url: "https://www.instagram.com/flormoradocafe/",
-    icon: icons.Instagram,
     label: "Instagram Flormorado Café",
   },
   {
     id: "whatsapp",
     url: "https://wa.me/573132316080",
-    icon: icons.WhatsApp,
     label: "WhatsApp Flormorado Café",
   },
   {
     id: "youtube",
     url: "https://www.youtube.com/@flormoradocafe",
-    icon: icons.YouTube,
     label: "YouTube Flormorado Café",
   },
 ];
@@ -37,11 +33,13 @@ export const Footer: React.FC = () => {
     <footer id="footer" className="footer-fm">
       <div className="footer-fm__inner">
         <div className="footer-fm__brand">
-          <Image
-            src={images.LogoNombreFondoBeige}
-            className="footer-fm__logo"
-            alt="Flormorado Café"
-          />
+          {/* El logo completo, armado con sus dos piezas: el PNG de siempre
+              trae el fondo beige quemado y sobre el morado del pie saldría
+              como un recuadro claro. */}
+          <span className="footer-fm__logo">
+            <Isotype className="footer-fm__isotype" />
+            <Wordmark />
+          </span>
           <ul className="footer-fm__social">
             {SOCIAL.map((network) => (
               <li key={network.id}>
@@ -51,7 +49,9 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   aria-label={network.label}
                 >
-                  <img src={network.icon} alt="" />
+                  <span
+                    className={`footer-fm__icon footer-fm__icon--${network.id}`}
+                  />
                 </a>
               </li>
             ))}
@@ -66,13 +66,13 @@ export const Footer: React.FC = () => {
           <ul>
             <li>
               <a href="mailto:info@flormoradocafe.com">
-                <img src={icons.Mail} alt="" />
+                <span className="footer-fm__icon footer-fm__icon--mail" />
                 info@flormoradocafe.com
               </a>
             </li>
             <li>
               <a href="tel:3132316080">
-                <img src={icons.Phone} alt="" />
+                <span className="footer-fm__icon footer-fm__icon--phone" />
                 +57 313 231 60 80
               </a>
             </li>

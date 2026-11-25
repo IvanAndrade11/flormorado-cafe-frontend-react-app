@@ -6,6 +6,46 @@ $principal-beige-oscuro: #e4e2dd;
 $principal-cafe: #512a18;
 $principal-verde: #104928;
 
+/* Superficies
+
+   Tres planos, de atrás hacia adelante: lienzo de página, banda de sección y
+   tarjeta. Sin esa jerarquía un sitio entero en beige se ve plano, porque todo
+   queda al mismo nivel. Van de menos a más claro para que lo que está encima
+   parezca levantado.
+
+   El lienzo no es `$principal-beige-oscuro`: ese es un gris frío y, debajo del
+   beige cálido de la marca, lo ensucia. */
+
+$fm-surface-page: #f4ece0;
+$fm-surface-section: $principal-beige;
+$fm-surface-card: #fffdf8;
+$fm-surface-sunken: #ebe0cf;
+
+/* Bordes y sombras
+
+   En tinta café, no en negro: sobre crema un negro puro se lee gris sucio. */
+
+$fm-border-soft: rgba(81, 42, 24, 0.12);
+$fm-border-strong: rgba(81, 42, 24, 0.22);
+
+$fm-shadow-sm:
+  0 1px 2px rgba(81, 42, 24, 0.05),
+  0 2px 6px rgba(81, 42, 24, 0.05);
+$fm-shadow-md: 0 4px 12px rgba(81, 42, 24, 0.09);
+$fm-shadow-lg: 0 16px 32px rgba(81, 42, 24, 0.13);
+
+/* Texto */
+
+$fm-text-strong: $principal-cafe;
+$fm-text-body: #4a3a30;
+$fm-text-muted: #7a6a5f;
+
+/* Radios */
+
+$fm-radius-sm: 8px;
+$fm-radius-md: 12px;
+$fm-radius-lg: 20px;
+
 /* Gradients */
 
 $principal-purple-gradient: linear-gradient(
@@ -14,42 +54,22 @@ $principal-purple-gradient: linear-gradient(
   $principal-purple 100%
 );
 
-$principal-beige-gradient: linear-gradient(
-  180deg,
-  $principal-beige 0%,
-  $principal-beige-oscuro 100%
-);
-
 $secondary-beige-gradient: linear-gradient(
   180deg,
   #fff6e6e1 -1.39%,
   $principal-beige 100%
 );
 
-$principal-beige-transparent-gradient: linear-gradient(
-  180deg,
-  $principal-beige 25%,
-  #fcf6ea 25%,
-  transparent 100%
-);
-
 /* Fonts */
 
 $font-flormorado: "Source Sans 3", sans-serif;
-
-@font-face {
-  font-family: "Economica";
-  src: url("@assets/fonts/Economica/Economica-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+$font-economica: "Economica", sans-serif;
 
 /* Mixins */
 
 // Encabezado de sección: lo comparten el título de `/contacto` y el de su FAQ.
 @mixin section-title {
-  font-family: "Economica", sans-serif;
+  font-family: $font-economica;
   font-weight: bold;
   font-size: 2.4rem;
   color: $principal-purple;

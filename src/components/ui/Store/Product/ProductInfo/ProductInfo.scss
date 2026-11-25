@@ -53,14 +53,8 @@ hr {
   margin: 2rem 0;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
 .product-attributes {
-  background-color: $principal-beige-oscuro;
+  background-color: $fm-surface-sunken;
   border: none;
   padding: 2rem;
   border-radius: 18px;

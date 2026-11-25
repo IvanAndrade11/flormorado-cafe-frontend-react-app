@@ -1,7 +1,8 @@
 @use "@/styles/globals.scss" as *;
 
 .fmc-product-detail {
-  background: $principal-beige;
+  background: $fm-surface-card;
+  box-shadow: $fm-shadow-sm;
   margin-top: 1rem;
   margin-bottom: 2rem;
   padding: 2rem;

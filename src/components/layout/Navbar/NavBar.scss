@@ -1,42 +1,25 @@
 @use "@/styles/globals.scss" as *;
 
 .flormorado-navbar {
-  background: $principal-beige-transparent-gradient;
-  transition: all 0.3s ease;
+  background: $fm-surface-section;
+  box-shadow: $fm-shadow-sm;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
   max-height: 120px;
   align-items: initial;
 
-  &:hover {
-    background-color: $principal-beige;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  @media screen and (max-width: 990px) {
-    background: $principal-beige;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-}
-
-// Páginas con fondo propio (ver `SOLID_NAVBAR_URLS`). Va después del bloque de
-// arriba a propósito: tiene su misma especificidad y gana por orden.
-.flormorado-navbar--solid {
-  background: $principal-beige;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  // El logotipo morado no pega sobre el morado del hover, así que la marca va
-  // escrita, con la Economica de los títulos de producto.
-  .flormorado-navbar__wordmark {
-    font-family: "Economica", sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 1;
-    letter-spacing: 1px;
+  .flormorado-navbar__brand {
     color: $principal-purple;
     transition: color 0.3s ease;
+  }
+
+  .flormorado-navbar__isotype {
+    font-size: 3.4rem;
 
     @media screen and (max-width: 990px) {
-      font-size: 2rem;
+      font-size: 2.8rem;
     }
   }
 
@@ -45,9 +28,9 @@
   @media screen and (min-width: 991px) {
     &:hover {
       background: $principal-purple;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: $fm-shadow-md;
 
-      .flormorado-navbar__wordmark {
+      .flormorado-navbar__brand {
         color: $principal-beige;
       }
 
@@ -68,10 +51,10 @@
 
         &:hover,
         &:active {
-          background-color: #ffffff !important;
-          border-color: #ffffff;
+          background-color: $fm-surface-card !important;
+          border-color: $fm-surface-card;
           color: $principal-purple;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+          box-shadow: $fm-shadow-md;
         }
 
         // El carrito es negro y el botón lo invierte a blanco para el morado;
@@ -80,6 +63,93 @@
           filter: none;
         }
       }
+    }
+  }
+}
+
+// El inicio abre con un video a todo el ancho (ver `OVERLAY_NAVBAR_URLS`): la
+// barra se superpone y va transparente para no partirlo con una franja beige.
+// El morado al pasar el cursor lo hereda del bloque de arriba, que gana por
+// especificidad: `.flormorado-navbar:hover` pesa más que esta clase sola.
+.flormorado-navbar--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  // No es transparente del todo: un velo que se desvanece hacia abajo. El texto
+  // es beige y el video cambia de fotograma, así que sin él la barra se vuelve
+  // ilegible cada vez que pasa una zona clara.
+  background: linear-gradient(
+    180deg,
+    rgba(43, 15, 28, 0.62) 0%,
+    rgba(43, 15, 28, 0.38) 55%,
+    rgba(43, 15, 28, 0) 100%
+  );
+  box-shadow: none;
+
+  .flormorado-navbar__brand,
+  .fmc-navbar-link {
+    color: $principal-beige;
+  }
+
+  .fmc-navbar-link a {
+    color: $principal-beige !important;
+  }
+
+  .fmc-navbar-link:hover,
+  .fmc-navbar-link:focus {
+    border-bottom-color: $principal-beige;
+  }
+
+  .fmc-navbar-button {
+    background-color: transparent;
+    border-color: $principal-beige;
+    color: $principal-beige;
+
+    &:hover,
+    &:active {
+      background-color: $principal-beige !important;
+      border-color: $principal-beige;
+      color: $principal-purple;
+    }
+  }
+
+  // La cinta de anuncios también se superpone, así que deja ver el video.
+  .navbar-carousel-container {
+    background-color: transparent;
+
+    &::before,
+    &::after {
+      background: none;
+    }
+
+    p {
+      color: $principal-beige;
+    }
+  }
+
+  // El icono del carrito es negro y aquí el botón ya no tiene fondo claro
+  // detrás: invertido se lee sobre el video.
+  .fmc-navbar-button span img {
+    filter: brightness(0) invert(1);
+  }
+
+  // Bootstrap dibuja la hamburguesa con un SVG negro embebido en una variable.
+  // Sobre el video no se ve, así que se reemplaza por el mismo trazo en beige.
+  .navbar-toggler {
+    border-color: rgba(255, 246, 230, 0.45);
+
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23fff6e6' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(255, 246, 230, 0.3);
+    }
+  }
+
+  @media screen and (min-width: 991px) {
+    .fmc-navbar-button:hover span img {
+      filter: none;
     }
   }
 }
@@ -111,12 +181,10 @@
 }
 
 .fmc-offcanvas {
-  background-color: $principal-beige;
+  background-color: $fm-surface-section;
 }
 
 .fmc-offcanvas-title {
-  font-family: Economica;
-  font-weight: bold;
   color: $principal-purple;
 }
 

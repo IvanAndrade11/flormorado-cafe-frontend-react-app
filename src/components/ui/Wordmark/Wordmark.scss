@@ -1,0 +1,28 @@
+@use "@/styles/globals.scss" as *;
+
+.fmc-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  font-size: 2rem;
+  color: inherit;
+
+  &__name {
+    font-family: $font-economica;
+    // font-weight: 700;
+    font-size: 1em;
+    letter-spacing: 0.03em;
+  }
+
+  &__kind {
+    font-family: $font-flormorado;
+    font-weight: 600;
+    font-size: 0.31em;
+    letter-spacing: 0.42em;
+    margin-top: 0.75em;
+    // El tracking también separa después de la última letra, así que sin este
+    // descuento la palabra queda corrida a la izquierda bajo la de arriba.
+    margin-right: -0.42em;
+  }
+}

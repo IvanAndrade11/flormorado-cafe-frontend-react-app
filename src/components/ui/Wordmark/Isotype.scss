@@ -1,0 +1,12 @@
+.fmc-isotype {
+  display: inline-block;
+  flex: none;
+  // El tamaño sale del `font-size` del contexto, igual que el logotipo escrito.
+  width: 1em;
+  aspect-ratio: 1643 / 1439;
+  background-color: currentColor;
+  mask: url("@/assets/images/logos/logo-principal.png") no-repeat center /
+    contain;
+  -webkit-mask: url("@/assets/images/logos/logo-principal.png") no-repeat
+    center / contain;
+}

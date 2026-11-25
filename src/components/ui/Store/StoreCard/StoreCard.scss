@@ -1,0 +1,65 @@
+@use "@/styles/globals.scss" as *;
+
+.store-card {
+  transition:
+    transform var(--fm-duration) var(--fm-easing),
+    box-shadow var(--fm-duration) var(--fm-easing);
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: var(--fm-shadow-strong);
+  }
+}
+
+.store-card-image-container {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: var(--fm-radius) var(--fm-radius) 0 0;
+  overflow: hidden;
+  background: $fm-surface-card;
+  box-shadow: var(--fm-shadow);
+}
+
+.store-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  will-change: transform;
+  transition: transform var(--fm-duration) var(--fm-easing);
+  backface-visibility: hidden;
+  transform-origin: center 60%;
+
+  &:hover {
+    transform: scale(1.08) translateY(-2%);
+  }
+}
+
+.store-card-body {
+  background-color: $fm-surface-card;
+  color: $principal-purple;
+  padding-bottom: 0 !important;
+}
+
+.store-card-body-title {
+  font-family: $font-economica;
+  font-weight: 700;
+  font-size: 2rem !important;
+}
+
+.store-card-list-group {
+  border: none !important;
+}
+
+.store-card-list-group-item {
+  background-color: $fm-surface-card;
+  color: $principal-verde;
+}
+
+.store-card-body-button {
+  padding-top: 0 !important;
+  text-align: center;
+  background: $fm-surface-card;
+  border-radius: 0 0 var(--fm-radius) var(--fm-radius);
+}

@@ -2,6 +2,10 @@ export * from "./ListItemWithIcon/ListItemWithIcon";
 
 export * from "./Title/Title";
 
+export * from "./Wordmark/Wordmark";
+
+export * from "./Wordmark/Isotype";
+
 export * from "./WhatsAppButton/WhatsAppButton";
 
 export * from "./CarouselMessage/CarouselMessage";

@@ -2,27 +2,24 @@ import "./NavBar.scss";
 
 import React, { useEffect, useState } from "react";
 import NavbarBs from "react-bootstrap/Navbar";
-import { isMobile } from "react-device-detect";
 import { Container, Offcanvas } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import { CarouselMessage } from "@/components/ui";
+import { CarouselMessage, Isotype, Wordmark } from "@/components/ui";
 import {
   getBlogSubItems,
-  images,
   NAVBAR_MENU_ITEMS,
-  SOLID_NAVBAR_URLS,
+  OVERLAY_NAVBAR_URLS,
   URLS,
 } from "@/utils/constants";
 import store from "@/app/providers/redux/store";
 import { IBlog, IBlogFlormorado } from "@/types/configCat";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { NavContent } from "./NavContent/NavContent";
-import { Logo } from "./Logo/Logo";
 
 export const Navbar: React.FC = () => {
   const { pathname } = useLocation();
 
-  const solid = SOLID_NAVBAR_URLS.includes(pathname);
+  const overlay = OVERLAY_NAVBAR_URLS.includes(pathname);
 
   const [show, setShow] = useState(false);
 
@@ -47,7 +44,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <div
-      className={`flormorado-navbar${solid ? " flormorado-navbar--solid" : ""}`}
+      className={`flormorado-navbar${overlay ? " flormorado-navbar--overlay" : ""}`}
     >
       <CarouselMessage />
       {pathname !== URLS.checkout && (
@@ -55,20 +52,14 @@ export const Navbar: React.FC = () => {
           <NavbarBs expand="lg">
             <Container fluid>
               <NavbarBs.Brand href="/" style={{ marginRight: "0" }}>
-                {solid ? (
-                  <span className="flormorado-navbar__wordmark">
-                    FLORMORADO
-                  </span>
+                {/* Sobre el video el símbolo se lee mejor que la palabra, que
+                    además repetiría el logotipo del propio hero. */}
+                {overlay ? (
+                  <Isotype className="flormorado-navbar__brand flormorado-navbar__isotype" />
                 ) : (
-                  <Logo src={images.Logo} width={62} />
+                  <Wordmark className="flormorado-navbar__brand" />
                 )}
               </NavbarBs.Brand>
-              {/* La palabra ya hace de logotipo: repetirla sobraría. */}
-              {isMobile && !solid && (
-                <a href="/">
-                  <Logo src={images.LogoSoloNombreFondoBeige} width={116} />
-                </a>
-              )}
               <NavbarBs.Toggle
                 aria-controls={`fmc-principal-navbar`}
                 onClick={toggleShow}
@@ -83,7 +74,7 @@ export const Navbar: React.FC = () => {
               >
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title id={`fmc-principal-navbar-label`}>
-                    <h1 className="fmc-offcanvas-title">FLORMORADO</h1>
+                    <Wordmark className="fmc-offcanvas-title" />
                   </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>

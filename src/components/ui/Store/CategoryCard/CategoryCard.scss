@@ -2,9 +2,10 @@
 
 .categories-card {
   cursor: pointer;
-  background-color: $principal-beige;
+  background-color: $fm-surface-card;
   color: $principal-purple;
-  font-family: "Economica", sans-serif;
+  font-family: $font-economica;
+  border: 1px solid $fm-border-soft;
   transition: all 0.3s ease-in-out;
 
   &:hover {

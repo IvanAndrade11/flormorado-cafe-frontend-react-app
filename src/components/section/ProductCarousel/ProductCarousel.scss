@@ -1,16 +1,11 @@
 @use "@/styles/globals.scss" as *;
-@use "../../../pages/Store/Store.scss" as *;
 
 .fmc-carousel-product-section {
   background-color: transparent;
 
   .fmc-carousel-title {
     background-color: transparent !important;
-    color: white;
-
-    @media (max-width: 768px) {
-      color: $principal-purple;
-    }
+    color: $principal-purple;
 
     a {
       display: block;
@@ -30,9 +25,11 @@
     padding-bottom: 20px;
   }
 
+  // Las flechas de Bootstrap son blancas: sobre el lienzo claro hay que
+  // oscurecerlas, no invertirlas.
   .carousel-control-prev,
   .carousel-control-next {
     width: 6%;
-    filter: invert(1);
+    filter: invert(1) grayscale(1) brightness(0.45);
   }
 }

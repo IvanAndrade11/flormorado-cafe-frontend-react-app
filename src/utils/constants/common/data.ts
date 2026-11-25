@@ -15,9 +15,10 @@ export const URLS = {
   panel: "/panel",
 };
 
-// Páginas con fondo propio de lado a lado: el navbar no puede ir transparente
-// encima, así que va sólido y se invierte a morado al pasar el cursor.
-export const SOLID_NAVBAR_URLS: string[] = [URLS.purpose, URLS.origins];
+// El inicio abre con un video a todo el ancho: ahí el navbar se superpone y va
+// transparente, para no partir la imagen con una franja beige. En el resto del
+// sitio va sólido y dentro del flujo.
+export const OVERLAY_NAVBAR_URLS: string[] = [URLS.home];
 
 export const NAVBAR_MENU_ITEMS: NavbarMenuItem[] = [
   { id: "home", title: "Inicio", url: URLS.home },
