@@ -104,3 +104,35 @@ export interface IOrigin {
   cupProfile: string;
   facts: IOriginFact[];
 }
+
+// Preguntas frecuentes (`/contacto`). Una respuesta se arma con fragmentos
+// porque casi todas enlazan a mitad de frase.
+export interface IFaqLink {
+  text: string;
+  // Interna si empieza por "/"; en otro caso abre en otra pestaña.
+  url: string;
+}
+
+export type IFaqFragment = string | IFaqLink;
+
+export type IFaqParagraph = IFaqFragment[];
+
+export interface IFaqPoint {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface IFaqItem {
+  id: string;
+  question: string;
+  paragraphs: IFaqParagraph[];
+  // Los puntos van después de los párrafos, que son los que entran a la lista.
+  points?: IFaqPoint[];
+}
+
+export interface IFaqGroup {
+  id: string;
+  title: string;
+  items: IFaqItem[];
+}

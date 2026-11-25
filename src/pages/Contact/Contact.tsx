@@ -1,5 +1,5 @@
 import { Turnstile, type TurnstileHandle } from "@/components/common";
-import { Title } from "@/components/ui";
+import { Faq } from "./Faq";
 import "./Contact.scss";
 
 import React, { useRef, useState } from "react";
@@ -112,14 +112,17 @@ export const Contact: React.FC = () => {
 
   return (
     <div className="container fmc-contact">
-      <Title title="¡CONTÁCTANOS!" />
-
-      <p className="fmc-contact__lead">
-        ¿Tienes una pregunta sobre tu pedido, nuestros cafés de origen o quieres
-        ser aliado? Escríbenos y te respondemos en menos de 24 horas hábiles.
-      </p>
-
       <Row className="fmc-contact__surface">
+        <Col xs={12}>
+          <h1 className="fmc-contact__title">¡Contáctanos!</h1>
+
+          <p className="fmc-contact__lead">
+            ¿Tienes una pregunta sobre tu pedido, nuestros cafés de origen o
+            quieres ser aliado? Escríbenos y te respondemos en menos de 24 horas
+            hábiles.
+          </p>
+        </Col>
+
         <Col md={7} className="mb-4">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <fieldset disabled={submitting}>
@@ -372,6 +375,8 @@ export const Contact: React.FC = () => {
           </div>
         </Col>
       </Row>
+
+      <Faq />
     </div>
   );
 };

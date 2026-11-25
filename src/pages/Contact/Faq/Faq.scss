@@ -1,0 +1,152 @@
+@use "@/styles/globals.scss" as *;
+
+// Chevron del acordeón: Bootstrap lo trae gris y lo pinta azul al abrir, así
+// que se reemplaza por uno morado en los dos estados.
+$faq-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236d2649'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
+.fmc-faq {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 24px rgba(59, 35, 20, 0.14);
+  margin-bottom: 2rem;
+  padding: 2.5rem 2rem 2.5rem;
+
+  @media screen and (max-width: 576px) {
+    padding: 1.75rem 1rem;
+  }
+
+  &__title {
+    @include section-title;
+    margin-bottom: 0.5rem;
+  }
+
+  &__lead {
+    max-width: 38rem;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    color: $principal-cafe;
+  }
+
+  &__group {
+    margin-bottom: 2.5rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__group-title {
+    font-family: "Economica", sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: $principal-cafe;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid $principal-purple;
+  }
+
+  &__accordion {
+    --bs-accordion-bg: transparent;
+    --bs-accordion-border-color: #{rgba($principal-cafe, 0.15)};
+    --bs-accordion-border-radius: 0.5rem;
+    --bs-accordion-btn-color: #{$principal-cafe};
+    --bs-accordion-btn-icon: #{$faq-chevron};
+    --bs-accordion-btn-active-icon: #{$faq-chevron};
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem
+      #{rgba($principal-purple, 0.2)};
+    --bs-accordion-active-color: #{$principal-purple};
+    --bs-accordion-active-bg: #{$principal-beige};
+
+    .accordion-button {
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .accordion-body {
+      color: #212529;
+      padding-top: 1.25rem;
+    }
+  }
+
+  &__paragraph {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: $principal-purple;
+      font-weight: 600;
+    }
+  }
+
+  &__points {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin-bottom: 0.85rem;
+      line-height: 1.65;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      img {
+        flex: 0 0 auto;
+        // Centra el grano con la primera línea del texto.
+        margin-top: 0.3rem;
+      }
+
+      strong {
+        color: $principal-cafe;
+      }
+    }
+  }
+
+  &__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    background: rgba($principal-purple, 0.92);
+    border-radius: 12px;
+    color: $principal-beige;
+    margin-top: 2.5rem;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+  }
+
+  &__cta-text {
+    font-family: "Economica", sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+  }
+
+  // Invertido: sobre el morado del bloque, un botón morado se pierde.
+  &__cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: $principal-beige;
+    border-color: $principal-beige;
+    color: $principal-purple;
+    font-weight: 600;
+
+    &:hover,
+    &:active {
+      background-color: #ffffff !important;
+      border-color: #ffffff;
+      color: $principal-purple;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    }
+  }
+}
