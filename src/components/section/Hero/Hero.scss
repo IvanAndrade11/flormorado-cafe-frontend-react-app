@@ -1,14 +1,15 @@
 @use "@/styles/globals.scss" as *;
 
 // La altura no se fija: la pone la proporción del material, que el componente
-// aplica con `aspect-ratio`. Así el encuadre entra entero y no hay nada que
-// recortar. El tope en `vh` es para que en una pantalla muy ancha la portada no
-// crezca por encima de la ventana; además deja asomar el borde de la sección de
-// abajo, que es lo que invita a seguir bajando.
+// aplica con `aspect-ratio`. Así el encuadre entra entero mientras quepa. El
+// tope es la ventana: el video apaisado es más alto que una pantalla, y así se
+// ve lo más grande posible sin obligar a bajar para verlo entero. `dvh` por las
+// barras del navegador en el celular, con `vh` de respaldo.
 .fmc-hero {
   position: relative;
   width: 100%;
-  max-height: 92vh;
+  max-height: 100vh;
+  max-height: 100dvh;
   // La cabecera se superpone al video en vez de empujarlo hacia abajo, así que
   // la portada sube por detrás de ella y le devuelve ese alto como relleno para
   // que el contenido no quede tapado.

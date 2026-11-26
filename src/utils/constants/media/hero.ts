@@ -1,21 +1,19 @@
-import HeroPosterWide from "@/assets/images/banners/banner-hero.jpg";
-
-// Cloudinary sirve el video ya recodificado: el original son 43 MB en `.mov`,
-// y de ahí salen 3 con `q_auto:eco` a 720 de ancho, que es de sobra para un
-// celular. El póster es el primer fotograma del propio video (`so_0`), así que
-// no salta nada al arrancar. Cambiar el encuadre o la calidad es cambiar estas
-// transformaciones, sin tocar un archivo.
+// Cloudinary sirve los dos videos ya recodificados: los originales son 43 y 39
+// MB en `.mov`, y de ahí salen 3 y 3,9 con `q_auto:eco`. El póster es el primer
+// fotograma del propio video (`so_0`), así que no salta nada al arrancar.
+// Cambiar encuadre, calidad o tamaño es cambiar estas transformaciones, sin
+// tocar un archivo.
 const CLOUDINARY_VIDEO = "https://res.cloudinary.com/dcbnyk8uk/video/upload";
+
 const PORTRAIT_ID = "v1795653132/22-11-2026-1795623410_3440340_1_pqmkxg";
+const LANDSCAPE_ID = "v1795707928/desktop_wdnmsi";
 
 export interface IHeroMedia {
-  // Sin video se ve solo el póster, que es lo que pasa en apaisado hasta que
-  // esté el definitivo.
+  // Sin video se ve solo el póster.
   video?: string;
   poster: string;
-  // Las medidas reales del material. La portada adopta esa proporción para no
-  // recortarlo, así que tiene que ser la del archivo, no una aproximación: con
-  // declarar 16/9 una foto de 1920x845 ya pierde un 20% por los lados.
+  // Las medidas reales del archivo. La portada adopta esa proporción para no
+  // recortarlo, así que tiene que ser la suya y no una aproximación.
   aspectRatio: string;
 }
 
@@ -26,20 +24,21 @@ export interface IHeroMedia {
  * apaisada sin recortarse, ni al revés: cada pantalla recibe el encuadre hecho
  * para ella y ninguno se corta.
  *
- * Están aquí, y no en `images`/`videos`, para que viajen en el chunk perezoso
+ * Viven aquí, y no en `images`/`videos`, para que viajen en el chunk perezoso
  * del inicio y no en el inicial: el pie importa `images`, así que todo lo que
- * entre ahí lo descarga también quien llega a una página legal.
- *
- * El vertical ya es el definitivo y vive en Cloudinary, como las imágenes de
- * producto: por eso el video no pesa dentro del paquete. El apaisado sigue
- * pendiente, así que de momento solo tiene póster y en escritorio la portada se
- * ve como una foto fija; cuando llegue se le pone aquí su URL, su póster y **su
- * `aspectRatio` real**, y el componente no cambia.
+ * entre ahí lo descarga también quien llega a una página legal. Y al servirse
+ * desde Cloudinary, como las imágenes de producto, ya no queda ningún video
+ * dentro del paquete.
  */
 export const HERO_MEDIA: Record<"landscape" | "portrait", IHeroMedia> = {
+  // Se sirve en su 3:2 nativo, sin recortar: es más alto que una pantalla
+  // apaisada, y de eso se encarga el tope de la portada repartiendo el recorte
+  // entre arriba y abajo, en vez de descartar una cuarta parte del encuadre de
+  // forma fija.
   landscape: {
-    poster: HeroPosterWide,
-    aspectRatio: "1920 / 845",
+    video: `${CLOUDINARY_VIDEO}/f_mp4,q_auto:eco,w_1600,c_limit/${LANDSCAPE_ID}.mp4`,
+    poster: `${CLOUDINARY_VIDEO}/so_0,f_jpg,q_auto,w_1600,c_limit/${LANDSCAPE_ID}.jpg`,
+    aspectRatio: "1600 / 1066",
   },
   portrait: {
     video: `${CLOUDINARY_VIDEO}/f_mp4,q_auto:eco,w_720,c_limit/${PORTRAIT_ID}.mp4`,
