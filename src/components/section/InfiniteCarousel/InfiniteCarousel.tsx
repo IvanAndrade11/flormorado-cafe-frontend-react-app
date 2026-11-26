@@ -3,13 +3,16 @@ import "./InfiniteCarousel.scss";
 import React, { useEffect, useMemo } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
-import store from "@/app/providers/redux/store";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { scrollToSection } from "@/utils/constants";
 import { ICoffeeGrower } from "@/types/configCat";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+import { useAppSelector } from "@/app/providers/redux";
 
 export const InfiniteCarousel: React.FC = () => {
-  const { coffeeGrowers } = store.getState().main.flags;
+  const { coffeeGrowers } = useAppSelector((state) => state.main.flags);
+
+  const { ref, revealClassName } = useRevealOnScroll<HTMLElement>();
 
   const growersList = useMemo<ICoffeeGrower[]>(() => {
     if (!coffeeGrowers) return [];
@@ -26,7 +29,7 @@ export const InfiniteCarousel: React.FC = () => {
   }, [coffeeGrowers]);
 
   return (
-    <section id="infinite-carousel">
+    <section id="infinite-carousel" ref={ref} className={revealClassName}>
       <div className="banner-carousel-title">
         <a onClick={() => scrollToSection("tab")}>
           Conoce nuestros caficultores aliados

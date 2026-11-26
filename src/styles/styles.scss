@@ -69,6 +69,69 @@ html {
   scroll-padding-top: calc(var(--fm-header-h) + 1rem);
 }
 
+// Aparición por sección (ver `useRevealOnScroll`). Vive aquí y no en un SCSS de
+// componente porque la usan varios árboles.
+//
+// Solo `opacity` y `transform`: nunca `height`, `display` ni `margin`. Una
+// sección sin revelar conserva su caja, así que el documento no cambia de alto
+// y el salto a un ancla aterriza donde debe aunque lo de abajo no haya
+// aparecido todavía. Tampoco lleva `will-change`: crearía bloque contenedor
+// permanente y rompería los `fixed`/`sticky` de dentro.
+.fm-reveal {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  // Sin prisa: a menos de esto la sección ya está entera antes de que dé tiempo
+  // a notar que apareció.
+  transition:
+    opacity 0.9s var(--fm-easing),
+    transform 0.9s var(--fm-easing);
+
+  &--in {
+    opacity: 1;
+    transform: none;
+  }
+
+  // Los hijos marcados entran escalonados detrás de su sección, con un solo
+  // observador para todos. El retardo va por atributo y no por una custom
+  // property en `style` porque TypeScript no admite claves `--*` sin castear.
+  [data-fm-delay] {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition:
+      opacity 0.75s var(--fm-easing),
+      transform 0.75s var(--fm-easing);
+  }
+
+  &--in [data-fm-delay] {
+    opacity: 1;
+    transform: none;
+  }
+
+  &--in [data-fm-delay="1"] {
+    transition-delay: 180ms;
+  }
+
+  &--in [data-fm-delay="2"] {
+    transition-delay: 360ms;
+  }
+
+  &--in [data-fm-delay="3"] {
+    transition-delay: 540ms;
+  }
+}
+
+// Quien pidió menos movimiento ve el contenido tal cual, sin depender de que el
+// JavaScript llegue a revelarlo.
+@media (prefers-reduced-motion: reduce) {
+  .fm-reveal,
+  .fm-reveal--in,
+  .fm-reveal [data-fm-delay] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 body,
 html {
   margin: 0;

@@ -12,14 +12,18 @@ import {
   parseFilterId,
 } from "@/utils/constants";
 import store from "@/app/providers/redux/store";
+import { useAppSelector } from "@/app/providers/redux";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 
 export const Store: React.FC = () => {
+  const { ref, revealClassName } = useRevealOnScroll<HTMLDivElement>();
+
   const [orderId, setOrderId] = useState<OrderId>("older");
   const [selected, setSelected] =
     useState<SelectedFilters>(createEmptyFilters());
 
   const { categoryTitle } = store.getState().main.session;
-  const { storeProducts } = store.getState().main.flags;
+  const { storeProducts } = useAppSelector((state) => state.main.flags);
 
   const allProducts = useMemo<ICoffeeProduct[]>(() => {
     if (!storeProducts) return [];
@@ -80,11 +84,17 @@ export const Store: React.FC = () => {
           {visibleProducts.length > 0 ? (
             <Row>
               <Col>
-                <Row xs={2} sm={2} md={2} lg={3} xl={4} className="g-4">
-                  {visibleProducts.map((item) => (
-                    <StoreCard {...item} key={item.id} />
-                  ))}
-                </Row>
+                <div ref={ref} className={revealClassName}>
+                  <Row xs={2} sm={2} md={2} lg={3} xl={4} className="g-4">
+                    {visibleProducts.map((item, index) => (
+                      <StoreCard
+                        {...item}
+                        key={item.id}
+                        revealDelay={(index % 3) + 1}
+                      />
+                    ))}
+                  </Row>
+                </div>
               </Col>
             </Row>
           ) : (

@@ -8,12 +8,12 @@ import {
   ProductConfigurator,
   Title,
 } from "@/components/ui";
-import store from "@/app/providers/redux/store";
 import { useEffect, useMemo } from "react";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { ICoffeeProduct } from "@/types/configCat";
 import { URLS } from "@/utils/constants";
 import { isMobile } from "react-device-detect";
+import { useAppSelector } from "@/app/providers/redux";
 
 const ProductTitle = ({ product }: { product: ICoffeeProduct }) => (
   <>
@@ -51,7 +51,7 @@ const ProductDescription = ({ product }: { product: ICoffeeProduct }) => (
 
 export const ProductDetail = () => {
   const { productId } = useParams();
-  const { storeProducts } = store.getState().main.flags;
+  const { storeProducts } = useAppSelector((state) => state.main.flags);
 
   const product = useMemo<ICoffeeProduct | undefined>(() => {
     if (!storeProducts) return undefined;

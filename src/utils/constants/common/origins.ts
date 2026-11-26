@@ -23,14 +23,12 @@ export const ORIGINS_SECTIONS: IStorySection[] = [
     ],
     image: GIRL_STANDING,
   },
-  // Entrada a los tres orígenes, que el mapa de abajo deja explorar.
-  {
-    id: "tres-origenes",
-    paragraphs: [
-      "Descubre nuestros tres orígenes únicos, fruto de microclimas privilegiados, del trabajo dedicado de nuestros campesinos y de un comercio justo que transforma vidas.",
-    ],
-  },
 ];
+
+// Encabeza el explorador del mapa, y por eso no es una sección de relato más:
+// presenta lo que viene debajo, así que se pinta dentro de él.
+export const ORIGINS_EXPLORER_INTRO =
+  "Descubre nuestros tres orígenes únicos, fruto de microclimas privilegiados, del trabajo dedicado de nuestros campesinos y de un comercio justo que transforma vidas.";
 
 // Los `id` son los del mapa: los mismos que `DEPARTMENT_PATHS` y `ORIGIN_MARKERS`.
 export const ORIGINS: IOrigin[] = [

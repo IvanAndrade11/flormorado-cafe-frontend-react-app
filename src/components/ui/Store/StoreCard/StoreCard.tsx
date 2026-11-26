@@ -7,7 +7,9 @@ import { ICoffeeProduct } from "@/types/configCat";
 import { useNavigate } from "react-router-dom";
 import { URLS } from "@/utils/constants";
 
-export const StoreCard: React.FC<ICoffeeProduct> = ({
+// `revealDelay` lo pone quien la pinta dentro de una sección que aparece, para
+// escalonar la entrada; sin él la tarjeta se comporta como siempre.
+export const StoreCard: React.FC<ICoffeeProduct & { revealDelay?: number }> = ({
   id,
   name,
   imageUrl,
@@ -15,11 +17,12 @@ export const StoreCard: React.FC<ICoffeeProduct> = ({
   roastOptions,
   variety,
   price,
+  revealDelay,
 }) => {
   const navigate = useNavigate();
 
   return (
-    <Col key={id}>
+    <Col key={id} data-fm-delay={revealDelay}>
       <Card
         className="store-card"
         onClick={() => navigate(`${URLS.store}/${id}`)}

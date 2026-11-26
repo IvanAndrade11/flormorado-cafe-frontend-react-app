@@ -5,16 +5,19 @@ import { isDesktop } from "react-device-detect";
 import { Row, Carousel, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import store from "@/app/providers/redux/store";
 import { URLS } from "@/utils/constants";
 import { ICoffeeProduct } from "@/types/configCat";
 import { StoreCard } from "@/components/ui";
 import { setCategoryTitle } from "@/utils/constants/redux/sets";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+import { useAppSelector } from "@/app/providers/redux";
 
 export const ProductCarousel: React.FC = () => {
   const navigate = useNavigate();
 
-  const { storeProducts } = store.getState().main.flags;
+  const { ref, revealClassName } = useRevealOnScroll<HTMLElement>();
+
+  const { storeProducts } = useAppSelector((state) => state.main.flags);
 
   const productsList = useMemo<ICoffeeProduct[]>(() => {
     if (!storeProducts) return [];
@@ -44,7 +47,7 @@ export const ProductCarousel: React.FC = () => {
   };
 
   return (
-    <section id="product-carousel">
+    <section id="product-carousel" ref={ref} className={revealClassName}>
       <div className="fmc-carousel-product-section">
         <Container className="pb-5">
           <div className="fmc-carousel-title">
