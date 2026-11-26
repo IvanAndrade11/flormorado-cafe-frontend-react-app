@@ -5,15 +5,15 @@ import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image, Badge } from "react-bootstrap";
 
-import store from "@/app/providers/redux/store";
 import { IBlog, IBlogEntry, IBlogFlormorado } from "@/types/configCat";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { Title } from "@/components/ui";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
+import { useAppSelector } from "@/app/providers/redux";
 
 export const BlogPost: React.FC = () => {
   const { slug } = useParams();
-  const { blog } = store.getState().main.flags;
+  const { blog } = useAppSelector((state) => state.main.flags);
 
   const entry = useMemo<IBlogEntry | undefined>(() => {
     if (!blog) return undefined;

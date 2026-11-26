@@ -11,11 +11,11 @@ import {
   OVERLAY_NAVBAR_URLS,
   URLS,
 } from "@/utils/constants";
-import store from "@/app/providers/redux/store";
 import { IBlog, IBlogFlormorado } from "@/types/configCat";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { useHideOnScroll } from "@/hooks/useHideOnScroll";
 import { NavContent } from "./NavContent/NavContent";
+import { useAppSelector } from "@/app/providers/redux";
 
 export const Navbar: React.FC = () => {
   const { pathname } = useLocation();
@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
-  const { blog } = store.getState().main.flags;
+  const { blog } = useAppSelector((state) => state.main.flags);
 
   useEffect(() => {
     setLoader(true);

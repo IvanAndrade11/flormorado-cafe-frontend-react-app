@@ -8,7 +8,14 @@ import { URLS } from "@/utils/constants";
 import { ICategory } from "@/types/configCat";
 import { CategoryTitle } from "@/types/store";
 
-export const CategoryCard: React.FC<ICategory> = ({ id, name, imageUrl }) => {
+// `revealDelay` lo pone quien la pinta dentro de una sección que aparece, para
+// escalonar la entrada; sin él la tarjeta se comporta como siempre.
+export const CategoryCard: React.FC<ICategory & { revealDelay?: number }> = ({
+  id,
+  name,
+  imageUrl,
+  revealDelay,
+}) => {
   const navigate = useNavigate();
 
   const redirect = (url: string, categoryTitle: CategoryTitle) => {
@@ -16,7 +23,7 @@ export const CategoryCard: React.FC<ICategory> = ({ id, name, imageUrl }) => {
     navigate(url);
   };
   return (
-    <Col key={id}>
+    <Col key={id} data-fm-delay={revealDelay}>
       <Card
         key={id}
         onClick={() => redirect(URLS.store, name)}

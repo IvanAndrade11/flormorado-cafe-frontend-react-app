@@ -4,14 +4,17 @@ import React, { useEffect, useMemo } from "react";
 import { isDesktop } from "react-device-detect";
 import { Row, Carousel, Container } from "react-bootstrap";
 
-import store from "@/app/providers/redux/store";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { scrollToSection } from "@/utils/constants";
 import { ICategory } from "@/types/configCat";
 import { CategoryCard } from "@/components/ui";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+import { useAppSelector } from "@/app/providers/redux";
 
 export const CategoryCarousel: React.FC = () => {
-  const { storeCategories } = store.getState().main.flags;
+  const { storeCategories } = useAppSelector((state) => state.main.flags);
+
+  const { ref, revealClassName } = useRevealOnScroll<HTMLElement>();
 
   const categoriesList = useMemo<ICategory[]>(() => {
     if (!storeCategories) return [];
@@ -26,7 +29,7 @@ export const CategoryCarousel: React.FC = () => {
   }, [storeCategories]);
 
   return (
-    <section id="category-carousel">
+    <section id="category-carousel" ref={ref} className={revealClassName}>
       <div className="fmc-carousel-category-section">
         <Container className="pb-5">
           <div className="fmc-carousel-title">

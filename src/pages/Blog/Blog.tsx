@@ -5,14 +5,14 @@ import React, { useEffect, useMemo } from "react";
 import { Container, Row, Col, Card, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import store from "@/app/providers/redux/store";
 import { setLoader } from "@/utils/constants/redux/sets";
 import { IBlog, IBlogEntry, IBlogFlormorado } from "@/types/configCat";
+import { useAppSelector } from "@/app/providers/redux";
 
 export const Blog: React.FC = () => {
   const navigate = useNavigate();
 
-  const { blog } = store.getState().main.flags;
+  const { blog } = useAppSelector((state) => state.main.flags);
 
   const blogList = useMemo<IBlogEntry[]>(() => {
     if (!blog) return [];

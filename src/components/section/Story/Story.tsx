@@ -9,6 +9,7 @@ import {
   IStorySection,
 } from "@/types/components";
 import { icons } from "@/utils/constants";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 
 // Decorativo, así que va sin alt.
 const CoffeeBean: React.FC<{ size: number }> = ({ size }) => (
@@ -85,64 +86,71 @@ const StorySectionBody: React.FC<{ section: IStorySection }> = ({
 const StorySection: React.FC<{
   section: IStorySection;
   reverse: boolean;
-}> = ({ section, reverse }) => (
-  <section
-    id={section.id}
-    className={`fmc-story-section${reverse ? " fmc-story-section--reverse" : ""}`}
-  >
-    {section.image ? (
-      <Row className="fmc-story-section__row align-items-center g-4 g-lg-5">
-        <Col xs={12} lg={6}>
-          <figure className="fmc-story-figure">
-            <img
-              src={section.image.src}
-              alt={section.image.alt}
-              loading="lazy"
-            />
-          </figure>
+}> = ({ section, reverse }) => {
+  const { ref, revealClassName } = useRevealOnScroll<HTMLElement>();
 
-          {section.secondaryImage && (
-            <figure className="fmc-story-figure fmc-story-figure--secondary">
+  return (
+    <section
+      ref={ref}
+      id={section.id}
+      className={`fmc-story-section${reverse ? " fmc-story-section--reverse" : ""} ${revealClassName}`}
+    >
+      {section.image ? (
+        <Row className="fmc-story-section__row align-items-center g-4 g-lg-5">
+          <Col xs={12} lg={6}>
+            <figure className="fmc-story-figure">
               <img
-                src={section.secondaryImage.src}
-                alt={section.secondaryImage.alt}
+                src={section.image.src}
+                alt={section.image.alt}
                 loading="lazy"
               />
             </figure>
-          )}
-        </Col>
 
-        <Col xs={12} lg={6}>
-          <StorySectionBody section={section} />
-        </Col>
-      </Row>
-    ) : (
-      <div className="fmc-story-section__text--solo">
-        <StorySectionBody section={section} />
-      </div>
-    )}
-
-    {section.highlightsLayout === "cards" && section.highlights && (
-      <Row className="g-4 fmc-story-cards">
-        {section.highlights.map((highlight: IStoryHighlight) => (
-          <Col key={highlight.id} xs={12} md={4}>
-            <Card className="h-100 shadow-sm fmc-story-card">
-              <Card.Body>
-                <CoffeeBean size={26} />
-                <Card.Title className="fmc-story-card__title">
-                  {highlight.title}
-                </Card.Title>
-                <Card.Text className="fmc-story-card__text">
-                  {highlight.description}
-                </Card.Text>
-              </Card.Body>
-            </Card>
+            {section.secondaryImage && (
+              <figure className="fmc-story-figure fmc-story-figure--secondary">
+                <img
+                  src={section.secondaryImage.src}
+                  alt={section.secondaryImage.alt}
+                  loading="lazy"
+                />
+              </figure>
+            )}
           </Col>
-        ))}
-      </Row>
-    )}
-  </section>
-);
+
+          <Col xs={12} lg={6}>
+            <StorySectionBody section={section} />
+          </Col>
+        </Row>
+      ) : (
+        <div className="fmc-story-section__text--solo">
+          <StorySectionBody section={section} />
+        </div>
+      )}
+
+      {section.highlightsLayout === "cards" && section.highlights && (
+        <Row className="g-4 fmc-story-cards">
+          {section.highlights.map(
+            (highlight: IStoryHighlight, index: number) => (
+              <Col key={highlight.id} xs={12} md={4} data-fm-delay={index + 1}>
+                <Card className="h-100 shadow-sm fmc-story-card">
+                  <Card.Body>
+                    <CoffeeBean size={26} />
+                    <Card.Title className="fmc-story-card__title">
+                      {highlight.title}
+                    </Card.Title>
+                    <Card.Text className="fmc-story-card__text">
+                      {highlight.description}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ),
+          )}
+        </Row>
+      )}
+    </section>
+  );
+};
 
 export const StorySections: React.FC<{ sections: IStorySection[] }> = ({
   sections,
@@ -168,10 +176,14 @@ export const StoryCta: React.FC<{
   title: string;
   text: string;
   children: React.ReactNode;
-}> = ({ title, text, children }) => (
-  <section className="fmc-story-cta">
-    <h2>{title}</h2>
-    <p>{text}</p>
-    <div className="fmc-story-cta__actions">{children}</div>
-  </section>
-);
+}> = ({ title, text, children }) => {
+  const { ref, revealClassName } = useRevealOnScroll<HTMLElement>();
+
+  return (
+    <section ref={ref} className={`fmc-story-cta ${revealClassName}`}>
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <div className="fmc-story-cta__actions">{children}</div>
+    </section>
+  );
+};
