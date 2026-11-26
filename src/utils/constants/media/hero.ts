@@ -1,6 +1,12 @@
 import HeroPosterWide from "@/assets/images/banners/banner-hero.jpg";
-import HeroPosterTall from "@/assets/images/banners/banner-hero-vertical.jpg";
-import HeroVideoTall from "@/assets/videos/bird.mp4";
+
+// Cloudinary sirve el video ya recodificado: el original son 43 MB en `.mov`,
+// y de ahí salen 3 con `q_auto:eco` a 720 de ancho, que es de sobra para un
+// celular. El póster es el primer fotograma del propio video (`so_0`), así que
+// no salta nada al arrancar. Cambiar el encuadre o la calidad es cambiar estas
+// transformaciones, sin tocar un archivo.
+const CLOUDINARY_VIDEO = "https://res.cloudinary.com/dcbnyk8uk/video/upload";
+const PORTRAIT_ID = "v1795653132/22-11-2026-1795623410_3440340_1_pqmkxg";
 
 export interface IHeroMedia {
   // Sin video se ve solo el póster, que es lo que pasa en apaisado hasta que
@@ -24,13 +30,11 @@ export interface IHeroMedia {
  * del inicio y no en el inicial: el pie importa `images`, así que todo lo que
  * entre ahí lo descarga también quien llega a una página legal.
  *
- * Provisional: el material de hoy es el que ya existía —un video vertical y
- * una foto recortada en los dos formatos—. Cuando estén los definitivos se
- * cambian aquí por su URL de Cloudinary, donde ya viven las imágenes de
- * producto, **y con ellos el `aspectRatio` y el póster**, que tiene que ser un
- * fotograma del propio video para que no salte al arrancar; el componente no
- * cambia. Servirlos desde
- * ahí es lo que hace que el video deje de pesar dentro del paquete.
+ * El vertical ya es el definitivo y vive en Cloudinary, como las imágenes de
+ * producto: por eso el video no pesa dentro del paquete. El apaisado sigue
+ * pendiente, así que de momento solo tiene póster y en escritorio la portada se
+ * ve como una foto fija; cuando llegue se le pone aquí su URL, su póster y **su
+ * `aspectRatio` real**, y el componente no cambia.
  */
 export const HERO_MEDIA: Record<"landscape" | "portrait", IHeroMedia> = {
   landscape: {
@@ -38,8 +42,8 @@ export const HERO_MEDIA: Record<"landscape" | "portrait", IHeroMedia> = {
     aspectRatio: "1920 / 845",
   },
   portrait: {
-    video: HeroVideoTall,
-    poster: HeroPosterTall,
-    aspectRatio: "480 / 848",
+    video: `${CLOUDINARY_VIDEO}/f_mp4,q_auto:eco,w_720,c_limit/${PORTRAIT_ID}.mp4`,
+    poster: `${CLOUDINARY_VIDEO}/so_0,f_jpg,q_auto,w_720,c_limit/${PORTRAIT_ID}.jpg`,
+    aspectRatio: "720 / 1280",
   },
 };
