@@ -3,7 +3,7 @@ import React from "react";
 
 import { CONSUMER_AUTHORITY, URLS } from "@/utils/constants";
 import { Link } from "react-router-dom";
-import { Isotype, Wordmark } from "@/components/ui";
+import { Wordmark } from "@/components/ui";
 
 const SOCIAL = [
   {
@@ -37,7 +37,6 @@ export const Footer: React.FC = () => {
               trae el fondo beige quemado y sobre el morado del pie saldría
               como un recuadro claro. */}
           <span className="footer-fm__logo">
-            <Isotype className="footer-fm__isotype" />
             <Wordmark />
           </span>
           <ul className="footer-fm__social">
